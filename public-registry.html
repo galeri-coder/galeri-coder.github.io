@@ -2,69 +2,194 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>PoArt Registry Debug</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoArt Public Registry</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
-        body { font-family: sans-serif; padding: 20px; color: #333; }
-        .error-box { background: #fee2e2; border: 1px solid #ef4444; padding: 15px; border-radius: 8px; color: #b91c1c; margin-bottom: 20px; display: none; }
-        .loading { color: #666; font-style: italic; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
-        .cert-id { font-family: monospace; color: #15803d; font-weight: bold; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+        :root {
+            --emerald-50: rgba(34, 197, 94, 0.04);
+            --emerald-100: rgba(34, 197, 94, 0.08);
+            --emerald-200: rgba(34, 197, 94, 0.15);
+            --emerald-500: #15803d;
+            --emerald-600: #166534;
+            --slate-500: #64748b;
+            --slate-800: #1e293b;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: var(--font);
+            background: transparent; /* Squarespace uyumu */
+        }
+
+        .poart-registry-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* HEADER */
+        .pr-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
+        .pr-header h1 { font-size: 24px; font-weight: 900; color: var(--slate-800); margin: 0; letter-spacing: -0.02em; }
+        .pr-header h1 span { color: var(--emerald-500); }
+        .pr-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: linear-gradient(135deg, var(--emerald-500), var(--emerald-600)); border-radius: 999px; font-size: 11px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+        .badge-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* STATS */
+        .pr-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+        .stat-card { background: var(--emerald-50); padding: 20px; border-radius: 16px; border: 1px solid var(--emerald-100); text-align: center; }
+        .stat-val { font-size: 28px; font-weight: 900; color: var(--emerald-600); }
+        .stat-lbl { font-size: 11px; font-weight: 700; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 5px; }
+
+        /* TABLE */
+        .pr-table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { text-align: left; padding: 15px; font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--slate-500); border-bottom: 2px solid var(--emerald-100); letter-spacing: 0.05em; }
+        td { padding: 18px 15px; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: var(--slate-800); vertical-align: middle; }
+        
+        .cert-tag { font-family: var(--mono); font-size: 11px; background: var(--emerald-50); color: var(--emerald-600); padding: 6px 10px; border-radius: 6px; font-weight: 600; display: inline-block; }
+        .hash-txt { font-family: var(--mono); font-size: 10px; color: #94a3b8; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+        .verified { color: var(--emerald-600); font-weight: 800; font-size: 10px; display: flex; align-items: center; gap: 4px; }
+
+        .loading-state { text-align: center; padding: 60px; color: var(--slate-500); font-style: italic; }
+        
+        @media (max-width: 768px) {
+            .pr-stats { grid-template-columns: 1fr; }
+            .poart-registry-wrapper { padding: 15px; }
+        }
     </style>
 </head>
 <body>
-    <h3>PoArt Kayıt Kontrol Paneli</h3>
-    
-    <div id="error-display" class="error-box"></div>
-    
-    <div id="content">
-        <p class="loading" id="status-text">Supabase'e bağlanılıyor...</p>
+
+<div class="poart-registry-wrapper">
+    <div class="pr-header">
+        <div>
+            <h1><span>[PoArt]</span> Public Registry</h1>
+            <p style="font-size:13px; color:#64748b; margin-top:5px;">Digital Notary & Asset Archive</p>
+        </div>
+        <div class="pr-badge">
+            <span class="badge-dot"></span> Canlı Senkron
+        </div>
     </div>
 
-    <script>
-        const S_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
-        const S_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
+    <div class="pr-stats">
+        <div class="stat-card">
+            <div class="stat-val" id="total-count">-</div>
+            <div class="stat-lbl">Toplam Eser</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-val" id="today-count">-</div>
+            <div class="stat-lbl">Bugün Eklenen</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-val" id="last-update">...</div>
+            <div class="stat-lbl">Son Güncelleme</div>
+        </div>
+    </div>
 
-        async function init() {
-            const status = document.getElementById('status-text');
-            const errorDisplay = document.getElementById('error-display');
+    <div class="pr-table-container">
+        <div id="loading-msg" class="loading-state">
+            Veriler Supabase Arşivinden Çekiliyor...
+        </div>
+        <table id="registry-table" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Sertifika ID</th>
+                    <th>Eser Adı</th>
+                    <th>Oluşturucu</th>
+                    <th>Dijital Mühür (SHA)</th>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // --- 1. AYARLAR ---
+    const S_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
+    const S_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
+
+    async function initRegistry() {
+        const loadingMsg = document.getElementById('loading-msg');
+        const table = document.getElementById('registry-table');
+        const tbody = document.getElementById('table-body');
+        
+        // Stats Elements
+        const elTotal = document.getElementById('total-count');
+        const elToday = document.getElementById('today-count');
+        const elLast = document.getElementById('last-update');
+
+        try {
+            const supabaseClient = supabase.createClient(S_URL, S_KEY);
             
-            try {
-                const supabaseClient = supabase.createClient(S_URL, S_KEY);
-                
-                const { data, error } = await supabaseClient
-                    .from('manifests')
-                    .select('*')
-                    .order('created_at', { ascending: false });
+            // Veriyi çek (Tarihe göre yeniden eskiye)
+            const { data, error } = await supabaseClient
+                .from('manifests')
+                .select('*')
+                .order('created_at', { ascending: false });
 
-                if (error) throw error;
+            if (error) throw error;
 
-                if (!data || data.length === 0) {
-                    status.innerHTML = "Bağlantı başarılı ama <b>tablo boş</b> (Veri bulunamadı).";
-                    return;
-                }
+            // İstatistikleri Hesapla
+            elTotal.innerText = data.length;
+            
+            const todayStr = new Date().toDateString();
+            const todayCount = data.filter(d => d.created_at && new Date(d.created_at).toDateString() === todayStr).length;
+            elToday.innerText = todayCount;
 
-                let html = '<table><thead><tr><th>Sertifika ID</th><th>Eser</th><th>Oluşturucu</th></tr></thead><tbody>';
+            const now = new Date();
+            elLast.innerText = now.getHours() + ":" + String(now.getMinutes()).padStart(2, '0');
+
+            // Tabloyu Doldur
+            if (data.length > 0) {
+                let html = '';
                 data.forEach(item => {
-                    html += `<tr>
-                        <td><span class="cert-id">${item.cert_id || 'Yok'}</span></td>
-                        <td>${item.title || 'İsimsiz'}</td>
-                        <td>${item.creator || '-'}</td>
-                    </tr>`;
+                    const date = item.created_at ? new Date(item.created_at).toLocaleDateString('tr-TR') : '-';
+                    const hash = item.sha512 || item.sha256 || 'HASH_NOT_FOUND';
+                    
+                    html += `
+                        <tr>
+                            <td><span class="cert-tag">${item.cert_id}</span></td>
+                            <td><strong style="color:#1e293b">${item.title}</strong></td>
+                            <td>${item.creator}</td>
+                            <td><span class="hash-txt">${hash}</span></td>
+                            <td style="color:#64748b; font-size:13px;">${date}</td>
+                            <td><span class="verified">✓ VERIFIED</span></td>
+                        </tr>
+                    `;
                 });
-                html += '</tbody></table>';
-                document.getElementById('content').innerHTML = html;
-
-            } catch (err) {
-                console.error(err);
-                status.style.display = 'none';
-                errorDisplay.style.display = 'block';
-                errorDisplay.innerHTML = `<b>Bağlantı Hatası:</b> ${err.message || 'Bilinmeyen hata'}<br><small>Not: Supabase ayarlarından CORS veya RLS politikasını kontrol edin.</small>`;
+                tbody.innerHTML = html;
+                loadingMsg.style.display = 'none';
+                table.style.display = 'table';
+            } else {
+                loadingMsg.innerText = "Henüz mühürlenmiş eser bulunmuyor.";
             }
-        }
 
-        init();
-    </script>
+        } catch (err) {
+            console.error(err);
+            loadingMsg.style.color = 'red';
+            loadingMsg.innerHTML = `Veri Hatası: ${err.message}`;
+        }
+    }
+
+    // Başlat
+    initRegistry();
+</script>
+
 </body>
 </html>
