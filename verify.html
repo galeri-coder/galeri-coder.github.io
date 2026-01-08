@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoArt Verifier</title>
+    <title>PoArt Verifier - Diamond</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
@@ -13,12 +13,11 @@
             --emerald-dark: #047857;
             --slate-900: #0f172a;
             --slate-500: #64748b;
-            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: transparent; /* Iframe uyumu */
+            background: transparent;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -41,169 +40,99 @@
             overflow: hidden;
         }
 
-        /* Dekoratif Arka Plan */
+        /* Arkaplan Efekti */
         .verifier-container::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: var(--emerald);
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: 0;
+            content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px;
+            background: var(--emerald); filter: blur(80px); opacity: 0.15; z-index: 0;
         }
-
         .content-layer { position: relative; z-index: 1; }
 
         h2 {
-            font-size: 24px;
-            font-weight: 900;
-            margin: 0 0 8px 0;
+            font-size: 24px; font-weight: 900; margin: 0 0 8px 0;
             background: linear-gradient(to right, var(--slate-900), var(--emerald-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em;
         }
 
-        p.subtitle {
-            font-size: 13px;
-            color: var(--slate-500);
-            margin-bottom: 30px;
+        p.subtitle { font-size: 13px; color: var(--slate-500); margin-bottom: 25px; }
+
+        /* DROP ZONE (Sürükle Bırak Alanı) */
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--emerald);
+            background: #f0fdf4;
+            transform: scale(1.01);
+        }
+
+        .drop-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+        .drop-text { font-size: 14px; font-weight: 600; color: var(--slate-900); }
+        .drop-sub { font-size: 11px; color: var(--slate-500); margin-top: 5px; }
+
+        /* OR Divider */
+        .divider {
+            display: flex; align-items: center; text-align: center; color: #94a3b8; font-size: 11px; font-weight: 700; margin: 20px 0;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; border-bottom: 1px solid #e2e8f0;
+        }
+        .divider::before { margin-right: 10px; }
+        .divider::after { margin-left: 10px; }
 
         /* INPUT AREA */
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
+        .input-group { position: relative; margin-bottom: 15px; }
         input {
-            width: 100%;
-            padding: 18px 20px;
-            padding-right: 50px;
-            border-radius: 16px;
-            border: 2px solid #e2e8f0;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            outline: none;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-            background: #fff;
-            color: var(--slate-900);
+            width: 100%; padding: 16px 20px; border-radius: 14px;
+            border: 2px solid #e2e8f0; font-family: 'Inter', sans-serif; font-size: 14px;
+            outline: none; transition: all 0.3s ease; box-sizing: border-box;
         }
-
-        input:focus {
-            border-color: var(--emerald);
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-        }
+        input:focus { border-color: var(--emerald); }
 
         button {
-            width: 100%;
-            padding: 16px;
-            background: var(--slate-900);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            width: 100%; padding: 16px; background: var(--slate-900); color: white;
+            border: none; border-radius: 14px; font-size: 14px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-
-        button:hover {
-            background: black;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-        button:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-            transform: none;
-        }
+        button:hover { background: black; transform: translateY(-2px); }
+        button:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
 
         /* SONUÇ KARTLARI */
         .result-box {
-            display: none;
-            margin-top: 30px;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: left;
-            animation: slideUp 0.4s ease-out;
+            display: none; margin-top: 30px; border-radius: 16px; padding: 25px; text-align: left; animation: slideUp 0.4s ease-out;
         }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* BAŞARILI */
-        .success-box {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            position: relative;
-            overflow: hidden;
-        }
-        .success-box::after {
-            content: "VERIFIED";
-            position: absolute;
-            right: -10px;
-            bottom: -10px;
-            font-size: 60px;
-            font-weight: 900;
-            color: #15803d;
-            opacity: 0.05;
-            transform: rotate(-10deg);
-        }
-
+        .success-box { background: #f0fdf4; border: 1px solid #bbf7d0; position: relative; overflow: hidden; }
         .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #15803d;
-            color: white;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 99px;
-            margin-bottom: 15px;
+            display: inline-flex; align-items: center; gap: 6px; background: #15803d; color: white;
+            font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 99px; margin-bottom: 15px;
         }
-
         .data-row { margin-bottom: 12px; }
-        .data-label { font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 2px;}
-        .data-value { font-size: 15px; color: #0f172a; font-weight: 600; word-break: break-word; }
-        .data-value.mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #334155; }
+        .data-label { font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: 700; margin-bottom: 2px; display: block; }
+        .data-value { font-size: 15px; color: #0f172a; font-weight: 600; word-break: break-all; }
+        .data-value.mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #334155; }
 
         /* BAŞARISIZ */
-        .fail-box {
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
-            text-align: center;
-        }
+        .fail-box { background: #fff1f2; border: 1px solid #fecdd3; text-align: center; }
         .fail-icon { font-size: 30px; margin-bottom: 10px; }
         .fail-title { color: #9f1239; font-weight: 800; margin-bottom: 5px; }
         .fail-text { color: #be123c; font-size: 13px; }
 
-        /* Spinner */
         .spinner {
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            display: none;
+            width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; display: none;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-
     </style>
 </head>
 <body>
@@ -211,28 +140,35 @@
 <div class="verifier-container">
     <div class="content-layer">
         <h2>Varlık Doğrulama</h2>
-        <p class="subtitle">Eserin orijinalliğini kanıtlamak için ID, İsim veya Mühür kodunu girin.</p>
+        <p class="subtitle">Orijinalliği kanıtlamak için dosyayı sürükleyin veya ID girin.</p>
 
-        <div class="input-group">
-            <input type="text" id="queryInput" placeholder="Sertifika ID veya Eser Adı..." autocomplete="off">
+        <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" style="display:none" onchange="handleFileSelect(this)">
+            <span class="drop-icon">📂</span>
+            <div class="drop-text">Dosyayı Buraya Sürükleyin</div>
+            <div class="drop-sub">veya seçmek için tıklayın</div>
         </div>
 
-        <button id="searchBtn" onclick="verifyAsset()">
+        <div class="divider">VEYA MANUEL ARAMA</div>
+
+        <div class="input-group">
+            <input type="text" id="queryInput" placeholder="Sertifika ID, Eser Adı veya Hash..." autocomplete="off">
+        </div>
+
+        <button id="searchBtn" onclick="verifyInput()">
             <span class="spinner" id="btnSpinner"></span>
             <span id="btnText">Sorgula ve Doğrula</span>
         </button>
 
         <div id="successCard" class="result-box success-box">
-            <div class="status-badge">
-                <span style="font-size:12px;">✓</span> POART PROTOCOL SECURED
-            </div>
+            <div class="status-badge">✓ POART PROTOCOL SECURED</div>
             
             <div class="data-row">
                 <span class="data-label">Eser Adı</span>
                 <div class="data-value" id="resTitle">-</div>
             </div>
             <div class="data-row">
-                <span class="data-label">Oluşturucu / Sanatçı</span>
+                <span class="data-label">Oluşturucu</span>
                 <div class="data-value" id="resCreator">-</div>
             </div>
             <div class="data-row">
@@ -240,15 +176,15 @@
                 <div class="data-value mono" id="resId">-</div>
             </div>
             <div class="data-row" style="margin-top:15px; background: rgba(255,255,255,0.5); padding:10px; border-radius:8px;">
-                <span class="data-label">Kriptografik Mühür (SHA)</span>
-                <div class="data-value mono" id="resHash" style="font-size:10px;">-</div>
+                <span class="data-label">Dijital Parmak İzi (Algılanan Hash)</span>
+                <div class="data-value mono" id="resHash">-</div>
             </div>
         </div>
 
         <div id="failCard" class="result-box fail-box">
             <div class="fail-icon">⛔</div>
-            <div class="fail-title">Kayıt Bulunamadı</div>
-            <div class="fail-text">Girdiğiniz bilgilere ait doğrulanmış bir varlık arşivimizde yer almıyor.</div>
+            <div class="fail-title">Doğrulama Başarısız</div>
+            <div class="fail-text">Bu veriye veya dosyaya ait orijinal bir kayıt bulunamadı. Dosya değiştirilmiş veya mühürlenmemiş olabilir.</div>
         </div>
     </div>
 </div>
@@ -257,44 +193,76 @@
     const S_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
     const S_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
 
-    async function verifyAsset() {
-        const input = document.getElementById('queryInput').value.trim();
-        const btn = document.getElementById('searchBtn');
-        const spinner = document.getElementById('btnSpinner');
-        const btnText = document.getElementById('btnText');
-        
-        const successCard = document.getElementById('successCard');
-        const failCard = document.getElementById('failCard');
+    const supabaseClient = supabase.createClient(S_URL, S_KEY, {
+        auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
 
-        // Reset
-        successCard.style.display = 'none';
-        failCard.style.display = 'none';
+    // --- SÜRÜKLE BIRAK MANTIĞI ---
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
 
-        if (!input) {
-            alert("Lütfen bir ID veya Eser Adı girin.");
-            return;
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) {
+            processFile(e.dataTransfer.files[0]);
         }
+    });
 
-        // Loading State
-        btn.disabled = true;
-        spinner.style.display = 'block';
-        btnText.innerText = "Arşiv Taranıyor...";
+    function handleFileSelect(input) {
+        if (input.files.length) processFile(input.files[0]);
+    }
+
+    // --- DOSYA İŞLEME VE HASH HESAPLAMA ---
+    async function processFile(file) {
+        setLoading(true, "Dosya Analiz Ediliyor...");
+        
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            const hashBuffer = await crypto.subtle.digest('SHA-512', arrayBuffer); // SHA-512 Hesapla
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            
+            // Hesaplanan Hash ile Arama Yap
+            console.log("Hesaplanan Hash:", hashHex);
+            performSearch(hashHex);
+
+        } catch (err) {
+            console.error(err);
+            alert("Dosya okuma hatası.");
+            setLoading(false);
+        }
+    }
+
+    // --- NORMAL METİN ARAMA ---
+    function verifyInput() {
+        const val = document.getElementById('queryInput').value.trim();
+        if (!val) { alert("Lütfen bir değer girin."); return; }
+        performSearch(val);
+    }
+
+    // --- ORTAK ARAMA FONKSİYONU ---
+    async function performSearch(query) {
+        setLoading(true, "Arşiv Taranıyor...");
+        const sCard = document.getElementById('successCard');
+        const fCard = document.getElementById('failCard');
+        sCard.style.display = 'none';
+        fCard.style.display = 'none';
 
         try {
-            // ÖZEL AYAR: IFRAME İÇİN PERSISTENCE KAPALI (Çok Önemli)
-            const supabaseClient = supabase.createClient(S_URL, S_KEY, {
-                auth: {
-                    persistSession: false,
-                    autoRefreshToken: false,
-                    detectSessionInUrl: false
-                }
-            });
-
-            // Genişletilmiş Sorgu: ID, Title, SHA256, SHA512
             const { data, error } = await supabaseClient
                 .from('manifests')
                 .select('*')
-                .or(`cert_id.ilike.%${input}%,title.ilike.%${input}%,sha256.ilike.%${input}%,sha512.ilike.%${input}%`)
+                .or(`cert_id.ilike.%${query}%,title.ilike.%${query}%,sha256.ilike.%${query}%,sha512.ilike.%${query}%`)
                 .limit(1);
 
             if (error) throw error;
@@ -306,36 +274,48 @@
                 document.getElementById('resCreator').innerText = item.creator;
                 document.getElementById('resId').innerText = item.cert_id;
                 
-                const hashVal = item.sha512 || item.sha256 || 'Hash bilgisi eksik';
-                // Hash'i çok uzunsa ortadan kesip gösterelim
-                const displayHash = hashVal.length > 40 
-                    ? hashVal.substring(0, 20) + '...' + hashVal.substring(hashVal.length - 10) 
-                    : hashVal;
+                // Eğer arama bir Hash ise, o Hash'i göster. Değilse veritabanındaki hash'i göster.
+                // Kullanıcıya "Bak senin dosyanın hash'i bu ve bizde var" demek için.
+                const displayHash = (query.length > 60) ? query : (item.sha512 || item.sha256);
                 
-                document.getElementById('resHash').innerText = displayHash;
-                
-                successCard.style.display = 'block';
+                // Hash'i kısaltarak göster
+                const shortHash = displayHash.length > 40 
+                    ? displayHash.substring(0, 20) + '...' + displayHash.substring(displayHash.length - 10) 
+                    : displayHash;
+
+                document.getElementById('resHash').innerText = shortHash;
+                sCard.style.display = 'block';
             } else {
-                // BULUNAMADI
-                failCard.style.display = 'block';
+                fCard.style.display = 'block';
             }
 
         } catch (err) {
             console.error(err);
-            alert("Sorgulama hatası: " + err.message);
+            alert("Hata: " + err.message);
         } finally {
-            // Reset Button
+            setLoading(false);
+        }
+    }
+
+    function setLoading(isLoading, text = "İşleniyor...") {
+        const btn = document.getElementById('searchBtn');
+        const spinner = document.getElementById('btnSpinner');
+        const btnText = document.getElementById('btnText');
+
+        if (isLoading) {
+            btn.disabled = true;
+            spinner.style.display = 'block';
+            btnText.innerText = text;
+        } else {
             btn.disabled = false;
             spinner.style.display = 'none';
             btnText.innerText = "Sorgula ve Doğrula";
         }
     }
-
-    // Enter tuşu ile arama
+    
+    // Enter tuşu desteği
     document.getElementById('queryInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            verifyAsset();
-        }
+        if (e.key === 'Enter') verifyInput();
     });
 </script>
 
