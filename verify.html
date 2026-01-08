@@ -9,696 +9,168 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --emerald-50: #ecfdf5;
-      --emerald-100: #d1fae5;
-      --emerald-200: #a7f3d0;
-      --emerald-400: #34d399;
-      --emerald-500: #10b981;
-      --emerald-600: #059669;
-      --emerald-700: #047857;
-      --emerald-800: #065f46;
-      --red-50: #fef2f2;
-      --red-100: #fee2e2;
-      --red-500: #ef4444;
-      --red-600: #dc2626;
-      --red-700: #b91c1c;
-      --slate-50: #f8fafc;
-      --slate-100: #f1f5f9;
-      --slate-200: #e2e8f0;
-      --slate-300: #cbd5e1;
-      --slate-400: #94a3b8;
-      --slate-500: #64748b;
-      --slate-600: #475569;
-      --slate-700: #334155;
-      --slate-800: #1e293b;
-      --slate-900: #0f172a;
+      --emerald-50: #ecfdf5; --emerald-100: #d1fae5; --emerald-200: #a7f3d0;
+      --emerald-400: #34d399; --emerald-500: #10b981; --emerald-600: #059669; --emerald-700: #047857;
+      --red-50: #fef2f2; --red-500: #ef4444; --red-600: #dc2626; --red-700: #b91c1c;
+      --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1; --slate-400: #94a3b8; --slate-500: #64748b;
+      --slate-600: #475569; --slate-800: #1e293b; --slate-900: #0f172a;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: transparent; color: var(--slate-800); }
+    .page-wrapper { max-width: 800px; margin: 0 auto; padding: 10px 20px 50px; }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(180deg, var(--emerald-50) 0%, #ffffff 100%);
-      min-height: 100vh;
-      color: var(--slate-800);
-    }
+    .main-card { background: white; border-radius: 24px; padding: 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
 
-    .page-wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 50px 30px 80px;
-    }
+    .drop-zone { border: 2px dashed var(--slate-300); border-radius: 20px; padding: 50px 30px; text-align: center; cursor: pointer; transition: 0.3s; background: var(--slate-50); margin-bottom: 25px; }
+    .drop-zone:hover { border-color: var(--emerald-500); background: var(--emerald-50); }
+    .drop-zone.dragover { border-color: var(--emerald-600); background: var(--emerald-100); }
+    .dz-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--emerald-500), var(--emerald-600)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 15px; box-shadow: 0 8px 25px rgba(16,185,129,0.3); }
+    .dz-title { font-size: 18px; font-weight: 800; color: var(--slate-800); margin-bottom: 6px; }
+    .dz-sub { font-size: 13px; color: var(--slate-500); margin-bottom: 15px; }
+    .dz-formats { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .format-tag { font-size: 9px; font-weight: 700; padding: 5px 10px; background: white; color: var(--slate-600); border-radius: 15px; border: 1px solid var(--slate-200); }
 
-    /* HEADER */
-    .header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    .logo-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--emerald-700), var(--emerald-800));
-      color: white;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 20px rgba(5, 150, 105, 0.3);
-    }
-    .logo-badge::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      background: var(--emerald-400);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
-    }
-    .header h1 {
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      color: var(--slate-900);
-      margin-bottom: 12px;
-    }
-    .header p {
-      font-size: 16px;
-      color: var(--slate-500);
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
+    .divider { display: flex; align-items: center; gap: 15px; margin: 25px 0; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--slate-200); }
+    .divider span { font-size: 11px; font-weight: 700; color: var(--slate-400); letter-spacing: 0.1em; }
 
-    /* MAIN CARD */
-    .main-card {
-      background: white;
-      border-radius: 32px;
-      padding: 50px;
-      box-shadow: 
-        0 0 0 1px rgba(0,0,0,0.03),
-        0 20px 50px rgba(0,0,0,0.08);
-    }
+    .input-row { display: flex; gap: 12px; }
+    .input-field { flex: 1; padding: 16px 20px; border: 2px solid var(--slate-200); border-radius: 14px; font-size: 15px; font-family: 'Inter'; outline: none; transition: 0.3s; background: var(--slate-50); }
+    .input-field:focus { border-color: var(--emerald-500); background: white; box-shadow: 0 0 0 4px rgba(16,185,129,0.1); }
+    .search-btn { padding: 16px 30px; background: linear-gradient(135deg, var(--slate-800), var(--slate-900)); color: white; border: none; border-radius: 14px; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+    .search-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+    .search-btn:disabled { background: var(--slate-400); transform: none; }
 
-    /* DROP ZONE */
-    .drop-zone {
-      border: 2px dashed var(--slate-300);
-      border-radius: 24px;
-      padding: 60px 40px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: var(--slate-50);
-      margin-bottom: 30px;
-      position: relative;
-      overflow: hidden;
-    }
-    .drop-zone::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--emerald-100), transparent);
-      opacity: 0;
-      transition: 0.3s;
-    }
-    .drop-zone:hover {
-      border-color: var(--emerald-500);
-      background: var(--emerald-50);
-    }
-    .drop-zone:hover::before {
-      opacity: 1;
-    }
-    .drop-zone.dragover {
-      border-color: var(--emerald-600);
-      background: var(--emerald-100);
-      transform: scale(1.01);
-    }
-    .dz-content {
-      position: relative;
-      z-index: 1;
-    }
-    .dz-icon {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--emerald-500), var(--emerald-600));
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      margin: 0 auto 20px;
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-    }
-    .dz-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--slate-800);
-      margin-bottom: 8px;
-    }
-    .dz-sub {
-      font-size: 14px;
-      color: var(--slate-500);
-      margin-bottom: 20px;
-    }
-    .dz-formats {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
-    .format-tag {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 6px 12px;
-      background: white;
-      color: var(--slate-600);
-      border-radius: 20px;
-      border: 1px solid var(--slate-200);
-    }
-
-    /* DIVIDER */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin: 35px 0;
-    }
-    .divider::before, .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--slate-200), transparent);
-    }
-    .divider span {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--slate-400);
-      letter-spacing: 0.1em;
-    }
-
-    /* INPUT ROW */
-    .input-row {
-      display: flex;
-      gap: 15px;
-    }
-    .input-field {
-      flex: 1;
-      padding: 20px 24px;
-      border: 2px solid var(--slate-200);
-      border-radius: 16px;
-      font-size: 16px;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: all 0.3s;
-      background: var(--slate-50);
-    }
-    .input-field:focus {
-      border-color: var(--emerald-500);
-      background: white;
-      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-    }
-    .input-field::placeholder {
-      color: var(--slate-400);
-    }
-    .search-btn {
-      padding: 20px 40px;
-      background: linear-gradient(135deg, var(--slate-800), var(--slate-900));
-      color: white;
-      border: none;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: all 0.3s;
-      white-space: nowrap;
-    }
-    .search-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    .search-btn:disabled {
-      background: var(--slate-400);
-      transform: none;
-      cursor: wait;
-    }
-
-    /* LOADING */
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 50px;
-    }
+    .loading { display: none; text-align: center; padding: 40px; }
     .loading.active { display: block; }
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid var(--slate-200);
-      border-top-color: var(--emerald-500);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
-    }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--slate-200); border-top-color: var(--emerald-500); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-text {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--slate-600);
-    }
+    .loading-text { font-size: 14px; font-weight: 600; color: var(--slate-600); }
 
-    /* RESULTS */
-    .result {
-      display: none;
-      margin-top: 40px;
-      animation: slideUp 0.5s ease;
-    }
+    .result { display: none; margin-top: 30px; animation: slideUp 0.4s ease; }
     .result.active { display: block; }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* SUCCESS CARD */
-    .success-card {
-      background: linear-gradient(135deg, var(--emerald-50), white);
-      border: 2px solid var(--emerald-400);
-      border-radius: 28px;
-      overflow: hidden;
-    }
-    .success-header {
-      background: linear-gradient(135deg, var(--emerald-600), var(--emerald-700));
-      padding: 30px 40px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .success-icon {
-      width: 70px;
-      height: 70px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      color: var(--emerald-600);
-      flex-shrink: 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    .success-title h3 {
-      font-size: 24px;
-      font-weight: 900;
-      color: white;
-      margin-bottom: 4px;
-      letter-spacing: -0.02em;
-    }
-    .success-title p {
-      font-size: 14px;
-      color: var(--emerald-200);
-    }
-    .success-badge {
-      margin-left: auto;
-      background: rgba(255,255,255,0.2);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: 0.05em;
-    }
+    .success-card { background: linear-gradient(135deg, var(--emerald-50), white); border: 2px solid var(--emerald-400); border-radius: 24px; overflow: hidden; }
+    .success-header { background: linear-gradient(135deg, var(--emerald-600), var(--emerald-700)); padding: 25px 30px; display: flex; align-items: center; gap: 15px; }
+    .success-icon { width: 55px; height: 55px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: var(--emerald-600); flex-shrink: 0; }
+    .success-title h3 { font-size: 20px; font-weight: 900; color: white; margin-bottom: 2px; }
+    .success-title p { font-size: 12px; color: var(--emerald-200); }
+    .success-badge { margin-left: auto; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 15px; font-size: 10px; font-weight: 800; color: white; }
 
-    .success-body {
-      padding: 40px;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
-      margin-bottom: 30px;
-    }
-    .info-item {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px solid var(--emerald-200);
-    }
-    .info-item.full {
-      grid-column: 1 / -1;
-    }
-    .info-label {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--emerald-700);
-      margin-bottom: 8px;
-    }
-    .info-value {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--slate-800);
-    }
+    .success-body { padding: 30px; }
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 25px; }
+    .info-item { background: white; padding: 16px; border-radius: 14px; border: 1px solid var(--emerald-200); }
+    .info-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--emerald-700); margin-bottom: 6px; }
+    .info-value { font-size: 14px; font-weight: 700; color: var(--slate-800); }
 
-    .hash-section {
-      background: white;
-      border: 1px solid var(--emerald-200);
-      border-radius: 16px;
-      padding: 25px;
-      margin-bottom: 25px;
-    }
-    .hash-label {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--emerald-700);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .hash-label::before {
-      content: "🔐";
-    }
-    .hash-value {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--slate-600);
-      word-break: break-all;
-      line-height: 1.8;
-      background: var(--slate-50);
-      padding: 15px;
-      border-radius: 10px;
-    }
+    .privacy-notice { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 10px 14px; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; font-size: 11px; color: #92400e; }
+    .privacy-notice::before { content: "🔒"; }
 
-    .download-btn {
-      width: 100%;
-      padding: 22px;
-      background: linear-gradient(135deg, var(--emerald-600), var(--emerald-700));
-      color: white;
-      border: none;
-      border-radius: 16px;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(5, 150, 105, 0.4);
-    }
+    .hash-section { background: white; border: 1px solid var(--emerald-200); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+    .hash-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--emerald-700); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .hash-label::before { content: "🔐"; }
+    .hash-value { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--slate-600); word-break: break-all; line-height: 1.7; background: var(--slate-50); padding: 12px; border-radius: 8px; }
 
-    /* FAIL CARD */
-    .fail-card {
-      background: linear-gradient(135deg, var(--red-50), white);
-      border: 2px solid var(--red-500);
-      border-radius: 28px;
-      padding: 60px 40px;
-      text-align: center;
-    }
-    .fail-icon {
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(135deg, var(--red-500), var(--red-600));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 44px;
-      color: white;
-      margin: 0 auto 25px;
-      box-shadow: 0 15px 40px rgba(239, 68, 68, 0.3);
-    }
-    .fail-card h3 {
-      font-size: 26px;
-      font-weight: 900;
-      color: var(--red-700);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-    .fail-card p {
-      font-size: 15px;
-      color: var(--slate-600);
-      line-height: 1.6;
-      max-width: 400px;
-      margin: 0 auto;
-    }
+    .download-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--emerald-600), var(--emerald-700)); color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .download-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(5,150,105,0.35); }
 
-    /* FOOTER */
-    .footer {
-      margin-top: 50px;
-      text-align: center;
-      padding: 30px;
-      border-top: 1px solid var(--slate-200);
-    }
-    .footer p {
-      font-size: 13px;
-      color: var(--slate-500);
-    }
-    .footer a {
-      color: var(--emerald-600);
-      font-weight: 700;
-      text-decoration: none;
-    }
+    .fail-card { background: linear-gradient(135deg, var(--red-50), white); border: 2px solid var(--red-500); border-radius: 24px; padding: 50px 30px; text-align: center; }
+    .fail-icon { width: 75px; height: 75px; background: linear-gradient(135deg, var(--red-500), var(--red-600)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white; margin: 0 auto 20px; }
+    .fail-card h3 { font-size: 22px; font-weight: 900; color: var(--red-700); margin-bottom: 10px; }
+    .fail-card p { font-size: 14px; color: var(--slate-600); line-height: 1.5; max-width: 350px; margin: 0 auto; }
 
-    /* CERTIFICATE (Hidden for PNG export) */
-    #certHidden {
-      position: fixed;
-      left: -9999px;
-      width: 800px;
-      padding: 60px;
-      background: white;
-      font-family: 'Inter', sans-serif;
-    }
-    .cert-border {
-      border: 4px solid var(--emerald-600);
-      border-radius: 20px;
-      padding: 50px;
-    }
-    .cert-header {
-      text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 30px;
-      border-bottom: 2px solid var(--emerald-200);
-    }
-    .cert-logo {
-      font-size: 14px;
-      font-weight: 900;
-      color: var(--emerald-700);
-      letter-spacing: 0.1em;
-      margin-bottom: 15px;
-    }
-    .cert-title {
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--slate-900);
-    }
-    .cert-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-    .cert-field-label {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--slate-400);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 5px;
-    }
-    .cert-field-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--slate-800);
-    }
-    .cert-hash {
-      background: var(--slate-100);
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 20px;
-    }
-    .cert-hash-value {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      word-break: break-all;
-      color: var(--slate-600);
-    }
-    .cert-footer {
-      margin-top: 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .cert-stamp {
-      width: 100px;
-      height: 100px;
-      border: 4px double var(--emerald-600);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 900;
-      color: var(--emerald-600);
-      transform: rotate(-15deg);
-    }
+    #certHidden { position: fixed; left: -9999px; width: 800px; padding: 50px; background: white; font-family: 'Inter'; }
+    .cert-border { border: 4px solid var(--emerald-600); border-radius: 20px; padding: 45px; }
+    .cert-header { text-align: center; margin-bottom: 35px; padding-bottom: 25px; border-bottom: 2px solid var(--emerald-200); }
+    .cert-logo { font-size: 12px; font-weight: 900; color: var(--emerald-700); letter-spacing: 0.1em; margin-bottom: 12px; }
+    .cert-title { font-size: 30px; font-weight: 900; color: var(--slate-900); }
+    .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
+    .cert-field-label { font-size: 10px; font-weight: 800; color: var(--slate-400); text-transform: uppercase; margin-bottom: 4px; }
+    .cert-field-value { font-size: 16px; font-weight: 700; color: var(--slate-800); }
+    .cert-hash { background: var(--slate-100); padding: 18px; border-radius: 10px; margin-top: 20px; }
+    .cert-hash-value { font-family: 'JetBrains Mono'; font-size: 10px; word-break: break-all; color: var(--slate-600); }
+    .cert-footer { margin-top: 35px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .cert-stamp { width: 90px; height: 90px; border: 4px double var(--emerald-600); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: var(--emerald-600); transform: rotate(-15deg); }
 
-    /* RESPONSIVE */
-    @media (max-width: 600px) {
-      .page-wrapper { padding: 30px 20px; }
-      .main-card { padding: 30px 25px; }
-      .header h1 { font-size: 32px; }
-      .input-row { flex-direction: column; }
-      .search-btn { width: 100%; }
-      .info-grid { grid-template-columns: 1fr; }
-      .success-header { flex-direction: column; text-align: center; }
-      .success-badge { margin: 15px 0 0 0; }
-    }
+    @media (max-width: 600px) { .input-row { flex-direction: column; } .search-btn { width: 100%; } .info-grid { grid-template-columns: 1fr; } .success-header { flex-direction: column; text-align: center; } .success-badge { margin: 10px 0 0 0; } }
   </style>
 </head>
 <body>
 
 <div class="page-wrapper">
-  <div class="header">
-    <span class="logo-badge">[PoArt] Proof of Art</span>
-    <h1>Varlık Doğrulama</h1>
-    <p>Dijital varlığınızın orijinalliğini doğrulamak için dosyayı sürükleyin veya bilgi girin</p>
-  </div>
-
   <div class="main-card">
-    <!-- DROP ZONE -->
     <div class="drop-zone" id="dropZone">
-      <div class="dz-content">
-        <div class="dz-icon">📂</div>
-        <div class="dz-title">Dosyayı Buraya Sürükleyin</div>
-        <div class="dz-sub">Otomatik SHA-512 parmak izi analizi yapılacak</div>
-        <div class="dz-formats">
-          <span class="format-tag">PDF</span>
-          <span class="format-tag">PNG</span>
-          <span class="format-tag">JPG</span>
-          <span class="format-tag">MP4</span>
-          <span class="format-tag">ZIP</span>
-          <span class="format-tag">TÜM FORMATLAR</span>
-        </div>
+      <div class="dz-icon">📂</div>
+      <div class="dz-title">Dosyayı Buraya Sürükleyin</div>
+      <div class="dz-sub">SHA-512 parmak izi otomatik hesaplanır</div>
+      <div class="dz-formats">
+        <span class="format-tag">PDF</span>
+        <span class="format-tag">PNG</span>
+        <span class="format-tag">JPG</span>
+        <span class="format-tag">MP4</span>
+        <span class="format-tag">TÜM FORMATLAR</span>
       </div>
       <input type="file" id="fileInput" style="display:none">
     </div>
 
     <div class="divider"><span>VEYA</span></div>
 
-    <!-- MANUAL SEARCH -->
     <div class="input-row">
       <input type="text" class="input-field" id="queryInput" placeholder="Sertifika ID, Eser Adı veya Hash...">
       <button class="search-btn" id="searchBtn">SORGULA</button>
     </div>
 
-    <!-- LOADING -->
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-      <div class="loading-text">Arşiv taranıyor...</div>
-    </div>
+    <div class="loading" id="loading"><div class="spinner"></div><div class="loading-text">Arşiv taranıyor...</div></div>
 
-    <!-- SUCCESS -->
     <div class="result" id="successResult">
       <div class="success-card">
         <div class="success-header">
           <div class="success-icon">✓</div>
-          <div class="success-title">
-            <h3>MÜHÜRLENMİŞ VARLIK</h3>
-            <p>Bu eser İlhan Art Registry'de doğrulandı</p>
-          </div>
+          <div class="success-title"><h3>MÜHÜRLENMİŞ VARLIK</h3><p>İlhan Art Registry'de doğrulandı</p></div>
           <span class="success-badge">VERIFIED</span>
         </div>
         <div class="success-body">
           <div class="info-grid">
-            <div class="info-item">
-              <div class="info-label">Eser Adı</div>
-              <div class="info-value" id="resTitle">-</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Oluşturucu</div>
-              <div class="info-value" id="resCreator">-</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Sertifika ID</div>
-              <div class="info-value" id="resCertId">-</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Kayıt Tarihi</div>
-              <div class="info-value" id="resDate">-</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Origin IP & Konum</div>
-              <div class="info-value" id="resLocation">-</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Cihaz</div>
-              <div class="info-value" id="resDevice">-</div>
-            </div>
+            <div class="info-item"><div class="info-label">Eser Adı</div><div class="info-value" id="resTitle">-</div></div>
+            <div class="info-item"><div class="info-label">Oluşturucu</div><div class="info-value" id="resCreator">-</div></div>
+            <div class="info-item"><div class="info-label">Sertifika ID</div><div class="info-value" id="resCertId">-</div></div>
+            <div class="info-item"><div class="info-label">Kayıt Tarihi</div><div class="info-value" id="resDate">-</div></div>
+            <div class="info-item"><div class="info-label">Origin Bölgesi</div><div class="info-value" id="resLocation">-</div></div>
+            <div class="info-item"><div class="info-label">Cihaz</div><div class="info-value" id="resDevice">-</div></div>
           </div>
-
-          <div class="hash-section">
-            <div class="hash-label">Dijital Parmak İzi (SHA-512)</div>
-            <div class="hash-value" id="resHash">-</div>
-          </div>
-
-          <button class="download-btn" id="downloadBtn">📜 RESMİ SERTİFİKAYI İNDİR (PNG)</button>
+          <div class="privacy-notice"><span>Gizlilik koruma: IP adresleri KVKK/GDPR için maskelenmiştir.</span></div>
+          <div class="hash-section"><div class="hash-label">Dijital Parmak İzi (SHA-512)</div><div class="hash-value" id="resHash">-</div></div>
+          <button class="download-btn" id="downloadBtn">📜 SERTİFİKAYI İNDİR (PNG)</button>
         </div>
       </div>
     </div>
 
-    <!-- FAIL -->
     <div class="result" id="failResult">
       <div class="fail-card">
         <div class="fail-icon">✗</div>
         <h3>MÜHÜRLENMEMİŞ</h3>
-        <p>Bu dosya veya bilgi İlhan Art Registry'de bulunamadı. Eser henüz mühürlenmemiş veya farklı bir dosya olabilir.</p>
+        <p>Bu dosya veya bilgi İlhan Art Registry'de bulunamadı.</p>
       </div>
     </div>
   </div>
-
-  <div class="footer">
-    <p>İlhan Art Gallery • <a href="https://ilhanart.org">ilhanart.org</a> • SYSTEM_VISION: CULTURE > CAPITAL</p>
-  </div>
 </div>
 
-<!-- HIDDEN CERTIFICATE -->
 <div id="certHidden">
   <div class="cert-border">
-    <div class="cert-header">
-      <div class="cert-logo">[POART] PROOF OF ART PROTOCOL</div>
-      <div class="cert-title">Certificate of Authenticity</div>
-    </div>
+    <div class="cert-header"><div class="cert-logo">[POART] PROOF OF ART</div><div class="cert-title">Certificate of Authenticity</div></div>
     <div class="cert-grid">
       <div><div class="cert-field-label">Asset Title</div><div class="cert-field-value" id="certTitle">-</div></div>
       <div><div class="cert-field-label">Creator</div><div class="cert-field-value" id="certCreator">-</div></div>
       <div><div class="cert-field-label">Certificate ID</div><div class="cert-field-value" id="certId">-</div></div>
-      <div><div class="cert-field-label">Registration Date</div><div class="cert-field-value" id="certDate">-</div></div>
-      <div><div class="cert-field-label">Origin IP & Location</div><div class="cert-field-value" id="certLocation">-</div></div>
+      <div><div class="cert-field-label">Date</div><div class="cert-field-value" id="certDate">-</div></div>
+      <div><div class="cert-field-label">Origin Region</div><div class="cert-field-value" id="certLocation">-</div></div>
       <div><div class="cert-field-label">Device</div><div class="cert-field-value" id="certDevice">-</div></div>
     </div>
-    <div class="cert-hash">
-      <div class="cert-field-label">SHA-512 Cryptographic Hash</div>
-      <div class="cert-hash-value" id="certHash">-</div>
-    </div>
+    <div class="cert-hash"><div class="cert-field-label">SHA-512 Hash</div><div class="cert-hash-value" id="certHash">-</div></div>
     <div class="cert-footer">
-      <div>
-        <div style="font-size:12px; color:#64748b;">Verified by</div>
-        <div style="font-size:18px; font-weight:900; color:#1e293b;">İlhan Art Gallery</div>
-        <div style="font-size:11px; color:#94a3b8;">ilhanart.org</div>
-      </div>
+      <div><div style="font-size:11px;color:#64748b;">Verified by</div><div style="font-size:16px;font-weight:900;color:#1e293b;">İlhan Art Gallery</div></div>
       <div class="cert-stamp">VALID<br>✓</div>
     </div>
   </div>
@@ -708,152 +180,81 @@
 (function() {
   var SUPABASE_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
-  
-  var client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
-  });
-
-  var dropZone = document.getElementById('dropZone');
-  var fileInput = document.getElementById('fileInput');
-  var queryInput = document.getElementById('queryInput');
-  var searchBtn = document.getElementById('searchBtn');
-  var loading = document.getElementById('loading');
-  var successResult = document.getElementById('successResult');
-  var failResult = document.getElementById('failResult');
-  var downloadBtn = document.getElementById('downloadBtn');
+  var client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
 
   var currentRecord = null;
 
-  // DROP ZONE
+  // 🔒 ADLİ MASKELEME (KVKK/GDPR)
+  function maskIP(ip) { if (!ip || ip === 'Gizli' || ip === '-') return 'Korumalı'; var p = ip.split('.'); return p.length === 4 ? p[0]+'.'+p[1]+'.***.***' : ip.substring(0,6)+'****'; }
+  function maskLoc(loc) { if (!loc || loc === '-') return '-'; var p = loc.split(' / '); return p.length >= 2 ? '*** / ' + p.slice(1).join(' / ') : loc; }
+
+  var dropZone = document.getElementById('dropZone'), fileInput = document.getElementById('fileInput');
+  var queryInput = document.getElementById('queryInput'), searchBtn = document.getElementById('searchBtn');
+  var loading = document.getElementById('loading'), successResult = document.getElementById('successResult'), failResult = document.getElementById('failResult');
+  var downloadBtn = document.getElementById('downloadBtn');
+
   dropZone.addEventListener('click', function() { fileInput.click(); });
   dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.classList.add('dragover'); });
-  dropZone.addEventListener('dragleave', function(e) { e.preventDefault(); dropZone.classList.remove('dragover'); });
-  dropZone.addEventListener('drop', function(e) {
-    e.preventDefault();
-    dropZone.classList.remove('dragover');
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      processFile(e.dataTransfer.files[0]);
-    }
-  });
-  fileInput.addEventListener('change', function(e) {
-    if (e.target.files && e.target.files.length > 0) {
-      processFile(e.target.files[0]);
-    }
-  });
+  dropZone.addEventListener('dragleave', function() { dropZone.classList.remove('dragover'); });
+  dropZone.addEventListener('drop', function(e) { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files.length) processFile(e.dataTransfer.files[0]); });
+  fileInput.addEventListener('change', function(e) { if (e.target.files.length) processFile(e.target.files[0]); });
 
-  // SEARCH
-  searchBtn.addEventListener('click', function() {
-    var query = queryInput.value.trim();
-    if (query) performSearch(query);
-  });
-  queryInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') searchBtn.click();
-  });
-
-  // DOWNLOAD
-  downloadBtn.addEventListener('click', downloadCertificate);
+  searchBtn.addEventListener('click', function() { var q = queryInput.value.trim(); if (q) performSearch(q); });
+  queryInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') searchBtn.click(); });
+  downloadBtn.addEventListener('click', downloadCert);
 
   async function processFile(file) {
     showLoading('Dosya analiz ediliyor...');
     try {
       var buffer = await file.arrayBuffer();
-      var hashBuffer = await crypto.subtle.digest('SHA-512', buffer);
-      var hashArray = Array.from(new Uint8Array(hashBuffer));
-      var hash = hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+      var hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-512', buffer))).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
       performSearch(hash);
-    } catch (err) {
-      hideLoading();
-      showFail();
-    }
+    } catch(e) { hideLoading(); showFail(); }
   }
 
-  async function performSearch(query) {
+  async function performSearch(q) {
     showLoading('Arşiv taranıyor...');
     hideResults();
     try {
-      var response = await client
-        .from('manifests')
-        .select('*')
-        .or('cert_id.ilike.%' + query + '%,title.ilike.%' + query + '%,sha512.ilike.%' + query + '%,sha256.ilike.%' + query + '%')
-        .limit(1);
-
-      if (response.error) throw response.error;
-
-      if (response.data && response.data.length > 0) {
-        currentRecord = response.data[0];
-        showSuccess(currentRecord);
-      } else {
-        showFail();
-      }
-    } catch (err) {
-      showFail();
-    }
+      var res = await client.from('manifests').select('*').or('cert_id.ilike.%'+q+'%,title.ilike.%'+q+'%,sha512.ilike.%'+q+'%,sha256.ilike.%'+q+'%').limit(1);
+      if (res.error) throw res.error;
+      if (res.data && res.data.length > 0) { currentRecord = res.data[0]; showSuccess(currentRecord); } else showFail();
+    } catch(e) { showFail(); }
     hideLoading();
   }
 
-  function showLoading(text) {
-    loading.querySelector('.loading-text').textContent = text || 'Arşiv taranıyor...';
-    loading.classList.add('active');
-    searchBtn.disabled = true;
-  }
+  function showLoading(t) { loading.querySelector('.loading-text').textContent = t; loading.classList.add('active'); searchBtn.disabled = true; }
+  function hideLoading() { loading.classList.remove('active'); searchBtn.disabled = false; }
+  function hideResults() { successResult.classList.remove('active'); failResult.classList.remove('active'); }
 
-  function hideLoading() {
-    loading.classList.remove('active');
-    searchBtn.disabled = false;
-  }
-
-  function hideResults() {
-    successResult.classList.remove('active');
-    failResult.classList.remove('active');
-  }
-
-  function showSuccess(data) {
-    document.getElementById('resTitle').textContent = data.title || 'İsimsiz';
-    document.getElementById('resCreator').textContent = data.creator || '-';
-    document.getElementById('resCertId').textContent = data.cert_id || '-';
-    document.getElementById('resDate').textContent = formatDate(data.created_at);
-    document.getElementById('resLocation').textContent = (data.origin_ip || '') + ' / ' + (data.location_data || '-');
-    document.getElementById('resDevice').textContent = data.device_info || '-';
-    document.getElementById('resHash').textContent = data.sha512 || data.sha256 || '-';
-
+  function showSuccess(d) {
+    var mIP = maskIP(d.origin_ip), mLoc = maskLoc(d.location_data);
+    document.getElementById('resTitle').textContent = d.title || 'İsimsiz';
+    document.getElementById('resCreator').textContent = d.creator || '-';
+    document.getElementById('resCertId').textContent = d.cert_id || '-';
+    document.getElementById('resDate').textContent = formatDate(d.created_at);
+    document.getElementById('resLocation').textContent = mIP + ' / ' + mLoc;
+    document.getElementById('resDevice').textContent = d.device_info || '-';
+    document.getElementById('resHash').textContent = d.sha512 || d.sha256 || '-';
     // Certificate
-    document.getElementById('certTitle').textContent = data.title || 'İsimsiz';
-    document.getElementById('certCreator').textContent = data.creator || '-';
-    document.getElementById('certId').textContent = data.cert_id || '-';
-    document.getElementById('certDate').textContent = formatDate(data.created_at);
-    document.getElementById('certLocation').textContent = (data.origin_ip || '') + ' / ' + (data.location_data || '-');
-    document.getElementById('certDevice').textContent = data.device_info || '-';
-    document.getElementById('certHash').textContent = data.sha512 || data.sha256 || '-';
-
+    document.getElementById('certTitle').textContent = d.title || 'İsimsiz';
+    document.getElementById('certCreator').textContent = d.creator || '-';
+    document.getElementById('certId').textContent = d.cert_id || '-';
+    document.getElementById('certDate').textContent = formatDate(d.created_at);
+    document.getElementById('certLocation').textContent = mIP + ' / ' + mLoc;
+    document.getElementById('certDevice').textContent = d.device_info || '-';
+    document.getElementById('certHash').textContent = d.sha512 || d.sha256 || '-';
     successResult.classList.add('active');
-    failResult.classList.remove('active');
   }
 
-  function showFail() {
-    failResult.classList.add('active');
-    successResult.classList.remove('active');
-  }
+  function showFail() { failResult.classList.add('active'); }
+  function formatDate(s) { if (!s) return '-'; var d = new Date(s); return d.toLocaleDateString('tr-TR') + ' ' + d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}); }
 
-  function formatDate(dateStr) {
-    if (!dateStr) return '-';
-    var d = new Date(dateStr);
-    return d.toLocaleDateString('tr-TR') + ' ' + d.toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'});
-  }
-
-  async function downloadCertificate() {
+  async function downloadCert() {
     if (!currentRecord) return;
-    try {
-      var canvas = await html2canvas(document.getElementById('certHidden'), { scale: 2, useCORS: true });
-      var link = document.createElement('a');
-      link.download = 'CERT-' + (currentRecord.cert_id || 'POART') + '.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    } catch (err) {
-      alert('Sertifika indirilemedi.');
-    }
+    try { var canvas = await html2canvas(document.getElementById('certHidden'),{scale:2,useCORS:true}); var link = document.createElement('a'); link.download = 'CERT-'+(currentRecord.cert_id||'POART')+'.png'; link.href = canvas.toDataURL('image/png'); link.click(); } catch(e) { alert('Sertifika indirilemedi.'); }
   }
 })();
 </script>
-
 </body>
 </html>
