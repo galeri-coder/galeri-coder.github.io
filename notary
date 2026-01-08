@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[PoArt] Dijital Noter</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald-50: #ecfdf5; --emerald-100: #d1fae5; --emerald-200: #a7f3d0;
+      --emerald-400: #34d399; --emerald-500: #10b981; --emerald-600: #059669; --emerald-700: #047857;
+      --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+      --slate-400: #94a3b8; --slate-500: #64748b; --slate-600: #475569; --slate-800: #1e293b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: transparent; color: var(--slate-800); }
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 10px 20px 50px; }
+
+    .main-card { background: white; border-radius: 24px; padding: 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+
+    .section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--emerald-700); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ""; width: 4px; height: 14px; background: var(--emerald-500); border-radius: 2px; }
+
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
+    .form-grid.triple { grid-template-columns: repeat(3, 1fr); }
+    .form-grid.full { grid-template-columns: 1fr; }
+    .input-group label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--slate-500); margin-bottom: 6px; }
+    .input-field { width: 100%; padding: 14px 16px; border: 2px solid var(--slate-200); border-radius: 12px; font-family: 'Inter'; font-size: 14px; outline: none; transition: 0.3s; background: var(--slate-50); }
+    .input-field:focus { border-color: var(--emerald-500); background: white; box-shadow: 0 0 0 4px rgba(16,185,129,0.1); }
+    textarea.input-field { min-height: 70px; resize: vertical; }
+
+    .drop-zone { border: 2px dashed var(--slate-300); border-radius: 20px; padding: 40px 25px; text-align: center; cursor: pointer; transition: 0.3s; background: var(--slate-50); margin-bottom: 20px; }
+    .drop-zone:hover { border-color: var(--emerald-500); background: var(--emerald-50); }
+    .drop-zone.dragover { border-color: var(--emerald-600); background: var(--emerald-100); }
+    .dz-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--emerald-500), var(--emerald-600)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 12px; box-shadow: 0 6px 20px rgba(16,185,129,0.3); }
+    .dz-title { font-size: 16px; font-weight: 800; color: var(--slate-800); margin-bottom: 4px; }
+    .dz-sub { font-size: 12px; color: var(--slate-500); }
+
+    .preview { display: none; margin-top: 20px; padding: 20px; background: var(--emerald-50); border: 1px solid var(--emerald-200); border-radius: 16px; }
+    .preview.active { display: block; }
+    .preview-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+    .preview-thumb { width: 80px; height: 80px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .preview-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .preview-info h4 { font-size: 14px; font-weight: 800; color: var(--slate-800); margin-bottom: 2px; }
+    .preview-info p { font-size: 12px; color: var(--slate-500); }
+
+    .forensic-box { background: white; padding: 15px; border-radius: 12px; border: 1px solid var(--emerald-200); margin-bottom: 12px; }
+    .forensic-title { font-size: 10px; font-weight: 800; color: var(--emerald-700); margin-bottom: 10px; }
+    .forensic-row { display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px dashed var(--slate-200); }
+    .forensic-row:last-child { border: none; }
+    .f-key { color: var(--slate-500); }
+    .f-val { font-family: 'JetBrains Mono'; font-weight: 600; color: var(--slate-800); font-size: 11px; }
+
+    .privacy-badge { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 8px 12px; margin-top: 8px; font-size: 10px; color: #92400e; display: flex; align-items: center; gap: 6px; }
+    .privacy-badge::before { content: "🔒"; }
+
+    .hash-section { background: white; padding: 12px; border-radius: 10px; border: 1px solid var(--emerald-200); margin-bottom: 8px; }
+    .hash-label { font-size: 9px; font-weight: 800; color: var(--emerald-700); margin-bottom: 6px; }
+    .hash-value { font-family: 'JetBrains Mono'; font-size: 9px; color: var(--slate-600); word-break: break-all; line-height: 1.5; background: var(--slate-50); padding: 8px; border-radius: 6px; }
+
+    .action-buttons { display: none; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .action-buttons.active { display: grid; }
+    .action-btn { padding: 16px 20px; border: none; border-radius: 12px; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-primary { background: linear-gradient(135deg, var(--emerald-600), var(--emerald-700)); color: white; box-shadow: 0 6px 20px rgba(5,150,105,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-primary:disabled { background: var(--slate-400); transform: none; }
+    .btn-secondary { background: var(--slate-800); color: white; }
+
+    .status { display: none; margin-top: 15px; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700; text-align: center; }
+    .status.success { display: block; background: var(--emerald-100); color: var(--emerald-700); }
+    .status.error { display: block; background: #fee2e2; color: #b91c1c; }
+    .status.loading { display: block; background: var(--slate-100); color: var(--slate-600); }
+
+    #certHidden { position: fixed; left: -9999px; width: 800px; padding: 50px; background: white; font-family: 'Inter'; }
+    .cert-frame { border: 4px solid var(--emerald-600); border-radius: 20px; padding: 40px; }
+    .cert-header { text-align: center; margin-bottom: 30px; padding-bottom: 25px; border-bottom: 2px solid var(--emerald-200); }
+    .cert-logo { font-size: 12px; font-weight: 900; color: var(--emerald-700); letter-spacing: 0.1em; margin-bottom: 10px; }
+    .cert-title { font-size: 28px; font-weight: 900; color: var(--slate-800); }
+    .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+    .cert-field-label { font-size: 10px; font-weight: 800; color: var(--slate-400); text-transform: uppercase; margin-bottom: 4px; }
+    .cert-field-value { font-size: 16px; font-weight: 700; color: var(--slate-800); }
+    .cert-hash-box { background: var(--slate-100); padding: 15px; border-radius: 10px; margin-top: 20px; }
+    .cert-hash-val { font-family: 'JetBrains Mono'; font-size: 10px; word-break: break-all; color: var(--slate-600); }
+    .cert-footer { margin-top: 30px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .cert-stamp { width: 80px; height: 80px; border: 3px double var(--emerald-600); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: var(--emerald-600); transform: rotate(-15deg); }
+
+    @media (max-width: 600px) { .form-grid, .form-grid.triple { grid-template-columns: 1fr; } .action-buttons { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+  <div class="main-card">
+    <div class="section-title">Eser Bilgileri</div>
+    <div class="form-grid">
+      <div class="input-group"><label>Eser Adı</label><input type="text" class="input-field" id="title" placeholder="Örn: WhitePaper v1.0"></div>
+      <div class="input-group"><label>Proje</label><input type="text" class="input-field" id="project" placeholder="Örn: PoArt Protocol"></div>
+    </div>
+    <div class="form-grid triple">
+      <div class="input-group"><label>Oluşturucu</label><input type="text" class="input-field" id="creator" placeholder="Ad Soyad"></div>
+      <div class="input-group"><label>Organizasyon</label><input type="text" class="input-field" id="organization" placeholder="İlhan Art Gallery"></div>
+      <div class="input-group"><label>Tarih</label><input type="date" class="input-field" id="created-date"></div>
+    </div>
+    <div class="form-grid full">
+      <div class="input-group"><label>Açıklama</label><textarea class="input-field" id="description" placeholder="Kısa açıklama..."></textarea></div>
+    </div>
+
+    <div class="drop-zone" id="dropZone">
+      <div class="dz-icon">📂</div>
+      <div class="dz-title">Dosyayı Buraya Sürükleyin</div>
+      <div class="dz-sub">veya tıklayarak seçin</div>
+      <input type="file" id="fileInput" style="display:none">
+    </div>
+
+    <div class="preview" id="preview">
+      <div class="preview-header">
+        <div class="preview-thumb" id="previewThumb">📄</div>
+        <div class="preview-info"><h4 id="fileName">-</h4><p id="fileSize">-</p></div>
+      </div>
+      <div class="forensic-box">
+        <div class="forensic-title">📡 ADLİ VERİ ANALİZİ</div>
+        <div class="forensic-row"><span class="f-key">IP Adresi</span><span class="f-val" id="dispIp">Analiz ediliyor...</span></div>
+        <div class="forensic-row"><span class="f-key">Konum</span><span class="f-val" id="dispLoc">Tespit ediliyor...</span></div>
+        <div class="forensic-row"><span class="f-key">Cihaz</span><span class="f-val" id="dispDevice">-</span></div>
+        <div class="privacy-badge">Adli Maskeleme: IP güvenle saklanır, halka açık görünümlerde maskelenir.</div>
+      </div>
+      <div class="hash-section"><div class="hash-label">SHA-256</div><div class="hash-value" id="hash256">-</div></div>
+      <div class="hash-section"><div class="hash-label">SHA-512 (Birincil)</div><div class="hash-value" id="hash512">-</div></div>
+    </div>
+
+    <div class="action-buttons" id="actionButtons">
+      <button class="action-btn btn-primary" id="btnSeal">💾 MÜHÜRLE</button>
+      <button class="action-btn btn-secondary" id="btnCert">📜 SERTİFİKA</button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+</div>
+
+<div id="certHidden">
+  <div class="cert-frame">
+    <div class="cert-header"><div class="cert-logo">[POART] PROOF OF ART</div><div class="cert-title">Certificate of Authenticity</div></div>
+    <div class="cert-grid">
+      <div><div class="cert-field-label">Asset Title</div><div class="cert-field-value" id="certTitle">-</div></div>
+      <div><div class="cert-field-label">Creator</div><div class="cert-field-value" id="certCreator">-</div></div>
+      <div><div class="cert-field-label">Certificate ID</div><div class="cert-field-value" id="certId">-</div></div>
+      <div><div class="cert-field-label">Date</div><div class="cert-field-value" id="certDate">-</div></div>
+      <div><div class="cert-field-label">Origin Region</div><div class="cert-field-value" id="certLoc">-</div></div>
+      <div><div class="cert-field-label">Device</div><div class="cert-field-value" id="certDevice">-</div></div>
+    </div>
+    <div class="cert-hash-box"><div class="cert-field-label">SHA-512 Hash</div><div class="cert-hash-val" id="certHash">-</div></div>
+    <div class="cert-footer">
+      <div><div style="font-size:11px;color:#64748b;">Verified by</div><div style="font-size:16px;font-weight:900;color:#1e293b;">İlhan Art Gallery</div></div>
+      <div class="cert-stamp">VALID<br>✓</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var SUPABASE_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
+  var client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  var forensics = { full: { ip: 'Gizli', location: 'Bilinmiyor', device: 'Bilinmiyor' }, masked: { ip: 'Korumalı', location: 'Bilinmiyor', device: 'Bilinmiyor' } };
+  var currentFile = null, fileHashes = { sha256: null, sha512: null }, fileBase64 = null, lastCertId = null;
+
+  function maskIP(ip) { if (!ip || ip === 'Gizli') return 'Korumalı'; var p = ip.split('.'); return p.length === 4 ? p[0]+'.'+p[1]+'.***.***' : ip.substring(0,6)+'****'; }
+  function maskLoc(loc) { if (!loc || loc === 'Bilinmiyor') return 'Bilinmiyor'; var p = loc.split(' / '); return p.length >= 2 ? '*** / ' + p.slice(1).join(' / ') : loc; }
+  function getDevice() { var ua = navigator.userAgent; var d = /Mobile|Android|iPhone/i.test(ua) ? 'Mobil' : (/Tablet|iPad/i.test(ua) ? 'Tablet' : 'Masaüstü'); var os = ua.indexOf('Win')>-1?'Windows':(ua.indexOf('Mac')>-1?'MacOS':(ua.indexOf('Linux')>-1?'Linux':(ua.indexOf('Android')>-1?'Android':'OS'))); var br = ua.indexOf('Chrome')>-1?'Chrome':(ua.indexOf('Safari')>-1?'Safari':(ua.indexOf('Firefox')>-1?'Firefox':'Browser')); return d+' • '+os+' • '+br; }
+  function setText(id, t) { var el = document.getElementById(id); if (el) el.textContent = t || '-'; }
+
+  forensics.full.device = forensics.masked.device = getDevice();
+  setText('dispDevice', forensics.masked.device);
+
+  fetch('https://ipapi.co/json/').then(function(r){return r.json();}).then(function(d){
+    forensics.full.ip = d.ip;
+    forensics.full.location = (d.city||'Merkez')+' / '+(d.region||'Bölge')+' / '+d.country_name;
+    forensics.masked.ip = maskIP(d.ip);
+    forensics.masked.location = maskLoc(forensics.full.location);
+    setText('dispIp', forensics.masked.ip);
+    setText('dispLoc', forensics.masked.location);
+  }).catch(function(){ setText('dispIp', 'VPN/Gizli'); setText('dispLoc', 'Bilinmiyor'); });
+
+  document.getElementById('created-date').valueAsDate = new Date();
+
+  var dropZone = document.getElementById('dropZone'), fileInput = document.getElementById('fileInput');
+  var preview = document.getElementById('preview'), actionButtons = document.getElementById('actionButtons');
+  var status = document.getElementById('status'), btnSeal = document.getElementById('btnSeal'), btnCert = document.getElementById('btnCert');
+
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', function() { dropZone.classList.remove('dragover'); });
+  dropZone.addEventListener('drop', function(e) { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files.length) processFile(e.dataTransfer.files[0]); });
+  fileInput.addEventListener('change', function(e) { if (e.target.files.length) processFile(e.target.files[0]); });
+
+  async function processFile(file) {
+    currentFile = file;
+    var buffer = await file.arrayBuffer();
+    fileHashes.sha256 = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', buffer))).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+    fileHashes.sha512 = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-512', buffer))).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+    var reader = new FileReader(); reader.onload = function(){ fileBase64 = reader.result; }; reader.readAsDataURL(file);
+    setText('fileName', file.name); setText('fileSize', (file.size/1024).toFixed(2)+' KB');
+    setText('hash256', fileHashes.sha256); setText('hash512', fileHashes.sha512);
+    var thumb = document.getElementById('previewThumb');
+    if (file.type.startsWith('image/')) { var img = document.createElement('img'); img.src = URL.createObjectURL(file); thumb.innerHTML = ''; thumb.appendChild(img); } else { thumb.innerHTML = '<span style="font-size:32px">📄</span>'; }
+    preview.classList.add('active'); actionButtons.classList.add('active');
+  }
+
+  btnSeal.addEventListener('click', async function() {
+    var title = document.getElementById('title').value || 'İsimsiz';
+    var creator = document.getElementById('creator').value || 'Belirsiz';
+    var certId = 'POART-2026-' + Math.random().toString(36).substr(2,9).toUpperCase();
+    lastCertId = certId;
+    status.className = 'status loading'; status.textContent = '⏳ Mühürleniyor...'; btnSeal.disabled = true;
+    try {
+      var res = await client.from('manifests').insert([{ cert_id: certId, title: title, creator: creator, sha512: fileHashes.sha512, sha256: fileHashes.sha256, manifest_data: { id: certId, title: title, creator: creator, forensics: forensics.full }, origin_ip: forensics.full.ip, location_data: forensics.full.location, device_info: forensics.full.device }]);
+      if (res.error) throw res.error;
+      status.className = 'status success'; status.textContent = '✅ Mühürlendi: ' + certId;
+      var json = JSON.stringify({ id: certId, title: title, sha512: fileHashes.sha512, origin: forensics.masked.ip + ' / ' + forensics.masked.location }, null, 2);
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([json], {type:'application/json'})); a.download = certId+'.json'; a.click();
+    } catch(e) { status.className = 'status error'; status.textContent = '❌ Hata: ' + e.message; }
+    btnSeal.disabled = false;
+  });
+
+  btnCert.addEventListener('click', async function() {
+    setText('certTitle', document.getElementById('title').value || 'İsimsiz');
+    setText('certCreator', document.getElementById('creator').value || 'Belirsiz');
+    setText('certId', lastCertId || 'PREVIEW');
+    setText('certDate', new Date().toLocaleDateString('tr-TR'));
+    setText('certLoc', forensics.masked.ip + ' / ' + forensics.masked.location);
+    setText('certDevice', forensics.masked.device);
+    setText('certHash', fileHashes.sha512 || '-');
+    try { var canvas = await html2canvas(document.getElementById('certHidden'), {scale:2,useCORS:true}); var link = document.createElement('a'); link.download = 'CERT-'+(lastCertId||'PREVIEW')+'.png'; link.href = canvas.toDataURL('image/png'); link.click(); } catch(e) { alert('Sertifika indirilemedi'); }
+  });
+})();
+</script>
+</body>
+</html>
