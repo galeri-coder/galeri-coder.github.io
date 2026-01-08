@@ -8,126 +8,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --emerald: #15803d;
-            --emerald-soft: #dcfce7;
-            --rose: #e11d48;
-            --rose-soft: #ffe4e6;
-            --slate: #1e293b;
-            --bg: #ffffff;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: transparent;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .verify-wrapper {
-            width: 100%;
-            max-width: 600px;
-            background: var(--bg);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-
+        :root { --emerald: #15803d; --emerald-soft: #dcfce7; --rose: #e11d48; --rose-soft: #ffe4e6; --slate: #1e293b; --bg: #ffffff; }
+        body { font-family: 'Inter', sans-serif; background: transparent; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .verify-wrapper { width: 100%; max-width: 600px; background: var(--bg); border-radius: 24px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; text-align: center; }
         h2 { margin: 0 0 10px 0; color: var(--slate); font-weight: 900; letter-spacing: -0.02em; }
         p { margin: 0 0 30px 0; color: #64748b; font-size: 14px; }
-
-        /* INPUT AREA */
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        input {
-            flex: 1;
-            padding: 16px 20px;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: 0.3s;
-        }
-
+        .search-box { display: flex; gap: 10px; margin-bottom: 30px; }
+        input { flex: 1; padding: 16px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
         input:focus { border-color: var(--emerald); }
-
-        button {
-            background: var(--slate);
-            color: white;
-            border: none;
-            padding: 0 30px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
+        button { background: var(--slate); color: white; border: none; padding: 0 30px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
         button:hover { background: black; transform: translateY(-2px); }
-
-        /* RESULT CARDS */
-        .result-card {
-            display: none; /* Başlangıçta gizli */
-            padding: 30px;
-            border-radius: 20px;
-            border: 2px solid transparent;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
+        .result-card { display: none; padding: 30px; border-radius: 20px; border: 2px solid transparent; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        /* SUCCESS STATE */
-        .success {
-            background: var(--emerald-soft);
-            border-color: var(--emerald);
-            color: var(--emerald);
-        }
+        .success { background: var(--emerald-soft); border-color: var(--emerald); color: var(--emerald); }
         .success .icon { font-size: 48px; margin-bottom: 10px; }
         .success h3 { margin: 10px 0; font-weight: 900; font-size: 20px; }
-        .success .detail-row {
-            background: rgba(255,255,255,0.6);
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 5px;
-            font-size: 14px;
-            color: #064e3b;
-            text-align: left;
-            display: flex;
-            justify-content: space-between;
-        }
+        .success .detail-row { background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; margin-top: 5px; font-size: 14px; color: #064e3b; text-align: left; display: flex; justify-content: space-between; }
         .success .mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-
-        /* FAIL STATE */
-        .fail {
-            background: var(--rose-soft);
-            border-color: var(--rose);
-            color: var(--rose);
-        }
+        .fail { background: var(--rose-soft); border-color: var(--rose); color: var(--rose); }
         .fail .icon { font-size: 48px; margin-bottom: 10px; }
         .fail h3 { font-weight: 900; font-size: 18px; margin: 0; }
         .fail p { color: #881337; margin-top: 5px; font-size: 13px; }
-
     </style>
 </head>
 <body>
 
 <div class="verify-wrapper">
     <h2>Varlık Doğrulama</h2>
-    <p>Sertifika ID veya Eser Adı girerek orijinallik sorgulayın.</p>
+    <p>Sertifika ID, Eser Adı veya Mühür (Hash) girerek sorgulayın.</p>
 
     <div class="search-box">
-        <input type="text" id="queryInput" placeholder="Örn: POART-2026... veya 'WhitePaper'">
+        <input type="text" id="queryInput" placeholder="ID, İsim veya Hash yapıştırın...">
         <button onclick="verifyAsset()">SORGULA</button>
     </div>
 
@@ -136,21 +47,11 @@
         <h3>DOĞRULANMIŞ VARLIK</h3>
         <div style="margin-bottom: 20px; font-size: 12px; opacity: 0.8;">OFFICIAL POART RECORD FOUND</div>
         
-        <div class="detail-row">
-            <span>Eser:</span>
-            <strong id="resTitle">-</strong>
-        </div>
-        <div class="detail-row">
-            <span>Sanatçı:</span>
-            <strong id="resCreator">-</strong>
-        </div>
-        <div class="detail-row">
-            <span>ID:</span>
-            <strong id="resId" class="mono">-</strong>
-        </div>
+        <div class="detail-row"><span>Eser:</span><strong id="resTitle">-</strong></div>
+        <div class="detail-row"><span>Sanatçı:</span><strong id="resCreator">-</strong></div>
+        <div class="detail-row"><span>ID:</span><strong id="resId" class="mono">-</strong></div>
         <div class="detail-row" style="margin-top: 15px; border:1px solid #15803d;">
-            <span>Mühür (SHA):</span>
-            <strong id="resHash" class="mono" style="font-size: 10px;">-</strong>
+            <span>Mühür:</span><strong id="resHash" class="mono" style="font-size: 10px;">-</strong>
         </div>
     </div>
 
@@ -172,32 +73,28 @@
         const successCard = document.getElementById('successCard');
         const failCard = document.getElementById('failCard');
 
-        // Reset
         successCard.style.display = 'none';
         failCard.style.display = 'none';
 
-        if (!input) return; // Boşsa işlem yapma
+        if (!input) return;
 
-        // Sorgu: Hem ID hem de Başlık içinde ara (Büyük/küçük harf duyarsız - ilike)
+        // GÜNCELLENEN SORGU: Artık SHA256 ve SHA512 sütunlarına da bakıyor
         const { data, error } = await supabaseClient
             .from('manifests')
             .select('*')
-            .or(`cert_id.ilike.%${input}%,title.ilike.%${input}%`)
+            .or(`cert_id.ilike.%${input}%,title.ilike.%${input}%,sha256.ilike.%${input}%,sha512.ilike.%${input}%`)
             .limit(1);
 
         if (data && data.length > 0) {
-            // BULUNDU (YEŞİL)
             const item = data[0];
             document.getElementById('resTitle').innerText = item.title;
             document.getElementById('resCreator').innerText = item.creator;
             document.getElementById('resId').innerText = item.cert_id;
-            // Hash için sha512 varsa onu, yoksa sha256'yı, o da yoksa boş göster
             const hashVal = item.sha512 || item.sha256 || 'Hash bilgisi eksik';
             document.getElementById('resHash').innerText = hashVal.substring(0, 20) + '...';
             
             successCard.style.display = 'block';
         } else {
-            // BULUNAMADI (KIRMIZI)
             failCard.style.display = 'block';
         }
     }
