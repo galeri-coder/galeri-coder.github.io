@@ -2,169 +2,58 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoArt Public Registry</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --emerald: #15803d;
-            --emerald-light: #dcfce7;
-            --slate-800: #1e293b;
-            --slate-500: #64748b;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: transparent; /* Iframe uyumu için */
-            margin: 0;
-            padding: 20px;
-            color: var(--slate-800);
-        }
-
-        .registry-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--emerald-light);
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            font-size: 22px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            margin: 0;
-        }
-
-        .status-badge {
-            background: var(--emerald-light);
-            color: var(--emerald);
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        #registry-list {
-            display: grid;
-            gap: 15px;
-        }
-
-        .registry-item {
-            border: 1px solid #f1f5f9;
-            padding: 15px;
-            border-radius: 12px;
-            transition: 0.2s;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-        }
-
-        .registry-item:hover {
-            border-color: var(--emerald);
-            background: #f8fafc;
-        }
-
-        .asset-info h3 {
-            margin: 0 0 5px 0;
-            font-size: 15px;
-            color: var(--slate-800);
-        }
-
-        .asset-info p {
-            margin: 0;
-            font-size: 12px;
-            color: var(--slate-500);
-        }
-
-        .cert-id {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            background: #f1f5f9;
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: var(--emerald);
-        }
-
-        .loading { text-align: center; padding: 40px; color: var(--slate-500); font-weight: 600; }
+        body { font-family: 'Inter', sans-serif; background: white; margin: 0; padding: 20px; }
+        .loading { text-align: center; margin-top: 50px; color: #64748b; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { text-align: left; background: #f8fafc; padding: 12px; font-size: 12px; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .cert-id { color: #15803d; font-weight: bold; background: #dcfce7; padding: 4px 8px; border-radius: 4px; }
     </style>
 </head>
 <body>
+    <h2>[PoArt] Güncel Kayıtlar</h2>
+    <div id="content"><div class="loading">Bağlanılıyor...</div></div>
 
-<div class="registry-container">
-    <div class="header">
-        <h1>Kamu Arşivi <span style="color: var(--emerald);">• Registry</span></h1>
-        <div class="status-badge">CANLI SENKRONİZASYON</div>
-    </div>
-
-    <div id="registry-list">
-        <div class="loading">Veriler yükleniyor...</div>
-    </div>
-</div>
-
-<script>
-    // Supabase Ayarları
-    const S_URL = 'https://vjthdznmjwzzzhvzzhzq.supabase.co'; // Senin URL
-    const S_KEY = 'sb_publishable_RIz_XhRjKx06uTcz9V318g_fg5heJ0g'; // Senin Key
-    const supabase = lib.supabase.createClient(S_URL, S_KEY);
-
-    async function fetchRegistry() {
-        const listEl = document.getElementById('registry-list');
+    <script>
+        // SENİN PAYLAŞTIĞIN GÜNCEL BİLGİLER
+        const S_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
+        const S_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
         
-        try {
-            const { data, error } = await supabase
+        const supabaseClient = supabase.createClient(S_URL, S_KEY);
+
+        async function loadData() {
+            const { data, error } = await supabaseClient
                 .from('manifests')
                 .select('*')
                 .order('created_at', { ascending: false });
 
-            if (error) throw error;
-
-            if (data.length === 0) {
-                listEl.innerHTML = '<div class="loading">Henüz kayıtlı eser bulunamadı.</div>';
+            if (error) {
+                document.getElementById('content').innerHTML = "Hata: " + error.message;
                 return;
             }
 
-            listEl.innerHTML = ''; // Loading'i temizle
-            
+            if (data.length === 0) {
+                document.getElementById('content').innerHTML = "Kayıt bulunamadı.";
+                return;
+            }
+
+            let html = '<table><thead><tr><th>ID</th><th>Eser</th><th>Sanatçı</th></tr></thead><tbody>';
             data.forEach(item => {
-                const date = new Date(item.created_at).toLocaleDateString('tr-TR');
-                const div = document.createElement('div');
-                div.className = 'registry-item';
-                div.innerHTML = `
-                    <div class="asset-info">
-                        <h3>${item.title || 'İsimsiz Varlık'}</h3>
-                        <p>Oluşturucu: <strong>${item.creator || 'Belirtilmedi'}</strong> • Tarih: ${date}</p>
-                        <div style="margin-top:8px;"><span class="cert-id">${item.cert_id}</span></div>
-                    </div>
-                    <div style="text-align: right;">
-                        <span style="font-size: 18px;">✅</span>
-                    </div>
-                `;
-                listEl.appendChild(div);
+                html += `<tr>
+                    <td><span class="cert-id">${item.cert_id}</span></td>
+                    <td><b>${item.title}</b></td>
+                    <td>${item.creator}</td>
+                </tr>`;
             });
-
-        } catch (err) {
-            console.error(err);
-            listEl.innerHTML = `<div class="loading" style="color: red;">Bağlantı Hatası: ${err.message}</div>`;
+            html += '</tbody></table>';
+            document.getElementById('content').innerHTML = html;
         }
-    }
 
-    fetchRegistry();
-</script>
-
+        loadData();
+    </script>
 </body>
 </html>
