@@ -3,101 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoArt Doğrulama (Verifier)</title>
+    <title>PoArt Verifier</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        :root { --emerald: #15803d; --emerald-soft: #dcfce7; --rose: #e11d48; --rose-soft: #ffe4e6; --slate: #1e293b; --bg: #ffffff; }
-        body { font-family: 'Inter', sans-serif; background: transparent; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .verify-wrapper { width: 100%; max-width: 600px; background: var(--bg); border-radius: 24px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; text-align: center; }
-        h2 { margin: 0 0 10px 0; color: var(--slate); font-weight: 900; letter-spacing: -0.02em; }
-        p { margin: 0 0 30px 0; color: #64748b; font-size: 14px; }
-        .search-box { display: flex; gap: 10px; margin-bottom: 30px; }
-        input { flex: 1; padding: 16px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--emerald); }
-        button { background: var(--slate); color: white; border: none; padding: 0 30px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
-        button:hover { background: black; transform: translateY(-2px); }
-        .result-card { display: none; padding: 30px; border-radius: 20px; border: 2px solid transparent; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .success { background: var(--emerald-soft); border-color: var(--emerald); color: var(--emerald); }
-        .success .icon { font-size: 48px; margin-bottom: 10px; }
-        .success h3 { margin: 10px 0; font-weight: 900; font-size: 20px; }
-        .success .detail-row { background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; margin-top: 5px; font-size: 14px; color: #064e3b; text-align: left; display: flex; justify-content: space-between; }
-        .success .mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-        .fail { background: var(--rose-soft); border-color: var(--rose); color: var(--rose); }
-        .fail .icon { font-size: 48px; margin-bottom: 10px; }
-        .fail h3 { font-weight: 900; font-size: 18px; margin: 0; }
-        .fail p { color: #881337; margin-top: 5px; font-size: 13px; }
+        :root {
+            --emerald: #10b981;
+            --emerald-dark: #047857;
+            --slate-900: #0f172a;
+            --slate-500: #64748b;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: transparent; /* Iframe uyumu */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .verifier-container {
+            width: 100%;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dekoratif Arka Plan */
+        .verifier-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: var(--emerald);
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .content-layer { position: relative; z-index: 1; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 900;
+            margin: 0 0 8px 0;
+            background: linear-gradient(to right, var(--slate-900), var(--emerald-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        p.subtitle {
+            font-size: 13px;
+            color: var(--slate-500);
+            margin-bottom: 30px;
+        }
+
+        /* INPUT AREA */
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px 20px;
+            padding-right: 50px;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            background: #fff;
+            color: var(--slate-900);
+        }
+
+        input:focus {
+            border-color: var(--emerald);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: var(--slate-900);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            background: black;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* SONUÇ KARTLARI */
+        .result-box {
+            display: none;
+            margin-top: 30px;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: left;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BAŞARILI */
+        .success-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            position: relative;
+            overflow: hidden;
+        }
+        .success-box::after {
+            content: "VERIFIED";
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 60px;
+            font-weight: 900;
+            color: #15803d;
+            opacity: 0.05;
+            transform: rotate(-10deg);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #15803d;
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 99px;
+            margin-bottom: 15px;
+        }
+
+        .data-row { margin-bottom: 12px; }
+        .data-label { font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 2px;}
+        .data-value { font-size: 15px; color: #0f172a; font-weight: 600; word-break: break-word; }
+        .data-value.mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #334155; }
+
+        /* BAŞARISIZ */
+        .fail-box {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            text-align: center;
+        }
+        .fail-icon { font-size: 30px; margin-bottom: 10px; }
+        .fail-title { color: #9f1239; font-weight: 800; margin-bottom: 5px; }
+        .fail-text { color: #be123c; font-size: 13px; }
+
+        /* Spinner */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
     </style>
 </head>
 <body>
 
-<div class="verify-wrapper">
-    <h2>Varlık Doğrulama</h2>
-    <p>Sertifika ID, Eser Adı veya Mühür (Hash) girerek sorgulayın.</p>
+<div class="verifier-container">
+    <div class="content-layer">
+        <h2>Varlık Doğrulama</h2>
+        <p class="subtitle">Eserin orijinalliğini kanıtlamak için ID, İsim veya Mühür kodunu girin.</p>
 
-    <div class="search-box">
-        <input type="text" id="queryInput" placeholder="ID, İsim veya Hash yapıştırın...">
-        <button onclick="verifyAsset()">SORGULA</button>
-    </div>
-
-    <div id="successCard" class="result-card success">
-        <div class="icon">✅</div>
-        <h3>DOĞRULANMIŞ VARLIK</h3>
-        <div style="margin-bottom: 20px; font-size: 12px; opacity: 0.8;">OFFICIAL POART RECORD FOUND</div>
-        
-        <div class="detail-row"><span>Eser:</span><strong id="resTitle">-</strong></div>
-        <div class="detail-row"><span>Sanatçı:</span><strong id="resCreator">-</strong></div>
-        <div class="detail-row"><span>ID:</span><strong id="resId" class="mono">-</strong></div>
-        <div class="detail-row" style="margin-top: 15px; border:1px solid #15803d;">
-            <span>Mühür:</span><strong id="resHash" class="mono" style="font-size: 10px;">-</strong>
+        <div class="input-group">
+            <input type="text" id="queryInput" placeholder="Sertifika ID veya Eser Adı..." autocomplete="off">
         </div>
-    </div>
 
-    <div id="failCard" class="result-card fail">
-        <div class="icon">⛔</div>
-        <h3>KAYIT BULUNAMADI</h3>
-        <p>Girdiğiniz bilgilere ait mühürlenmiş bir varlık arşivde yok.</p>
+        <button id="searchBtn" onclick="verifyAsset()">
+            <span class="spinner" id="btnSpinner"></span>
+            <span id="btnText">Sorgula ve Doğrula</span>
+        </button>
+
+        <div id="successCard" class="result-box success-box">
+            <div class="status-badge">
+                <span style="font-size:12px;">✓</span> POART PROTOCOL SECURED
+            </div>
+            
+            <div class="data-row">
+                <span class="data-label">Eser Adı</span>
+                <div class="data-value" id="resTitle">-</div>
+            </div>
+            <div class="data-row">
+                <span class="data-label">Oluşturucu / Sanatçı</span>
+                <div class="data-value" id="resCreator">-</div>
+            </div>
+            <div class="data-row">
+                <span class="data-label">Sertifika ID</span>
+                <div class="data-value mono" id="resId">-</div>
+            </div>
+            <div class="data-row" style="margin-top:15px; background: rgba(255,255,255,0.5); padding:10px; border-radius:8px;">
+                <span class="data-label">Kriptografik Mühür (SHA)</span>
+                <div class="data-value mono" id="resHash" style="font-size:10px;">-</div>
+            </div>
+        </div>
+
+        <div id="failCard" class="result-box fail-box">
+            <div class="fail-icon">⛔</div>
+            <div class="fail-title">Kayıt Bulunamadı</div>
+            <div class="fail-text">Girdiğiniz bilgilere ait doğrulanmış bir varlık arşivimizde yer almıyor.</div>
+        </div>
     </div>
 </div>
 
 <script>
     const S_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
     const S_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
-    
-    const supabaseClient = supabase.createClient(S_URL, S_KEY);
 
     async function verifyAsset() {
         const input = document.getElementById('queryInput').value.trim();
+        const btn = document.getElementById('searchBtn');
+        const spinner = document.getElementById('btnSpinner');
+        const btnText = document.getElementById('btnText');
+        
         const successCard = document.getElementById('successCard');
         const failCard = document.getElementById('failCard');
 
+        // Reset
         successCard.style.display = 'none';
         failCard.style.display = 'none';
 
-        if (!input) return;
+        if (!input) {
+            alert("Lütfen bir ID veya Eser Adı girin.");
+            return;
+        }
 
-        // GÜNCELLENEN SORGU: Artık SHA256 ve SHA512 sütunlarına da bakıyor
-        const { data, error } = await supabaseClient
-            .from('manifests')
-            .select('*')
-            .or(`cert_id.ilike.%${input}%,title.ilike.%${input}%,sha256.ilike.%${input}%,sha512.ilike.%${input}%`)
-            .limit(1);
+        // Loading State
+        btn.disabled = true;
+        spinner.style.display = 'block';
+        btnText.innerText = "Arşiv Taranıyor...";
 
-        if (data && data.length > 0) {
-            const item = data[0];
-            document.getElementById('resTitle').innerText = item.title;
-            document.getElementById('resCreator').innerText = item.creator;
-            document.getElementById('resId').innerText = item.cert_id;
-            const hashVal = item.sha512 || item.sha256 || 'Hash bilgisi eksik';
-            document.getElementById('resHash').innerText = hashVal.substring(0, 20) + '...';
-            
-            successCard.style.display = 'block';
-        } else {
-            failCard.style.display = 'block';
+        try {
+            // ÖZEL AYAR: IFRAME İÇİN PERSISTENCE KAPALI (Çok Önemli)
+            const supabaseClient = supabase.createClient(S_URL, S_KEY, {
+                auth: {
+                    persistSession: false,
+                    autoRefreshToken: false,
+                    detectSessionInUrl: false
+                }
+            });
+
+            // Genişletilmiş Sorgu: ID, Title, SHA256, SHA512
+            const { data, error } = await supabaseClient
+                .from('manifests')
+                .select('*')
+                .or(`cert_id.ilike.%${input}%,title.ilike.%${input}%,sha256.ilike.%${input}%,sha512.ilike.%${input}%`)
+                .limit(1);
+
+            if (error) throw error;
+
+            if (data && data.length > 0) {
+                // BULUNDU
+                const item = data[0];
+                document.getElementById('resTitle').innerText = item.title;
+                document.getElementById('resCreator').innerText = item.creator;
+                document.getElementById('resId').innerText = item.cert_id;
+                
+                const hashVal = item.sha512 || item.sha256 || 'Hash bilgisi eksik';
+                // Hash'i çok uzunsa ortadan kesip gösterelim
+                const displayHash = hashVal.length > 40 
+                    ? hashVal.substring(0, 20) + '...' + hashVal.substring(hashVal.length - 10) 
+                    : hashVal;
+                
+                document.getElementById('resHash').innerText = displayHash;
+                
+                successCard.style.display = 'block';
+            } else {
+                // BULUNAMADI
+                failCard.style.display = 'block';
+            }
+
+        } catch (err) {
+            console.error(err);
+            alert("Sorgulama hatası: " + err.message);
+        } finally {
+            // Reset Button
+            btn.disabled = false;
+            spinner.style.display = 'none';
+            btnText.innerText = "Sorgula ve Doğrula";
         }
     }
+
+    // Enter tuşu ile arama
+    document.getElementById('queryInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            verifyAsset();
+        }
+    });
 </script>
 
 </body>
