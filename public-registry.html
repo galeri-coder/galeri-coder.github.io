@@ -2,58 +2,69 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>PoArt Public Registry</title>
+    <title>PoArt Registry Debug</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background: white; margin: 0; padding: 20px; }
-        .loading { text-align: center; margin-top: 50px; color: #64748b; }
+        body { font-family: sans-serif; padding: 20px; color: #333; }
+        .error-box { background: #fee2e2; border: 1px solid #ef4444; padding: 15px; border-radius: 8px; color: #b91c1c; margin-bottom: 20px; display: none; }
+        .loading { color: #666; font-style: italic; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { text-align: left; background: #f8fafc; padding: 12px; font-size: 12px; border-bottom: 2px solid #e2e8f0; }
-        td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
-        .cert-id { color: #15803d; font-weight: bold; background: #dcfce7; padding: 4px 8px; border-radius: 4px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
+        .cert-id { font-family: monospace; color: #15803d; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h2>[PoArt] Güncel Kayıtlar</h2>
-    <div id="content"><div class="loading">Bağlanılıyor...</div></div>
+    <h3>PoArt Kayıt Kontrol Paneli</h3>
+    
+    <div id="error-display" class="error-box"></div>
+    
+    <div id="content">
+        <p class="loading" id="status-text">Supabase'e bağlanılıyor...</p>
+    </div>
 
     <script>
-        // SENİN PAYLAŞTIĞIN GÜNCEL BİLGİLER
         const S_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
         const S_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
-        
-        const supabaseClient = supabase.createClient(S_URL, S_KEY);
 
-        async function loadData() {
-            const { data, error } = await supabaseClient
-                .from('manifests')
-                .select('*')
-                .order('created_at', { ascending: false });
+        async function init() {
+            const status = document.getElementById('status-text');
+            const errorDisplay = document.getElementById('error-display');
+            
+            try {
+                const supabaseClient = supabase.createClient(S_URL, S_KEY);
+                
+                const { data, error } = await supabaseClient
+                    .from('manifests')
+                    .select('*')
+                    .order('created_at', { ascending: false });
 
-            if (error) {
-                document.getElementById('content').innerHTML = "Hata: " + error.message;
-                return;
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    status.innerHTML = "Bağlantı başarılı ama <b>tablo boş</b> (Veri bulunamadı).";
+                    return;
+                }
+
+                let html = '<table><thead><tr><th>Sertifika ID</th><th>Eser</th><th>Oluşturucu</th></tr></thead><tbody>';
+                data.forEach(item => {
+                    html += `<tr>
+                        <td><span class="cert-id">${item.cert_id || 'Yok'}</span></td>
+                        <td>${item.title || 'İsimsiz'}</td>
+                        <td>${item.creator || '-'}</td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                document.getElementById('content').innerHTML = html;
+
+            } catch (err) {
+                console.error(err);
+                status.style.display = 'none';
+                errorDisplay.style.display = 'block';
+                errorDisplay.innerHTML = `<b>Bağlantı Hatası:</b> ${err.message || 'Bilinmeyen hata'}<br><small>Not: Supabase ayarlarından CORS veya RLS politikasını kontrol edin.</small>`;
             }
-
-            if (data.length === 0) {
-                document.getElementById('content').innerHTML = "Kayıt bulunamadı.";
-                return;
-            }
-
-            let html = '<table><thead><tr><th>ID</th><th>Eser</th><th>Sanatçı</th></tr></thead><tbody>';
-            data.forEach(item => {
-                html += `<tr>
-                    <td><span class="cert-id">${item.cert_id}</span></td>
-                    <td><b>${item.title}</b></td>
-                    <td>${item.creator}</td>
-                </tr>`;
-            });
-            html += '</tbody></table>';
-            document.getElementById('content').innerHTML = html;
         }
 
-        loadData();
+        init();
     </script>
 </body>
 </html>
