@@ -1,0 +1,17 @@
+{
+  "name": "PoArt Digital Notary",
+  "short_name": "PoArt Notary",
+  "description": "A trustless digital notary for art and documents.",
+  "lang": "en",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
