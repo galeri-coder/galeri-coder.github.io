@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[PoArt] Dijital Noter v1.1</title>
+<title>[PoArt] Dijital Noter v1.2</title>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -16,57 +16,184 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --emerald: #10b981;
+  --emerald-dark: #047857;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --text-dark: #1e293b;
+  --text-light: #f0fdf4;
+}
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%);
-  color: #1e293b;
-  margin: 0; padding: 30px;
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #d1fae5 0%, #ecfdf5 40%, #f0fdf4 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  color: var(--text-dark);
+  backdrop-filter: blur(20px);
 }
 .container {
-  max-width: 900px; margin: auto;
-  background: white; border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 900px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 25px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
   padding: 40px;
+  backdrop-filter: blur(20px);
+  animation: fadeIn 0.8s ease;
 }
-h1 { text-align: center; font-weight: 900; color: #047857; margin-bottom: 10px; }
-.subtitle { text-align: center; color: #64748b; font-size: 14px; margin-bottom: 30px; }
-label { display: block; margin-top: 15px; font-weight: 600; color:#065f46; }
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+h1 {
+  text-align: center;
+  font-weight: 900;
+  color: var(--emerald-dark);
+  text-shadow: 0 0 10px rgba(16,185,129,0.3);
+}
+.subtitle {
+  text-align: center;
+  color: #475569;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+label {
+  display: block;
+  margin-top: 18px;
+  font-weight: 700;
+  color: var(--emerald-dark);
+}
 input, textarea, select {
-  width:100%; padding:12px 14px; border:1px solid #d1fae5;
-  border-radius:10px; margin-top:5px; font-size:14px; outline:none;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 14px;
+  font-size: 15px;
+  outline: none;
+  background: rgba(255,255,255,0.7);
+  transition: 0.25s;
 }
-textarea { resize: vertical; min-height: 70px; }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--emerald);
+  box-shadow: 0 0 10px rgba(16,185,129,0.3);
+  background: rgba(255,255,255,0.9);
+}
 button {
-  margin-top:25px; width:100%; padding:16px;
-  border:none; border-radius:12px;
-  background:linear-gradient(135deg,#10b981,#047857);
-  color:white; font-weight:800; font-size:15px;
-  cursor:pointer; transition:0.3s;
+  width: 100%;
+  padding: 18px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 rgba(16,185,129,0);
 }
-button:hover { transform:translateY(-1px); box-shadow:0 10px 20px rgba(16,185,129,0.3); }
-#status { margin-top:15px; text-align:center; font-weight:700; }
-
-.certificate { display:none; background:white; border:4px solid #10b981; border-radius:20px; padding:40px; margin-top:40px; }
-.cert-header { text-align:center; border-bottom:2px solid #a7f3d0; padding-bottom:15px; margin-bottom:25px; }
-.cert-header h2 { margin:0; font-size:28px; color:#065f46; font-weight:900; }
-.cert-body { display:grid; grid-template-columns: 200px 1fr; gap:20px; }
-.cert-photos { display:flex; flex-direction:column; gap:10px; }
-.cert-photos img { width:180px; height:180px; object-fit:cover; border-radius:10px; border:1px solid #d1fae5; }
-.cert-info { font-size:14px; }
-.cert-row { margin-bottom:10px; }
-.cert-label { font-weight:700; color:#047857; font-size:12px; }
-.cert-value { font-weight:600; color:#1e293b; }
-.hash-box { margin-top:10px; background:#f8fafc; border:1px solid #d1fae5; border-radius:10px; padding:10px; font-family:'JetBrains Mono'; font-size:11px; color:#334155; word-break:break-all; }
-.qr-box { text-align:center; margin-top:20px; }
-.qr-box canvas { width:120px; height:120px; }
-.footer { text-align:center; font-size:12px; color:#64748b; margin-top:15px; }
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(16,185,129,0.35);
+  filter: brightness(1.1);
+}
+#status {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 700;
+  color: #334155;
+}
+.certificate {
+  display: none;
+  background: rgba(255,255,255,0.7);
+  border: 2px solid rgba(16,185,129,0.4);
+  border-radius: 20px;
+  padding: 35px;
+  margin-top: 40px;
+  box-shadow: inset 0 0 40px rgba(16,185,129,0.1);
+}
+.cert-header {
+  text-align: center;
+  border-bottom: 2px solid rgba(16,185,129,0.2);
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+}
+.cert-header h2 {
+  font-weight: 900;
+  color: var(--emerald-dark);
+  letter-spacing: 1px;
+}
+.cert-body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 25px;
+}
+.cert-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cert-photos img {
+  width: 180px; height: 180px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: 0.3s ease;
+}
+.cert-photos img:hover {
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 0 6px 30px rgba(16,185,129,0.4);
+}
+.cert-info { font-size: 15px; }
+.cert-row { margin-bottom: 10px; }
+.cert-label { font-weight: 700; color: var(--emerald-dark); font-size: 13px; }
+.cert-value { font-weight: 600; color: #1e293b; }
+.hash-box {
+  margin-top: 10px;
+  background: rgba(240,253,244,0.6);
+  border-radius: 14px;
+  padding: 12px;
+  font-family: 'JetBrains Mono';
+  font-size: 11px;
+  color: #334155;
+  word-break: break-all;
+  border: 1px solid rgba(16,185,129,0.2);
+}
+.qr-box {
+  text-align: center;
+  margin-top: 25px;
+}
+.qr-box canvas {
+  width: 130px;
+  height: 130px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 0 20px rgba(16,185,129,0.3);
+  transition: 0.3s;
+}
+.qr-box canvas:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(16,185,129,0.45);
+}
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 20px;
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>🟩 Dijital Noter v1.1</h1>
-  <p class="subtitle">Eserini mühürle, hash delilini al, sertifikanı indir.</p>
+  <h1>🌐 PoArt Dijital Noter v1.2</h1>
+  <p class="subtitle">Eserini mühürle, hash delilini al, QR sertifikanı indir.</p>
 
   <label>👤 Kişisel Fotoğraf</label>
   <input type="file" id="photoInput" accept="image/*">
@@ -75,13 +202,10 @@ button:hover { transform:translateY(-1px); box-shadow:0 10px 20px rgba(16,185,12
   <input type="file" id="artInput" accept="image/*">
 
   <label>📛 Eser Adı</label>
-  <input type="text" id="title" placeholder="Örn: WhitePaper v1.1">
+  <input type="text" id="title" placeholder="Örn: Dijital Kompozisyon #001">
 
   <label>✍️ Oluşturucu</label>
   <input type="text" id="creator" placeholder="Ad Soyad veya rumuz">
-
-  <label>📝 Açıklama</label>
-  <textarea id="desc" placeholder="Kısa açıklama..."></textarea>
 
   <label>🔒 Görünürlük</label>
   <select id="visibility">
@@ -93,7 +217,7 @@ button:hover { transform:translateY(-1px); box-shadow:0 10px 20px rgba(16,185,12
   <label>📁 Eklenecek Dosya</label>
   <input type="file" id="fileInput">
 
-  <button id="sealBtn">💾 Mühürle & Kaydet</button>
+  <button id="sealBtn">💾 Mühürle ve Sertifika Oluştur</button>
   <div id="status"></div>
 
   <div id="certificate" class="certificate">
@@ -147,7 +271,6 @@ button:hover { transform:translateY(-1px); box-shadow:0 10px 20px rgba(16,185,12
   sealBtn.addEventListener('click', async ()=>{
     const title=document.getElementById('title').value||'İsimsiz';
     const creator=document.getElementById('creator').value||'Anonim';
-    const desc=document.getElementById('desc').value||'';
     const visibility=document.getElementById('visibility').value;
     const file=fileInput.files[0];
     if(!file){ setStatus("⚠️ Lütfen bir dosya seçin."); return; }
@@ -162,14 +285,18 @@ button:hover { transform:translateY(-1px); box-shadow:0 10px 20px rgba(16,185,12
     const artB64=artInput.files[0]?await readAsBase64(artInput.files[0]):null;
     const timestamp=new Date().toLocaleString('tr-TR');
 
-    const manifest={cert_id:certId,title,creator,desc,sha256:hash256,sha512:hash512,device,timestamp,visibility};
+    const manifest={cert_id:certId,title,creator,sha256:hash256,sha512:hash512,device_info:device,created_at:new Date().toISOString()};
 
-    if(visibility==='public'){ await sb.from('manifests_public').insert([manifest]); }
-    else if(visibility==='private'){ await sb.from('manifests_private').insert([manifest]); }
-    else localStorage.setItem(certId,JSON.stringify(manifest));
-
-    const blob=new Blob([JSON.stringify(manifest,null,2)],{type:'application/json'});
-    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${certId}.json`; a.click();
+    if(visibility==='public'){
+      const record={
+        cert_id:certId,title,creator,sha256:hash256,sha512:hash512,
+        manifest_data:{visibility},device_info:device,created_at:new Date().toISOString(),
+        location_data:'-',origin_ip:'-'
+      };
+      const { error }=await sb.from('manifests').insert([record]);
+      if(error){console.error("Supabase Insert Error:",error.message);setStatus("⚠️ Kayıt başarısız: "+error.message);}
+      else setStatus("✅ Supabase'e gönderildi.");
+    } else if(visibility==='private'){localStorage.setItem(certId,JSON.stringify(manifest));}
 
     document.getElementById('cTitle').textContent=title;
     document.getElementById('cCreator').textContent=creator;
@@ -185,8 +312,6 @@ button:hover { transform:translateY(-1px); box-shadow:0 10px 20px rgba(16,185,12
     new QRious({element:qrCanvas,value:qrUrl,size:150,foreground:'#047857'});
 
     cert.style.display='block';
-    setStatus("✅ Sertifika oluşturuldu. İndiriliyor...");
-
     await new Promise(r=>setTimeout(r,800));
     const canvas=await html2canvas(cert,{scale:2,useCORS:true});
     const link=document.createElement('a');
