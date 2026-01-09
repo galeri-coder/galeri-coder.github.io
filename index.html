@@ -1,325 +1,222 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[PoArt] Dijital Noter v1.2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoArt Dijital Sertifika v1.6</title>
 
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
-<style>
-:root {
-  --emerald: #10b981;
-  --emerald-dark: #047857;
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --text-dark: #1e293b;
-  --text-light: #f0fdf4;
-}
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(circle at top right, #d1fae5 0%, #ecfdf5 40%, #f0fdf4 100%);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
-  color: var(--text-dark);
-  backdrop-filter: blur(20px);
-}
-.container {
-  width: 100%;
-  max-width: 900px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 25px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-  padding: 40px;
-  backdrop-filter: blur(20px);
-  animation: fadeIn 0.8s ease;
-}
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-h1 {
-  text-align: center;
-  font-weight: 900;
-  color: var(--emerald-dark);
-  text-shadow: 0 0 10px rgba(16,185,129,0.3);
-}
-.subtitle {
-  text-align: center;
-  color: #475569;
-  margin-bottom: 25px;
-  font-size: 15px;
-}
-label {
-  display: block;
-  margin-top: 18px;
-  font-weight: 700;
-  color: var(--emerald-dark);
-}
-input, textarea, select {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid rgba(16,185,129,0.3);
-  border-radius: 14px;
-  font-size: 15px;
-  outline: none;
-  background: rgba(255,255,255,0.7);
-  transition: 0.25s;
-}
-input:focus, textarea:focus, select:focus {
-  border-color: var(--emerald);
-  box-shadow: 0 0 10px rgba(16,185,129,0.3);
-  background: rgba(255,255,255,0.9);
-}
-button {
-  width: 100%;
-  padding: 18px;
-  margin-top: 30px;
-  border: none;
-  border-radius: 18px;
-  font-size: 16px;
-  font-weight: 800;
-  color: white;
-  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 0 rgba(16,185,129,0);
-}
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(16,185,129,0.35);
-  filter: brightness(1.1);
-}
-#status {
-  margin-top: 20px;
-  text-align: center;
-  font-weight: 700;
-  color: #334155;
-}
-.certificate {
-  display: none;
-  background: rgba(255,255,255,0.7);
-  border: 2px solid rgba(16,185,129,0.4);
-  border-radius: 20px;
-  padding: 35px;
-  margin-top: 40px;
-  box-shadow: inset 0 0 40px rgba(16,185,129,0.1);
-}
-.cert-header {
-  text-align: center;
-  border-bottom: 2px solid rgba(16,185,129,0.2);
-  margin-bottom: 25px;
-  padding-bottom: 10px;
-}
-.cert-header h2 {
-  font-weight: 900;
-  color: var(--emerald-dark);
-  letter-spacing: 1px;
-}
-.cert-body {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 25px;
-}
-.cert-photos {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.cert-photos img {
-  width: 180px; height: 180px;
-  object-fit: cover;
-  border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  transition: 0.3s ease;
-}
-.cert-photos img:hover {
-  transform: scale(1.05) rotate(1deg);
-  box-shadow: 0 6px 30px rgba(16,185,129,0.4);
-}
-.cert-info { font-size: 15px; }
-.cert-row { margin-bottom: 10px; }
-.cert-label { font-weight: 700; color: var(--emerald-dark); font-size: 13px; }
-.cert-value { font-weight: 600; color: #1e293b; }
-.hash-box {
-  margin-top: 10px;
-  background: rgba(240,253,244,0.6);
-  border-radius: 14px;
-  padding: 12px;
-  font-family: 'JetBrains Mono';
-  font-size: 11px;
-  color: #334155;
-  word-break: break-all;
-  border: 1px solid rgba(16,185,129,0.2);
-}
-.qr-box {
-  text-align: center;
-  margin-top: 25px;
-}
-.qr-box canvas {
-  width: 130px;
-  height: 130px;
-  border-radius: 16px;
-  background: white;
-  box-shadow: 0 0 20px rgba(16,185,129,0.3);
-  transition: 0.3s;
-}
-.qr-box canvas:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(16,185,129,0.45);
-}
-.footer {
-  text-align: center;
-  font-size: 12px;
-  color: #64748b;
-  margin-top: 20px;
-}
-</style>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ecfdf5, #f0fdfa);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 25px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 900px;
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      text-align: center;
+      color: #064e3b;
+      font-weight: 900;
+      margin-bottom: 30px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      margin-bottom: 15px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 4px rgba(16,185,129,0.1);
+      outline: none;
+    }
+
+    button {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(16,185,129,0.3);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #334155;
+      margin-bottom: 10px;
+    }
+
+    .output {
+      margin-top: 20px;
+      background: #ecfdf5;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #a7f3d0;
+      display: none;
+    }
+
+    .hash-block {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 12px;
+      word-break: break-all;
+      margin-top: 10px;
+    }
+
+    #qrcode {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="card">
+    <h1>📜 Dijital Sertifika Oluştur</h1>
 
-<div class="container">
-  <h1>🌐 PoArt Dijital Noter v1.2</h1>
-  <p class="subtitle">Eserini mühürle, hash delilini al, QR sertifikanı indir.</p>
+    <input type="text" id="title" placeholder="Eser Adı (ör. Sonsuzluk)">
+    <input type="text" id="creator" placeholder="Oluşturucu (ör. İlhan Art)">
+    <input type="file" id="fileInput">
 
-  <label>👤 Kişisel Fotoğraf</label>
-  <input type="file" id="photoInput" accept="image/*">
-
-  <label>🖼️ Eser Görseli</label>
-  <input type="file" id="artInput" accept="image/*">
-
-  <label>📛 Eser Adı</label>
-  <input type="text" id="title" placeholder="Örn: Dijital Kompozisyon #001">
-
-  <label>✍️ Oluşturucu</label>
-  <input type="text" id="creator" placeholder="Ad Soyad veya rumuz">
-
-  <label>🔒 Görünürlük</label>
-  <select id="visibility">
-    <option value="local">📍 Sadece bu cihazda</option>
-    <option value="private">☁️ Bulutta (gizli)</option>
-    <option value="public">🌍 Herkese açık</option>
-  </select>
-
-  <label>📁 Eklenecek Dosya</label>
-  <input type="file" id="fileInput">
-
-  <button id="sealBtn">💾 Mühürle ve Sertifika Oluştur</button>
-  <div id="status"></div>
-
-  <div id="certificate" class="certificate">
-    <div class="cert-header"><h2>DİJİTAL SERTİFİKA</h2></div>
-    <div class="cert-body">
-      <div class="cert-photos">
-        <img id="certPhoto" alt="Kişisel Fotoğraf">
-        <img id="certArt" alt="Eser Görseli">
-      </div>
-      <div class="cert-info">
-        <div class="cert-row"><span class="cert-label">Eser Adı:</span> <span class="cert-value" id="cTitle">-</span></div>
-        <div class="cert-row"><span class="cert-label">Oluşturucu:</span> <span class="cert-value" id="cCreator">-</span></div>
-        <div class="cert-row"><span class="cert-label">Sertifika ID:</span> <span class="cert-value" id="cID">-</span></div>
-        <div class="cert-row"><span class="cert-label">Cihaz:</span> <span class="cert-value" id="cDevice">-</span></div>
-        <div class="cert-row"><span class="cert-label">Tarih:</span> <span class="cert-value" id="cDate">-</span></div>
-        <div class="hash-box"><strong>SHA-256:</strong> <div id="cHash256">-</div></div>
-        <div class="hash-box"><strong>SHA-512:</strong> <div id="cHash512">-</div></div>
-      </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="maskOption">
+      <label for="maskOption">IP ve Konumum maskelensin (isteğe bağlı)</label>
     </div>
-    <div class="qr-box">
-      <canvas id="qrCanvas"></canvas>
-      <p style="font-size:11px;color:#64748b;">Sertifika Doğrulama QR Kodu</p>
+
+    <button id="generate">Sertifika Oluştur</button>
+
+    <div class="output" id="output">
+      <h3>✅ Sertifika Oluşturuldu</h3>
+      <p><strong>Sertifika ID:</strong> <span id="certId"></span></p>
+      <div class="hash-block">SHA-256: <span id="sha256"></span></div>
+      <div class="hash-block">SHA-512: <span id="sha512"></span></div>
+      <div id="qrcode"></div>
+      <button id="downloadCert">📄 Sertifikayı İndir (PNG)</button>
+      <button id="downloadJson">💾 JSON Verisini İndir</button>
     </div>
-    <div class="footer">© 2026 İlhan Art Gallery • Proof of Art Protocol</div>
   </div>
-</div>
+
+  <div id="certHidden" style="position:absolute; left:-9999px;"></div>
 
 <script>
-(async function(){
-  const SUPABASE_URL = 'https://immdfdvrwqcvgmflbgdr.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE';
-  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_URL = "https://immdfdvrwqcvgmflbgdr.supabase.co";
+const SERVICE_KEY = "⚠️BURAYA SERVICE ROLE KEY GELECEK⚠️"; // RLS korumalı key
+const client = supabase.createClient(SUPABASE_URL, SERVICE_KEY);
 
-  const fileInput = document.getElementById('fileInput');
-  const photoInput = document.getElementById('photoInput');
-  const artInput = document.getElementById('artInput');
-  const cert = document.getElementById('certificate');
-  const qrCanvas = document.getElementById('qrCanvas');
-  const sealBtn = document.getElementById('sealBtn');
-  const status = document.getElementById('status');
+async function hashFile(file, algorithm = "SHA-512") {
+  const buffer = await file.arrayBuffer();
+  const digest = await crypto.subtle.digest(algorithm, buffer);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
 
-  function setStatus(msg){ status.textContent=msg; }
+document.getElementById("generate").onclick = async () => {
+  const file = document.getElementById("fileInput").files[0];
+  if (!file) return alert("Lütfen bir dosya seçin!");
 
-  async function hashBuffer(buffer, algo){
-    const h=await crypto.subtle.digest(algo, buffer);
-    return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');
-  }
-  function readAsBase64(f){ return new Promise(r=>{const rd=new FileReader();rd.onload=()=>r(rd.result);rd.readAsDataURL(f);}); }
-  function getDeviceInfo(){ const ua=navigator.userAgent; if(ua.includes('Win')) return "Windows PC"; if(ua.includes('Mac')) return "MacOS"; if(ua.includes('Android')) return "Android"; return "Bilinmeyen"; }
+  const title = document.getElementById("title").value || "İsimsiz Eser";
+  const creator = document.getElementById("creator").value || "Bilinmiyor";
+  const mask = document.getElementById("maskOption").checked;
 
-  sealBtn.addEventListener('click', async ()=>{
-    const title=document.getElementById('title').value||'İsimsiz';
-    const creator=document.getElementById('creator').value||'Anonim';
-    const visibility=document.getElementById('visibility').value;
-    const file=fileInput.files[0];
-    if(!file){ setStatus("⚠️ Lütfen bir dosya seçin."); return; }
+  // Hash oluştur
+  const sha256 = await hashFile(file, "SHA-256");
+  const sha512 = await hashFile(file, "SHA-512");
+  const certId = "POART-" + Math.random().toString(36).substring(2,10).toUpperCase();
 
-    setStatus("🔄 Dosya işleniyor...");
-    const buffer=await file.arrayBuffer();
-    const hash256=await hashBuffer(buffer,'SHA-256');
-    const hash512=await hashBuffer(buffer,'SHA-512');
-    const device=getDeviceInfo();
-    const certId='POART-'+Date.now().toString(36).toUpperCase();
-    const photoB64=photoInput.files[0]?await readAsBase64(photoInput.files[0]):null;
-    const artB64=artInput.files[0]?await readAsBase64(artInput.files[0]):null;
-    const timestamp=new Date().toLocaleString('tr-TR');
+  // IP/konum maskesi (yalnızca kullanıcı istemişse)
+  const loc = mask ? "Anonim / ***" : "Gizli";
 
-    const manifest={cert_id:certId,title,creator,sha256:hash256,sha512:hash512,device_info:device,created_at:new Date().toISOString()};
+  // Supabase'e kaydet
+  const manifest = {
+    cert_id: certId,
+    title,
+    creator,
+    sha256,
+    sha512,
+    device_info: navigator.platform || "Web",
+    location_data: loc,
+    origin_ip: "Korumalı",
+    visibility: "public"
+  };
 
-    if(visibility==='public'){
-      const record={
-        cert_id:certId,title,creator,sha256:hash256,sha512:hash512,
-        manifest_data:{visibility},device_info:device,created_at:new Date().toISOString(),
-        location_data:'-',origin_ip:'-'
-      };
-      const { error }=await sb.from('manifests').insert([record]);
-      if(error){console.error("Supabase Insert Error:",error.message);setStatus("⚠️ Kayıt başarısız: "+error.message);}
-      else setStatus("✅ Supabase'e gönderildi.");
-    } else if(visibility==='private'){localStorage.setItem(certId,JSON.stringify(manifest));}
+  const { data, error } = await client.from("manifests").insert([manifest]);
+  if (error) console.error(error);
 
-    document.getElementById('cTitle').textContent=title;
-    document.getElementById('cCreator').textContent=creator;
-    document.getElementById('cID').textContent=certId;
-    document.getElementById('cDevice').textContent=device;
-    document.getElementById('cDate').textContent=timestamp;
-    document.getElementById('cHash256').textContent=hash256;
-    document.getElementById('cHash512').textContent=hash512;
-    if(photoB64) document.getElementById('certPhoto').src=photoB64;
-    if(artB64) document.getElementById('certArt').src=artB64;
+  // Görsel çıktılar
+  document.getElementById("output").style.display = "block";
+  document.getElementById("certId").textContent = certId;
+  document.getElementById("sha256").textContent = sha256;
+  document.getElementById("sha512").textContent = sha512;
 
-    const qrUrl=`${window.location.origin}/verify.html?id=${certId}`;
-    new QRious({element:qrCanvas,value:qrUrl,size:150,foreground:'#047857'});
-
-    cert.style.display='block';
-    await new Promise(r=>setTimeout(r,800));
-    const canvas=await html2canvas(cert,{scale:2,useCORS:true});
-    const link=document.createElement('a');
-    link.download=`${certId}.png`;
-    link.href=canvas.toDataURL('image/png');
-    link.click();
+  document.getElementById("qrcode").innerHTML = "";
+  new QRCode(document.getElementById("qrcode"), {
+    text: `https://galeri-coder.github.io/verify.html?q=${encodeURIComponent(certId)}`,
+    width: 128, height: 128, colorDark: "#059669"
   });
-})();
+
+  // Sertifika PNG indir
+  document.getElementById("downloadCert").onclick = async () => {
+    const clone = document.getElementById("output").cloneNode(true);
+    clone.style.display = "block";
+    document.getElementById("certHidden").innerHTML = "";
+    document.getElementById("certHidden").appendChild(clone);
+    const canvas = await html2canvas(clone, { scale: 2 });
+    const link = document.createElement("a");
+    link.download = `${certId}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+
+  // JSON indir
+  document.getElementById("downloadJson").onclick = () => {
+    const json = JSON.stringify(manifest, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${certId}.json`;
+    link.click();
+  };
+};
 </script>
 </body>
 </html>
