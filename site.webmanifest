@@ -1,17 +1,16 @@
 {
   "name": "PoArt Digital Notary",
-  "short_name": "PoArt Notary",
-  "description": "A trustless digital notary for art and documents.",
+  "short_name": "PoArt",
+  "description": "A forensic-grade digital notarization platform developed by İlhan Art for immutable proof of creation and authenticity.",
   "lang": "en",
-  "start_url": "/notary/index.html",
-  "scope": "/notary/",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#10b981",
+  "theme_color": "#15803d",
   "icons": [
     {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
       "type": "image/png"
     },
     {
@@ -20,9 +19,15 @@
       "type": "image/png"
     },
     {
-      "src": "/favicon-16x16.png",
-      "sizes": "16x16",
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
