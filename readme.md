@@ -37,6 +37,16 @@ It allows creators and collectors to generate immutable cryptographic proofs of 
 | 🧠 No Server Uploads | 100% privacy |
 | 💾 Supabase Storage | Optional record persistence |
 
+
 ---
 
-## 📁 Structure
+## 🧾 License
+MIT License © 2026 İlhan Art Gallery Initiative  
+See [LICENSE](LICENSE) for full terms.
+
+---
+
+## 💬 Credits
+Developed by **İlhan Art Gallery**  
+> *A step toward a trustless, censorship-resistant proof of authenticity for digital art.*
+
