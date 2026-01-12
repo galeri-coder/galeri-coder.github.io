@@ -1,6 +1,7 @@
-<!-- ✅ DIGITAL NOTARY — PREMIUM EDITION v4.1 (FIXED) -->
+<!-- ✅ DIGITAL NOTARY — PREMIUM EDITION v4.4 (READABILITY FIXED) -->
 <div id="notaryApp" class="dn-wrap">
   <div class="dn-head">
+    <div class="dn-badge">POART PROTOCOL</div>
     <h1 class="dn-title">DİJİTAL NOTER</h1>
     <p class="dn-sub">Eserinizi yükleyin, kriptografik olarak mühürleyin ve resmi sertifikanızı alın.</p>
   </div>
@@ -10,6 +11,7 @@
     <div>
       <label class="dn-label">Fotoğrafınız</label>
       <div id="photoDrop" class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop-icon">📸</div>
         <div class="dn-drop-title">Sürükle bırak</div>
         <div class="dn-drop-sub">veya tıklayıp seçin</div>
         <div id="photoMeta" class="dn-drop-meta"></div>
@@ -20,6 +22,7 @@
     <div>
       <label class="dn-label">Eser Dosyası</label>
       <div id="artDrop" class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop-icon">🎨</div>
         <div class="dn-drop-title">Sürükle bırak</div>
         <div class="dn-drop-sub">veya tıklayıp seçin</div>
         <div id="artMeta" class="dn-drop-meta"></div>
@@ -54,23 +57,121 @@
     </div>
   </div>
 
-  <!-- Visibility -->
-  <div class="dn-block">
-    <label class="dn-label">Görünürlük Seçenekleri</label>
-    <select id="visibility" class="dn-select">
-      <option value="private">🔒 Özel (yalnızca siz)</option>
-      <option value="masked">🕶️ Maskeli Herkese Açık (IP & konum maskeli)</option>
-      <option value="public">🌍 Herkese Açık (herkes görebilir)</option>
-    </select>
+  <!-- Visibility Section -->
+  <div class="dn-visibility-section">
+    <div class="dn-visibility-header">
+      <span class="dn-visibility-icon">🔐</span>
+      <span class="dn-visibility-title">Üç Gizlilik Modu: Tam Kontrol Sizde</span>
+    </div>
+    
+    <p class="dn-visibility-intro">
+      Her duruma uygun gizlilik seviyesi seçebilirsiniz. Önemli not: 
+      <strong class="dn-highlight">Hangi modu seçerseniz seçin, IP adresiniz hiçbir zaman tam olarak görünmez</strong> 
+      — sistem her zaman maskeleyerek kaydeder (örn: <code class="dn-code">192.168.***.***</code>).
+    </p>
+
+    <div class="dn-visibility-cards">
+      <label class="dn-vis-card" data-value="private">
+        <input type="radio" name="visibility" value="private" checked />
+        <div class="dn-vis-card-inner">
+          <div class="dn-vis-icon">🔒</div>
+          <div class="dn-vis-name">Özel (Private)</div>
+          <div class="dn-vis-desc">Sadece siz görürsünüz. Henüz paylaşmak istemediğiniz projeler için ideal. Tarih damgası vurup bekletebilirsiniz.</div>
+          <div class="dn-vis-badge private">Sunucuya gitmez</div>
+        </div>
+      </label>
+
+      <label class="dn-vis-card" data-value="masked">
+        <input type="radio" name="visibility" value="masked" />
+        <div class="dn-vis-card-inner">
+          <div class="dn-vis-icon">🕶️</div>
+          <div class="dn-vis-name">Maskeli (Masked)</div>
+          <div class="dn-vis-desc">Mühür görünür, kimliğiniz gizli. Anonim kalmak isteyen sanatçılar için. Konum ve cihaz bilgileri maskelenir.</div>
+          <div class="dn-vis-badge masked">Anonim kayıt</div>
+        </div>
+      </label>
+
+      <label class="dn-vis-card" data-value="public">
+        <input type="radio" name="visibility" value="public" />
+        <div class="dn-vis-card-inner">
+          <div class="dn-vis-icon">🌍</div>
+          <div class="dn-vis-name">Herkese Açık (Public)</div>
+          <div class="dn-vis-desc">Tam şeffaflık. Tarih, şehir ve cihaz bilgileri görünür. <em>(IP yine de maskelenir)</em></div>
+          <div class="dn-vis-badge public">Tam şeffaflık</div>
+        </div>
+      </label>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="dn-table-section">
+      <div class="dn-table-header">
+        <span class="dn-table-icon">📊</span>
+        <span class="dn-table-title">Örnek için bakınız: Modlar Karşılaştırması</span>
+      </div>
+      <div class="dn-table-wrapper">
+        <table class="dn-comparison-table">
+          <thead>
+            <tr>
+              <th>Mod</th>
+              <th>Sunucu</th>
+              <th>IP</th>
+              <th>Konum</th>
+              <th>Cihaz</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="dn-table-mode">🔒 Özel<br><span class="dn-table-mode-sub">(Private)</span></span>
+              </td>
+              <td>
+                <span class="dn-table-badge red">✕ Gitmez</span>
+              </td>
+              <td><span class="dn-table-na">Yok</span></td>
+              <td><span class="dn-table-na">Yok</span></td>
+              <td><span class="dn-table-na">Yok</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="dn-table-mode">🕶️ Maskeli<br><span class="dn-table-mode-sub">(Masked)</span></span>
+              </td>
+              <td>
+                <span class="dn-table-badge green">✓ Kaydedilir</span>
+              </td>
+              <td><code class="dn-table-code" id="tableMaskedIP">46.1.***.***</code></td>
+              <td><code class="dn-table-code" id="tableMaskedLoc">*** / Türkiye</code></td>
+              <td><span class="dn-table-text">Gizli</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span class="dn-table-mode">🌍 Herkese Açık<br><span class="dn-table-mode-sub">(Public)</span></span>
+              </td>
+              <td>
+                <span class="dn-table-badge green">✓ Kaydedilir</span>
+              </td>
+              <td><code class="dn-table-code" id="tablePublicIP">46.1.***.***</code></td>
+              <td><code class="dn-table-code" id="tablePublicLoc">İstanbul, Türkiye</code></td>
+              <td><span class="dn-table-text">Gösterilir</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="dn-privacy-guarantee">
+      <span class="dn-guarantee-icon">🛡️</span>
+      <div class="dn-guarantee-text">
+        <strong>Gizlilik Garantisi:</strong> Dosyanız sunucuya yüklenmez, hash hesaplaması tarayıcınızda yapılır. 
+        "Herkese Açık" modda bile IP adresiniz <code class="dn-code" id="liveIPPreview">***.***.***.***</code> 
+        formatında maskelenerek gösterilir — tam IP asla kaydedilmez.
+      </div>
+    </div>
   </div>
 
-  <!-- Mask Option -->
-  <label class="dn-check">
-    <input type="checkbox" id="maskOption" />
-    Sertifikada IP adresi ve konum <b>maskelensin</b>.
-  </label>
-
-  <button id="sealBtn" class="dn-btn">🪶 MÜHÜRLE & SERTİFİKA OLUŞTUR</button>
+  <button id="sealBtn" class="dn-btn">
+    <span class="dn-btn-icon">🪶</span>
+    <span>MÜHÜRLE & SERTİFİKA OLUŞTUR</span>
+  </button>
 
   <div id="statusBox" class="dn-status" style="display:none;"></div>
 
@@ -91,167 +192,676 @@
 <canvas id="certCanvas" style="display:none;"></canvas>
 
 <style>
+  :root {
+    --dn-primary: #059669;
+    --dn-primary-dark: #047857;
+    --dn-primary-darker: #065f46;
+    --dn-primary-light: #10b981;
+    --dn-primary-lighter: #34d399;
+    --dn-accent: #6ee7b7;
+    --dn-gray-50: #f9fafb;
+    --dn-gray-100: #f3f4f6;
+    --dn-gray-200: #e5e7eb;
+    --dn-gray-300: #d1d5db;
+    --dn-gray-400: #9ca3af;
+    --dn-gray-500: #6b7280;
+    --dn-gray-600: #4b5563;
+    --dn-gray-700: #374151;
+    --dn-gray-800: #1f2937;
+    --dn-gray-900: #111827;
+  }
+
   .dn-wrap{
-    max-width: 880px;
+    max-width: 920px;
     margin: 0 auto;
-    padding: 46px;
-    border-radius: 26px;
-    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 45%, #ecfdf5 100%);
-    box-shadow: 0 14px 55px rgba(2, 6, 23, 0.08);
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    border: 1px solid rgba(16,185,129,0.16);
-    backdrop-filter: blur(10px);
+    padding: 48px 52px;
+    border-radius: 28px;
+    background: linear-gradient(165deg, 
+      #ffffff 0%, 
+      #f9fafb 25%,
+      #f3f4f6 50%,
+      #ecfdf5 75%,
+      #d1fae5 100%
+    );
+    box-shadow: 
+      0 25px 80px rgba(5, 150, 105, 0.08),
+      0 10px 40px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    border: 1px solid rgba(5, 150, 105, 0.12);
+    position: relative;
+    overflow: hidden;
   }
-  .dn-head{ text-align:center; margin-bottom: 28px; }
+
+  .dn-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+      var(--dn-primary-dark) 0%,
+      var(--dn-primary) 25%,
+      var(--dn-primary-light) 50%,
+      var(--dn-primary-lighter) 75%,
+      var(--dn-accent) 100%
+    );
+  }
+
+  .dn-head{ 
+    text-align: center; 
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(5, 150, 105, 0.1);
+  }
+
+  .dn-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, var(--dn-primary-darker), var(--dn-primary-dark));
+    color: #d1fae5;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.25);
+  }
+
   .dn-title{
-    font-weight: 950;
-    font-size: 34px;
-    color: #064e3b;
+    font-weight: 900;
+    font-size: 38px;
+    background: linear-gradient(135deg, var(--dn-gray-800) 0%, var(--dn-primary-darker) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: -0.03em;
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
   }
-  .dn-sub{ margin: 0; color: #475569; font-size: 15px; line-height: 1.5; }
+
+  .dn-sub{ 
+    margin: 0; 
+    color: var(--dn-gray-500); 
+    font-size: 15px; 
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
   .dn-grid{
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    margin-bottom: 18px;
+    gap: 20px;
+    margin-bottom: 20px;
   }
-  .dn-block{ margin-bottom: 18px; }
-  .dn-label{ font-weight: 800; font-size: 13px; color: #0f172a; margin-bottom: 8px; display:block; }
-  .dn-input, .dn-select{
+
+  .dn-label{ 
+    font-weight: 700; 
+    font-size: 13px; 
+    color: var(--dn-gray-700); 
+    margin-bottom: 10px; 
+    display: block;
+    letter-spacing: 0.3px;
+  }
+
+  .dn-input{
     width: 100%;
-    padding: 12px 12px;
-    border: 1.8px solid rgba(148,163,184,0.55);
+    padding: 14px 16px;
+    border: 2px solid var(--dn-gray-200);
     border-radius: 14px;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
     outline: none;
-    transition: box-shadow .2s ease, border-color .2s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 14px;
+    font-weight: 500;
+    color: var(--dn-gray-800);
+    box-sizing: border-box;
   }
-  .dn-input:focus, .dn-select:focus{
-    border-color: rgba(16,185,129,0.75);
-    box-shadow: 0 0 0 4px rgba(16,185,129,0.12);
+
+  .dn-input::placeholder {
+    color: var(--dn-gray-400);
+  }
+
+  .dn-input:hover {
+    border-color: var(--dn-gray-300);
+  }
+
+  .dn-input:focus{
+    border-color: var(--dn-primary);
+    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+    background: #ffffff;
   }
 
   .dn-drop{
-    border: 2px dashed rgba(16,185,129,0.35);
-    background: linear-gradient(135deg, rgba(236,253,245,0.85), rgba(241,245,249,0.85));
-    border-radius: 16px;
-    padding: 16px 14px;
+    border: 2px dashed var(--dn-gray-300);
+    background: linear-gradient(145deg, #ffffff 0%, var(--dn-gray-50) 50%, rgba(236, 253, 245, 0.5) 100%);
+    border-radius: 18px;
+    padding: 24px 18px;
     cursor: pointer;
-    user-select:none;
-    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-    min-height: 86px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 6px;
+    text-align: center;
   }
-  .dn-drop:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(2,6,23,0.06); }
-  .dn-drop.is-over{ border-color: rgba(6,78,59,0.65); box-shadow: 0 0 0 4px rgba(16,185,129,0.10); }
-  .dn-drop-title{ font-weight: 900; color:#064e3b; }
-  .dn-drop-sub{ color:#64748b; font-size: 13px; }
-  .dn-drop-meta{ color:#0f172a; font-size: 12px; font-weight: 700; margin-top: 2px; }
 
-  .dn-hidden-input{ display:none; }
+  .dn-drop:hover{ 
+    border-color: var(--dn-primary-light);
+    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(5, 150, 105, 0.1);
+  }
+
+  .dn-drop.is-over{ 
+    border-color: var(--dn-primary);
+    border-style: solid;
+    background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%);
+    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.12);
+  }
+
+  .dn-drop-icon {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+
+  .dn-drop-title{ 
+    font-weight: 800; 
+    color: var(--dn-gray-700);
+    font-size: 14px;
+  }
+
+  .dn-drop-sub{ 
+    color: var(--dn-gray-400); 
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .dn-drop-meta{ 
+    color: var(--dn-primary-dark); 
+    font-size: 11px; 
+    font-weight: 700; 
+    margin-top: 6px;
+    padding: 4px 10px;
+    background: rgba(5, 150, 105, 0.08);
+    border-radius: 6px;
+  }
+
+  .dn-hidden-input{ display: none; }
 
   .dn-preview-card{
-    border: 1px solid rgba(148,163,184,0.45);
+    border: 1px solid var(--dn-gray-200);
     border-radius: 16px;
-    background: linear-gradient(180deg, #ffffff, #f8fafc);
-    padding: 12px;
-    min-height: 140px;
+    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
+    padding: 14px;
+    min-height: 150px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
   }
-  .dn-preview-label{ font-weight: 900; color:#0f172a; font-size: 12px; margin-bottom: 10px; }
-  .dn-preview-img{ width: 100%; height: 96px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(148,163,184,0.45); }
-  .dn-preview-empty{ color:#64748b; font-size: 12px; padding: 26px 0 0; text-align:center; }
 
-  .dn-check{
-    display:flex;
-    align-items:center;
-    gap: 10px;
+  .dn-preview-label{ 
+    font-weight: 800; 
+    color: var(--dn-gray-600); 
+    font-size: 11px; 
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .dn-preview-img{ 
+    width: 100%; 
+    height: 100px; 
+    object-fit: cover; 
+    border-radius: 12px; 
+    border: 1px solid var(--dn-gray-200);
+  }
+
+  .dn-preview-empty{ 
+    color: var(--dn-gray-400); 
+    font-size: 12px; 
+    padding: 30px 0 0; 
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* Visibility Section */
+  .dn-visibility-section {
+    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
+    border: 2px solid rgba(5, 150, 105, 0.15);
+    border-radius: 20px;
+    padding: 28px;
+    margin: 24px 0;
+  }
+
+  .dn-visibility-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .dn-visibility-icon {
+    font-size: 24px;
+  }
+
+  .dn-visibility-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--dn-primary-darker);
+  }
+
+  .dn-visibility-intro {
+    font-size: 14px;
+    color: var(--dn-gray-600);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  /* 🔥 FIXED: Better readability for highlighted text */
+  .dn-highlight {
+    color: var(--dn-gray-900);
+    font-weight: 800;
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(16, 185, 129, 0.08));
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* 🔥 FIXED: Better contrast for code elements */
+  .dn-code {
+    background: linear-gradient(135deg, var(--dn-primary-darker), var(--dn-primary-dark));
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
     font-size: 13px;
-    margin: 12px 0 18px;
-    color: #064e3b;
-    background: linear-gradient(135deg, rgba(236,253,245,0.9), rgba(241,245,249,0.9));
-    border: 1px solid rgba(16,185,129,0.14);
-    padding: 12px 14px;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
+  }
+
+  .dn-visibility-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .dn-vis-card {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .dn-vis-card input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .dn-vis-card-inner {
+    background: #ffffff;
+    border: 2px solid var(--dn-gray-200);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dn-vis-card:hover .dn-vis-card-inner {
+    border-color: var(--dn-primary-light);
+    box-shadow: 0 8px 25px rgba(5, 150, 105, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .dn-vis-card input:checked + .dn-vis-card-inner {
+    border-color: var(--dn-primary);
+    background: linear-gradient(145deg, #f0fdf4 0%, #ecfdf5 100%);
+    box-shadow: 0 8px 30px rgba(5, 150, 105, 0.18);
+  }
+
+  .dn-vis-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .dn-vis-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--dn-primary-dark);
+    margin-bottom: 10px;
+  }
+
+  .dn-vis-desc {
+    font-size: 12px;
+    color: var(--dn-gray-500);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .dn-vis-desc em {
+    color: var(--dn-gray-400);
+    font-style: italic;
+  }
+
+  .dn-vis-badge {
+    margin-top: 14px;
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dn-vis-badge.private {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+  }
+
+  .dn-vis-badge.masked {
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    color: #3730a3;
+  }
+
+  .dn-vis-badge.public {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: var(--dn-primary-darker);
+  }
+
+  .dn-privacy-guarantee {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 1px solid var(--dn-accent);
+    border-left: 4px solid var(--dn-primary);
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+
+  /* Comparison Table Styles */
+  .dn-table-section {
+    margin-top: 24px;
+    margin-bottom: 20px;
+  }
+
+  .dn-table-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--dn-primary-darker) 0%, var(--dn-primary-dark) 50%, var(--dn-primary) 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.25);
+  }
+
+  .dn-table-icon {
+    font-size: 24px;
+    filter: brightness(1.2);
+  }
+
+  .dn-table-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+  }
+
+  .dn-table-wrapper {
+    overflow-x: auto;
     border-radius: 14px;
+    border: 1px solid var(--dn-gray-200);
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .dn-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .dn-comparison-table thead {
+    background: linear-gradient(135deg, var(--dn-gray-50) 0%, #f0fdf4 100%);
+  }
+
+  .dn-comparison-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 800;
+    color: var(--dn-gray-700);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--dn-gray-200);
+  }
+
+  .dn-comparison-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--dn-gray-100);
+    vertical-align: middle;
+  }
+
+  .dn-comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .dn-comparison-table tbody tr:hover {
+    background: linear-gradient(135deg, rgba(240, 253, 244, 0.5), rgba(236, 253, 245, 0.5));
+  }
+
+  .dn-table-mode {
+    font-weight: 700;
+    color: var(--dn-gray-800);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .dn-table-mode-sub {
+    font-weight: 600;
+    color: var(--dn-gray-500);
+    font-size: 11px;
+  }
+
+  .dn-table-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .dn-table-badge.red {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    color: #dc2626;
+  }
+
+  .dn-table-badge.green {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    color: #16a34a;
+  }
+
+  .dn-table-na {
+    color: var(--dn-gray-400);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .dn-table-code {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .dn-table-text {
+    color: var(--dn-gray-600);
+    font-weight: 600;
+  }
+
+  .dn-guarantee-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .dn-guarantee-text {
+    font-size: 13px;
+    color: var(--dn-gray-700);
+    line-height: 1.6;
+  }
+
+  .dn-guarantee-text strong {
+    color: var(--dn-primary-darker);
   }
 
   .dn-btn{
     width: 100%;
-    padding: 16px 28px;
+    padding: 18px 32px;
     border: none;
     border-radius: 16px;
-    background: linear-gradient(135deg, #16a34a, #047857, #0f766e);
+    background: linear-gradient(135deg, 
+      var(--dn-primary-dark) 0%,
+      var(--dn-primary) 50%,
+      var(--dn-primary-light) 100%
+    );
     color: white;
-    font-weight: 950;
+    font-weight: 800;
     font-size: 15px;
     cursor: pointer;
-    box-shadow: 0 14px 36px rgba(16,185,129,0.30);
-    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    box-shadow: 
+      0 8px 30px rgba(5, 150, 105, 0.35),
+      0 2px 8px rgba(5, 150, 105, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
-  .dn-btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-  .dn-btn:disabled{ opacity: .68; cursor:not-allowed; transform:none; }
 
-  .dn-status{ text-align:center; margin-top: 14px; color: #475569; font-size: 14px; font-weight: 600; }
+  .dn-btn:hover{ 
+    transform: translateY(-2px);
+    box-shadow: 
+      0 12px 40px rgba(5, 150, 105, 0.4),
+      0 4px 12px rgba(5, 150, 105, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .dn-btn:active {
+    transform: translateY(0);
+  }
+
+  .dn-btn:disabled{ 
+    opacity: 0.6; 
+    cursor: not-allowed; 
+    transform: none;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.2);
+  }
+
+  .dn-btn-icon {
+    font-size: 18px;
+  }
+
+  .dn-status{ 
+    text-align: center; 
+    margin-top: 18px; 
+    color: var(--dn-gray-600); 
+    font-size: 14px; 
+    font-weight: 600;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--dn-gray-50), #ffffff);
+    border-radius: 12px;
+    border: 1px solid var(--dn-gray-200);
+  }
 
   .dn-preview-section{
-    margin-top: 24px;
-    border-radius: 18px;
-    border: 2px solid rgba(16,185,129,0.3);
-    background: white;
-    overflow:hidden;
+    margin-top: 28px;
+    border-radius: 20px;
+    border: 2px solid rgba(5, 150, 105, 0.2);
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(5, 150, 105, 0.08);
   }
+
   .dn-preview-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding: 14px 16px;
-    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-    border-bottom: 2px solid rgba(16,185,129,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+    border-bottom: 2px solid rgba(5, 150, 105, 0.15);
   }
-  .dn-preview-title{ font-weight: 950; color:#064e3b; font-size: 15px; }
-  .dn-preview-actions{ display:flex; gap: 8px; }
+
+  .dn-preview-title{ 
+    font-weight: 800; 
+    color: var(--dn-primary-darker); 
+    font-size: 16px;
+    letter-spacing: 0.3px;
+  }
+
+  .dn-preview-actions{ 
+    display: flex; 
+    gap: 10px; 
+  }
+
   .dn-mini-btn{
-    padding: 9px 14px;
+    padding: 10px 16px;
     border-radius: 10px;
-    border: 1.5px solid rgba(16,185,129,0.4);
-    background: white;
-    cursor:pointer;
-    font-weight: 800;
+    border: 2px solid rgba(5, 150, 105, 0.25);
+    background: #ffffff;
+    cursor: pointer;
+    font-weight: 700;
     font-size: 12px;
-    color:#047857;
-    transition: all 0.2s;
+    color: var(--dn-primary-dark);
+    transition: all 0.25s ease;
   }
+
   .dn-mini-btn:hover{ 
-    background: #ecfdf5;
-    box-shadow: 0 4px 12px rgba(16,185,129,0.15);
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border-color: var(--dn-primary);
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
     transform: translateY(-1px);
   }
 
   .dn-cert-container{
-    padding: 32px;
-    background: white;
+    padding: 36px;
+    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
   }
 
   /* Certificate Styles */
   .cert-frame{
     max-width: 800px;
     margin: 0 auto;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    border: 3px solid #064e3b;
-    border-radius: 20px;
+    background: linear-gradient(165deg, #ffffff 0%, var(--dn-gray-50) 50%, #f0fdf4 100%);
+    border: 3px solid var(--dn-primary-darker);
+    border-radius: 24px;
     padding: 0;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.1),
+      0 8px 25px rgba(5, 150, 105, 0.08);
   }
 
   .cert-header{
-    background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
-    padding: 32px 24px;
+    background: linear-gradient(135deg, 
+      var(--dn-gray-800) 0%,
+      var(--dn-primary-darker) 40%,
+      var(--dn-primary-dark) 70%,
+      var(--dn-primary) 100%
+    );
+    padding: 36px 28px;
     text-align: center;
     position: relative;
   }
@@ -262,55 +872,62 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 8px;
-    background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7, #34d399, #10b981);
+    height: 6px;
+    background: linear-gradient(90deg, 
+      var(--dn-primary-light), 
+      var(--dn-primary-lighter), 
+      var(--dn-accent), 
+      var(--dn-primary-lighter), 
+      var(--dn-primary-light)
+    );
   }
 
   .cert-logo{
     font-family: 'Georgia', serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-    color: #a7f3d0;
-    letter-spacing: 3px;
-    margin-bottom: 12px;
+    color: var(--dn-accent);
+    letter-spacing: 4px;
+    margin-bottom: 14px;
   }
 
   .cert-title{
     font-family: 'Georgia', serif;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 900;
     color: white;
     letter-spacing: 1px;
     margin: 0;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
   }
 
   .cert-subtitle{
     font-size: 13px;
     color: #d1fae5;
-    margin-top: 8px;
+    margin-top: 10px;
     font-weight: 500;
+    letter-spacing: 0.5px;
   }
 
   .cert-body{
-    padding: 32px 28px;
+    padding: 36px 32px;
   }
 
   .cert-photos{
     display: grid;
     grid-template-columns: 120px 1fr 120px;
-    gap: 20px;
-    margin-bottom: 28px;
+    gap: 24px;
+    margin-bottom: 32px;
     align-items: center;
   }
 
   .cert-photo-frame{
     width: 120px;
     height: 120px;
-    border-radius: 12px;
-    border: 3px solid #d1d5db;
+    border-radius: 14px;
+    border: 3px solid var(--dn-gray-300);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   }
 
   .cert-photo-frame img{
@@ -322,16 +939,18 @@
   .cert-photo-label{
     text-align: center;
     font-size: 11px;
-    color: #64748b;
-    margin-top: 6px;
+    color: var(--dn-gray-500);
+    margin-top: 8px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .cert-artwork-main{
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    border: 3px solid #e5e7eb;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    border: 3px solid var(--dn-gray-200);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   }
 
   .cert-artwork-main img{
@@ -343,130 +962,146 @@
   .cert-qr{
     width: 120px;
     height: 120px;
-    border: 3px solid #047857;
-    border-radius: 12px;
+    border: 3px solid var(--dn-primary);
+    border-radius: 14px;
     padding: 8px;
-    background: white;
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
   }
 
   .cert-info-panel{
-    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-    border: 2px solid #a7f3d0;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 20px;
-    border-left: 6px solid #10b981;
+    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
+    border: 2px solid var(--dn-accent);
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 24px;
+    border-left: 6px solid var(--dn-primary);
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.06);
   }
 
   .cert-info-title{
     font-family: 'Georgia', serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 900;
-    color: #064e3b;
-    margin-bottom: 16px;
+    color: var(--dn-primary-darker);
+    margin-bottom: 20px;
   }
 
   .cert-info-grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px 20px;
+    gap: 16px 24px;
   }
 
   .cert-info-item{
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
   }
 
   .cert-info-label{
     font-size: 11px;
     font-weight: 800;
-    color: #047857;
+    color: var(--dn-primary);
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
   }
 
   .cert-info-value{
     font-size: 14px;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--dn-gray-800);
   }
 
   .cert-hash-panel{
-    background: #f8fafc;
-    border: 2px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 20px;
+    background: linear-gradient(145deg, var(--dn-gray-50) 0%, #ffffff 100%);
+    border: 2px solid var(--dn-gray-200);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
   }
 
   .cert-hash-title{
-    font-size: 12px;
-    font-weight: 900;
-    color: #475569;
-    margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--dn-gray-600);
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
 
   .cert-hash-value{
     font-family: 'Courier New', monospace;
     font-size: 11px;
-    color: #1e293b;
+    color: var(--dn-gray-700);
     word-break: break-all;
-    line-height: 1.6;
-    background: white;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
+    line-height: 1.7;
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--dn-gray-200);
   }
 
   .cert-footer{
-    padding-top: 20px;
-    border-top: 2px solid #e5e7eb;
+    padding-top: 24px;
+    border-top: 2px solid var(--dn-gray-200);
     display: flex;
     justify-content: flex-end;
   }
 
   .cert-stamp{
-    width: 90px;
-    height: 90px;
-    border: 4px double #047857;
+    width: 95px;
+    height: 95px;
+    border: 4px double var(--dn-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
     font-weight: 900;
-    color: #047857;
+    color: var(--dn-primary-dark);
     transform: rotate(-15deg);
-    background: radial-gradient(circle, #ecfdf5 0%, #d1fae5 100%);
+    background: radial-gradient(circle, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
   }
 
   .cert-disclaimer{
     font-family: 'Georgia', serif;
     font-size: 11px;
-    line-height: 1.6;
-    color: #475569;
+    line-height: 1.7;
+    color: var(--dn-gray-500);
     text-align: center;
     font-style: italic;
-    padding: 16px 20px;
-    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    margin-top: 20px;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, var(--dn-gray-50), #ffffff);
+    border-radius: 14px;
+    border: 1px solid var(--dn-gray-200);
+    margin-top: 24px;
   }
 
-  @media (max-width: 720px){
-    .dn-wrap{ padding: 22px; }
+  .cert-local-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 800;
+    margin-left: 8px;
+  }
+
+  @media (max-width: 800px){
+    .dn-wrap{ padding: 24px 20px; }
     .dn-grid{ grid-template-columns: 1fr; }
+    .dn-visibility-cards { grid-template-columns: 1fr; }
     .cert-photos{ grid-template-columns: 1fr; }
     .cert-photo-frame{ margin: 0 auto; }
     .cert-info-grid{ grid-template-columns: 1fr; }
+    .dn-title { font-size: 28px; }
   }
 </style>
 
@@ -487,8 +1122,6 @@
   const userPhoto = document.getElementById("userPhoto");
   const creatorName = document.getElementById("creatorName");
   const artTitle = document.getElementById("artTitle");
-  const maskOption = document.getElementById("maskOption");
-  const visibility = document.getElementById("visibility");
   const statusBox = document.getElementById("statusBox");
 
   const artDrop = document.getElementById("artDrop");
@@ -506,15 +1139,54 @@
   const downloadPNG = document.getElementById("downloadPNG");
   const downloadJSON = document.getElementById("downloadJSON");
   const downloadPDF = document.getElementById("downloadPDF");
+  const liveIPPreview = document.getElementById("liveIPPreview");
+  const tableMaskedIP = document.getElementById("tableMaskedIP");
+  const tablePublicIP = document.getElementById("tablePublicIP");
+  const tableMaskedLoc = document.getElementById("tableMaskedLoc");
+  const tablePublicLoc = document.getElementById("tablePublicLoc");
 
   let currentRecord = null;
   let currentArtDataUrl = null;
   let currentPhotoDataUrl = null;
+  let cachedIPData = null;
+
+  // Get selected visibility
+  function getVisibility() {
+    const checked = document.querySelector('input[name="visibility"]:checked');
+    return checked ? checked.value : 'private';
+  }
+
+  // Fetch and cache IP on load
+  async function fetchIPData() {
+    try {
+      const res = await fetch("https://ipapi.co/json/");
+      cachedIPData = await res.json();
+      // Update live preview and table
+      if (cachedIPData && cachedIPData.ip) {
+        const maskedIP = maskIP(cachedIPData.ip);
+        const city = cachedIPData.city || 'Bilinmiyor';
+        const country = cachedIPData.country_name || 'Bilinmiyor';
+        
+        // Update IP displays
+        liveIPPreview.textContent = maskedIP;
+        if (tableMaskedIP) tableMaskedIP.textContent = maskedIP;
+        if (tablePublicIP) tablePublicIP.textContent = maskedIP;
+        
+        // Update location displays
+        if (tableMaskedLoc) tableMaskedLoc.textContent = `*** / ${country}`;
+        if (tablePublicLoc) tablePublicLoc.textContent = `${city}, ${country}`;
+      }
+    } catch (e) {
+      console.warn("IP fetch failed:", e);
+      cachedIPData = null;
+    }
+  }
+  fetchIPData();
 
   // UI helpers
   function setStatus(html, kind = "info") {
     statusBox.style.display = "block";
-    const color = kind === "error" ? "#dc2626" : (kind === "ok" ? "#059669" : "#475569");
+    const color = kind === "error" ? "#dc2626" : (kind === "ok" ? "#059669" : "#4b5563");
     statusBox.innerHTML = `<span style="color:${color};">${html}</span>`;
   }
 
@@ -594,7 +1266,7 @@
   }
 
   function maskIP(ip) {
-    if (!ip) return "Korumalı";
+    if (!ip) return "***.***.***.***";
     const parts = ip.split('.');
     if (parts.length === 4) return `${parts[0]}.${parts[1]}.***.***`;
     return ip.substring(0, 6) + "****";
@@ -627,13 +1299,13 @@
     const canvas = document.createElement("canvas");
     await QRCode.toCanvas(canvas, text, {
       width: 110,
-      color: { dark: "#064e3b", light: "#ffffff" }
+      color: { dark: "#065f46", light: "#ffffff" }
     });
     return canvas.toDataURL("image/png");
   }
 
   // Generate Certificate HTML
-  async function generateCertHTML(record, artDataUrl, photoDataUrl, qrDataUrl) {
+  async function generateCertHTML(record, artDataUrl, photoDataUrl, qrDataUrl, visibility) {
     const photoHTML = photoDataUrl ? `
       <div>
         <div class="cert-photo-frame">
@@ -648,19 +1320,57 @@
         <img src="${artDataUrl}" alt="Artwork">
       </div>
     ` : `
-      <div class="cert-artwork-main" style="min-height: 200px; display: flex; align-items: center; justify-content: center; background: #f8fafc;">
-        <div style="text-align: center; color: #64748b;">
+      <div class="cert-artwork-main" style="min-height: 200px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f9fafb, #f0fdf4);">
+        <div style="text-align: center; color: #6b7280;">
           <div style="font-size: 48px; margin-bottom: 8px;">📄</div>
           <div style="font-weight: 700;">${record.title}</div>
         </div>
       </div>
     `;
 
+    // Visibility-based info display
+    let extraInfoHTML = '';
+    
+    if (visibility === 'public') {
+      // Public: Show city, device (masked IP still)
+      extraInfoHTML = `
+        <div class="cert-info-item">
+          <div class="cert-info-label">Konum</div>
+          <div class="cert-info-value">${record.location_data || 'Belirtilmedi'}</div>
+        </div>
+        <div class="cert-info-item">
+          <div class="cert-info-label">IP (Maskeli)</div>
+          <div class="cert-info-value">${record.origin_ip}</div>
+        </div>
+      `;
+    } else if (visibility === 'masked') {
+      // Masked: Show masked location and IP
+      extraInfoHTML = `
+        <div class="cert-info-item">
+          <div class="cert-info-label">Konum</div>
+          <div class="cert-info-value">${record.location_data}</div>
+        </div>
+        <div class="cert-info-item">
+          <div class="cert-info-label">IP (Maskeli)</div>
+          <div class="cert-info-value">${record.origin_ip}</div>
+        </div>
+      `;
+    }
+    // Private: No extra info
+
+    const localBadge = visibility === 'private' ? '<span class="cert-local-badge">🔒 YEREL</span>' : '';
+
+    const visibilityLabels = {
+      'private': 'Özel (Private)',
+      'masked': 'Maskeli (Masked)',
+      'public': 'Herkese Açık (Public)'
+    };
+
     return `
       <div class="cert-frame">
         <div class="cert-header">
           <div class="cert-logo">POART PROTOCOL</div>
-          <h2 class="cert-title">DİJİTAL NOTER SERTİFİKASI</h2>
+          <h2 class="cert-title">DİJİTAL NOTER SERTİFİKASI ${localBadge}</h2>
           <div class="cert-subtitle">İlhan Art Gallery tarafından verilmiştir</div>
         </div>
 
@@ -697,29 +1407,28 @@
               </div>
               <div class="cert-info-item">
                 <div class="cert-info-label">Görünürlük</div>
-                <div class="cert-info-value">${record.visibility}</div>
+                <div class="cert-info-value">${visibilityLabels[visibility] || visibility}</div>
               </div>
-              <div class="cert-info-item">
-                <div class="cert-info-label">Konum</div>
-                <div class="cert-info-value">${record.location_data}</div>
-              </div>
+              ${extraInfoHTML}
             </div>
           </div>
 
           <div class="cert-hash-panel">
             <div class="cert-hash-title">🔐 Kriptografik Parmak İzleri</div>
-            <div style="margin-bottom: 10px;">
-              <div style="font-size: 10px; font-weight: 800; color: #64748b; margin-bottom: 4px;">SHA-256:</div>
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 10px; font-weight: 800; color: #6b7280; margin-bottom: 5px;">SHA-256:</div>
               <div class="cert-hash-value">${record.sha256}</div>
             </div>
             <div>
-              <div style="font-size: 10px; font-weight: 800; color: #64748b; margin-bottom: 4px;">SHA-512:</div>
+              <div style="font-size: 10px; font-weight: 800; color: #6b7280; margin-bottom: 5px;">SHA-512:</div>
               <div class="cert-hash-value">${record.sha512}</div>
             </div>
           </div>
 
           <div class="cert-disclaimer">
-            This certificate is digitally notarized and cryptographically sealed for the first stage of verification on the PoArt Protocol. Please check the site for second-stage verification.
+            ${visibility === 'private' 
+              ? 'Bu sertifika yalnızca tarayıcınızda oluşturulmuştur ve sunucuya kaydedilmemiştir. Doğrulama için daha sonra "Maskeli" veya "Herkese Açık" modda yeniden mühürleyebilirsiniz.'
+              : 'This certificate is digitally notarized and cryptographically sealed for the first stage of verification on the PoArt Protocol. Please check the site for second-stage verification.'}
           </div>
 
           <div class="cert-footer">
@@ -739,6 +1448,8 @@
     previewSection.style.display = "none";
     certPreview.innerHTML = "";
 
+    const visibility = getVisibility();
+
     try {
       sealBtn.disabled = true;
       setStatus("⏳ İşleniyor... Hash hesaplanıyor...", "info");
@@ -749,16 +1460,20 @@
       const sha256 = await digest(buffer, "SHA-256");
       const sha512 = await digest(buffer, "SHA-512");
 
-      // IP & location
-      let ip = "Bilinmiyor", loc = "Bilinmiyor";
-      try {
-        const ipRes = await fetch("https://ipapi.co/json/");
-        const data = await ipRes.json();
-        const shouldMask = maskOption.checked || visibility.value === "masked";
-        ip = shouldMask ? maskIP(data.ip) : data.ip;
-        loc = shouldMask ? maskLoc(data.city, data.country_name) : `${data.city}, ${data.country_name}`;
-      } catch (e) {
-        console.warn("IP fetch failed:", e);
+      // Prepare location/IP data based on visibility
+      let ip = "***.***.***.***";
+      let loc = "Gizli";
+      
+      if (visibility !== 'private' && cachedIPData) {
+        if (visibility === 'public') {
+          // Public: Show city, country (IP still masked)
+          ip = maskIP(cachedIPData.ip);
+          loc = `${cachedIPData.city || 'Bilinmiyor'}, ${cachedIPData.country_name || 'Bilinmiyor'}`;
+        } else if (visibility === 'masked') {
+          // Masked: Everything masked
+          ip = maskIP(cachedIPData.ip);
+          loc = maskLoc(cachedIPData.city, cachedIPData.country_name);
+        }
       }
 
       const record = {
@@ -767,8 +1482,8 @@
         creator: creatorName.value || "Bilinmiyor",
         sha256: sha256,
         sha512: sha512,
-        visibility: visibility.value,
-        device_info: navigator.userAgent,
+        visibility: visibility,
+        device_info: visibility === 'public' ? navigator.userAgent : "Gizli",
         location_data: loc,
         origin_ip: ip,
         created_at: new Date().toISOString()
@@ -790,23 +1505,24 @@
         currentPhotoDataUrl = null;
       }
 
-      // CRITICAL FIX: Always try Supabase insert, regardless of visibility
-      setStatus("💾 Supabase'e kaydediliyor...", "info");
+      // Only save to Supabase if NOT private
       let supabaseSuccess = false;
-      try {
-        // Remove .select() to avoid RLS read restrictions
-        const { error } = await sb.from("manifests").insert([record]);
-        if (error) {
-          console.error("❌ Supabase error:", error);
-          console.error("Error details:", JSON.stringify(error, null, 2));
-          throw error;
+      if (visibility !== 'private') {
+        setStatus("💾 Supabase'e kaydediliyor...", "info");
+        try {
+          const { error } = await sb.from("manifests").insert([record]);
+          if (error) {
+            console.error("❌ Supabase error:", error);
+            throw error;
+          }
+          console.log("✅ Supabase insert SUCCESS:", record.cert_id);
+          supabaseSuccess = true;
+        } catch (e) {
+          console.error("❌ Supabase insert FAILED:", e);
+          setStatus(`⚠️ Supabase kayıt hatası: ${e.message || e.toString()}. Sertifika yine de oluşturuluyor...`, "info");
         }
-        console.log("✅ Supabase insert SUCCESS:", record.cert_id);
-        supabaseSuccess = true;
-      } catch (e) {
-        console.error("❌ Supabase insert FAILED:", e);
-        console.error("Record attempted:", JSON.stringify(record, null, 2));
-        setStatus(`⚠️ Supabase kayıt hatası: ${e.message || e.toString()}. Sertifika yine de oluşturuluyor...`, "info");
+      } else {
+        console.log("🔒 Private mode - skipping Supabase");
       }
 
       // Generate QR
@@ -814,14 +1530,16 @@
 
       // Generate certificate HTML
       setStatus("📜 Sertifika oluşturuluyor...", "info");
-      const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl);
+      const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
       certPreview.innerHTML = certHTML;
       previewSection.style.display = "block";
 
-      if (supabaseSuccess) {
+      if (visibility === 'private') {
+        setStatus("✅ Sertifika hazır! 🔒 Özel mod: Sadece tarayıcınızda oluşturuldu, sunucuya kaydedilmedi.", "ok");
+      } else if (supabaseSuccess) {
         setStatus("✅ Sertifika hazır ve Supabase'e kaydedildi! İndirme seçeneklerini kullanabilirsiniz.", "ok");
       } else {
-        setStatus("⚠️ Sertifika hazır ama Supabase kayıt başarısız. (RLS policy sorunu olabilir - INSERT policy ekleyin)", "ok");
+        setStatus("⚠️ Sertifika hazır ama Supabase kayıt başarısız.", "ok");
       }
     } catch (err) {
       console.error("Main error:", err);
@@ -887,7 +1605,6 @@
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
       
       const imgWidth = pdfWidth - 20;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
