@@ -1,282 +1,685 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PoArt Varlık Doğrulama v1.6</title>
+<!-- ============================================================================ -->
+<!-- 🔍 DOSYA DOĞRULAMA SİSTEMİ -->
+<!-- Bu bölümü previewSection'ın kapanış </div> etiketinden SONRA -->
+<!-- ama dn-wrap kapanışından (en son </div>) ÖNCE ekleyin -->
+<!-- ============================================================================ -->
 
-  <!-- Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<div class="dn-verify-section" id="verifySection">
+  <div class="dn-verify-header">
+    <div class="dn-verify-badge">VERIFICATION TOOL</div>
+    <h2 class="dn-verify-title">Dosya Doğrulama</h2>
+    <p class="dn-verify-subtitle">Elinizdeki dosyanın daha önce mühürlenip mühürlenmediğini kontrol edin</p>
+  </div>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --emerald: #059669;
-      --emerald-light: #10b981;
-      --slate: #1e293b;
-      --slate-light: #64748b;
-      --red: #ef4444;
-      --bg-glass: rgba(255,255,255,0.8);
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #ecfdf5, #f0fdfa);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 40px 10px;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 900px;
-      background: var(--bg-glass);
-      border-radius: 25px;
-      box-shadow: 0 15px 60px rgba(0,0,0,0.08);
-      padding: 40px;
-      backdrop-filter: blur(15px);
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 70px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: var(--slate);
-      font-weight: 900;
-      font-size: 26px;
-      margin-bottom: 25px;
-      letter-spacing: 0.5px;
-    }
-
-    .input-group {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    input[type="text"] {
-      flex: 1;
-      padding: 15px;
-      border-radius: 12px;
-      border: 2px solid #e2e8f0;
-      font-size: 15px;
-      outline: none;
-      transition: 0.3s;
-    }
-
-    input[type="text"]:focus {
-      border-color: var(--emerald-light);
-      box-shadow: 0 0 0 4px rgba(16,185,129,0.1);
-    }
-
-    button {
-      padding: 15px 25px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(16,185,129,0.3);
-    }
-
-    .result {
-      margin-top: 25px;
-      display: none;
-      animation: fadeIn 0.4s ease;
-    }
-
-    .success {
-      background: #ecfdf5;
-      border: 2px solid var(--emerald-light);
-      border-radius: 20px;
-      padding: 25px;
-    }
-
-    .fail {
-      background: #fef2f2;
-      border: 2px solid var(--red);
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
-    }
-
-    .fail h2 {
-      color: var(--red);
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .info-box {
-      background: white;
-      border-radius: 14px;
-      padding: 15px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .label {
-      font-size: 12px;
-      color: var(--slate-light);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .value {
-      font-weight: 700;
-      color: var(--slate);
-      font-size: 15px;
-    }
-
-    .hash-box {
-      margin-top: 15px;
-      font-family: monospace;
-      font-size: 12px;
-      color: var(--slate-light);
-      background: #f8fafc;
-      padding: 10px;
-      border-radius: 10px;
-      word-break: break-all;
-    }
-
-    #certContainer {
-      display: none;
-    }
-
-    .qr {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="card">
-    <h1>🔍 Dijital Sertifika Doğrulama</h1>
-    <div class="input-group">
-      <input type="text" id="query" placeholder="Eser adı, sertifika ID veya hash...">
-      <button id="searchBtn">Sorgula</button>
-    </div>
-
-    <div class="result" id="result">
-      <div class="success" id="successBox" style="display:none;">
-        <h2>✅ Mühürlü Kayıt Bulundu</h2>
-        <div class="info-grid">
-          <div class="info-box"><div class="label">Eser Adı</div><div class="value" id="resTitle"></div></div>
-          <div class="info-box"><div class="label">Oluşturucu</div><div class="value" id="resCreator"></div></div>
-          <div class="info-box"><div class="label">Cihaz</div><div class="value" id="resDevice"></div></div>
-          <div class="info-box"><div class="label">Tarih</div><div class="value" id="resDate"></div></div>
-        </div>
-        <div class="hash-box">SHA-256: <span id="res256"></span></div>
-        <div class="hash-box">SHA-512: <span id="res512"></span></div>
-        <div class="qr"><div id="qrcode"></div></div>
-        <button id="downloadCert">📄 Sertifikayı İndir (PNG)</button>
-        <button id="downloadJson">💾 JSON Verisini İndir</button>
-      </div>
-
-      <div class="fail" id="failBox" style="display:none;">
-        <h2>❌ Kayıt Bulunamadı</h2>
-        <p>Bu varlık PoArt kayıtlarında yer almıyor.</p>
+  <div class="dn-verify-explainer">
+    <div class="dn-verify-explainer-icon">🔍</div>
+    <div class="dn-verify-explainer-content">
+      <div class="dn-verify-explainer-title">Nasıl Çalışır?</div>
+      <div class="dn-verify-explainer-text">
+        Bir dosyayı buraya sürükleyin. Sistem otomatik olarak SHA-512 hash'ini hesaplayıp 
+        İlhanArt veri tabanında arar. Eğer dosya daha önce mühürlenmişse, tüm detaylarını göreceksiniz.
       </div>
     </div>
   </div>
 
-  <div id="certContainer"></div>
+  <div class="dn-verify-drop-zone" id="verifyDropZone">
+    <div class="dn-verify-drop-icon">📂</div>
+    <div class="dn-verify-drop-title">Dosyayı Sürükle & Bırak</div>
+    <div class="dn-verify-drop-subtitle">veya tıklayıp seçin (herhangi bir dosya türü)</div>
+    <div class="dn-verify-drop-meta" id="verifyFileMeta"></div>
+  </div>
+  <input type="file" id="verifyFileInput" class="dn-hidden-input" />
+
+  <!-- Loading State -->
+  <div class="dn-verify-loading" id="verifyLoading" style="display: none;">
+    <div class="dn-verify-loading-spinner"></div>
+    <div class="dn-verify-loading-text">Hash hesaplanıyor ve veritabanında aranıyor...</div>
+  </div>
+
+  <!-- Result: NOT FOUND -->
+  <div class="dn-verify-result dn-verify-not-found" id="verifyNotFound" style="display: none;">
+    <div class="dn-verify-result-icon">❌</div>
+    <div class="dn-verify-result-title">Kayıt Bulunamadı</div>
+    <div class="dn-verify-result-desc">
+      Bu dosya İlhanArt sisteminde mühürlenmemiş. Hash hesaplaması başarılı oldu ama veritabanında eşleşen bir kayıt yok.
+    </div>
+    <div class="dn-verify-hash-display">
+      <div class="dn-verify-hash-label">Hesaplanan SHA-512:</div>
+      <div class="dn-verify-hash-value" id="verifyComputedHash"></div>
+    </div>
+  </div>
+
+  <!-- Result: FOUND -->
+  <div class="dn-verify-result dn-verify-found" id="verifyFound" style="display: none;">
+    <div class="dn-verify-result-icon">✅</div>
+    <div class="dn-verify-result-title">Dosya Doğrulandı!</div>
+    <div class="dn-verify-result-desc">
+      Bu dosya İlhanArt sisteminde kayıtlı. Aşağıda orijinal mühürleme bilgilerini görebilirsiniz.
+    </div>
+
+    <div class="dn-verify-cert-card">
+      <div class="dn-verify-cert-header">
+        <div class="dn-verify-cert-badge" id="verifyCertBadge">POART-XXXXXXXX</div>
+        <div class="dn-verify-cert-visibility" id="verifyCertVisibility">🌍 Herkese Açık</div>
+      </div>
+
+      <div class="dn-verify-cert-grid">
+        <div class="dn-verify-cert-item">
+          <div class="dn-verify-cert-label">Eser Adı</div>
+          <div class="dn-verify-cert-value" id="verifyCertTitle">-</div>
+        </div>
+        <div class="dn-verify-cert-item">
+          <div class="dn-verify-cert-label">Sanatçı</div>
+          <div class="dn-verify-cert-value" id="verifyCertCreator">-</div>
+        </div>
+        <div class="dn-verify-cert-item">
+          <div class="dn-verify-cert-label">Mühürleme Tarihi</div>
+          <div class="dn-verify-cert-value" id="verifyCertDate">-</div>
+        </div>
+        <div class="dn-verify-cert-item">
+          <div class="dn-verify-cert-label">Konum</div>
+          <div class="dn-verify-cert-value" id="verifyCertLocation">-</div>
+        </div>
+        <div class="dn-verify-cert-item">
+          <div class="dn-verify-cert-label">IP (Maskeli)</div>
+          <div class="dn-verify-cert-value" id="verifyCertIP">-</div>
+        </div>
+        <div class="dn-verify-cert-item">
+          <div class="dn-verify-cert-label">Cihaz</div>
+          <div class="dn-verify-cert-value" id="verifyCertDevice">-</div>
+        </div>
+      </div>
+
+      <div class="dn-verify-hash-display">
+        <div class="dn-verify-hash-label">SHA-256 (Orijinal):</div>
+        <div class="dn-verify-hash-value" id="verifySHA256"></div>
+      </div>
+
+      <div class="dn-verify-hash-display" style="margin-top: 12px;">
+        <div class="dn-verify-hash-label">SHA-512 (Orijinal Mühür):</div>
+        <div class="dn-verify-hash-value" id="verifySHA512"></div>
+      </div>
+
+      <div class="dn-verify-cert-footer">
+        <a href="#" id="verifyCertLink" target="_blank" class="dn-verify-cert-link">
+          📜 Doğrulama Linki
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================================ -->
+<!-- STİLLER - Bu <style> bloğunu mevcut </style> kapanışından ÖNCE ekleyin -->
+<!-- ============================================================================ -->
+
+<style>
+/* Verification Section Base */
+.dn-verify-section {
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 3px solid rgba(5, 150, 105, 0.15);
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dn-verify-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.dn-verify-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fffbeb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.dn-verify-title {
+  font-weight: 900;
+  font-size: 32px;
+  background: linear-gradient(135deg, var(--dn-gray-800) 0%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px 0;
+}
+
+.dn-verify-subtitle {
+  margin: 0;
+  color: var(--dn-gray-500);
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Explainer Box */
+.dn-verify-explainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(245, 158, 11, 0.05));
+  border: 2px solid rgba(251, 191, 36, 0.2);
+  border-left: 5px solid #fbbf24;
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+.dn-verify-explainer-icon {
+  font-size: 36px;
+  flex-shrink: 0;
+}
+
+.dn-verify-explainer-content {
+  flex: 1;
+}
+
+.dn-verify-explainer-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--dn-gray-800);
+  margin-bottom: 8px;
+}
+
+.dn-verify-explainer-text {
+  font-size: 14px;
+  color: var(--dn-gray-600);
+  line-height: 1.7;
+}
+
+/* Drop Zone */
+.dn-verify-drop-zone {
+  border: 3px dashed rgba(251, 191, 36, 0.35);
+  background: linear-gradient(145deg, #ffffff 0%, #fef3c7 25%, rgba(254, 243, 199, 0.4) 100%);
+  border-radius: 20px;
+  padding: 52px 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 28px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dn-verify-drop-zone:hover {
+  border-color: #fbbf24;
+  background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(251, 191, 36, 0.18);
+}
+
+.dn-verify-drop-zone.is-over {
+  border-color: #f59e0b;
+  border-style: solid;
+  background: linear-gradient(145deg, #fef3c7 0%, #fde68a 100%);
+  box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.2);
+  transform: scale(1.02);
+}
+
+.dn-verify-drop-icon {
+  font-size: 52px;
+  margin-bottom: 10px;
+}
+
+.dn-verify-drop-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--dn-gray-700);
+  margin-bottom: 6px;
+}
+
+.dn-verify-drop-subtitle {
+  font-size: 14px;
+  color: var(--dn-gray-500);
+  font-weight: 500;
+}
+
+.dn-verify-drop-meta {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #d97706;
+  background: rgba(251, 191, 36, 0.15);
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+/* Loading State */
+.dn-verify-loading {
+  text-align: center;
+  padding: 52px 28px;
+  background: linear-gradient(145deg, #ffffff, var(--dn-gray-50));
+  border-radius: 18px;
+  border: 2px solid var(--dn-gray-200);
+  margin-bottom: 28px;
+}
+
+.dn-verify-loading-spinner {
+  width: 52px;
+  height: 52px;
+  border: 5px solid var(--dn-gray-200);
+  border-top-color: #fbbf24;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 18px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.dn-verify-loading-text {
+  font-size: 15px;
+  color: var(--dn-gray-600);
+  font-weight: 600;
+}
+
+/* Result States */
+.dn-verify-result {
+  border-radius: 20px;
+  padding: 36px 32px;
+  text-align: center;
+  animation: slideUpFade 0.5s ease;
+  margin-bottom: 28px;
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dn-verify-not-found {
+  background: linear-gradient(145deg, #fef2f2, #fee2e2);
+  border: 3px solid #fca5a5;
+}
+
+.dn-verify-found {
+  background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+  border: 3px solid #86efac;
+}
+
+.dn-verify-result-icon {
+  font-size: 72px;
+  margin-bottom: 18px;
+}
+
+.dn-verify-result-title {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.dn-verify-not-found .dn-verify-result-title {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dn-verify-found .dn-verify-result-title {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dn-verify-result-desc {
+  font-size: 14px;
+  color: var(--dn-gray-600);
+  line-height: 1.8;
+  margin-bottom: 28px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hash Display */
+.dn-verify-hash-display {
+  background: rgba(0, 0, 0, 0.04);
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 18px 20px;
+  text-align: left;
+  margin-top: 24px;
+}
+
+.dn-verify-hash-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--dn-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+}
+
+.dn-verify-hash-value {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--dn-gray-800);
+  word-break: break-all;
+  line-height: 1.7;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Certificate Card */
+.dn-verify-cert-card {
+  background: #ffffff;
+  border: 3px solid #86efac;
+  border-radius: 20px;
+  padding: 28px;
+  margin-top: 28px;
+  text-align: left;
+  box-shadow: 0 8px 30px rgba(5, 150, 105, 0.12);
+}
+
+.dn-verify-cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+  border-bottom: 3px solid #d1fae5;
+}
+
+.dn-verify-cert-badge {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--dn-primary-darker);
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.15), rgba(16, 185, 129, 0.1));
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(5, 150, 105, 0.25);
+}
+
+.dn-verify-cert-visibility {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dn-gray-600);
+  background: var(--dn-gray-50);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.dn-verify-cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.dn-verify-cert-item {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid var(--dn-primary);
+  transition: all 0.3s ease;
+}
+
+.dn-verify-cert-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.1);
+}
+
+.dn-verify-cert-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--dn-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.dn-verify-cert-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dn-gray-800);
+  line-height: 1.4;
+}
+
+.dn-verify-cert-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid #d1fae5;
+  text-align: center;
+}
+
+.dn-verify-cert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--dn-primary-dark), var(--dn-primary));
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.25);
+}
+
+.dn-verify-cert-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(5, 150, 105, 0.35);
+  background: linear-gradient(135deg, var(--dn-primary), var(--dn-primary-light));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dn-verify-cert-grid {
+    grid-template-columns: 1fr;
+  }
+  .dn-verify-title {
+    font-size: 26px;
+  }
+  .dn-verify-cert-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+</style>
+
+<!-- ============================================================================ -->
+<!-- JAVASCRIPT - Bu <script> bloğunu en son </script> kapanışından HEMEN ÖNCE ekleyin -->
+<!-- NOT: Mevcut script'in kapanışından ÖNCE, yani ")();" satırından önce ekleyin -->
+<!-- ============================================================================ -->
 
 <script>
-const SUPABASE_URL = "https://immdfdvrwqcvgmflbgdr.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE";
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// ===== VERIFICATION SYSTEM =====
+// Bu kod mevcut script içinde, sb değişkeni tanımlandıktan SONRA eklenmelidir
+(function initVerification() {
+  const verifyDropZone = document.getElementById('verifyDropZone');
+  const verifyFileInput = document.getElementById('verifyFileInput');
+  const verifyFileMeta = document.getElementById('verifyFileMeta');
+  const verifyLoading = document.getElementById('verifyLoading');
+  const verifyNotFound = document.getElementById('verifyNotFound');
+  const verifyFound = document.getElementById('verifyFound');
 
-const searchBtn = document.getElementById("searchBtn");
-const query = document.getElementById("query");
-const resultBox = document.getElementById("result");
-const successBox = document.getElementById("successBox");
-const failBox = document.getElementById("failBox");
+  // Result elements
+  const verifyComputedHash = document.getElementById('verifyComputedHash');
+  const verifySHA256 = document.getElementById('verifySHA256');
+  const verifySHA512 = document.getElementById('verifySHA512');
+  const verifyCertBadge = document.getElementById('verifyCertBadge');
+  const verifyCertVisibility = document.getElementById('verifyCertVisibility');
+  const verifyCertTitle = document.getElementById('verifyCertTitle');
+  const verifyCertCreator = document.getElementById('verifyCertCreator');
+  const verifyCertDate = document.getElementById('verifyCertDate');
+  const verifyCertLocation = document.getElementById('verifyCertLocation');
+  const verifyCertIP = document.getElementById('verifyCertIP');
+  const verifyCertDevice = document.getElementById('verifyCertDevice');
+  const verifyCertLink = document.getElementById('verifyCertLink');
 
-searchBtn.addEventListener("click", async () => {
-  const q = query.value.trim();
-  if (!q) return;
-  successBox.style.display = "none";
-  failBox.style.display = "none";
-  resultBox.style.display = "block";
+  // Drag & Drop setup
+  verifyDropZone.addEventListener('click', () => verifyFileInput.click());
 
-  const { data, error } = await client
-    .from("manifests")
-    .select("*")
-    .or(`cert_id.ilike.%${q}%,title.ilike.%${q}%,sha512.ilike.%${q}%,sha256.ilike.%${q}%`)
-    .eq("visibility", "public")
-    .limit(1);
-
-  if (error || !data || data.length === 0) {
-    failBox.style.display = "block";
-    return;
-  }
-
-  const d = data[0];
-  successBox.style.display = "block";
-  document.getElementById("resTitle").textContent = d.title || "-";
-  document.getElementById("resCreator").textContent = d.creator || "-";
-  document.getElementById("resDevice").textContent = d.device_info || "-";
-  document.getElementById("resDate").textContent = new Date(d.created_at).toLocaleString("tr-TR");
-  document.getElementById("res256").textContent = d.sha256 || "-";
-  document.getElementById("res512").textContent = d.sha512 || "-";
-
-  // QR oluştur
-  document.getElementById("qrcode").innerHTML = "";
-  new QRCode(document.getElementById("qrcode"), {
-    text: `https://galeri-coder.github.io/verify.html?q=${encodeURIComponent(d.cert_id)}`,
-    width: 128, height: 128, colorDark: "#059669"
+  ['dragenter', 'dragover'].forEach(evt => {
+    verifyDropZone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      verifyDropZone.classList.add('is-over');
+    });
   });
 
-  // PNG sertifika indir
-  document.getElementById("downloadCert").onclick = async () => {
-    const clone = successBox.cloneNode(true);
-    clone.style.display = "block";
-    document.getElementById("certContainer").innerHTML = "";
-    document.getElementById("certContainer").appendChild(clone);
-    const canvas = await html2canvas(clone, { scale: 2, useCORS: true });
-    const link = document.createElement("a");
-    link.download = `${d.cert_id}.png`;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-  };
+  ['dragleave', 'drop'].forEach(evt => {
+    verifyDropZone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      verifyDropZone.classList.remove('is-over');
+    });
+  });
 
-  // JSON indir
-  document.getElementById("downloadJson").onclick = () => {
-    const json = JSON.stringify(d, null, 2);
-    const blob = new Blob([json], { type: "application/json" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `${d.cert_id}.json`;
-    link.click();
-  };
-});
+  verifyDropZone.addEventListener('drop', (e) => {
+    const file = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file) handleVerifyFile(file);
+  });
+
+  verifyFileInput.addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) handleVerifyFile(file);
+  });
+
+  async function handleVerifyFile(file) {
+    // Reset UI
+    verifyLoading.style.display = 'none';
+    verifyNotFound.style.display = 'none';
+    verifyFound.style.display = 'none';
+
+    // Show file info
+    const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+    verifyFileMeta.textContent = `${file.name} • ${sizeMb} MB`;
+
+    // Show loading
+    verifyLoading.style.display = 'block';
+
+    try {
+      // Calculate hash
+      const buffer = await file.arrayBuffer();
+      const hashBuffer = await crypto.subtle.digest('SHA-512', buffer);
+      const hash = Array.from(new Uint8Array(hashBuffer))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+
+      console.log('🔍 Computed hash:', hash);
+
+      // Search in Supabase
+      const { data, error } = await sb
+        .from('manifests')
+        .select('*')
+        .eq('sha512', hash)
+        .single();
+
+      verifyLoading.style.display = 'none';
+
+      if (error || !data) {
+        // NOT FOUND
+        console.log('❌ Not found in database');
+        verifyComputedHash.textContent = hash;
+        verifyNotFound.style.display = 'block';
+        
+        // Scroll to result
+        setTimeout(() => {
+          verifyNotFound.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      } else {
+        // FOUND!
+        console.log('✅ Found in database:', data);
+        displayVerificationResult(data, hash);
+        verifyFound.style.display = 'block';
+        
+        // Scroll to result
+        setTimeout(() => {
+          verifyFound.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    } catch (err) {
+      console.error('Verification error:', err);
+      verifyLoading.style.display = 'none';
+      alert('Doğrulama sırasında hata oluştu: ' + err.message);
+    }
+  }
+
+  function displayVerificationResult(record, hash) {
+    // Badge & Visibility
+    verifyCertBadge.textContent = record.cert_id;
+    
+    const visibilityIcons = {
+      'private': '🔒',
+      'masked': '🕶️',
+      'public': '🌍'
+    };
+    const visibilityLabels = {
+      'private': 'Özel (Private)',
+      'masked': 'Maskeli (Masked)',
+      'public': 'Herkese Açık (Public)'
+    };
+    verifyCertVisibility.textContent = 
+      `${visibilityIcons[record.visibility] || '🔐'} ${visibilityLabels[record.visibility] || record.visibility}`;
+
+    // Basic Info
+    verifyCertTitle.textContent = record.title || 'İsimsiz';
+    verifyCertCreator.textContent = record.creator || 'Bilinmiyor';
+    
+    // Date
+    try {
+      const d = new Date(record.created_at);
+      verifyCertDate.textContent = d.toLocaleDateString('tr-TR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }) + ' ' + d.toLocaleTimeString('tr-TR', {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch {
+      verifyCertDate.textContent = record.created_at;
+    }
+
+    // Location & IP (visibility-dependent)
+    if (record.visibility === 'private') {
+      verifyCertLocation.textContent = 'Gizli';
+      verifyCertIP.textContent = 'Gizli';
+      verifyCertDevice.textContent = 'Gizli';
+    } else if (record.visibility === 'masked') {
+      verifyCertLocation.textContent = record.location_data || 'Gizli';
+      verifyCertIP.textContent = record.origin_ip || 'Gizli';
+      verifyCertDevice.textContent = 'Gizli';
+    } else {
+      verifyCertLocation.textContent = record.location_data || 'Belirtilmedi';
+      verifyCertIP.textContent = record.origin_ip || 'Belirtilmedi';
+      const deviceText = record.device_info || 'Belirtilmedi';
+      verifyCertDevice.textContent = deviceText.length > 80 ? 
+        deviceText.substring(0, 80) + '...' : 
+        deviceText;
+    }
+
+    // Hashes
+    verifySHA256.textContent = record.sha256 || 'Yok';
+    verifySHA512.textContent = hash;
+
+    // Verification Link
+    verifyCertLink.href = `https://ilhanart.org/verify?id=${record.cert_id}`;
+  }
+})();
 </script>
-</body>
-</html>
