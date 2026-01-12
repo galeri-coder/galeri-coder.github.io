@@ -1,173 +1,171 @@
-# 🔍 Dosya Doğrulama Sistemi - Hızlı Entegrasyon
+# 🔍 File Verification System - Quick Integration
 
-## 📋 3 Adımda Kurulum
+## 📋 3-Step Installation
 
-### 1️⃣ HTML Bölümünü Ekle
+### 1️⃣ Add HTML Section
 
-Mevcut dijital noter HTML'inde `</div> <!-- previewSection sonu -->` satırını bul.
+Find `</div> <!-- previewSection end -->` line in your existing digital notary HTML.
 
-**NEREYE EKLENECEK:**
+**WHERE TO ADD:**
 ```html
-</div> <!-- previewSection sonu -->
+</div> <!-- previewSection end -->
 
-<!-- 🔥 BURAYA EKLENECEK (verification-addon.html'deki HTML kısmı) -->
+<!-- 🔥 ADD HERE (HTML section from verification-addon.html) -->
 
-</div> <!-- dn-wrap sonu -->
+</div> <!-- dn-wrap end -->
 ```
 
-**EKLENMESİ GEREKEN:**
-- `verification-addon.html` dosyasındaki HTML bölümü (ilk yorum bloğundan başlayan kısım)
+**WHAT TO ADD:**
+- HTML section from `verification-addon.html` file (starting from first comment block)
 
 ---
 
-### 2️⃣ CSS Stillerini Ekle
+### 2️⃣ Add CSS Styles
 
-Mevcut dijital noter HTML'inde `</style>` kapanış etiketini bul.
+Find the closing `</style>` tag in your existing digital notary HTML.
 
-**NEREYE EKLENECEK:**
+**WHERE TO ADD:**
 ```html
-  .cert-local-badge {
-    ...
-  }
+  .cert-local-badge { ... }
 
-  /* 🔥 BURAYA EKLENECEK (verification-addon.html'deki CSS kısmı) */
+  /* 🔥 ADD HERE (CSS section from verification-addon.html) */
 
 </style>
 ```
 
-**EKLENMESİ GEREKEN:**
-- `verification-addon.html` dosyasındaki tüm CSS kuralları
+**WHAT TO ADD:**
+- All CSS rules from `verification-addon.html` file
 
 ---
 
-### 3️⃣ JavaScript'i Ekle
+### 3️⃣ Add JavaScript
 
-Mevcut dijital noter HTML'inde en son `})();` satırını bul (script'in kapanışı).
+Find the final `})();` line in your existing digital notary HTML (script closing).
 
-**NEREYE EKLENECEK:**
+**WHERE TO ADD:**
 ```javascript
     });
   });
 })();
 
-// 🔥 BURAYA EKLENECEK (verification-addon.html'deki JS kısmı)
+// 🔥 ADD HERE (JS section from verification-addon.html)
 
 </script>
 ```
 
-**EKLENMESİ GEREKEN:**
-- `verification-addon.html` dosyasındaki JavaScript fonksiyonu
+**WHAT TO ADD:**
+- JavaScript function from `verification-addon.html` file
 
 ---
 
-## 🎯 Entegrasyon Sonrası
+## 🎯 Post-Integration
 
-### Görünüm:
+### Appearance:
 
 ```
-┌─────────────────────────────────────┐
-│  📜 Sertifika Hazır                 │
-│  [PNG] [JSON] [PDF]                 │
-│  ┌───────────────────────────────┐  │
-│  │   Sertifika Preview           │  │
-│  └───────────────────────────────┘  │
-└─────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│  📜 Certificate Ready                   │
+│  [PNG] [JSON] [PDF]                     │
+│  ┌───────────────────────────────────┐  │
+│  │   Certificate Preview             │  │
+│  └───────────────────────────────────┘  │
+└─────────────────────────────────────────┘
 
-─────────────────────────────────────── (ayırıcı çizgi)
+─────────────────────────────────────────── (divider line)
 
-┌─────────────────────────────────────┐
-│  🔍 DOSYA DOĞRULAMA                 │
-│                                     │
-│  Nasıl Çalışır?                     │
-│  Bir dosyayı buraya sürükleyin...   │
-│                                     │
-│  ┌───────────────────────────────┐  │
-│  │ 📂 Dosyayı Sürükle & Bırak    │  │
-│  │ veya tıklayıp seçin           │  │
-│  └───────────────────────────────┘  │
-└─────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│  🔍 FILE VERIFICATION                   │
+│                                         │
+│  How It Works?                          │
+│  Drag a file here to verify...          │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │ 📂 Drag & Drop File               │  │
+│  │ or click to select                │  │
+│  └───────────────────────────────────┘  │
+└─────────────────────────────────────────┘
 ```
 
 ---
 
 ## ✅ Test Checklist
 
-Entegrasyondan sonra şunları kontrol et:
+After integration, verify:
 
-- [ ] Sayfa yükleniyor mu? (console'da hata yok)
-- [ ] Doğrulama bölümü görünüyor mu?
-- [ ] Dosya sürüklenebiliyor mu?
-- [ ] Hash hesaplanıyor mu? (loading spinner)
-- [ ] Supabase sorgusu çalışıyor mu?
-- [ ] "Bulunamadı" durumu gösteriliyor mu?
-- [ ] "Bulundu" durumu gösteriliyor mu?
-- [ ] Visibility'ye göre bilgiler doğru mu?
-- [ ] Scroll animasyonu çalışıyor mu?
-- [ ] Mobilde düzgün görünüyor mu?
+- [ ] Page loads without errors (check console)
+- [ ] Verification section is visible
+- [ ] File can be dragged/dropped
+- [ ] Hash calculation works (loading spinner shows)
+- [ ] Supabase query executes
+- [ ] "Not Found" state displays correctly
+- [ ] "Found" state displays correctly
+- [ ] Visibility-based info filtering works
+- [ ] Scroll animation works
+- [ ] Mobile responsive works
 
 ---
 
-## 🎨 Özellikler
+## 🎨 Features
 
-### 1. Drag & Drop Alanı
-- Sarı/turuncu tema (mühürleme kısmından ayırt edilebilir)
-- Hover ve active durumları
-- Dosya bilgisi (isim + boyut)
+### 1. Drag & Drop Area
+- Yellow/orange theme (distinguishable from sealing section)
+- Hover and active states
+- File info display (name + size)
 
 ### 2. Loading State
-- Spinning animasyon
-- "Hash hesaplanıyor ve veritabanında aranıyor..." mesajı
+- Spinning animation
+- "Calculating hash and searching database..." message
 
-### 3. Sonuç Durumları
+### 3. Result States
 
-**❌ Bulunamadı:**
-- Kırmızı tema
-- Hesaplanan hash gösterilir
-- "Bu dosya mühürlenmemiş" mesajı
+**❌ Not Found:**
+- Red theme
+- Computed hash displayed
+- "This file is not sealed" message
 
-**✅ Bulundu:**
-- Yeşil tema
-- Sertifika kartı
-- Tüm bilgiler:
-  * Sertifika ID
-  * Eser adı & Sanatçı
-  * Mühürleme tarihi
-  * Konum (visibility'ye göre)
-  * IP (her zaman maskeli)
-  * Cihaz bilgisi
+**✅ Found:**
+- Green theme
+- Certificate card
+- All information:
+  * Certificate ID
+  * Artwork title & Artist
+  * Sealing date
+  * Location (based on visibility)
+  * IP (always masked)
+  * Device info
   * SHA-256 & SHA-512
-  * Doğrulama linki
+  * Verification link
 
-### 4. Visibility Kontrolü
+### 4. Visibility Control
 
 **Private:**
-- Supabase'de kayıt yok
-- "Bulunamadı" gösterir
+- Not in Supabase
+- Shows "Not Found"
 
 **Masked:**
-- Konum: `*** / Türkiye`
+- Location: `*** / Turkey`
 - IP: `46.1.***.***`
-- Cihaz: `Gizli`
+- Device: `Hidden`
 
 **Public:**
-- Konum: `İstanbul, Türkiye`
-- IP: `46.1.***.***` (yine maskeli)
-- Cihaz: Gösterilir
+- Location: `Istanbul, Turkey`
+- IP: `46.1.***.***` (still masked)
+- Device: Shown
 
 ---
 
-## 🔧 Teknik Detaylar
+## 🔧 Technical Details
 
-### Supabase Sorgusu:
+### Supabase Query:
 ```javascript
 const { data, error } = await sb
   .from('manifests')
   .select('*')
-  .eq('sha512', hash)  // SHA-512 ile ara
-  .single();           // Tek sonuç bekle
+  .eq('sha512', hash)  // Search by SHA-512
+  .single();           // Expect single result
 ```
 
-### Hash Hesaplama:
+### Hash Calculation:
 ```javascript
 const buffer = await file.arrayBuffer();
 const hashBuffer = await crypto.subtle.digest('SHA-512', buffer);
@@ -176,7 +174,7 @@ const hash = Array.from(new Uint8Array(hashBuffer))
   .join('');
 ```
 
-### Scroll Animasyonu:
+### Scroll Animation:
 ```javascript
 setTimeout(() => {
   resultElement.scrollIntoView({ 
@@ -190,94 +188,94 @@ setTimeout(() => {
 
 ## 🐛 Troubleshooting
 
-### Problem: "sb is not defined" hatası
-**Çözüm:** Supabase script yüklenmemiş veya verification script'i çok erken çalışıyor. Script sırasını kontrol et.
+### Problem: "sb is not defined" error
+**Solution:** Supabase script not loaded or verification script runs too early. Check script order.
 
-### Problem: Dosya sürüklenemiyor
-**Çözüm:** 
-1. HTML'de `verifyDropZone` id'si var mı kontrol et
-2. CSS yükleniyor mu kontrol et
-3. Console'da hata var mı bak
+### Problem: File cannot be dragged
+**Solution:** 
+1. Check if `verifyDropZone` id exists in HTML
+2. Verify CSS is loading
+3. Check console for errors
 
-### Problem: Hash hesaplama çok yavaş
-**Çözüm:** Bu normal, özellikle büyük dosyalarda (100MB+). Loading spinner'ı göster.
+### Problem: Hash calculation is very slow
+**Solution:** This is normal, especially for large files (100MB+). Show loading spinner.
 
-### Problem: "Bulunamadı" diyor ama mühürledim
-**Olası Sebepler:**
-1. Dosya değiştirilmiş (tek byte bile değişse hash bozulur)
-2. Private modda mı mühürledin? (Private Supabase'e gitmez)
-3. Supabase bağlantısı çalışıyor mu?
-4. SHA-512 doğru hesaplanıyor mu?
+### Problem: Shows "Not Found" but I sealed it
+**Possible Reasons:**
+1. File has been modified (even one byte changes the hash)
+2. Sealed in private mode? (Private doesn't go to Supabase)
+3. Is Supabase connection working?
+4. Is SHA-512 calculated correctly?
 
-### Problem: Visibility bilgileri yanlış
-**Çözüm:** 
-- `record.visibility` değerini console'a yazdır
-- Veritabanındaki `visibility` kolonunu kontrol et
-- Enum değerleri: `private`, `masked`, `public`
-
----
-
-## 📱 Responsive Tasarım
-
-Mobil cihazlarda:
-- Grid 2 kolon → 1 kolon
-- Sertifika header: flex-direction column
-- Font boyutları küçülür
-- Tüm hover efektleri touch-friendly
+### Problem: Visibility information is wrong
+**Solution:** 
+- Print `record.visibility` value to console
+- Check `visibility` column in database
+- Enum values: `private`, `masked`, `public`
 
 ---
 
-## 🚀 Performans İpuçları
+## 📱 Responsive Design
 
-1. **Büyük Dosyalar:** 
-   - 100MB+ dosyalarda hash hesaplama yavaş olabilir
-   - Loading göstergesi önemli
+On mobile devices:
+- Grid 2 columns → 1 column
+- Certificate header: flex-direction column
+- Font sizes reduced
+- All hover effects are touch-friendly
+
+---
+
+## 🚀 Performance Tips
+
+1. **Large Files:** 
+   - Hash calculation can be slow for 100MB+ files
+   - Loading indicator is important
 
 2. **Supabase Rate Limit:**
-   - Free tier: 500 request/dakika
-   - Çok hızlı ardışık sorgu yapma
+   - Free tier: 500 requests/minute
+   - Don't make rapid successive queries
 
 3. **Cache:**
-   - Browser hash sonuçlarını cache'leyebilir
-   - Aynı dosya tekrar sürüklenirse instant sonuç
+   - Browser may cache hash results
+   - Same file dragged again gives instant result
 
 ---
 
-## 🎯 Kullanım Senaryoları
+## 🎯 Usage Scenarios
 
-### Senaryo 1: Sanatçı Doğrulaması
+### Scenario 1: Artist Verification
 ```
-Sanatçı: "Bu eserin orijinalini 2 ay önce mühürledim"
+Artist: "I sealed this artwork's original 2 months ago"
          ↓
-Kullanıcı: Dosyayı doğrulama bölümüne sürükler
+User: Drags file to verification section
          ↓
-Sistem: ✅ Bulundu! 15 Ekim 2024 tarihinde mühürlenmiş
+System: ✅ Found! Sealed on October 15, 2024
 ```
 
-### Senaryo 2: Sahtecilik Tespiti
+### Scenario 2: Forgery Detection
 ```
-Alıcı: "Bu eser gerçek mi?"
+Buyer: "Is this artwork genuine?"
        ↓
-Dosyayı sürükler
+Drags file
        ↓
-Sistem: ❌ Kayıt bulunamadı! Bu dosya hiç mühürlenmemiş
+System: ❌ Not Found! This file was never sealed
 ```
 
-### Senaryo 3: Versiyon Kontrolü
+### Scenario 3: Version Control
 ```
-Tasarımcı: "Bu v2.0 mı yoksa v3.0 mı?"
+Designer: "Is this v2.0 or v3.0?"
            ↓
-Her iki dosyayı sırası ile test eder
+Tests both files sequentially
            ↓
-Sistem: v2.0 → ✅ Bulundu (Mart 2024)
-        v3.0 → ❌ Bulunamadı (henüz mühürlenmemiş)
+System: v2.0 → ✅ Found (March 2024)
+        v3.0 → ❌ Not Found (not sealed yet)
 ```
 
 ---
 
-## 💡 Gelişmiş Özellikler (Opsiyonel)
+## 💡 Advanced Features (Optional)
 
-### Toplu Doğrulama:
+### Bulk Verification:
 ```javascript
 const files = Array.from(fileInput.files);
 for (const file of files) {
@@ -285,15 +283,15 @@ for (const file of files) {
 }
 ```
 
-### QR Kod Okuma:
-Kullanıcı sertifikadaki QR'ı taratır → Doğrudan doğrulama yapar
+### QR Code Reading:
+User scans QR from certificate → Direct verification
 
-### Export Raporu:
-Doğrulama sonuçlarını PDF/CSV olarak export et
+### Export Report:
+Export verification results as PDF/CSV
 
 ---
 
-**Son Güncelleme:** 12 Ocak 2025  
-**Versiyon:** 1.0  
-**Uyumluluk:** Digital Notary v4.4+  
-**Bağımlılıklar:** Supabase JS SDK v2+
+**Last Updated:** January 12, 2025  
+**Version:** 1.0  
+**Compatibility:** Digital Notary v4.4+  
+**Dependencies:** Supabase JS SDK v2+
