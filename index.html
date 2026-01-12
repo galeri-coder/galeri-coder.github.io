@@ -1,1117 +1,7 @@
-<!-- ✅ DIGITAL NOTARY — PREMIUM EDITION v4.4 (READABILITY FIXED) -->
-<div id="notaryApp" class="dn-wrap">
-  <div class="dn-head">
-    <div class="dn-badge">POART PROTOCOL</div>
-    <h1 class="dn-title">DİJİTAL NOTER</h1>
-    <p class="dn-sub">Eserinizi yükleyin, kriptografik olarak mühürleyin ve resmi sertifikanızı alın.</p>
-  </div>
+/* =========================================
+   POART NOTARY ENGINE v4.4 & SECURITY CORE
+   ========================================= */
 
-  <!-- Drag & Drop -->
-  <div class="dn-grid">
-    <div>
-      <label class="dn-label">Fotoğrafınız</label>
-      <div id="photoDrop" class="dn-drop" role="button" tabindex="0">
-        <div class="dn-drop-icon">📸</div>
-        <div class="dn-drop-title">Sürükle bırak</div>
-        <div class="dn-drop-sub">veya tıklayıp seçin</div>
-        <div id="photoMeta" class="dn-drop-meta"></div>
-      </div>
-      <input type="file" id="userPhoto" accept="image/*" class="dn-hidden-input" />
-    </div>
-
-    <div>
-      <label class="dn-label">Eser Dosyası</label>
-      <div id="artDrop" class="dn-drop" role="button" tabindex="0">
-        <div class="dn-drop-icon">🎨</div>
-        <div class="dn-drop-title">Sürükle bırak</div>
-        <div class="dn-drop-sub">veya tıklayıp seçin</div>
-        <div id="artMeta" class="dn-drop-meta"></div>
-      </div>
-      <input type="file" id="artFile" accept="image/*,.pdf,.mp4" class="dn-hidden-input" />
-    </div>
-  </div>
-
-  <!-- Quick previews -->
-  <div class="dn-grid" style="margin-top:-6px;">
-    <div class="dn-preview-card">
-      <div class="dn-preview-label">Fotoğraf Önizleme</div>
-      <img id="photoPreview" class="dn-preview-img" alt="" style="display:none;" />
-      <div id="photoPreviewEmpty" class="dn-preview-empty">Henüz seçilmedi</div>
-    </div>
-    <div class="dn-preview-card">
-      <div class="dn-preview-label">Eser Önizleme</div>
-      <img id="artPreview" class="dn-preview-img" alt="" style="display:none;" />
-      <div id="artPreviewEmpty" class="dn-preview-empty">Görsel değilse önizleme olmaz</div>
-    </div>
-  </div>
-
-  <!-- Metadata -->
-  <div class="dn-grid">
-    <div>
-      <label class="dn-label">Üretici / Sanatçı Adı</label>
-      <input type="text" id="creatorName" placeholder="Sanatçı adını girin" class="dn-input" />
-    </div>
-    <div>
-      <label class="dn-label">Eser Başlığı</label>
-      <input type="text" id="artTitle" placeholder="Eser başlığını girin" class="dn-input" />
-    </div>
-  </div>
-
-  <!-- Visibility Section -->
-  <div class="dn-visibility-section">
-    <div class="dn-visibility-header">
-      <span class="dn-visibility-icon">🔐</span>
-      <span class="dn-visibility-title">Üç Gizlilik Modu: Tam Kontrol Sizde</span>
-    </div>
-    
-    <p class="dn-visibility-intro">
-      Her duruma uygun gizlilik seviyesi seçebilirsiniz. Önemli not: 
-      <strong class="dn-highlight">Hangi modu seçerseniz seçin, IP adresiniz hiçbir zaman tam olarak görünmez</strong> 
-      — sistem her zaman maskeleyerek kaydeder (örn: <code class="dn-code">192.168.***.***</code>).
-    </p>
-
-    <div class="dn-visibility-cards">
-      <label class="dn-vis-card" data-value="private">
-        <input type="radio" name="visibility" value="private" checked />
-        <div class="dn-vis-card-inner">
-          <div class="dn-vis-icon">🔒</div>
-          <div class="dn-vis-name">Özel (Private)</div>
-          <div class="dn-vis-desc">Sadece siz görürsünüz. Henüz paylaşmak istemediğiniz projeler için ideal. Tarih damgası vurup bekletebilirsiniz.</div>
-          <div class="dn-vis-badge private">Sunucuya gitmez</div>
-        </div>
-      </label>
-
-      <label class="dn-vis-card" data-value="masked">
-        <input type="radio" name="visibility" value="masked" />
-        <div class="dn-vis-card-inner">
-          <div class="dn-vis-icon">🕶️</div>
-          <div class="dn-vis-name">Maskeli (Masked)</div>
-          <div class="dn-vis-desc">Mühür görünür, kimliğiniz gizli. Anonim kalmak isteyen sanatçılar için. Konum ve cihaz bilgileri maskelenir.</div>
-          <div class="dn-vis-badge masked">Anonim kayıt</div>
-        </div>
-      </label>
-
-      <label class="dn-vis-card" data-value="public">
-        <input type="radio" name="visibility" value="public" />
-        <div class="dn-vis-card-inner">
-          <div class="dn-vis-icon">🌍</div>
-          <div class="dn-vis-name">Herkese Açık (Public)</div>
-          <div class="dn-vis-desc">Tam şeffaflık. Tarih, şehir ve cihaz bilgileri görünür. <em>(IP yine de maskelenir)</em></div>
-          <div class="dn-vis-badge public">Tam şeffaflık</div>
-        </div>
-      </label>
-    </div>
-
-    <!-- Comparison Table -->
-    <div class="dn-table-section">
-      <div class="dn-table-header">
-        <span class="dn-table-icon">📊</span>
-        <span class="dn-table-title">Örnek için bakınız: Modlar Karşılaştırması</span>
-      </div>
-      <div class="dn-table-wrapper">
-        <table class="dn-comparison-table">
-          <thead>
-            <tr>
-              <th>Mod</th>
-              <th>Sunucu</th>
-              <th>IP</th>
-              <th>Konum</th>
-              <th>Cihaz</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <span class="dn-table-mode">🔒 Özel<br><span class="dn-table-mode-sub">(Private)</span></span>
-              </td>
-              <td>
-                <span class="dn-table-badge red">✕ Gitmez</span>
-              </td>
-              <td><span class="dn-table-na">Yok</span></td>
-              <td><span class="dn-table-na">Yok</span></td>
-              <td><span class="dn-table-na">Yok</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span class="dn-table-mode">🕶️ Maskeli<br><span class="dn-table-mode-sub">(Masked)</span></span>
-              </td>
-              <td>
-                <span class="dn-table-badge green">✓ Kaydedilir</span>
-              </td>
-              <td><code class="dn-table-code" id="tableMaskedIP">46.1.***.***</code></td>
-              <td><code class="dn-table-code" id="tableMaskedLoc">*** / Türkiye</code></td>
-              <td><span class="dn-table-text">Gizli</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span class="dn-table-mode">🌍 Herkese Açık<br><span class="dn-table-mode-sub">(Public)</span></span>
-              </td>
-              <td>
-                <span class="dn-table-badge green">✓ Kaydedilir</span>
-              </td>
-              <td><code class="dn-table-code" id="tablePublicIP">46.1.***.***</code></td>
-              <td><code class="dn-table-code" id="tablePublicLoc">İstanbul, Türkiye</code></td>
-              <td><span class="dn-table-text">Gösterilir</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="dn-privacy-guarantee">
-      <span class="dn-guarantee-icon">🛡️</span>
-      <div class="dn-guarantee-text">
-        <strong>Gizlilik Garantisi:</strong> Dosyanız sunucuya yüklenmez, hash hesaplaması tarayıcınızda yapılır. 
-        "Herkese Açık" modda bile IP adresiniz <code class="dn-code" id="liveIPPreview">***.***.***.***</code> 
-        formatında maskelenerek gösterilir — tam IP asla kaydedilmez.
-      </div>
-    </div>
-  </div>
-
-  <button id="sealBtn" class="dn-btn">
-    <span class="dn-btn-icon">🪶</span>
-    <span>MÜHÜRLE & SERTİFİKA OLUŞTUR</span>
-  </button>
-
-  <div id="statusBox" class="dn-status" style="display:none;"></div>
-
-  <!-- Certificate Preview & Download Options -->
-  <div id="previewSection" class="dn-preview-section" style="display:none;">
-    <div class="dn-preview-head">
-      <div class="dn-preview-title">📜 Sertifika Hazır</div>
-      <div class="dn-preview-actions">
-        <button id="downloadPNG" class="dn-mini-btn" type="button">🖼️ PNG</button>
-        <button id="downloadJSON" class="dn-mini-btn" type="button">💾 JSON</button>
-        <button id="downloadPDF" class="dn-mini-btn" type="button">📄 PDF</button>
-      </div>
-    </div>
-    <div id="certPreview" class="dn-cert-container"></div>
-  </div>
-</div>
-
-<canvas id="certCanvas" style="display:none;"></canvas>
-
-<style>
-  :root {
-    --dn-primary: #059669;
-    --dn-primary-dark: #047857;
-    --dn-primary-darker: #065f46;
-    --dn-primary-light: #10b981;
-    --dn-primary-lighter: #34d399;
-    --dn-accent: #6ee7b7;
-    --dn-gray-50: #f9fafb;
-    --dn-gray-100: #f3f4f6;
-    --dn-gray-200: #e5e7eb;
-    --dn-gray-300: #d1d5db;
-    --dn-gray-400: #9ca3af;
-    --dn-gray-500: #6b7280;
-    --dn-gray-600: #4b5563;
-    --dn-gray-700: #374151;
-    --dn-gray-800: #1f2937;
-    --dn-gray-900: #111827;
-  }
-
-  .dn-wrap{
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 48px 52px;
-    border-radius: 28px;
-    background: linear-gradient(165deg, 
-      #ffffff 0%, 
-      #f9fafb 25%,
-      #f3f4f6 50%,
-      #ecfdf5 75%,
-      #d1fae5 100%
-    );
-    box-shadow: 
-      0 25px 80px rgba(5, 150, 105, 0.08),
-      0 10px 40px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    border: 1px solid rgba(5, 150, 105, 0.12);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dn-wrap::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, 
-      var(--dn-primary-dark) 0%,
-      var(--dn-primary) 25%,
-      var(--dn-primary-light) 50%,
-      var(--dn-primary-lighter) 75%,
-      var(--dn-accent) 100%
-    );
-  }
-
-  .dn-head{ 
-    text-align: center; 
-    margin-bottom: 36px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid rgba(5, 150, 105, 0.1);
-  }
-
-  .dn-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: linear-gradient(135deg, var(--dn-primary-darker), var(--dn-primary-dark));
-    color: #d1fae5;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    border-radius: 100px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.25);
-  }
-
-  .dn-title{
-    font-weight: 900;
-    font-size: 38px;
-    background: linear-gradient(135deg, var(--dn-gray-800) 0%, var(--dn-primary-darker) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.03em;
-    margin: 0 0 12px 0;
-  }
-
-  .dn-sub{ 
-    margin: 0; 
-    color: var(--dn-gray-500); 
-    font-size: 15px; 
-    line-height: 1.6;
-    font-weight: 500;
-  }
-
-  .dn-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  .dn-label{ 
-    font-weight: 700; 
-    font-size: 13px; 
-    color: var(--dn-gray-700); 
-    margin-bottom: 10px; 
-    display: block;
-    letter-spacing: 0.3px;
-  }
-
-  .dn-input{
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid var(--dn-gray-200);
-    border-radius: 14px;
-    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
-    outline: none;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--dn-gray-800);
-    box-sizing: border-box;
-  }
-
-  .dn-input::placeholder {
-    color: var(--dn-gray-400);
-  }
-
-  .dn-input:hover {
-    border-color: var(--dn-gray-300);
-  }
-
-  .dn-input:focus{
-    border-color: var(--dn-primary);
-    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
-    background: #ffffff;
-  }
-
-  .dn-drop{
-    border: 2px dashed var(--dn-gray-300);
-    background: linear-gradient(145deg, #ffffff 0%, var(--dn-gray-50) 50%, rgba(236, 253, 245, 0.5) 100%);
-    border-radius: 18px;
-    padding: 24px 18px;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    min-height: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    text-align: center;
-  }
-
-  .dn-drop:hover{ 
-    border-color: var(--dn-primary-light);
-    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(5, 150, 105, 0.1);
-  }
-
-  .dn-drop.is-over{ 
-    border-color: var(--dn-primary);
-    border-style: solid;
-    background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%);
-    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.12);
-  }
-
-  .dn-drop-icon {
-    font-size: 28px;
-    margin-bottom: 4px;
-  }
-
-  .dn-drop-title{ 
-    font-weight: 800; 
-    color: var(--dn-gray-700);
-    font-size: 14px;
-  }
-
-  .dn-drop-sub{ 
-    color: var(--dn-gray-400); 
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  .dn-drop-meta{ 
-    color: var(--dn-primary-dark); 
-    font-size: 11px; 
-    font-weight: 700; 
-    margin-top: 6px;
-    padding: 4px 10px;
-    background: rgba(5, 150, 105, 0.08);
-    border-radius: 6px;
-  }
-
-  .dn-hidden-input{ display: none; }
-
-  .dn-preview-card{
-    border: 1px solid var(--dn-gray-200);
-    border-radius: 16px;
-    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
-    padding: 14px;
-    min-height: 150px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-  }
-
-  .dn-preview-label{ 
-    font-weight: 800; 
-    color: var(--dn-gray-600); 
-    font-size: 11px; 
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-
-  .dn-preview-img{ 
-    width: 100%; 
-    height: 100px; 
-    object-fit: cover; 
-    border-radius: 12px; 
-    border: 1px solid var(--dn-gray-200);
-  }
-
-  .dn-preview-empty{ 
-    color: var(--dn-gray-400); 
-    font-size: 12px; 
-    padding: 30px 0 0; 
-    text-align: center;
-    font-weight: 500;
-  }
-
-  /* Visibility Section */
-  .dn-visibility-section {
-    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
-    border: 2px solid rgba(5, 150, 105, 0.15);
-    border-radius: 20px;
-    padding: 28px;
-    margin: 24px 0;
-  }
-
-  .dn-visibility-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .dn-visibility-icon {
-    font-size: 24px;
-  }
-
-  .dn-visibility-title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--dn-primary-darker);
-  }
-
-  .dn-visibility-intro {
-    font-size: 14px;
-    color: var(--dn-gray-600);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  /* 🔥 FIXED: Better readability for highlighted text */
-  .dn-highlight {
-    color: var(--dn-gray-900);
-    font-weight: 800;
-    background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(16, 185, 129, 0.08));
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  /* 🔥 FIXED: Better contrast for code elements */
-  .dn-code {
-    background: linear-gradient(135deg, var(--dn-primary-darker), var(--dn-primary-dark));
-    color: #ffffff;
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    font-weight: 800;
-    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
-  }
-
-  .dn-visibility-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  .dn-vis-card {
-    cursor: pointer;
-    position: relative;
-  }
-
-  .dn-vis-card input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .dn-vis-card-inner {
-    background: #ffffff;
-    border: 2px solid var(--dn-gray-200);
-    border-radius: 16px;
-    padding: 20px 16px;
-    text-align: center;
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .dn-vis-card:hover .dn-vis-card-inner {
-    border-color: var(--dn-primary-light);
-    box-shadow: 0 8px 25px rgba(5, 150, 105, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .dn-vis-card input:checked + .dn-vis-card-inner {
-    border-color: var(--dn-primary);
-    background: linear-gradient(145deg, #f0fdf4 0%, #ecfdf5 100%);
-    box-shadow: 0 8px 30px rgba(5, 150, 105, 0.18);
-  }
-
-  .dn-vis-icon {
-    font-size: 32px;
-    margin-bottom: 12px;
-  }
-
-  .dn-vis-name {
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--dn-primary-dark);
-    margin-bottom: 10px;
-  }
-
-  .dn-vis-desc {
-    font-size: 12px;
-    color: var(--dn-gray-500);
-    line-height: 1.5;
-    flex-grow: 1;
-  }
-
-  .dn-vis-desc em {
-    color: var(--dn-gray-400);
-    font-style: italic;
-  }
-
-  .dn-vis-badge {
-    margin-top: 14px;
-    padding: 6px 12px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .dn-vis-badge.private {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-  }
-
-  .dn-vis-badge.masked {
-    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-    color: #3730a3;
-  }
-
-  .dn-vis-badge.public {
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-    color: var(--dn-primary-darker);
-  }
-
-  .dn-privacy-guarantee {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-    border: 1px solid var(--dn-accent);
-    border-left: 4px solid var(--dn-primary);
-    border-radius: 12px;
-    padding: 16px 20px;
-  }
-
-  /* Comparison Table Styles */
-  .dn-table-section {
-    margin-top: 24px;
-    margin-bottom: 20px;
-  }
-
-  .dn-table-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, var(--dn-primary-darker) 0%, var(--dn-primary-dark) 50%, var(--dn-primary) 100%);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.25);
-  }
-
-  .dn-table-icon {
-    font-size: 24px;
-    filter: brightness(1.2);
-  }
-
-  .dn-table-title {
-    font-size: 16px;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: 0.3px;
-  }
-
-  .dn-table-wrapper {
-    overflow-x: auto;
-    border-radius: 14px;
-    border: 1px solid var(--dn-gray-200);
-    background: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  }
-
-  .dn-comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-
-  .dn-comparison-table thead {
-    background: linear-gradient(135deg, var(--dn-gray-50) 0%, #f0fdf4 100%);
-  }
-
-  .dn-comparison-table th {
-    padding: 14px 16px;
-    text-align: left;
-    font-weight: 800;
-    color: var(--dn-gray-700);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid var(--dn-gray-200);
-  }
-
-  .dn-comparison-table td {
-    padding: 16px;
-    border-bottom: 1px solid var(--dn-gray-100);
-    vertical-align: middle;
-  }
-
-  .dn-comparison-table tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  .dn-comparison-table tbody tr:hover {
-    background: linear-gradient(135deg, rgba(240, 253, 244, 0.5), rgba(236, 253, 245, 0.5));
-  }
-
-  .dn-table-mode {
-    font-weight: 700;
-    color: var(--dn-gray-800);
-    font-size: 13px;
-    line-height: 1.4;
-  }
-
-  .dn-table-mode-sub {
-    font-weight: 600;
-    color: var(--dn-gray-500);
-    font-size: 11px;
-  }
-
-  .dn-table-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  .dn-table-badge.red {
-    background: linear-gradient(135deg, #fef2f2, #fee2e2);
-    color: #dc2626;
-  }
-
-  .dn-table-badge.green {
-    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-    color: #16a34a;
-  }
-
-  .dn-table-na {
-    color: var(--dn-gray-400);
-    font-weight: 500;
-    font-style: italic;
-  }
-
-  .dn-table-code {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .dn-table-text {
-    color: var(--dn-gray-600);
-    font-weight: 600;
-  }
-
-  .dn-guarantee-icon {
-    font-size: 24px;
-    flex-shrink: 0;
-  }
-
-  .dn-guarantee-text {
-    font-size: 13px;
-    color: var(--dn-gray-700);
-    line-height: 1.6;
-  }
-
-  .dn-guarantee-text strong {
-    color: var(--dn-primary-darker);
-  }
-
-  .dn-btn{
-    width: 100%;
-    padding: 18px 32px;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, 
-      var(--dn-primary-dark) 0%,
-      var(--dn-primary) 50%,
-      var(--dn-primary-light) 100%
-    );
-    color: white;
-    font-weight: 800;
-    font-size: 15px;
-    cursor: pointer;
-    box-shadow: 
-      0 8px 30px rgba(5, 150, 105, 0.35),
-      0 2px 8px rgba(5, 150, 105, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .dn-btn:hover{ 
-    transform: translateY(-2px);
-    box-shadow: 
-      0 12px 40px rgba(5, 150, 105, 0.4),
-      0 4px 12px rgba(5, 150, 105, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-
-  .dn-btn:active {
-    transform: translateY(0);
-  }
-
-  .dn-btn:disabled{ 
-    opacity: 0.6; 
-    cursor: not-allowed; 
-    transform: none;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.2);
-  }
-
-  .dn-btn-icon {
-    font-size: 18px;
-  }
-
-  .dn-status{ 
-    text-align: center; 
-    margin-top: 18px; 
-    color: var(--dn-gray-600); 
-    font-size: 14px; 
-    font-weight: 600;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, var(--dn-gray-50), #ffffff);
-    border-radius: 12px;
-    border: 1px solid var(--dn-gray-200);
-  }
-
-  .dn-preview-section{
-    margin-top: 28px;
-    border-radius: 20px;
-    border: 2px solid rgba(5, 150, 105, 0.2);
-    background: #ffffff;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(5, 150, 105, 0.08);
-  }
-
-  .dn-preview-head{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 22px;
-    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
-    border-bottom: 2px solid rgba(5, 150, 105, 0.15);
-  }
-
-  .dn-preview-title{ 
-    font-weight: 800; 
-    color: var(--dn-primary-darker); 
-    font-size: 16px;
-    letter-spacing: 0.3px;
-  }
-
-  .dn-preview-actions{ 
-    display: flex; 
-    gap: 10px; 
-  }
-
-  .dn-mini-btn{
-    padding: 10px 16px;
-    border-radius: 10px;
-    border: 2px solid rgba(5, 150, 105, 0.25);
-    background: #ffffff;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--dn-primary-dark);
-    transition: all 0.25s ease;
-  }
-
-  .dn-mini-btn:hover{ 
-    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-    border-color: var(--dn-primary);
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
-    transform: translateY(-1px);
-  }
-
-  .dn-cert-container{
-    padding: 36px;
-    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
-  }
-
-  /* Certificate Styles */
-  .cert-frame{
-    max-width: 800px;
-    margin: 0 auto;
-    background: linear-gradient(165deg, #ffffff 0%, var(--dn-gray-50) 50%, #f0fdf4 100%);
-    border: 3px solid var(--dn-primary-darker);
-    border-radius: 24px;
-    padding: 0;
-    overflow: hidden;
-    box-shadow: 
-      0 20px 60px rgba(0, 0, 0, 0.1),
-      0 8px 25px rgba(5, 150, 105, 0.08);
-  }
-
-  .cert-header{
-    background: linear-gradient(135deg, 
-      var(--dn-gray-800) 0%,
-      var(--dn-primary-darker) 40%,
-      var(--dn-primary-dark) 70%,
-      var(--dn-primary) 100%
-    );
-    padding: 36px 28px;
-    text-align: center;
-    position: relative;
-  }
-
-  .cert-header::after{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, 
-      var(--dn-primary-light), 
-      var(--dn-primary-lighter), 
-      var(--dn-accent), 
-      var(--dn-primary-lighter), 
-      var(--dn-primary-light)
-    );
-  }
-
-  .cert-logo{
-    font-family: 'Georgia', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--dn-accent);
-    letter-spacing: 4px;
-    margin-bottom: 14px;
-  }
-
-  .cert-title{
-    font-family: 'Georgia', serif;
-    font-size: 34px;
-    font-weight: 900;
-    color: white;
-    letter-spacing: 1px;
-    margin: 0;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .cert-subtitle{
-    font-size: 13px;
-    color: #d1fae5;
-    margin-top: 10px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-
-  .cert-body{
-    padding: 36px 32px;
-  }
-
-  .cert-photos{
-    display: grid;
-    grid-template-columns: 120px 1fr 120px;
-    gap: 24px;
-    margin-bottom: 32px;
-    align-items: center;
-  }
-
-  .cert-photo-frame{
-    width: 120px;
-    height: 120px;
-    border-radius: 14px;
-    border: 3px solid var(--dn-gray-300);
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .cert-photo-frame img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .cert-photo-label{
-    text-align: center;
-    font-size: 11px;
-    color: var(--dn-gray-500);
-    margin-top: 8px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .cert-artwork-main{
-    border-radius: 16px;
-    overflow: hidden;
-    border: 3px solid var(--dn-gray-200);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .cert-artwork-main img{
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .cert-qr{
-    width: 120px;
-    height: 120px;
-    border: 3px solid var(--dn-primary);
-    border-radius: 14px;
-    padding: 8px;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
-  }
-
-  .cert-info-panel{
-    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
-    border: 2px solid var(--dn-accent);
-    border-radius: 18px;
-    padding: 28px;
-    margin-bottom: 24px;
-    border-left: 6px solid var(--dn-primary);
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.06);
-  }
-
-  .cert-info-title{
-    font-family: 'Georgia', serif;
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--dn-primary-darker);
-    margin-bottom: 20px;
-  }
-
-  .cert-info-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 24px;
-  }
-
-  .cert-info-item{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .cert-info-label{
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--dn-primary);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .cert-info-value{
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--dn-gray-800);
-  }
-
-  .cert-hash-panel{
-    background: linear-gradient(145deg, var(--dn-gray-50) 0%, #ffffff 100%);
-    border: 2px solid var(--dn-gray-200);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-
-  .cert-hash-title{
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--dn-gray-600);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .cert-hash-value{
-    font-family: 'Courier New', monospace;
-    font-size: 11px;
-    color: var(--dn-gray-700);
-    word-break: break-all;
-    line-height: 1.7;
-    background: #ffffff;
-    padding: 14px;
-    border-radius: 10px;
-    border: 1px solid var(--dn-gray-200);
-  }
-
-  .cert-footer{
-    padding-top: 24px;
-    border-top: 2px solid var(--dn-gray-200);
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .cert-stamp{
-    width: 95px;
-    height: 95px;
-    border: 4px double var(--dn-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 900;
-    color: var(--dn-primary-dark);
-    transform: rotate(-15deg);
-    background: radial-gradient(circle, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
-  }
-
-  .cert-disclaimer{
-    font-family: 'Georgia', serif;
-    font-size: 11px;
-    line-height: 1.7;
-    color: var(--dn-gray-500);
-    text-align: center;
-    font-style: italic;
-    padding: 18px 24px;
-    background: linear-gradient(135deg, var(--dn-gray-50), #ffffff);
-    border-radius: 14px;
-    border: 1px solid var(--dn-gray-200);
-    margin-top: 24px;
-  }
-
-  .cert-local-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-    padding: 4px 12px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-weight: 800;
-    margin-left: 8px;
-  }
-
-  @media (max-width: 800px){
-    .dn-wrap{ padding: 24px 20px; }
-    .dn-grid{ grid-template-columns: 1fr; }
-    .dn-visibility-cards { grid-template-columns: 1fr; }
-    .cert-photos{ grid-template-columns: 1fr; }
-    .cert-photo-frame{ margin: 0 auto; }
-    .cert-info-grid{ grid-template-columns: 1fr; }
-    .dn-title { font-size: 28px; }
-  }
-</style>
-
-<!-- External Libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
-<script>
 (async function () {
   const SUPABASE_URL = "https://immdfdvrwqcvgmflbgdr.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE";
@@ -1139,6 +29,8 @@
   const downloadPNG = document.getElementById("downloadPNG");
   const downloadJSON = document.getElementById("downloadJSON");
   const downloadPDF = document.getElementById("downloadPDF");
+  
+  // Live Preview Elements (HTML'de varsa çalışır yoksa hata vermez)
   const liveIPPreview = document.getElementById("liveIPPreview");
   const tableMaskedIP = document.getElementById("tableMaskedIP");
   const tablePublicIP = document.getElementById("tablePublicIP");
@@ -1168,13 +60,13 @@
         const country = cachedIPData.country_name || 'Bilinmiyor';
         
         // Update IP displays
-        liveIPPreview.textContent = maskedIP;
-        if (tableMaskedIP) tableMaskedIP.textContent = maskedIP;
-        if (tablePublicIP) tablePublicIP.textContent = maskedIP;
+        if(liveIPPreview) liveIPPreview.textContent = maskedIP;
+        if(tableMaskedIP) tableMaskedIP.textContent = maskedIP;
+        if(tablePublicIP) tablePublicIP.textContent = maskedIP;
         
         // Update location displays
-        if (tableMaskedLoc) tableMaskedLoc.textContent = `*** / ${country}`;
-        if (tablePublicLoc) tablePublicLoc.textContent = `${city}, ${country}`;
+        if(tableMaskedLoc) tableMaskedLoc.textContent = `*** / ${country}`;
+        if(tablePublicLoc) tablePublicLoc.textContent = `${city}, ${country}`;
       }
     } catch (e) {
       console.warn("IP fetch failed:", e);
@@ -1185,6 +77,7 @@
 
   // UI helpers
   function setStatus(html, kind = "info") {
+    if(!statusBox) return;
     statusBox.style.display = "block";
     const color = kind === "error" ? "#dc2626" : (kind === "ok" ? "#059669" : "#4b5563");
     statusBox.innerHTML = `<span style="color:${color};">${html}</span>`;
@@ -1197,6 +90,7 @@
   }
 
   function bindDropZone(zoneEl, inputEl, metaEl, onFile) {
+    if(!zoneEl) return;
     zoneEl.addEventListener("click", () => inputEl.click());
     zoneEl.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") inputEl.click();
@@ -1332,7 +226,6 @@
     let extraInfoHTML = '';
     
     if (visibility === 'public') {
-      // Public: Show city, device (masked IP still)
       extraInfoHTML = `
         <div class="cert-info-item">
           <div class="cert-info-label">Konum</div>
@@ -1344,7 +237,6 @@
         </div>
       `;
     } else if (visibility === 'masked') {
-      // Masked: Show masked location and IP
       extraInfoHTML = `
         <div class="cert-info-item">
           <div class="cert-info-label">Konum</div>
@@ -1356,7 +248,6 @@
         </div>
       `;
     }
-    // Private: No extra info
 
     const localBadge = visibility === 'private' ? '<span class="cert-local-badge">🔒 YEREL</span>' : '';
 
@@ -1427,14 +318,12 @@
 
           <div class="cert-disclaimer">
             ${visibility === 'private' 
-              ? 'Bu sertifika yalnızca tarayıcınızda oluşturulmuştur ve sunucuya kaydedilmemiştir. Doğrulama için daha sonra "Maskeli" veya "Herkese Açık" modda yeniden mühürleyebilirsiniz.'
-              : 'This certificate is digitally notarized and cryptographically sealed for the first stage of verification on the PoArt Protocol. Please check the site for second-stage verification.'}
+              ? 'Bu sertifika yalnızca tarayıcınızda oluşturulmuştur ve sunucuya kaydedilmemiştir.'
+              : 'This certificate is digitally notarized and cryptographically sealed for the PoArt Protocol.'}
           </div>
 
           <div class="cert-footer">
-            <div class="cert-stamp">
-              ONAYLANDI<br>✓
-            </div>
+            <div class="cert-stamp">ONAYLANDI<br>✓</div>
           </div>
         </div>
       </div>
@@ -1442,180 +331,196 @@
   }
 
   // Main seal function
-  sealBtn.addEventListener("click", async () => {
-    if (!artFile.files.length) return alert("Lütfen önce bir eser seçin!");
+  if(sealBtn) {
+      sealBtn.addEventListener("click", async () => {
+        if (!artFile.files.length) return alert("Lütfen önce bir eser seçin!");
 
-    previewSection.style.display = "none";
-    certPreview.innerHTML = "";
+        previewSection.style.display = "none";
+        certPreview.innerHTML = "";
 
-    const visibility = getVisibility();
+        const visibility = getVisibility();
 
-    try {
-      sealBtn.disabled = true;
-      setStatus("⏳ İşleniyor... Hash hesaplanıyor...", "info");
-
-      const file = artFile.files[0];
-      const buffer = await file.arrayBuffer();
-
-      const sha256 = await digest(buffer, "SHA-256");
-      const sha512 = await digest(buffer, "SHA-512");
-
-      // Prepare location/IP data based on visibility
-      let ip = "***.***.***.***";
-      let loc = "Gizli";
-      
-      if (visibility !== 'private' && cachedIPData) {
-        if (visibility === 'public') {
-          // Public: Show city, country (IP still masked)
-          ip = maskIP(cachedIPData.ip);
-          loc = `${cachedIPData.city || 'Bilinmiyor'}, ${cachedIPData.country_name || 'Bilinmiyor'}`;
-        } else if (visibility === 'masked') {
-          // Masked: Everything masked
-          ip = maskIP(cachedIPData.ip);
-          loc = maskLoc(cachedIPData.city, cachedIPData.country_name);
-        }
-      }
-
-      const record = {
-        cert_id: "POART-" + Math.random().toString(36).substring(2, 10).toUpperCase(),
-        title: artTitle.value || "İsimsiz",
-        creator: creatorName.value || "Bilinmiyor",
-        sha256: sha256,
-        sha512: sha512,
-        visibility: visibility,
-        device_info: visibility === 'public' ? navigator.userAgent : "Gizli",
-        location_data: loc,
-        origin_ip: ip,
-        created_at: new Date().toISOString()
-      };
-
-      currentRecord = record;
-
-      // Convert images to data URLs
-      if (file.type.startsWith("image/")) {
-        currentArtDataUrl = await fileToDataUrl(file);
-      } else {
-        currentArtDataUrl = null;
-      }
-
-      const userFile = userPhoto.files[0];
-      if (userFile && userFile.type.startsWith("image/")) {
-        currentPhotoDataUrl = await fileToDataUrl(userFile);
-      } else {
-        currentPhotoDataUrl = null;
-      }
-
-      // Only save to Supabase if NOT private
-      let supabaseSuccess = false;
-      if (visibility !== 'private') {
-        setStatus("💾 Supabase'e kaydediliyor...", "info");
         try {
-          const { error } = await sb.from("manifests").insert([record]);
-          if (error) {
-            console.error("❌ Supabase error:", error);
-            throw error;
+          sealBtn.disabled = true;
+          setStatus("⏳ İşleniyor... Hash hesaplanıyor...", "info");
+
+          const file = artFile.files[0];
+          const buffer = await file.arrayBuffer();
+
+          const sha256 = await digest(buffer, "SHA-256");
+          const sha512 = await digest(buffer, "SHA-512");
+
+          // Prepare location/IP data based on visibility
+          let ip = "***.***.***.***";
+          let loc = "Gizli";
+          
+          if (visibility !== 'private' && cachedIPData) {
+            if (visibility === 'public') {
+              ip = maskIP(cachedIPData.ip);
+              loc = `${cachedIPData.city || 'Bilinmiyor'}, ${cachedIPData.country_name || 'Bilinmiyor'}`;
+            } else if (visibility === 'masked') {
+              ip = maskIP(cachedIPData.ip);
+              loc = maskLoc(cachedIPData.city, cachedIPData.country_name);
+            }
           }
-          console.log("✅ Supabase insert SUCCESS:", record.cert_id);
-          supabaseSuccess = true;
-        } catch (e) {
-          console.error("❌ Supabase insert FAILED:", e);
-          setStatus(`⚠️ Supabase kayıt hatası: ${e.message || e.toString()}. Sertifika yine de oluşturuluyor...`, "info");
+
+          const record = {
+            cert_id: "POART-" + Math.random().toString(36).substring(2, 10).toUpperCase(),
+            title: artTitle.value || "İsimsiz",
+            creator: creatorName.value || "Bilinmiyor",
+            sha256: sha256,
+            sha512: sha512,
+            visibility: visibility,
+            device_info: visibility === 'public' ? navigator.userAgent : "Gizli",
+            location_data: loc,
+            origin_ip: ip,
+            created_at: new Date().toISOString()
+          };
+
+          currentRecord = record;
+
+          if (file.type.startsWith("image/")) {
+            currentArtDataUrl = await fileToDataUrl(file);
+          } else {
+            currentArtDataUrl = null;
+          }
+
+          const userFile = userPhoto.files[0];
+          if (userFile && userFile.type.startsWith("image/")) {
+            currentPhotoDataUrl = await fileToDataUrl(userFile);
+          } else {
+            currentPhotoDataUrl = null;
+          }
+
+          // Only save to Supabase if NOT private
+          let supabaseSuccess = false;
+          if (visibility !== 'private') {
+            setStatus("💾 Supabase'e kaydediliyor...", "info");
+            try {
+              const { error } = await sb.from("manifests").insert([record]);
+              if (error) throw error;
+              console.log("✅ Supabase insert SUCCESS");
+              supabaseSuccess = true;
+            } catch (e) {
+              console.error("❌ Supabase insert FAILED:", e);
+              setStatus(`⚠️ Kayıt hatası, sertifika yine de üretiliyor.`, "info");
+            }
+          }
+
+          const qrDataUrl = await generateQR(`https://ilhanart.org/verify?id=${record.cert_id}`);
+          setStatus("📜 Sertifika oluşturuluyor...", "info");
+          const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
+          certPreview.innerHTML = certHTML;
+          previewSection.style.display = "block";
+
+          if (visibility === 'private') {
+            setStatus("✅ Sertifika hazır! (Özel Mod)", "ok");
+          } else if (supabaseSuccess) {
+            setStatus("✅ Sertifika hazır ve kaydedildi!", "ok");
+          } else {
+            setStatus("⚠️ Sertifika hazır (Kayıt başarısız).", "ok");
+          }
+        } catch (err) {
+          console.error("Main error:", err);
+          setStatus(`❌ Hata: ${err.message}`, "error");
+        } finally {
+          sealBtn.disabled = false;
         }
-      } else {
-        console.log("🔒 Private mode - skipping Supabase");
-      }
-
-      // Generate QR
-      const qrDataUrl = await generateQR(`https://ilhanart.org/verify?id=${record.cert_id}`);
-
-      // Generate certificate HTML
-      setStatus("📜 Sertifika oluşturuluyor...", "info");
-      const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
-      certPreview.innerHTML = certHTML;
-      previewSection.style.display = "block";
-
-      if (visibility === 'private') {
-        setStatus("✅ Sertifika hazır! 🔒 Özel mod: Sadece tarayıcınızda oluşturuldu, sunucuya kaydedilmedi.", "ok");
-      } else if (supabaseSuccess) {
-        setStatus("✅ Sertifika hazır ve Supabase'e kaydedildi! İndirme seçeneklerini kullanabilirsiniz.", "ok");
-      } else {
-        setStatus("⚠️ Sertifika hazır ama Supabase kayıt başarısız.", "ok");
-      }
-    } catch (err) {
-      console.error("Main error:", err);
-      setStatus(`❌ Hata: ${err.message}`, "error");
-    } finally {
-      sealBtn.disabled = false;
-    }
-  });
-
-  // Download PNG
-  downloadPNG.addEventListener("click", async () => {
-    if (!currentRecord) return;
-    try {
-      setStatus("🖼️ PNG oluşturuluyor...", "info");
-      const certElement = certPreview.querySelector('.cert-frame');
-      const canvas = await html2canvas(certElement, { 
-        scale: 2, 
-        useCORS: true, 
-        backgroundColor: '#ffffff',
-        logging: false
       });
-      const link = document.createElement("a");
-      link.download = `${currentRecord.cert_id}_Certificate.png`;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-      setStatus("✅ PNG indirildi!", "ok");
-    } catch (e) {
-      console.error(e);
-      setStatus("❌ PNG oluşturma hatası", "error");
-    }
-  });
+  }
 
-  // Download JSON
-  downloadJSON.addEventListener("click", () => {
-    if (!currentRecord) return;
-    const jsonData = {
-      ...currentRecord,
-      verification_url: `https://ilhanart.org/verify?id=${currentRecord.cert_id}`
-    };
-    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `${currentRecord.cert_id}_Data.json`;
-    link.click();
-    setStatus("✅ JSON indirildi!", "ok");
-  });
-
-  // Download PDF
-  downloadPDF.addEventListener("click", async () => {
-    if (!currentRecord) return;
-    try {
-      setStatus("📄 PDF oluşturuluyor...", "info");
-      const { jsPDF } = window.jspdf;
-      if (!jsPDF) throw new Error("jsPDF yüklenmedi");
-
-      const certElement = certPreview.querySelector('.cert-frame');
-      const canvas = await html2canvas(certElement, { 
-        scale: 2, 
-        useCORS: true, 
-        backgroundColor: '#ffffff' 
+  // Download Handlers
+  if(downloadPNG) {
+      downloadPNG.addEventListener("click", async () => {
+        if (!currentRecord) return;
+        try {
+          setStatus("🖼️ PNG oluşturuluyor...", "info");
+          const certElement = certPreview.querySelector('.cert-frame');
+          const canvas = await html2canvas(certElement, { 
+            scale: 2, 
+            useCORS: true, 
+            backgroundColor: '#ffffff',
+            logging: false
+          });
+          const link = document.createElement("a");
+          link.download = `${currentRecord.cert_id}_Certificate.png`;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+          setStatus("✅ PNG indirildi!", "ok");
+        } catch (e) {
+          console.error(e);
+          setStatus("❌ PNG hatası", "error");
+        }
       });
+  }
 
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      
-      const imgWidth = pdfWidth - 20;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  if(downloadJSON) {
+      downloadJSON.addEventListener("click", () => {
+        if (!currentRecord) return;
+        const jsonData = {
+          ...currentRecord,
+          verification_url: `https://ilhanart.org/verify?id=${currentRecord.cert_id}`
+        };
+        const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `${currentRecord.cert_id}_Data.json`;
+        link.click();
+        setStatus("✅ JSON indirildi!", "ok");
+      });
+  }
 
-      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
-      pdf.save(`${currentRecord.cert_id}_Certificate.pdf`);
-      setStatus("✅ PDF indirildi!", "ok");
-    } catch (e) {
-      console.error(e);
-      setStatus("❌ PDF oluşturma hatası", "error");
-    }
-  });
+  if(downloadPDF) {
+      downloadPDF.addEventListener("click", async () => {
+        if (!currentRecord) return;
+        try {
+          setStatus("📄 PDF oluşturuluyor...", "info");
+          const { jsPDF } = window.jspdf;
+          const certElement = certPreview.querySelector('.cert-frame');
+          const canvas = await html2canvas(certElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF("p", "mm", "a4");
+          const imgWidth = pdf.internal.pageSize.getWidth() - 20;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+          pdf.save(`${currentRecord.cert_id}_Certificate.pdf`);
+          setStatus("✅ PDF indirildi!", "ok");
+        } catch (e) {
+          console.error(e);
+          setStatus("❌ PDF hatası", "error");
+        }
+      });
+  }
+
 })();
-</script>
+
+
+/* -----------------------------------------------------------
+   🛡️ POART INTEGRITY CHECKER MODULE
+   Bu kod kendi kendini (app.js) okur ve hash'ler.
+   ----------------------------------------------------------- */
+async function verifySystemIntegrity() {
+    const TARGET_FILE = 'app.js'; // DO NOT CHANGE THIS
+
+    const displayElement = document.getElementById('hash-display');
+    if(!displayElement) return;
+
+    try {
+        const response = await fetch(TARGET_FILE);
+        if (!response.ok) throw new Error(`Dosya okunamadı: ${TARGET_FILE}`);
+
+        const buffer = await response.arrayBuffer();
+        const hashBuffer = await crypto.subtle.digest('SHA-512', buffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        displayElement.innerText = hashHex; 
+        console.log(`[PoArt Security] System Hash: ${hashHex}`);
+
+    } catch (error) {
+        console.error("Integrity Check Failed:", error);
+        displayElement.innerText = "⚠️ SYSTEM VERIFICATION FAILED (Localhost or Fetch Error)";
+        displayElement.style.color = "#ff3b3b";
+    }
+}
+window.addEventListener('load', verifySystemIntegrity);
