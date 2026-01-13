@@ -1,192 +1,692 @@
-<!-- ✅ DIGITAL NOTARY — PREMIUM EDITION v4.4 (READABILITY FIXED) -->
+<!-- ✅ DIGITAL NOTARY — MULTILINGUAL EDITION v4.5 (4 LANGUAGES) -->
 <div id="notaryApp" class="dn-wrap">
-  <div class="dn-head">
-    <div class="dn-badge">POART PROTOCOL</div>
-    <h1 class="dn-title">DİJİTAL NOTER</h1>
-    <p class="dn-sub">Eserinizi yükleyin, kriptografik olarak mühürleyin ve resmi sertifikanızı alın.</p>
-  </div>
 
-  <!-- Drag & Drop -->
-  <div class="dn-grid">
-    <div>
-      <label class="dn-label">Fotoğrafınız</label>
-      <div id="photoDrop" class="dn-drop" role="button" tabindex="0">
-        <div class="dn-drop-icon">📸</div>
-        <div class="dn-drop-title">Sürükle bırak</div>
-        <div class="dn-drop-sub">veya tıklayıp seçin</div>
-        <div id="photoMeta" class="dn-drop-meta"></div>
-      </div>
-      <input type="file" id="userPhoto" accept="image/*" class="dn-hidden-input" />
+  <!-- TÜRKÇE VERSİYON -->
+  <div class="lang-tr">
+    <div class="dn-head">
+      <div class="dn-badge">POART PROTOCOL</div>
+      <h1 class="dn-title">DİJİTAL NOTER</h1>
+      <p class="dn-sub">Eserinizi yükleyin, kriptografik olarak mühürleyin ve resmi sertifikanızı alın.</p>
     </div>
 
-    <div>
-      <label class="dn-label">Eser Dosyası</label>
-      <div id="artDrop" class="dn-drop" role="button" tabindex="0">
-        <div class="dn-drop-icon">🎨</div>
-        <div class="dn-drop-title">Sürükle bırak</div>
-        <div class="dn-drop-sub">veya tıklayıp seçin</div>
-        <div id="artMeta" class="dn-drop-meta"></div>
-      </div>
-      <input type="file" id="artFile" accept="image/*,.pdf,.mp4" class="dn-hidden-input" />
-    </div>
-  </div>
-
-  <!-- Quick previews -->
-  <div class="dn-grid" style="margin-top:-6px;">
-    <div class="dn-preview-card">
-      <div class="dn-preview-label">Fotoğraf Önizleme</div>
-      <img id="photoPreview" class="dn-preview-img" alt="" style="display:none;" />
-      <div id="photoPreviewEmpty" class="dn-preview-empty">Henüz seçilmedi</div>
-    </div>
-    <div class="dn-preview-card">
-      <div class="dn-preview-label">Eser Önizleme</div>
-      <img id="artPreview" class="dn-preview-img" alt="" style="display:none;" />
-      <div id="artPreviewEmpty" class="dn-preview-empty">Görsel değilse önizleme olmaz</div>
-    </div>
-  </div>
-
-  <!-- Metadata -->
-  <div class="dn-grid">
-    <div>
-      <label class="dn-label">Üretici / Sanatçı Adı</label>
-      <input type="text" id="creatorName" placeholder="Sanatçı adını girin" class="dn-input" />
-    </div>
-    <div>
-      <label class="dn-label">Eser Başlığı</label>
-      <input type="text" id="artTitle" placeholder="Eser başlığını girin" class="dn-input" />
-    </div>
-  </div>
-
-  <!-- Visibility Section -->
-  <div class="dn-visibility-section">
-    <div class="dn-visibility-header">
-      <span class="dn-visibility-icon">🔐</span>
-      <span class="dn-visibility-title">Üç Gizlilik Modu: Tam Kontrol Sizde</span>
-    </div>
-    
-    <p class="dn-visibility-intro">
-      Her duruma uygun gizlilik seviyesi seçebilirsiniz. Önemli not: 
-      <strong class="dn-highlight">Hangi modu seçerseniz seçin, IP adresiniz hiçbir zaman tam olarak görünmez</strong> 
-      — sistem her zaman maskeleyerek kaydeder (örn: <code class="dn-code">192.168.***.***</code>).
-    </p>
-
-    <div class="dn-visibility-cards">
-      <label class="dn-vis-card" data-value="private">
-        <input type="radio" name="visibility" value="private" checked />
-        <div class="dn-vis-card-inner">
-          <div class="dn-vis-icon">🔒</div>
-          <div class="dn-vis-name">Özel (Private)</div>
-          <div class="dn-vis-desc">Sadece siz görürsünüz. Henüz paylaşmak istemediğiniz projeler için ideal. Tarih damgası vurup bekletebilirsiniz.</div>
-          <div class="dn-vis-badge private">Sunucuya gitmez</div>
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">Fotoğrafınız</label>
+        <div id="photoDrop" class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">📸</div>
+          <div class="dn-drop-title">Sürükle bırak</div>
+          <div class="dn-drop-sub">veya tıklayıp seçin</div>
+          <div id="photoMeta" class="dn-drop-meta"></div>
         </div>
-      </label>
-
-      <label class="dn-vis-card" data-value="masked">
-        <input type="radio" name="visibility" value="masked" />
-        <div class="dn-vis-card-inner">
-          <div class="dn-vis-icon">🕶️</div>
-          <div class="dn-vis-name">Maskeli (Masked)</div>
-          <div class="dn-vis-desc">Mühür görünür, kimliğiniz gizli. Anonim kalmak isteyen sanatçılar için. Konum ve cihaz bilgileri maskelenir.</div>
-          <div class="dn-vis-badge masked">Anonim kayıt</div>
-        </div>
-      </label>
-
-      <label class="dn-vis-card" data-value="public">
-        <input type="radio" name="visibility" value="public" />
-        <div class="dn-vis-card-inner">
-          <div class="dn-vis-icon">🌍</div>
-          <div class="dn-vis-name">Herkese Açık (Public)</div>
-          <div class="dn-vis-desc">Tam şeffaflık. Tarih, şehir ve cihaz bilgileri görünür. <em>(IP yine de maskelenir)</em></div>
-          <div class="dn-vis-badge public">Tam şeffaflık</div>
-        </div>
-      </label>
-    </div>
-
-    <!-- Comparison Table -->
-    <div class="dn-table-section">
-      <div class="dn-table-header">
-        <span class="dn-table-icon">📊</span>
-        <span class="dn-table-title">Örnek için bakınız: Modlar Karşılaştırması</span>
+        <input type="file" id="userPhoto" accept="image/*" class="dn-hidden-input" />
       </div>
-      <div class="dn-table-wrapper">
-        <table class="dn-comparison-table">
-          <thead>
-            <tr>
-              <th>Mod</th>
-              <th>Sunucu</th>
-              <th>IP</th>
-              <th>Konum</th>
-              <th>Cihaz</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <span class="dn-table-mode">🔒 Özel<br><span class="dn-table-mode-sub">(Private)</span></span>
-              </td>
-              <td>
-                <span class="dn-table-badge red">✕ Gitmez</span>
-              </td>
-              <td><span class="dn-table-na">Yok</span></td>
-              <td><span class="dn-table-na">Yok</span></td>
-              <td><span class="dn-table-na">Yok</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span class="dn-table-mode">🕶️ Maskeli<br><span class="dn-table-mode-sub">(Masked)</span></span>
-              </td>
-              <td>
-                <span class="dn-table-badge green">✓ Kaydedilir</span>
-              </td>
-              <td><code class="dn-table-code" id="tableMaskedIP">46.1.***.***</code></td>
-              <td><code class="dn-table-code" id="tableMaskedLoc">*** / Türkiye</code></td>
-              <td><span class="dn-table-text">Gizli</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span class="dn-table-mode">🌍 Herkese Açık<br><span class="dn-table-mode-sub">(Public)</span></span>
-              </td>
-              <td>
-                <span class="dn-table-badge green">✓ Kaydedilir</span>
-              </td>
-              <td><code class="dn-table-code" id="tablePublicIP">46.1.***.***</code></td>
-              <td><code class="dn-table-code" id="tablePublicLoc">İstanbul, Türkiye</code></td>
-              <td><span class="dn-table-text">Gösterilir</span></td>
-            </tr>
-          </tbody>
-        </table>
+
+      <div>
+        <label class="dn-label">Eser Dosyası</label>
+        <div id="artDrop" class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">🎨</div>
+          <div class="dn-drop-title">Sürükle bırak</div>
+          <div class="dn-drop-sub">veya tıklayıp seçin</div>
+          <div id="artMeta" class="dn-drop-meta"></div>
+        </div>
+        <input type="file" id="artFile" accept="image/*,.pdf,.mp4" class="dn-hidden-input" />
       </div>
     </div>
 
-    <div class="dn-privacy-guarantee">
-      <span class="dn-guarantee-icon">🛡️</span>
-      <div class="dn-guarantee-text">
-        <strong>Gizlilik Garantisi:</strong> Dosyanız sunucuya yüklenmez, hash hesaplaması tarayıcınızda yapılır. 
-        "Herkese Açık" modda bile IP adresiniz <code class="dn-code" id="liveIPPreview">***.***.***.***</code> 
-        formatında maskelenerek gösterilir — tam IP asla kaydedilmez.
+    <div class="dn-grid" style="margin-top:-6px;">
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">Fotoğraf Önizleme</div>
+        <img id="photoPreview" class="dn-preview-img" alt="" style="display:none;" />
+        <div id="photoPreviewEmpty" class="dn-preview-empty">Henüz seçilmedi</div>
       </div>
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">Eser Önizleme</div>
+        <img id="artPreview" class="dn-preview-img" alt="" style="display:none;" />
+        <div id="artPreviewEmpty" class="dn-preview-empty">Görsel değilse önizleme olmaz</div>
+      </div>
+    </div>
+
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">Üretici / Sanatçı Adı</label>
+        <input type="text" id="creatorName" placeholder="Sanatçı adını girin" class="dn-input" />
+      </div>
+      <div>
+        <label class="dn-label">Eser Başlığı</label>
+        <input type="text" id="artTitle" placeholder="Eser başlığını girin" class="dn-input" />
+      </div>
+    </div>
+
+    <div class="dn-visibility-section">
+      <div class="dn-visibility-header">
+        <span class="dn-visibility-icon">🔐</span>
+        <span class="dn-visibility-title">Üç Gizlilik Modu: Tam Kontrol Sizde</span>
+      </div>
+      
+      <p class="dn-visibility-intro">
+        Her duruma uygun gizlilik seviyesi seçebilirsiniz. Önemli not: 
+        <strong class="dn-highlight">Hangi modu seçerseniz seçin, IP adresiniz hiçbir zaman tam olarak görünmez</strong> 
+        — sistem her zaman maskeleyerek kaydeder (örn: <code class="dn-code">192.168.***.***</code>).
+      </p>
+
+      <div class="dn-visibility-cards">
+        <label class="dn-vis-card" data-value="private">
+          <input type="radio" name="visibility" value="private" checked />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🔒</div>
+            <div class="dn-vis-name">Özel (Private)</div>
+            <div class="dn-vis-desc">Sadece siz görürsünüz. Henüz paylaşmak istemediğiniz projeler için ideal. Tarih damgası vurup bekletebilirsiniz.</div>
+            <div class="dn-vis-badge private">Sunucuya gitmez</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="masked">
+          <input type="radio" name="visibility" value="masked" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🕶️</div>
+            <div class="dn-vis-name">Maskeli (Masked)</div>
+            <div class="dn-vis-desc">Mühür görünür, kimliğiniz gizli. Anonim kalmak isteyen sanatçılar için. Konum ve cihaz bilgileri maskelenir.</div>
+            <div class="dn-vis-badge masked">Anonim kayıt</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="public">
+          <input type="radio" name="visibility" value="public" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🌍</div>
+            <div class="dn-vis-name">Herkese Açık (Public)</div>
+            <div class="dn-vis-desc">Tam şeffaflık. Tarih, şehir ve cihaz bilgileri görünür. <em>(IP yine de maskelenir)</em></div>
+            <div class="dn-vis-badge public">Tam şeffaflık</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="dn-table-section">
+        <div class="dn-table-header">
+          <span class="dn-table-icon">📊</span>
+          <span class="dn-table-title">Örnek için bakınız: Modlar Karşılaştırması</span>
+        </div>
+        <div class="dn-table-wrapper">
+          <table class="dn-comparison-table">
+            <thead>
+              <tr>
+                <th>Mod</th>
+                <th>Sunucu</th>
+                <th>IP</th>
+                <th>Konum</th>
+                <th>Cihaz</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="dn-table-mode">🔒 Özel<br><span class="dn-table-mode-sub">(Private)</span></span></td>
+                <td><span class="dn-table-badge red">✕ Gitmez</span></td>
+                <td><span class="dn-table-na">Yok</span></td>
+                <td><span class="dn-table-na">Yok</span></td>
+                <td><span class="dn-table-na">Yok</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🕶️ Maskeli<br><span class="dn-table-mode-sub">(Masked)</span></span></td>
+                <td><span class="dn-table-badge green">✓ Kaydedilir</span></td>
+                <td><code class="dn-table-code" id="tableMaskedIP">46.1.***.***</code></td>
+                <td><code class="dn-table-code" id="tableMaskedLoc">*** / Türkiye</code></td>
+                <td><span class="dn-table-text">Gizli</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🌍 Herkese Açık<br><span class="dn-table-mode-sub">(Public)</span></span></td>
+                <td><span class="dn-table-badge green">✓ Kaydedilir</span></td>
+                <td><code class="dn-table-code" id="tablePublicIP">46.1.***.***</code></td>
+                <td><code class="dn-table-code" id="tablePublicLoc">İstanbul, Türkiye</code></td>
+                <td><span class="dn-table-text">Gösterilir</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dn-privacy-guarantee">
+        <span class="dn-guarantee-icon">🛡️</span>
+        <div class="dn-guarantee-text">
+          <strong>Gizlilik Garantisi:</strong> Dosyanız sunucuya yüklenmez, hash hesaplaması tarayıcınızda yapılır. 
+          "Herkese Açık" modda bile IP adresiniz <code class="dn-code" id="liveIPPreview">***.***.***.***</code> 
+          formatında maskelenerek gösterilir — tam IP asla kaydedilmez.
+        </div>
+      </div>
+    </div>
+
+    <button id="sealBtn" class="dn-btn">
+      <span class="dn-btn-icon">🪶</span>
+      <span>MÜHÜRLE & SERTİFİKA OLUŞTUR</span>
+    </button>
+
+    <div id="statusBox" class="dn-status" style="display:none;"></div>
+
+    <div id="previewSection" class="dn-preview-section" style="display:none;">
+      <div class="dn-preview-head">
+        <div class="dn-preview-title">📜 Sertifika Hazır</div>
+        <div class="dn-preview-actions">
+          <button id="downloadPNG" class="dn-mini-btn" type="button">🖼️ PNG</button>
+          <button id="downloadJSON" class="dn-mini-btn" type="button">💾 JSON</button>
+          <button id="downloadPDF" class="dn-mini-btn" type="button">📄 PDF</button>
+        </div>
+      </div>
+      <div id="certPreview" class="dn-cert-container"></div>
     </div>
   </div>
 
-  <button id="sealBtn" class="dn-btn">
-    <span class="dn-btn-icon">🪶</span>
-    <span>MÜHÜRLE & SERTİFİKA OLUŞTUR</span>
-  </button>
+  <!-- İNGİLİZCE VERSİYON -->
+  <div class="lang-en">
+    <div class="dn-head">
+      <div class="dn-badge">POART PROTOCOL</div>
+      <h1 class="dn-title">DIGITAL NOTARY</h1>
+      <p class="dn-sub">Upload your artwork, seal it cryptographically, and receive your official certificate.</p>
+    </div>
 
-  <div id="statusBox" class="dn-status" style="display:none;"></div>
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">Your Photo</label>
+        <div class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">📸</div>
+          <div class="dn-drop-title">Drag & Drop</div>
+          <div class="dn-drop-sub">or click to select</div>
+          <div class="dn-drop-meta"></div>
+        </div>
+      </div>
 
-  <!-- Certificate Preview & Download Options -->
-  <div id="previewSection" class="dn-preview-section" style="display:none;">
-    <div class="dn-preview-head">
-      <div class="dn-preview-title">📜 Sertifika Hazır</div>
-      <div class="dn-preview-actions">
-        <button id="downloadPNG" class="dn-mini-btn" type="button">🖼️ PNG</button>
-        <button id="downloadJSON" class="dn-mini-btn" type="button">💾 JSON</button>
-        <button id="downloadPDF" class="dn-mini-btn" type="button">📄 PDF</button>
+      <div>
+        <label class="dn-label">Artwork File</label>
+        <div class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">🎨</div>
+          <div class="dn-drop-title">Drag & Drop</div>
+          <div class="dn-drop-sub">or click to select</div>
+          <div class="dn-drop-meta"></div>
+        </div>
       </div>
     </div>
-    <div id="certPreview" class="dn-cert-container"></div>
+
+    <div class="dn-grid" style="margin-top:-6px;">
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">Photo Preview</div>
+        <img class="dn-preview-img" alt="" style="display:none;" />
+        <div class="dn-preview-empty">Not selected yet</div>
+      </div>
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">Artwork Preview</div>
+        <img class="dn-preview-img" alt="" style="display:none;" />
+        <div class="dn-preview-empty">No preview for non-images</div>
+      </div>
+    </div>
+
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">Creator / Artist Name</label>
+        <input type="text" placeholder="Enter artist name" class="dn-input" />
+      </div>
+      <div>
+        <label class="dn-label">Artwork Title</label>
+        <input type="text" placeholder="Enter artwork title" class="dn-input" />
+      </div>
+    </div>
+
+    <div class="dn-visibility-section">
+      <div class="dn-visibility-header">
+        <span class="dn-visibility-icon">🔐</span>
+        <span class="dn-visibility-title">Three Privacy Modes: Full Control is Yours</span>
+      </div>
+      
+      <p class="dn-visibility-intro">
+        Choose the privacy level that suits your situation. Important note: 
+        <strong class="dn-highlight">Regardless of which mode you choose, your IP address is never fully visible</strong> 
+        — the system always masks it (e.g., <code class="dn-code">192.168.***.***</code>).
+      </p>
+
+      <div class="dn-visibility-cards">
+        <label class="dn-vis-card" data-value="private">
+          <input type="radio" name="visibility" value="private" checked />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🔒</div>
+            <div class="dn-vis-name">Private</div>
+            <div class="dn-vis-desc">Only you can see it. Ideal for projects you don't want to share yet. Timestamp and wait.</div>
+            <div class="dn-vis-badge private">Not sent to server</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="masked">
+          <input type="radio" name="visibility" value="masked" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🕶️</div>
+            <div class="dn-vis-name">Masked</div>
+            <div class="dn-vis-desc">Seal visible, identity hidden. For artists who want to remain anonymous. Location and device info masked.</div>
+            <div class="dn-vis-badge masked">Anonymous record</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="public">
+          <input type="radio" name="visibility" value="public" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🌍</div>
+            <div class="dn-vis-name">Public</div>
+            <div class="dn-vis-desc">Full transparency. Date, city, and device info visible. <em>(IP still masked)</em></div>
+            <div class="dn-vis-badge public">Full transparency</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="dn-table-section">
+        <div class="dn-table-header">
+          <span class="dn-table-icon">📊</span>
+          <span class="dn-table-title">Mode Comparison Table</span>
+        </div>
+        <div class="dn-table-wrapper">
+          <table class="dn-comparison-table">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Server</th>
+                <th>IP</th>
+                <th>Location</th>
+                <th>Device</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="dn-table-mode">🔒 Private</span></td>
+                <td><span class="dn-table-badge red">✕ Not sent</span></td>
+                <td><span class="dn-table-na">None</span></td>
+                <td><span class="dn-table-na">None</span></td>
+                <td><span class="dn-table-na">None</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🕶️ Masked</span></td>
+                <td><span class="dn-table-badge green">✓ Saved</span></td>
+                <td><code class="dn-table-code">46.1.***.***</code></td>
+                <td><code class="dn-table-code">*** / Turkey</code></td>
+                <td><span class="dn-table-text">Hidden</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🌍 Public</span></td>
+                <td><span class="dn-table-badge green">✓ Saved</span></td>
+                <td><code class="dn-table-code">46.1.***.***</code></td>
+                <td><code class="dn-table-code">Istanbul, Turkey</code></td>
+                <td><span class="dn-table-text">Shown</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dn-privacy-guarantee">
+        <span class="dn-guarantee-icon">🛡️</span>
+        <div class="dn-guarantee-text">
+          <strong>Privacy Guarantee:</strong> Your file is not uploaded to the server; hash calculation is done in your browser. 
+          Even in "Public" mode, your IP address is masked in <code class="dn-code">***.***.***.***</code> 
+          format — full IP is never recorded.
+        </div>
+      </div>
+    </div>
+
+    <button class="dn-btn">
+      <span class="dn-btn-icon">🪶</span>
+      <span>SEAL & CREATE CERTIFICATE</span>
+    </button>
+
+    <div class="dn-status" style="display:none;"></div>
+
+    <div class="dn-preview-section" style="display:none;">
+      <div class="dn-preview-head">
+        <div class="dn-preview-title">📜 Certificate Ready</div>
+        <div class="dn-preview-actions">
+          <button class="dn-mini-btn" type="button">🖼️ PNG</button>
+          <button class="dn-mini-btn" type="button">💾 JSON</button>
+          <button class="dn-mini-btn" type="button">📄 PDF</button>
+        </div>
+      </div>
+      <div class="dn-cert-container"></div>
+    </div>
   </div>
+
+  <!-- ÇİNCE VERSİYON -->
+  <div class="lang-zh">
+    <div class="dn-head">
+      <div class="dn-badge">POART PROTOCOL</div>
+      <h1 class="dn-title">数字公证</h1>
+      <p class="dn-sub">上传您的作品，加密密封，并获取您的官方证书。</p>
+    </div>
+
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">您的照片</label>
+        <div class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">📸</div>
+          <div class="dn-drop-title">拖放文件</div>
+          <div class="dn-drop-sub">或点击选择</div>
+          <div class="dn-drop-meta"></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="dn-label">作品文件</label>
+        <div class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">🎨</div>
+          <div class="dn-drop-title">拖放文件</div>
+          <div class="dn-drop-sub">或点击选择</div>
+          <div class="dn-drop-meta"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dn-grid" style="margin-top:-6px;">
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">照片预览</div>
+        <img class="dn-preview-img" alt="" style="display:none;" />
+        <div class="dn-preview-empty">尚未选择</div>
+      </div>
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">作品预览</div>
+        <img class="dn-preview-img" alt="" style="display:none;" />
+        <div class="dn-preview-empty">非图片无预览</div>
+      </div>
+    </div>
+
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">创作者 / 艺术家姓名</label>
+        <input type="text" placeholder="输入艺术家姓名" class="dn-input" />
+      </div>
+      <div>
+        <label class="dn-label">作品标题</label>
+        <input type="text" placeholder="输入作品标题" class="dn-input" />
+      </div>
+    </div>
+
+    <div class="dn-visibility-section">
+      <div class="dn-visibility-header">
+        <span class="dn-visibility-icon">🔐</span>
+        <span class="dn-visibility-title">三种隐私模式：完全控制权在您手中</span>
+      </div>
+      
+      <p class="dn-visibility-intro">
+        选择适合您情况的隐私级别。重要提示：
+        <strong class="dn-highlight">无论您选择哪种模式，您的IP地址永远不会完全可见</strong> 
+        — 系统始终会进行掩码处理（例如：<code class="dn-code">192.168.***.***</code>）。
+      </p>
+
+      <div class="dn-visibility-cards">
+        <label class="dn-vis-card" data-value="private">
+          <input type="radio" name="visibility" value="private" checked />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🔒</div>
+            <div class="dn-vis-name">私密</div>
+            <div class="dn-vis-desc">仅您可见。适合您暂时不想分享的项目。时间戳并等待。</div>
+            <div class="dn-vis-badge private">不发送到服务器</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="masked">
+          <input type="radio" name="visibility" value="masked" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🕶️</div>
+            <div class="dn-vis-name">掩码</div>
+            <div class="dn-vis-desc">印章可见，身份隐藏。适合希望保持匿名的艺术家。位置和设备信息已掩码。</div>
+            <div class="dn-vis-badge masked">匿名记录</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="public">
+          <input type="radio" name="visibility" value="public" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🌍</div>
+            <div class="dn-vis-name">公开</div>
+            <div class="dn-vis-desc">完全透明。日期、城市和设备信息可见。<em>（IP仍然掩码）</em></div>
+            <div class="dn-vis-badge public">完全透明</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="dn-table-section">
+        <div class="dn-table-header">
+          <span class="dn-table-icon">📊</span>
+          <span class="dn-table-title">模式对比表</span>
+        </div>
+        <div class="dn-table-wrapper">
+          <table class="dn-comparison-table">
+            <thead>
+              <tr>
+                <th>模式</th>
+                <th>服务器</th>
+                <th>IP</th>
+                <th>位置</th>
+                <th>设备</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="dn-table-mode">🔒 私密</span></td>
+                <td><span class="dn-table-badge red">✕ 不发送</span></td>
+                <td><span class="dn-table-na">无</span></td>
+                <td><span class="dn-table-na">无</span></td>
+                <td><span class="dn-table-na">无</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🕶️ 掩码</span></td>
+                <td><span class="dn-table-badge green">✓ 已保存</span></td>
+                <td><code class="dn-table-code">46.1.***.***</code></td>
+                <td><code class="dn-table-code">*** / 土耳其</code></td>
+                <td><span class="dn-table-text">隐藏</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🌍 公开</span></td>
+                <td><span class="dn-table-badge green">✓ 已保存</span></td>
+                <td><code class="dn-table-code">46.1.***.***</code></td>
+                <td><code class="dn-table-code">伊斯坦布尔, 土耳其</code></td>
+                <td><span class="dn-table-text">显示</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dn-privacy-guarantee">
+        <span class="dn-guarantee-icon">🛡️</span>
+        <div class="dn-guarantee-text">
+          <strong>隐私保证：</strong>您的文件不会上传到服务器；哈希计算在您的浏览器中完成。
+          即使在"公开"模式下，您的IP地址也以 <code class="dn-code">***.***.***.***</code> 
+          格式掩码 — 完整IP永远不会被记录。
+        </div>
+      </div>
+    </div>
+
+    <button class="dn-btn">
+      <span class="dn-btn-icon">🪶</span>
+      <span>密封并创建证书</span>
+    </button>
+
+    <div class="dn-status" style="display:none;"></div>
+
+    <div class="dn-preview-section" style="display:none;">
+      <div class="dn-preview-head">
+        <div class="dn-preview-title">📜 证书已准备好</div>
+        <div class="dn-preview-actions">
+          <button class="dn-mini-btn" type="button">🖼️ PNG</button>
+          <button class="dn-mini-btn" type="button">💾 JSON</button>
+          <button class="dn-mini-btn" type="button">📄 PDF</button>
+        </div>
+      </div>
+      <div class="dn-cert-container"></div>
+    </div>
+  </div>
+
+  <!-- İSPANYOLCA VERSİYON -->
+  <div class="lang-es">
+    <div class="dn-head">
+      <div class="dn-badge">POART PROTOCOL</div>
+      <h1 class="dn-title">NOTARIO DIGITAL</h1>
+      <p class="dn-sub">Sube su obra de arte, selle criptográficamente y reciba su certificado oficial.</p>
+    </div>
+
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">Su Foto</label>
+        <div class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">📸</div>
+          <div class="dn-drop-title">Arrastrar y soltar</div>
+          <div class="dn-drop-sub">o haga clic para seleccionar</div>
+          <div class="dn-drop-meta"></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="dn-label">Archivo de Obra</label>
+        <div class="dn-drop" role="button" tabindex="0">
+          <div class="dn-drop-icon">🎨</div>
+          <div class="dn-drop-title">Arrastrar y soltar</div>
+          <div class="dn-drop-sub">o haga clic para seleccionar</div>
+          <div class="dn-drop-meta"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dn-grid" style="margin-top:-6px;">
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">Vista previa de foto</div>
+        <img class="dn-preview-img" alt="" style="display:none;" />
+        <div class="dn-preview-empty">Aún no seleccionado</div>
+      </div>
+      <div class="dn-preview-card">
+        <div class="dn-preview-label">Vista previa de obra</div>
+        <img class="dn-preview-img" alt="" style="display:none;" />
+        <div class="dn-preview-empty">Sin vista previa para no imágenes</div>
+      </div>
+    </div>
+
+    <div class="dn-grid">
+      <div>
+        <label class="dn-label">Creador / Nombre del Artista</label>
+        <input type="text" placeholder="Ingrese el nombre del artista" class="dn-input" />
+      </div>
+      <div>
+        <label class="dn-label">Título de la Obra</label>
+        <input type="text" placeholder="Ingrese el título de la obra" class="dn-input" />
+      </div>
+    </div>
+
+    <div class="dn-visibility-section">
+      <div class="dn-visibility-header">
+        <span class="dn-visibility-icon">🔐</span>
+        <span class="dn-visibility-title">Tres Modos de Privacidad: El Control Total es Suyo</span>
+      </div>
+      
+      <p class="dn-visibility-intro">
+        Elija el nivel de privacidad que se adapte a su situación. Nota importante: 
+        <strong class="dn-highlight">Independientemente del modo que elija, su dirección IP nunca es completamente visible</strong> 
+        — el sistema siempre la enmascara (ej.: <code class="dn-code">192.168.***.***</code>).
+      </p>
+
+      <div class="dn-visibility-cards">
+        <label class="dn-vis-card" data-value="private">
+          <input type="radio" name="visibility" value="private" checked />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🔒</div>
+            <div class="dn-vis-name">Privado</div>
+            <div class="dn-vis-desc">Solo usted puede verlo. Ideal para proyectos que aún no desea compartir. Marca de tiempo y espera.</div>
+            <div class="dn-vis-badge private">No se envía al servidor</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="masked">
+          <input type="radio" name="visibility" value="masked" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🕶️</div>
+            <div class="dn-vis-name">Enmascarado</div>
+            <div class="dn-vis-desc">Sello visible, identidad oculta. Para artistas que desean permanecer anónimos. Información de ubicación y dispositivo enmascarada.</div>
+            <div class="dn-vis-badge masked">Registro anónimo</div>
+          </div>
+        </label>
+
+        <label class="dn-vis-card" data-value="public">
+          <input type="radio" name="visibility" value="public" />
+          <div class="dn-vis-card-inner">
+            <div class="dn-vis-icon">🌍</div>
+            <div class="dn-vis-name">Público</div>
+            <div class="dn-vis-desc">Transparencia total. Fecha, ciudad e información del dispositivo visibles. <em>(IP aún enmascarada)</em></div>
+            <div class="dn-vis-badge public">Transparencia total</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="dn-table-section">
+        <div class="dn-table-header">
+          <span class="dn-table-icon">📊</span>
+          <span class="dn-table-title">Tabla de Comparación de Modos</span>
+        </div>
+        <div class="dn-table-wrapper">
+          <table class="dn-comparison-table">
+            <thead>
+              <tr>
+                <th>Modo</th>
+                <th>Servidor</th>
+                <th>IP</th>
+                <th>Ubicación</th>
+                <th>Dispositivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="dn-table-mode">🔒 Privado</span></td>
+                <td><span class="dn-table-badge red">✕ No enviado</span></td>
+                <td><span class="dn-table-na">Ninguno</span></td>
+                <td><span class="dn-table-na">Ninguno</span></td>
+                <td><span class="dn-table-na">Ninguno</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🕶️ Enmascarado</span></td>
+                <td><span class="dn-table-badge green">✓ Guardado</span></td>
+                <td><code class="dn-table-code">46.1.***.***</code></td>
+                <td><code class="dn-table-code">*** / Turquía</code></td>
+                <td><span class="dn-table-text">Oculto</span></td>
+              </tr>
+              <tr>
+                <td><span class="dn-table-mode">🌍 Público</span></td>
+                <td><span class="dn-table-badge green">✓ Guardado</span></td>
+                <td><code class="dn-table-code">46.1.***.***</code></td>
+                <td><code class="dn-table-code">Estambul, Turquía</code></td>
+                <td><span class="dn-table-text">Mostrado</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dn-privacy-guarantee">
+        <span class="dn-guarantee-icon">🛡️</span>
+        <div class="dn-guarantee-text">
+          <strong>Garantía de Privacidad:</strong> Su archivo no se carga en el servidor; el cálculo de hash se realiza en su navegador. 
+          Incluso en modo "Público", su dirección IP se enmascara en formato <code class="dn-code">***.***.***.***</code> 
+          — la IP completa nunca se registra.
+        </div>
+      </div>
+    </div>
+
+    <button class="dn-btn">
+      <span class="dn-btn-icon">🪶</span>
+      <span>SELLAR Y CREAR CERTIFICADO</span>
+    </button>
+
+    <div class="dn-status" style="display:none;"></div>
+
+    <div class="dn-preview-section" style="display:none;">
+      <div class="dn-preview-head">
+        <div class="dn-preview-title">📜 Certificado Listo</div>
+        <div class="dn-preview-actions">
+          <button class="dn-mini-btn" type="button">🖼️ PNG</button>
+          <button class="dn-mini-btn" type="button">💾 JSON</button>
+          <button class="dn-mini-btn" type="button">📄 PDF</button>
+        </div>
+      </div>
+      <div class="dn-cert-container"></div>
+    </div>
+  </div>
+
 </div>
 
 <canvas id="certCanvas" style="display:none;"></canvas>
@@ -426,7 +926,6 @@
     font-weight: 500;
   }
 
-  /* Visibility Section */
   .dn-visibility-section {
     background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
     border: 2px solid rgba(5, 150, 105, 0.15);
@@ -459,7 +958,6 @@
     margin-bottom: 20px;
   }
 
-  /* 🔥 FIXED: Better readability for highlighted text */
   .dn-highlight {
     color: var(--dn-gray-900);
     font-weight: 800;
@@ -468,7 +966,6 @@
     border-radius: 4px;
   }
 
-  /* 🔥 FIXED: Better contrast for code elements */
   .dn-code {
     background: linear-gradient(135deg, var(--dn-primary-darker), var(--dn-primary-dark));
     color: #ffffff;
@@ -582,7 +1079,6 @@
     padding: 16px 20px;
   }
 
-  /* Comparison Table Styles */
   .dn-table-section {
     margin-top: 24px;
     margin-bottom: 20px;
@@ -840,7 +1336,6 @@
     background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
   }
 
-  /* Certificate Styles */
   .cert-frame{
     max-width: 800px;
     margin: 0 auto;
@@ -1104,7 +1599,6 @@
     .dn-title { font-size: 28px; }
   }
 </style>
-
 <!-- External Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
@@ -1113,27 +1607,91 @@
 
 <script>
 (async function () {
+  const MESSAGES = {
+    tr: {
+      selectArtFirst: "Lütfen önce bir eser seçin!", onlyImages: "Sadece görsel kabul edilir",
+      noPreview: "Görsel değilse önizleme yok", processing: "⏳ İşleniyor... Hash hesaplanıyor...",
+      savingSupabase: "💾 Supabase'e kaydediliyor...", creatingCert: "📜 Sertifika oluşturuluyor...",
+      certReadyPrivate: "✅ Sertifika hazır! 🔒 Özel mod: Sadece tarayıcınızda oluşturuldu.",
+      certReadySupabase: "✅ Sertifika hazır ve Supabase'e kaydedildi!", error: "❌ Hata: {error}",
+      pngDownloaded: "✅ PNG indirildi!", jsonDownloaded: "✅ JSON indirildi!", pdfDownloaded: "✅ PDF indirildi!",
+      certTitle: "DİJİTAL NOTER SERTİFİKASI", certSubtitle: "İlhan Art Gallery tarafından verilmiştir",
+      artworkName: "Eser Adı", artistName: "Sanatçı", certId: "Sertifika ID", date: "Tarih",
+      unknown: "Bilinmiyor", untitled: "İsimsiz", hidden: "Gizli", privateMode: "🔒 YEREL",
+      disclaimerPrivate: "Bu sertifika yalnızca tarayıcınızda oluşturulmuştur.",
+      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
+    },
+    en: {
+      selectArtFirst: "Please select an artwork first!", onlyImages: "Only images accepted",
+      noPreview: "No preview for non-images", processing: "⏳ Processing...",
+      savingSupabase: "💾 Saving...", creatingCert: "📜 Creating certificate...",
+      certReadyPrivate: "✅ Certificate ready! 🔒 Private mode.", certReadySupabase: "✅ Certificate ready!",
+      error: "❌ Error: {error}", pngDownloaded: "✅ PNG downloaded!", jsonDownloaded: "✅ JSON downloaded!",
+      pdfDownloaded: "✅ PDF downloaded!", certTitle: "DIGITAL NOTARY CERTIFICATE",
+      certSubtitle: "Issued by İlhan Art Gallery", artworkName: "Artwork Name", artistName: "Artist",
+      certId: "Certificate ID", date: "Date", unknown: "Unknown", untitled: "Untitled", hidden: "Hidden",
+      privateMode: "🔒 LOCAL", disclaimerPrivate: "This certificate was created only in your browser.",
+      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
+    },
+    zh: {
+      selectArtFirst: "请先选择一件作品！", onlyImages: "仅接受图片", noPreview: "非图片无预览",
+      processing: "⏳ 处理中...", savingSupabase: "💾 保存中...", creatingCert: "📜 创建证书...",
+      certReadyPrivate: "✅ 证书已准备好！🔒 私密模式", certReadySupabase: "✅ 证书已准备好！",
+      error: "❌ 错误：{error}", pngDownloaded: "✅ PNG 已下载！", jsonDownloaded: "✅ JSON 已下载！",
+      pdfDownloaded: "✅ PDF 已下载！", certTitle: "数字公证证书", certSubtitle: "由伊尔汗艺术画廊颁发",
+      artworkName: "作品名称", artistName: "艺术家", certId: "证书编号", date: "日期",
+      unknown: "未知", untitled: "无标题", hidden: "隐藏", privateMode: "🔒 本地",
+      disclaimerPrivate: "此证书仅在您的浏览器中创建。",
+      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry.."
+    },
+    es: {
+      selectArtFirst: "¡Seleccione una obra primero!", onlyImages: "Solo imágenes", noPreview: "Sin vista previa",
+      processing: "⏳ Procesando...", savingSupabase: "💾 Guardando...", creatingCert: "📜 Creando certificado...",
+      certReadyPrivate: "✅ ¡Certificado listo! 🔒 Modo privado", certReadySupabase: "✅ ¡Certificado listo!",
+      error: "❌ Error: {error}", pngDownloaded: "✅ ¡PNG descargado!", jsonDownloaded: "✅ ¡JSON descargado!",
+      pdfDownloaded: "✅ ¡PDF descargado!", certTitle: "CERTIFICADO DE NOTARIO DIGITAL",
+      certSubtitle: "Emitido por İlhan Art Gallery", artworkName: "Nombre de la Obra", artistName: "Artista",
+      certId: "ID del Certificado", date: "Fecha", unknown: "Desconocido", untitled: "Sin título",
+      hidden: "Oculto", privateMode: "🔒 LOCAL", disclaimerPrivate: "Este certificado fue creado solo en su navegador.",
+      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
+    }
+  };
+
+  function getCurrentLang() {
+    const htmlLang = document.documentElement.lang;
+    if (htmlLang.startsWith('tr')) return 'tr';
+    if (htmlLang.startsWith('en')) return 'en';
+    if (htmlLang.startsWith('zh')) return 'zh';
+    if (htmlLang.startsWith('es')) return 'es';
+    return 'tr';
+  }
+
+  function t(key, replacements = {}) {
+    const lang = getCurrentLang();
+    let msg = MESSAGES[lang][key] || MESSAGES.tr[key] || key;
+    Object.keys(replacements).forEach(k => { msg = msg.replace(`{${k}}`, replacements[k]); });
+    return msg;
+  }
+
   const SUPABASE_URL = "https://immdfdvrwqcvgmflbgdr.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE";
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+  // ✅ AYNI ID'LERİ KULLAN (suffix yok)
   const sealBtn = document.getElementById("sealBtn");
   const artFile = document.getElementById("artFile");
   const userPhoto = document.getElementById("userPhoto");
   const creatorName = document.getElementById("creatorName");
   const artTitle = document.getElementById("artTitle");
   const statusBox = document.getElementById("statusBox");
-
   const artDrop = document.getElementById("artDrop");
   const photoDrop = document.getElementById("photoDrop");
   const artMeta = document.getElementById("artMeta");
   const photoMeta = document.getElementById("photoMeta");
-
   const artPreview = document.getElementById("artPreview");
   const photoPreview = document.getElementById("photoPreview");
   const artPreviewEmpty = document.getElementById("artPreviewEmpty");
   const photoPreviewEmpty = document.getElementById("photoPreviewEmpty");
-
   const previewSection = document.getElementById("previewSection");
   const certPreview = document.getElementById("certPreview");
   const downloadPNG = document.getElementById("downloadPNG");
@@ -1145,61 +1703,61 @@
   const tableMaskedLoc = document.getElementById("tableMaskedLoc");
   const tablePublicLoc = document.getElementById("tablePublicLoc");
 
-  let currentRecord = null;
-  let currentArtDataUrl = null;
-  let currentPhotoDataUrl = null;
-  let cachedIPData = null;
+  let currentRecord = null, currentArtDataUrl = null, currentPhotoDataUrl = null, cachedIPData = null;
 
-  // Get selected visibility
   function getVisibility() {
     const checked = document.querySelector('input[name="visibility"]:checked');
     return checked ? checked.value : 'private';
   }
 
-  // Fetch and cache IP on load
   async function fetchIPData() {
     try {
       const res = await fetch("https://ipapi.co/json/");
       cachedIPData = await res.json();
-      // Update live preview and table
-      if (cachedIPData && cachedIPData.ip) {
+      if (cachedIPData?.ip) {
         const maskedIP = maskIP(cachedIPData.ip);
-        const city = cachedIPData.city || 'Bilinmiyor';
-        const country = cachedIPData.country_name || 'Bilinmiyor';
-        
-        // Update IP displays
-        liveIPPreview.textContent = maskedIP;
+        const city = cachedIPData.city || 'Unknown', country = cachedIPData.country_name || 'Unknown';
+        if (liveIPPreview) liveIPPreview.textContent = maskedIP;
         if (tableMaskedIP) tableMaskedIP.textContent = maskedIP;
         if (tablePublicIP) tablePublicIP.textContent = maskedIP;
-        
-        // Update location displays
         if (tableMaskedLoc) tableMaskedLoc.textContent = `*** / ${country}`;
         if (tablePublicLoc) tablePublicLoc.textContent = `${city}, ${country}`;
       }
-    } catch (e) {
-      console.warn("IP fetch failed:", e);
-      cachedIPData = null;
-    }
+    } catch (e) { console.warn('IP fetch failed:', e); cachedIPData = null; }
   }
   fetchIPData();
 
-  // UI helpers
   function setStatus(html, kind = "info") {
+    if (!statusBox) return;
     statusBox.style.display = "block";
     const color = kind === "error" ? "#dc2626" : (kind === "ok" ? "#059669" : "#4b5563");
     statusBox.innerHTML = `<span style="color:${color};">${html}</span>`;
   }
 
   function setDropMeta(el, file) {
-    if (!file) { el.textContent = ""; return; }
+    if (!el || !file) { if (el) el.textContent = ""; return; }
     const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
     el.textContent = `${file.name} • ${sizeMb} MB`;
   }
 
   function bindDropZone(zoneEl, inputEl, metaEl, onFile) {
-    zoneEl.addEventListener("click", () => inputEl.click());
+    if (!zoneEl || !inputEl) {
+      console.warn('❌ bindDropZone: element not found', {zoneEl, inputEl});
+      return;
+    }
+    
+    console.log('✅ Binding drop zone:', zoneEl.id || zoneEl.className);
+    
+    zoneEl.addEventListener("click", () => {
+      console.log('🖱️ Drop zone clicked');
+      inputEl.click();
+    });
+    
     zoneEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") inputEl.click();
+      if (e.key === "Enter" || e.key === " ") {
+        console.log('⌨️ Keyboard trigger');
+        inputEl.click();
+      }
     });
 
     ["dragenter","dragover"].forEach(evt => {
@@ -1209,6 +1767,7 @@
         zoneEl.classList.add("is-over");
       });
     });
+    
     ["dragleave","drop"].forEach(evt => {
       zoneEl.addEventListener(evt, (e) => {
         e.preventDefault();
@@ -1216,26 +1775,28 @@
         zoneEl.classList.remove("is-over");
       });
     });
+    
     zoneEl.addEventListener("drop", (e) => {
-      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      const file = e.dataTransfer.files?.[0];
       if (!file) return;
+      console.log('📁 File dropped:', file.name);
       inputEl.files = e.dataTransfer.files;
       setDropMeta(metaEl, file);
       onFile(file);
     });
 
     inputEl.addEventListener("change", () => {
-      const file = inputEl.files && inputEl.files[0];
+      const file = inputEl.files?.[0];
+      console.log('📁 File selected:', file?.name);
       setDropMeta(metaEl, file);
-      onFile(file);
+      if (file) onFile(file);
     });
   }
 
-  bindDropZone(photoDrop, userPhoto, photoMeta, async (file) => {
-    if (!file) return;
+  bindDropZone(photoDrop, userPhoto, photoMeta, (file) => {
     if (!file.type.startsWith("image/")) {
       photoPreview.style.display = "none";
-      photoPreviewEmpty.textContent = "Sadece görsel kabul edilir";
+      photoPreviewEmpty.textContent = t('onlyImages');
       photoPreviewEmpty.style.display = "block";
       return;
     }
@@ -1245,8 +1806,7 @@
     photoPreviewEmpty.style.display = "none";
   });
 
-  bindDropZone(artDrop, artFile, artMeta, async (file) => {
-    if (!file) return;
+  bindDropZone(artDrop, artFile, artMeta, (file) => {
     if (file.type.startsWith("image/")) {
       const url = URL.createObjectURL(file);
       artPreview.src = url;
@@ -1254,26 +1814,22 @@
       artPreviewEmpty.style.display = "none";
     } else {
       artPreview.style.display = "none";
-      artPreviewEmpty.textContent = "Görsel değilse önizleme yok";
+      artPreviewEmpty.textContent = t('noPreview');
       artPreviewEmpty.style.display = "block";
     }
   });
 
-  // Crypto
-  async function digest(buffer, algo) {
-    const hashBuffer = await crypto.subtle.digest(algo, buffer);
-    return Array.from(new Uint8Array(hashBuffer)).map((b) => b.toString(16).padStart(2, "0")).join("");
-  }
-
   function maskIP(ip) {
     if (!ip) return "***.***.***.***";
     const parts = ip.split('.');
-    if (parts.length === 4) return `${parts[0]}.${parts[1]}.***.***`;
-    return ip.substring(0, 6) + "****";
+    return parts.length === 4 ? `${parts[0]}.${parts[1]}.***.***` : ip.substring(0, 6) + "****";
   }
 
-  function maskLoc(city, country) {
-    return `*** / ${country || "Bilinmiyor"}`;
+  function maskLoc(city, country) { return `*** / ${country || 'Unknown'}`; }
+
+  async function digest(buffer, algo) {
+    const hashBuffer = await crypto.subtle.digest(algo, buffer);
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,"0")).join("");
   }
 
   async function fileToDataUrl(file) {
@@ -1288,334 +1844,157 @@
   function formatDate(iso) {
     try {
       const d = new Date(iso);
-      return d.toLocaleDateString('tr-TR') + ' ' + d.toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit'});
-    } catch {
-      return iso;
-    }
+      const lang = getCurrentLang();
+      const locale = lang === 'tr' ? 'tr-TR' : lang === 'zh' ? 'zh-CN' : lang === 'es' ? 'es-ES' : 'en-US';
+      return d.toLocaleDateString(locale) + ' ' + d.toLocaleTimeString(locale, {hour:'2-digit', minute:'2-digit'});
+    } catch { return iso; }
   }
 
-  // Generate QR
   async function generateQR(text) {
     const canvas = document.createElement("canvas");
-    await QRCode.toCanvas(canvas, text, {
-      width: 110,
-      color: { dark: "#065f46", light: "#ffffff" }
-    });
+    await QRCode.toCanvas(canvas, text, { width: 110, color: { dark: "#065f46", light: "#ffffff" } });
     return canvas.toDataURL("image/png");
   }
 
-  // Generate Certificate HTML
   async function generateCertHTML(record, artDataUrl, photoDataUrl, qrDataUrl, visibility) {
-    const photoHTML = photoDataUrl ? `
-      <div>
-        <div class="cert-photo-frame">
-          <img src="${photoDataUrl}" alt="User">
-        </div>
-        <div class="cert-photo-label">Fotoğraf</div>
-      </div>
-    ` : '';
-
-    const artHTML = artDataUrl ? `
-      <div class="cert-artwork-main">
-        <img src="${artDataUrl}" alt="Artwork">
-      </div>
-    ` : `
-      <div class="cert-artwork-main" style="min-height: 200px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f9fafb, #f0fdf4);">
-        <div style="text-align: center; color: #6b7280;">
-          <div style="font-size: 48px; margin-bottom: 8px;">📄</div>
-          <div style="font-weight: 700;">${record.title}</div>
-        </div>
-      </div>
-    `;
-
-    // Visibility-based info display
-    let extraInfoHTML = '';
+    const photoHTML = photoDataUrl ? `<div><div class="cert-photo-frame"><img src="${photoDataUrl}" alt="User"></div><div class="cert-photo-label">${t('artistName')}</div></div>` : '';
+    const artHTML = artDataUrl ? `<div class="cert-artwork-main"><img src="${artDataUrl}" alt="Artwork"></div>` : 
+      `<div class="cert-artwork-main" style="min-height:200px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f9fafb,#f0fdf4);">
+        <div style="text-align:center;color:#6b7280;"><div style="font-size:48px;margin-bottom:8px;">📄</div><div style="font-weight:700;">${record.title}</div></div></div>`;
     
-    if (visibility === 'public') {
-      // Public: Show city, device (masked IP still)
-      extraInfoHTML = `
-        <div class="cert-info-item">
-          <div class="cert-info-label">Konum</div>
-          <div class="cert-info-value">${record.location_data || 'Belirtilmedi'}</div>
-        </div>
-        <div class="cert-info-item">
-          <div class="cert-info-label">IP (Maskeli)</div>
-          <div class="cert-info-value">${record.origin_ip}</div>
-        </div>
-      `;
-    } else if (visibility === 'masked') {
-      // Masked: Show masked location and IP
-      extraInfoHTML = `
-        <div class="cert-info-item">
-          <div class="cert-info-label">Konum</div>
-          <div class="cert-info-value">${record.location_data}</div>
-        </div>
-        <div class="cert-info-item">
-          <div class="cert-info-label">IP (Maskeli)</div>
-          <div class="cert-info-value">${record.origin_ip}</div>
-        </div>
-      `;
+    let extraInfoHTML = '';
+    if (visibility === 'public' || visibility === 'masked') {
+      extraInfoHTML = `<div class="cert-info-item"><div class="cert-info-label">Konum</div><div class="cert-info-value">${record.location_data}</div></div>
+        <div class="cert-info-item"><div class="cert-info-label">IP</div><div class="cert-info-value">${record.origin_ip}</div></div>`;
     }
-    // Private: No extra info
 
-    const localBadge = visibility === 'private' ? '<span class="cert-local-badge">🔒 YEREL</span>' : '';
+    const localBadge = visibility === 'private' ? `<span class="cert-local-badge">${t('privateMode')}</span>` : '';
+    const lang = getCurrentLang();
+    const verifiedText = lang === 'tr' ? 'ONAYLANDI' : lang === 'zh' ? '已验证' : lang === 'es' ? 'VERIFICADO' : 'VERIFIED';
 
-    const visibilityLabels = {
-      'private': 'Özel (Private)',
-      'masked': 'Maskeli (Masked)',
-      'public': 'Herkese Açık (Public)'
-    };
-
-    return `
-      <div class="cert-frame">
-        <div class="cert-header">
-          <div class="cert-logo">POART PROTOCOL</div>
-          <h2 class="cert-title">DİJİTAL NOTER SERTİFİKASI ${localBadge}</h2>
-          <div class="cert-subtitle">İlhan Art Gallery tarafından verilmiştir</div>
-        </div>
-
-        <div class="cert-body">
-          <div class="cert-photos">
-            ${photoHTML}
-            ${artHTML}
-            <div>
-              <div class="cert-qr">
-                <img src="${qrDataUrl}" style="width: 100%; height: auto;" alt="QR">
-              </div>
-              <div class="cert-photo-label">Doğrula</div>
-            </div>
-          </div>
-
-          <div class="cert-info-panel">
-            <div class="cert-info-title">Sertifika Bilgileri</div>
-            <div class="cert-info-grid">
-              <div class="cert-info-item">
-                <div class="cert-info-label">Eser Adı</div>
-                <div class="cert-info-value">${record.title}</div>
-              </div>
-              <div class="cert-info-item">
-                <div class="cert-info-label">Sanatçı</div>
-                <div class="cert-info-value">${record.creator}</div>
-              </div>
-              <div class="cert-info-item">
-                <div class="cert-info-label">Sertifika ID</div>
-                <div class="cert-info-value">${record.cert_id}</div>
-              </div>
-              <div class="cert-info-item">
-                <div class="cert-info-label">Tarih</div>
-                <div class="cert-info-value">${formatDate(record.created_at)}</div>
-              </div>
-              <div class="cert-info-item">
-                <div class="cert-info-label">Görünürlük</div>
-                <div class="cert-info-value">${visibilityLabels[visibility] || visibility}</div>
-              </div>
-              ${extraInfoHTML}
-            </div>
-          </div>
-
-          <div class="cert-hash-panel">
-            <div class="cert-hash-title">🔐 Kriptografik Parmak İzleri</div>
-            <div style="margin-bottom: 12px;">
-              <div style="font-size: 10px; font-weight: 800; color: #6b7280; margin-bottom: 5px;">SHA-256:</div>
-              <div class="cert-hash-value">${record.sha256}</div>
-            </div>
-            <div>
-              <div style="font-size: 10px; font-weight: 800; color: #6b7280; margin-bottom: 5px;">SHA-512:</div>
-              <div class="cert-hash-value">${record.sha512}</div>
-            </div>
-          </div>
-
-          <div class="cert-disclaimer">
-            ${visibility === 'private' 
-              ? 'Bu sertifika yalnızca tarayıcınızda oluşturulmuştur ve sunucuya kaydedilmemiştir. Doğrulama için daha sonra "Maskeli" veya "Herkese Açık" modda yeniden mühürleyebilirsiniz.'
-              : 'This certificate is digitally notarized and cryptographically sealed for the first stage of verification on the PoArt Protocol. Please check the site for second-stage verification.'}
-          </div>
-
-          <div class="cert-footer">
-            <div class="cert-stamp">
-              ONAYLANDI<br>✓
-            </div>
-          </div>
-        </div>
+    return `<div class="cert-frame"><div class="cert-header"><div class="cert-logo">POART PROTOCOL</div><h2 class="cert-title">${t('certTitle')} ${localBadge}</h2><div class="cert-subtitle">${t('certSubtitle')}</div></div>
+      <div class="cert-body"><div class="cert-photos">${photoHTML}${artHTML}<div><div class="cert-qr"><img src="${qrDataUrl}" style="width:100%;height:auto;" alt="QR"></div><div class="cert-photo-label">QR</div></div></div>
+      <div class="cert-info-panel"><div class="cert-info-title">Sertifika Bilgileri</div><div class="cert-info-grid">
+        <div class="cert-info-item"><div class="cert-info-label">${t('artworkName')}</div><div class="cert-info-value">${record.title}</div></div>
+        <div class="cert-info-item"><div class="cert-info-label">${t('artistName')}</div><div class="cert-info-value">${record.creator}</div></div>
+        <div class="cert-info-item"><div class="cert-info-label">${t('certId')}</div><div class="cert-info-value">${record.cert_id}</div></div>
+        <div class="cert-info-item"><div class="cert-info-label">${t('date')}</div><div class="cert-info-value">${formatDate(record.created_at)}</div></div>${extraInfoHTML}
+      </div></div>
+      <div class="cert-hash-panel"><div class="cert-hash-title">🔐 Hash Fingerprints</div>
+        <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:800;color:#6b7280;margin-bottom:5px;">SHA-256:</div><div class="cert-hash-value">${record.sha256}</div></div>
+        <div><div style="font-size:10px;font-weight:800;color:#6b7280;margin-bottom:5px;">SHA-512:</div><div class="cert-hash-value">${record.sha512}</div></div>
       </div>
-    `;
+      <div class="cert-disclaimer">${t('disclaimerPublic')}</div>
+      <div class="cert-footer"><div class="cert-stamp">✓<br>${verifiedText}</div></div></div></div>`;
   }
 
-  // Main seal function
-  sealBtn.addEventListener("click", async () => {
-    if (!artFile.files.length) return alert("Lütfen önce bir eser seçin!");
-
-    previewSection.style.display = "none";
-    certPreview.innerHTML = "";
-
-    const visibility = getVisibility();
-
-    try {
-      sealBtn.disabled = true;
-      setStatus("⏳ İşleniyor... Hash hesaplanıyor...", "info");
-
-      const file = artFile.files[0];
-      const buffer = await file.arrayBuffer();
-
-      const sha256 = await digest(buffer, "SHA-256");
-      const sha512 = await digest(buffer, "SHA-512");
-
-      // Prepare location/IP data based on visibility
-      let ip = "***.***.***.***";
-      let loc = "Gizli";
+  if (sealBtn && artFile) {
+    sealBtn.addEventListener("click", async () => {
+      if (!artFile.files.length) { alert(t('selectArtFirst')); return; }
+      previewSection.style.display = "none";
+      certPreview.innerHTML = "";
+      const visibility = getVisibility();
       
-      if (visibility !== 'private' && cachedIPData) {
-        if (visibility === 'public') {
-          // Public: Show city, country (IP still masked)
+      try {
+        sealBtn.disabled = true;
+        setStatus(t('processing'), "info");
+        const file = artFile.files[0];
+        const buffer = await file.arrayBuffer();
+        const sha256 = await digest(buffer, "SHA-256");
+        const sha512 = await digest(buffer, "SHA-512");
+        
+        let ip = "***.***.***.***", loc = t('hidden');
+        if (visibility !== 'private' && cachedIPData) {
           ip = maskIP(cachedIPData.ip);
-          loc = `${cachedIPData.city || 'Bilinmiyor'}, ${cachedIPData.country_name || 'Bilinmiyor'}`;
-        } else if (visibility === 'masked') {
-          // Masked: Everything masked
-          ip = maskIP(cachedIPData.ip);
-          loc = maskLoc(cachedIPData.city, cachedIPData.country_name);
+          loc = visibility === 'public' ? `${cachedIPData.city || t('unknown')}, ${cachedIPData.country_name || t('unknown')}` : maskLoc(cachedIPData.city, cachedIPData.country_name);
         }
-      }
-
-      const record = {
-        cert_id: "POART-" + Math.random().toString(36).substring(2, 10).toUpperCase(),
-        title: artTitle.value || "İsimsiz",
-        creator: creatorName.value || "Bilinmiyor",
-        sha256: sha256,
-        sha512: sha512,
-        visibility: visibility,
-        device_info: visibility === 'public' ? navigator.userAgent : "Gizli",
-        location_data: loc,
-        origin_ip: ip,
-        created_at: new Date().toISOString()
-      };
-
-      currentRecord = record;
-
-      // Convert images to data URLs
-      if (file.type.startsWith("image/")) {
-        currentArtDataUrl = await fileToDataUrl(file);
-      } else {
-        currentArtDataUrl = null;
-      }
-
-      const userFile = userPhoto.files[0];
-      if (userFile && userFile.type.startsWith("image/")) {
-        currentPhotoDataUrl = await fileToDataUrl(userFile);
-      } else {
-        currentPhotoDataUrl = null;
-      }
-
-      // Only save to Supabase if NOT private
-      let supabaseSuccess = false;
-      if (visibility !== 'private') {
-        setStatus("💾 Supabase'e kaydediliyor...", "info");
-        try {
-          const { error } = await sb.from("manifests").insert([record]);
-          if (error) {
-            console.error("❌ Supabase error:", error);
-            throw error;
-          }
-          console.log("✅ Supabase insert SUCCESS:", record.cert_id);
-          supabaseSuccess = true;
-        } catch (e) {
-          console.error("❌ Supabase insert FAILED:", e);
-          setStatus(`⚠️ Supabase kayıt hatası: ${e.message || e.toString()}. Sertifika yine de oluşturuluyor...`, "info");
+        
+        const record = {
+          cert_id: "POART-" + Math.random().toString(36).substring(2, 10).toUpperCase(),
+          title: artTitle.value || t('untitled'),
+          creator: creatorName.value || t('unknown'),
+          sha256, sha512, visibility,
+          device_info: visibility === 'public' ? navigator.userAgent : t('hidden'),
+          location_data: loc, origin_ip: ip, created_at: new Date().toISOString()
+        };
+        currentRecord = record;
+        
+        currentArtDataUrl = file.type.startsWith("image/") ? await fileToDataUrl(file) : null;
+        const userFile = userPhoto.files[0];
+        currentPhotoDataUrl = userFile?.type.startsWith("image/") ? await fileToDataUrl(userFile) : null;
+        
+        let supabaseSuccess = false;
+        if (visibility !== 'private') {
+          setStatus(t('savingSupabase'), "info");
+          try {
+            const { error } = await sb.from("manifests").insert([record]);
+            if (error) throw error;
+            supabaseSuccess = true;
+          } catch (e) { console.error('Supabase error:', e); }
         }
-      } else {
-        console.log("🔒 Private mode - skipping Supabase");
-      }
+        
+        const qrDataUrl = await generateQR(`https://www.ilhanart.org/public-registry}`);
+        setStatus(t('creatingCert'), "info");
+        const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
+        certPreview.innerHTML = certHTML;
+        previewSection.style.display = "block";
+        setStatus(visibility === 'private' ? t('certReadyPrivate') : t('certReadySupabase'), "ok");
+      } catch (err) {
+        setStatus(t('error', {error: err.message}), "error");
+      } finally { sealBtn.disabled = false; }
+    });
+  }
 
-      // Generate QR
-      const qrDataUrl = await generateQR(`https://ilhanart.org/verify?id=${record.cert_id}`);
+  if (downloadPNG) {
+    downloadPNG.addEventListener("click", async () => {
+      if (!currentRecord || !certPreview) return;
+      try {
+        setStatus('🖼️ Creating PNG...', "info");
+        const certElement = certPreview.querySelector('.cert-frame');
+        const canvas = await html2canvas(certElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false });
+        const link = document.createElement("a");
+        link.download = `${currentRecord.cert_id}_Certificate.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        setStatus(t('pngDownloaded'), "ok");
+      } catch (e) { console.error(e); }
+    });
+  }
 
-      // Generate certificate HTML
-      setStatus("📜 Sertifika oluşturuluyor...", "info");
-      const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
-      certPreview.innerHTML = certHTML;
-      previewSection.style.display = "block";
-
-      if (visibility === 'private') {
-        setStatus("✅ Sertifika hazır! 🔒 Özel mod: Sadece tarayıcınızda oluşturuldu, sunucuya kaydedilmedi.", "ok");
-      } else if (supabaseSuccess) {
-        setStatus("✅ Sertifika hazır ve Supabase'e kaydedildi! İndirme seçeneklerini kullanabilirsiniz.", "ok");
-      } else {
-        setStatus("⚠️ Sertifika hazır ama Supabase kayıt başarısız.", "ok");
-      }
-    } catch (err) {
-      console.error("Main error:", err);
-      setStatus(`❌ Hata: ${err.message}`, "error");
-    } finally {
-      sealBtn.disabled = false;
-    }
-  });
-
-  // Download PNG
-  downloadPNG.addEventListener("click", async () => {
-    if (!currentRecord) return;
-    try {
-      setStatus("🖼️ PNG oluşturuluyor...", "info");
-      const certElement = certPreview.querySelector('.cert-frame');
-      const canvas = await html2canvas(certElement, { 
-        scale: 2, 
-        useCORS: true, 
-        backgroundColor: '#ffffff',
-        logging: false
-      });
+  if (downloadJSON) {
+    downloadJSON.addEventListener("click", () => {
+      if (!currentRecord) return;
+      const jsonData = { ...currentRecord, verification_url: `https://www.ilhanart.org/public-registry}` };
+      const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
       const link = document.createElement("a");
-      link.download = `${currentRecord.cert_id}_Certificate.png`;
-      link.href = canvas.toDataURL("image/png");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${currentRecord.cert_id}_Data.json`;
       link.click();
-      setStatus("✅ PNG indirildi!", "ok");
-    } catch (e) {
-      console.error(e);
-      setStatus("❌ PNG oluşturma hatası", "error");
-    }
-  });
+      setStatus(t('jsonDownloaded'), "ok");
+    });
+  }
 
-  // Download JSON
-  downloadJSON.addEventListener("click", () => {
-    if (!currentRecord) return;
-    const jsonData = {
-      ...currentRecord,
-      verification_url: `https://ilhanart.org/verify?id=${currentRecord.cert_id}`
-    };
-    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `${currentRecord.cert_id}_Data.json`;
-    link.click();
-    setStatus("✅ JSON indirildi!", "ok");
-  });
+  if (downloadPDF) {
+    downloadPDF.addEventListener("click", async () => {
+      if (!currentRecord || !certPreview) return;
+      try {
+        setStatus('📄 Creating PDF...', "info");
+        const { jsPDF } = window.jspdf;
+        if (!jsPDF) throw new Error("jsPDF not loaded");
+        const certElement = certPreview.querySelector('.cert-frame');
+        const canvas = await html2canvas(certElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const imgWidth = pdfWidth - 20;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+        pdf.save(`${currentRecord.cert_id}_Certificate.pdf`);
+        setStatus(t('pdfDownloaded'), "ok");
+      } catch (e) { console.error(e); }
+    });
+  }
 
-  // Download PDF
-  downloadPDF.addEventListener("click", async () => {
-    if (!currentRecord) return;
-    try {
-      setStatus("📄 PDF oluşturuluyor...", "info");
-      const { jsPDF } = window.jspdf;
-      if (!jsPDF) throw new Error("jsPDF yüklenmedi");
-
-      const certElement = certPreview.querySelector('.cert-frame');
-      const canvas = await html2canvas(certElement, { 
-        scale: 2, 
-        useCORS: true, 
-        backgroundColor: '#ffffff' 
-      });
-
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      
-      const imgWidth = pdfWidth - 20;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
-      pdf.save(`${currentRecord.cert_id}_Certificate.pdf`);
-      setStatus("✅ PDF indirildi!", "ok");
-    } catch (e) {
-      console.error(e);
-      setStatus("❌ PDF oluşturma hatası", "error");
-    }
-  });
+  console.log('✅ Digital Notary initialized for language:', getCurrentLang());
 })();
 </script>
