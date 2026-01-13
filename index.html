@@ -1,4 +1,4 @@
-<!-- ✅ DIGITAL NOTARY — MULTILINGUAL EDITION v4.5 (4 LANGUAGES) -->
+<!-- ✅ DIGITAL NOTARY — MULTILINGUAL EDITION v5.0 (COMPLETE & FIXED) -->
 <div id="notaryApp" class="dn-wrap">
 
   <!-- TÜRKÇE VERSİYON -->
@@ -12,48 +12,48 @@
     <div class="dn-grid">
       <div>
         <label class="dn-label">Fotoğrafınız</label>
-        <div id="photoDrop" class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop photo-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">📸</div>
           <div class="dn-drop-title">Sürükle bırak</div>
           <div class="dn-drop-sub">veya tıklayıp seçin</div>
-          <div id="photoMeta" class="dn-drop-meta"></div>
+          <div class="dn-drop-meta photo-meta"></div>
         </div>
-        <input type="file" id="userPhoto" accept="image/*" class="dn-hidden-input" />
+        <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
       </div>
 
       <div>
         <label class="dn-label">Eser Dosyası</label>
-        <div id="artDrop" class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop art-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">🎨</div>
           <div class="dn-drop-title">Sürükle bırak</div>
           <div class="dn-drop-sub">veya tıklayıp seçin</div>
-          <div id="artMeta" class="dn-drop-meta"></div>
+          <div class="dn-drop-meta art-meta"></div>
         </div>
-        <input type="file" id="artFile" accept="image/*,.pdf,.mp4" class="dn-hidden-input" />
+        <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
       </div>
     </div>
 
     <div class="dn-grid" style="margin-top:-6px;">
       <div class="dn-preview-card">
         <div class="dn-preview-label">Fotoğraf Önizleme</div>
-        <img id="photoPreview" class="dn-preview-img" alt="" style="display:none;" />
-        <div id="photoPreviewEmpty" class="dn-preview-empty">Henüz seçilmedi</div>
+        <img class="dn-preview-img photo-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty photo-preview-empty">Henüz seçilmedi</div>
       </div>
       <div class="dn-preview-card">
         <div class="dn-preview-label">Eser Önizleme</div>
-        <img id="artPreview" class="dn-preview-img" alt="" style="display:none;" />
-        <div id="artPreviewEmpty" class="dn-preview-empty">Görsel değilse önizleme olmaz</div>
+        <img class="dn-preview-img art-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty art-preview-empty">Görsel değilse önizleme olmaz</div>
       </div>
     </div>
 
     <div class="dn-grid">
       <div>
         <label class="dn-label">Üretici / Sanatçı Adı</label>
-        <input type="text" id="creatorName" placeholder="Sanatçı adını girin" class="dn-input" />
+        <input type="text" class="creator-name dn-input" placeholder="Sanatçı adını girin" />
       </div>
       <div>
         <label class="dn-label">Eser Başlığı</label>
-        <input type="text" id="artTitle" placeholder="Eser başlığını girin" class="dn-input" />
+        <input type="text" class="art-title dn-input" placeholder="Eser başlığını girin" />
       </div>
     </div>
 
@@ -71,7 +71,7 @@
 
       <div class="dn-visibility-cards">
         <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility" value="private" checked />
+          <input type="radio" name="visibility-tr" value="private" checked />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🔒</div>
             <div class="dn-vis-name">Özel (Private)</div>
@@ -81,7 +81,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility" value="masked" />
+          <input type="radio" name="visibility-tr" value="masked" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🕶️</div>
             <div class="dn-vis-name">Maskeli (Masked)</div>
@@ -91,7 +91,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility" value="public" />
+          <input type="radio" name="visibility-tr" value="public" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🌍</div>
             <div class="dn-vis-name">Herkese Açık (Public)</div>
@@ -128,15 +128,15 @@
               <tr>
                 <td><span class="dn-table-mode">🕶️ Maskeli<br><span class="dn-table-mode-sub">(Masked)</span></span></td>
                 <td><span class="dn-table-badge green">✓ Kaydedilir</span></td>
-                <td><code class="dn-table-code" id="tableMaskedIP">46.1.***.***</code></td>
-                <td><code class="dn-table-code" id="tableMaskedLoc">*** / Türkiye</code></td>
+                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-masked-loc">*** / Türkiye</code></td>
                 <td><span class="dn-table-text">Gizli</span></td>
               </tr>
               <tr>
                 <td><span class="dn-table-mode">🌍 Herkese Açık<br><span class="dn-table-mode-sub">(Public)</span></span></td>
                 <td><span class="dn-table-badge green">✓ Kaydedilir</span></td>
-                <td><code class="dn-table-code" id="tablePublicIP">46.1.***.***</code></td>
-                <td><code class="dn-table-code" id="tablePublicLoc">İstanbul, Türkiye</code></td>
+                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-public-loc">İstanbul, Türkiye</code></td>
                 <td><span class="dn-table-text">Gösterilir</span></td>
               </tr>
             </tbody>
@@ -148,34 +148,34 @@
         <span class="dn-guarantee-icon">🛡️</span>
         <div class="dn-guarantee-text">
           <strong>Gizlilik Garantisi:</strong> Dosyanız sunucuya yüklenmez, hash hesaplaması tarayıcınızda yapılır. 
-          "Herkese Açık" modda bile IP adresiniz <code class="dn-code" id="liveIPPreview">***.***.***.***</code> 
+          "Herkese Açık" modda bile IP adresiniz <code class="dn-code live-ip-preview">***.***.***.***</code> 
           formatında maskelenerek gösterilir — tam IP asla kaydedilmez.
         </div>
       </div>
     </div>
 
-    <button id="sealBtn" class="dn-btn">
+    <button class="seal-btn dn-btn">
       <span class="dn-btn-icon">🪶</span>
       <span>MÜHÜRLE & SERTİFİKA OLUŞTUR</span>
     </button>
 
-    <div id="statusBox" class="dn-status" style="display:none;"></div>
+    <div class="status-box dn-status" style="display:none;"></div>
 
-    <div id="previewSection" class="dn-preview-section" style="display:none;">
+    <div class="preview-section dn-preview-section" style="display:none;">
       <div class="dn-preview-head">
         <div class="dn-preview-title">📜 Sertifika Hazır</div>
         <div class="dn-preview-actions">
-          <button id="downloadPNG" class="dn-mini-btn" type="button">🖼️ PNG</button>
-          <button id="downloadJSON" class="dn-mini-btn" type="button">💾 JSON</button>
-          <button id="downloadPDF" class="dn-mini-btn" type="button">📄 PDF</button>
+          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
+          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
+          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
         </div>
       </div>
-      <div id="certPreview" class="dn-cert-container"></div>
+      <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
 
   <!-- İNGİLİZCE VERSİYON -->
-  <div class="lang-en">
+  <div class="lang-en" style="display:none;">
     <div class="dn-head">
       <div class="dn-badge">POART PROTOCOL</div>
       <h1 class="dn-title">DIGITAL NOTARY</h1>
@@ -185,46 +185,48 @@
     <div class="dn-grid">
       <div>
         <label class="dn-label">Your Photo</label>
-        <div class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop photo-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">📸</div>
           <div class="dn-drop-title">Drag & Drop</div>
           <div class="dn-drop-sub">or click to select</div>
-          <div class="dn-drop-meta"></div>
+          <div class="dn-drop-meta photo-meta"></div>
         </div>
+        <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
       </div>
 
       <div>
         <label class="dn-label">Artwork File</label>
-        <div class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop art-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">🎨</div>
           <div class="dn-drop-title">Drag & Drop</div>
           <div class="dn-drop-sub">or click to select</div>
-          <div class="dn-drop-meta"></div>
+          <div class="dn-drop-meta art-meta"></div>
         </div>
+        <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
       </div>
     </div>
 
     <div class="dn-grid" style="margin-top:-6px;">
       <div class="dn-preview-card">
         <div class="dn-preview-label">Photo Preview</div>
-        <img class="dn-preview-img" alt="" style="display:none;" />
-        <div class="dn-preview-empty">Not selected yet</div>
+        <img class="dn-preview-img photo-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty photo-preview-empty">Not selected yet</div>
       </div>
       <div class="dn-preview-card">
         <div class="dn-preview-label">Artwork Preview</div>
-        <img class="dn-preview-img" alt="" style="display:none;" />
-        <div class="dn-preview-empty">No preview for non-images</div>
+        <img class="dn-preview-img art-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty art-preview-empty">No preview for non-images</div>
       </div>
     </div>
 
     <div class="dn-grid">
       <div>
         <label class="dn-label">Creator / Artist Name</label>
-        <input type="text" placeholder="Enter artist name" class="dn-input" />
+        <input type="text" class="creator-name dn-input" placeholder="Enter artist name" />
       </div>
       <div>
         <label class="dn-label">Artwork Title</label>
-        <input type="text" placeholder="Enter artwork title" class="dn-input" />
+        <input type="text" class="art-title dn-input" placeholder="Enter artwork title" />
       </div>
     </div>
 
@@ -242,7 +244,7 @@
 
       <div class="dn-visibility-cards">
         <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility" value="private" checked />
+          <input type="radio" name="visibility-en" value="private" checked />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🔒</div>
             <div class="dn-vis-name">Private</div>
@@ -252,7 +254,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility" value="masked" />
+          <input type="radio" name="visibility-en" value="masked" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🕶️</div>
             <div class="dn-vis-name">Masked</div>
@@ -262,7 +264,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility" value="public" />
+          <input type="radio" name="visibility-en" value="public" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🌍</div>
             <div class="dn-vis-name">Public</div>
@@ -299,15 +301,15 @@
               <tr>
                 <td><span class="dn-table-mode">🕶️ Masked</span></td>
                 <td><span class="dn-table-badge green">✓ Saved</span></td>
-                <td><code class="dn-table-code">46.1.***.***</code></td>
-                <td><code class="dn-table-code">*** / Turkey</code></td>
+                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-masked-loc">*** / Turkey</code></td>
                 <td><span class="dn-table-text">Hidden</span></td>
               </tr>
               <tr>
                 <td><span class="dn-table-mode">🌍 Public</span></td>
                 <td><span class="dn-table-badge green">✓ Saved</span></td>
-                <td><code class="dn-table-code">46.1.***.***</code></td>
-                <td><code class="dn-table-code">Istanbul, Turkey</code></td>
+                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-public-loc">Istanbul, Turkey</code></td>
                 <td><span class="dn-table-text">Shown</span></td>
               </tr>
             </tbody>
@@ -319,34 +321,34 @@
         <span class="dn-guarantee-icon">🛡️</span>
         <div class="dn-guarantee-text">
           <strong>Privacy Guarantee:</strong> Your file is not uploaded to the server; hash calculation is done in your browser. 
-          Even in "Public" mode, your IP address is masked in <code class="dn-code">***.***.***.***</code> 
+          Even in "Public" mode, your IP address is masked in <code class="dn-code live-ip-preview">***.***.***.***</code> 
           format — full IP is never recorded.
         </div>
       </div>
     </div>
 
-    <button class="dn-btn">
+    <button class="seal-btn dn-btn">
       <span class="dn-btn-icon">🪶</span>
       <span>SEAL & CREATE CERTIFICATE</span>
     </button>
 
-    <div class="dn-status" style="display:none;"></div>
+    <div class="status-box dn-status" style="display:none;"></div>
 
-    <div class="dn-preview-section" style="display:none;">
+    <div class="preview-section dn-preview-section" style="display:none;">
       <div class="dn-preview-head">
         <div class="dn-preview-title">📜 Certificate Ready</div>
         <div class="dn-preview-actions">
-          <button class="dn-mini-btn" type="button">🖼️ PNG</button>
-          <button class="dn-mini-btn" type="button">💾 JSON</button>
-          <button class="dn-mini-btn" type="button">📄 PDF</button>
+          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
+          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
+          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
         </div>
       </div>
-      <div class="dn-cert-container"></div>
+      <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
 
   <!-- ÇİNCE VERSİYON -->
-  <div class="lang-zh">
+  <div class="lang-zh" style="display:none;">
     <div class="dn-head">
       <div class="dn-badge">POART PROTOCOL</div>
       <h1 class="dn-title">数字公证</h1>
@@ -356,46 +358,48 @@
     <div class="dn-grid">
       <div>
         <label class="dn-label">您的照片</label>
-        <div class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop photo-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">📸</div>
           <div class="dn-drop-title">拖放文件</div>
           <div class="dn-drop-sub">或点击选择</div>
-          <div class="dn-drop-meta"></div>
+          <div class="dn-drop-meta photo-meta"></div>
         </div>
+        <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
       </div>
 
       <div>
         <label class="dn-label">作品文件</label>
-        <div class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop art-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">🎨</div>
           <div class="dn-drop-title">拖放文件</div>
           <div class="dn-drop-sub">或点击选择</div>
-          <div class="dn-drop-meta"></div>
+          <div class="dn-drop-meta art-meta"></div>
         </div>
+        <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
       </div>
     </div>
 
     <div class="dn-grid" style="margin-top:-6px;">
       <div class="dn-preview-card">
         <div class="dn-preview-label">照片预览</div>
-        <img class="dn-preview-img" alt="" style="display:none;" />
-        <div class="dn-preview-empty">尚未选择</div>
+        <img class="dn-preview-img photo-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty photo-preview-empty">尚未选择</div>
       </div>
       <div class="dn-preview-card">
         <div class="dn-preview-label">作品预览</div>
-        <img class="dn-preview-img" alt="" style="display:none;" />
-        <div class="dn-preview-empty">非图片无预览</div>
+        <img class="dn-preview-img art-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty art-preview-empty">非图片无预览</div>
       </div>
     </div>
 
     <div class="dn-grid">
       <div>
         <label class="dn-label">创作者 / 艺术家姓名</label>
-        <input type="text" placeholder="输入艺术家姓名" class="dn-input" />
+        <input type="text" class="creator-name dn-input" placeholder="输入艺术家姓名" />
       </div>
       <div>
         <label class="dn-label">作品标题</label>
-        <input type="text" placeholder="输入作品标题" class="dn-input" />
+        <input type="text" class="art-title dn-input" placeholder="输入作品标题" />
       </div>
     </div>
 
@@ -413,7 +417,7 @@
 
       <div class="dn-visibility-cards">
         <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility" value="private" checked />
+          <input type="radio" name="visibility-zh" value="private" checked />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🔒</div>
             <div class="dn-vis-name">私密</div>
@@ -423,7 +427,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility" value="masked" />
+          <input type="radio" name="visibility-zh" value="masked" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🕶️</div>
             <div class="dn-vis-name">掩码</div>
@@ -433,7 +437,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility" value="public" />
+          <input type="radio" name="visibility-zh" value="public" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🌍</div>
             <div class="dn-vis-name">公开</div>
@@ -470,15 +474,15 @@
               <tr>
                 <td><span class="dn-table-mode">🕶️ 掩码</span></td>
                 <td><span class="dn-table-badge green">✓ 已保存</span></td>
-                <td><code class="dn-table-code">46.1.***.***</code></td>
-                <td><code class="dn-table-code">*** / 土耳其</code></td>
+                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-masked-loc">*** / 土耳其</code></td>
                 <td><span class="dn-table-text">隐藏</span></td>
               </tr>
               <tr>
                 <td><span class="dn-table-mode">🌍 公开</span></td>
                 <td><span class="dn-table-badge green">✓ 已保存</span></td>
-                <td><code class="dn-table-code">46.1.***.***</code></td>
-                <td><code class="dn-table-code">伊斯坦布尔, 土耳其</code></td>
+                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-public-loc">伊斯坦布尔, 土耳其</code></td>
                 <td><span class="dn-table-text">显示</span></td>
               </tr>
             </tbody>
@@ -490,34 +494,34 @@
         <span class="dn-guarantee-icon">🛡️</span>
         <div class="dn-guarantee-text">
           <strong>隐私保证：</strong>您的文件不会上传到服务器；哈希计算在您的浏览器中完成。
-          即使在"公开"模式下，您的IP地址也以 <code class="dn-code">***.***.***.***</code> 
+          即使在"公开"模式下，您的IP地址也以 <code class="dn-code live-ip-preview">***.***.***.***</code> 
           格式掩码 — 完整IP永远不会被记录。
         </div>
       </div>
     </div>
 
-    <button class="dn-btn">
+    <button class="seal-btn dn-btn">
       <span class="dn-btn-icon">🪶</span>
       <span>密封并创建证书</span>
     </button>
 
-    <div class="dn-status" style="display:none;"></div>
+    <div class="status-box dn-status" style="display:none;"></div>
 
-    <div class="dn-preview-section" style="display:none;">
+    <div class="preview-section dn-preview-section" style="display:none;">
       <div class="dn-preview-head">
         <div class="dn-preview-title">📜 证书已准备好</div>
         <div class="dn-preview-actions">
-          <button class="dn-mini-btn" type="button">🖼️ PNG</button>
-          <button class="dn-mini-btn" type="button">💾 JSON</button>
-          <button class="dn-mini-btn" type="button">📄 PDF</button>
+          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
+          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
+          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
         </div>
       </div>
-      <div class="dn-cert-container"></div>
+      <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
 
   <!-- İSPANYOLCA VERSİYON -->
-  <div class="lang-es">
+  <div class="lang-es" style="display:none;">
     <div class="dn-head">
       <div class="dn-badge">POART PROTOCOL</div>
       <h1 class="dn-title">NOTARIO DIGITAL</h1>
@@ -527,46 +531,48 @@
     <div class="dn-grid">
       <div>
         <label class="dn-label">Su Foto</label>
-        <div class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop photo-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">📸</div>
           <div class="dn-drop-title">Arrastrar y soltar</div>
           <div class="dn-drop-sub">o haga clic para seleccionar</div>
-          <div class="dn-drop-meta"></div>
+          <div class="dn-drop-meta photo-meta"></div>
         </div>
+        <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
       </div>
 
       <div>
         <label class="dn-label">Archivo de Obra</label>
-        <div class="dn-drop" role="button" tabindex="0">
+        <div class="dn-drop art-drop" role="button" tabindex="0">
           <div class="dn-drop-icon">🎨</div>
           <div class="dn-drop-title">Arrastrar y soltar</div>
           <div class="dn-drop-sub">o haga clic para seleccionar</div>
-          <div class="dn-drop-meta"></div>
+          <div class="dn-drop-meta art-meta"></div>
         </div>
+        <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
       </div>
     </div>
 
     <div class="dn-grid" style="margin-top:-6px;">
       <div class="dn-preview-card">
         <div class="dn-preview-label">Vista previa de foto</div>
-        <img class="dn-preview-img" alt="" style="display:none;" />
-        <div class="dn-preview-empty">Aún no seleccionado</div>
+        <img class="dn-preview-img photo-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty photo-preview-empty">Aún no seleccionado</div>
       </div>
       <div class="dn-preview-card">
         <div class="dn-preview-label">Vista previa de obra</div>
-        <img class="dn-preview-img" alt="" style="display:none;" />
-        <div class="dn-preview-empty">Sin vista previa para no imágenes</div>
+        <img class="dn-preview-img art-preview" alt="" style="display:none;" />
+        <div class="dn-preview-empty art-preview-empty">Sin vista previa para no imágenes</div>
       </div>
     </div>
 
     <div class="dn-grid">
       <div>
         <label class="dn-label">Creador / Nombre del Artista</label>
-        <input type="text" placeholder="Ingrese el nombre del artista" class="dn-input" />
+        <input type="text" class="creator-name dn-input" placeholder="Ingrese el nombre del artista" />
       </div>
       <div>
         <label class="dn-label">Título de la Obra</label>
-        <input type="text" placeholder="Ingrese el título de la obra" class="dn-input" />
+        <input type="text" class="art-title dn-input" placeholder="Ingrese el título de la obra" />
       </div>
     </div>
 
@@ -584,7 +590,7 @@
 
       <div class="dn-visibility-cards">
         <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility" value="private" checked />
+          <input type="radio" name="visibility-es" value="private" checked />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🔒</div>
             <div class="dn-vis-name">Privado</div>
@@ -594,7 +600,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility" value="masked" />
+          <input type="radio" name="visibility-es" value="masked" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🕶️</div>
             <div class="dn-vis-name">Enmascarado</div>
@@ -604,7 +610,7 @@
         </label>
 
         <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility" value="public" />
+          <input type="radio" name="visibility-es" value="public" />
           <div class="dn-vis-card-inner">
             <div class="dn-vis-icon">🌍</div>
             <div class="dn-vis-name">Público</div>
@@ -641,15 +647,15 @@
               <tr>
                 <td><span class="dn-table-mode">🕶️ Enmascarado</span></td>
                 <td><span class="dn-table-badge green">✓ Guardado</span></td>
-                <td><code class="dn-table-code">46.1.***.***</code></td>
-                <td><code class="dn-table-code">*** / Turquía</code></td>
+                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-masked-loc">*** / Turquía</code></td>
                 <td><span class="dn-table-text">Oculto</span></td>
               </tr>
               <tr>
                 <td><span class="dn-table-mode">🌍 Público</span></td>
                 <td><span class="dn-table-badge green">✓ Guardado</span></td>
-                <td><code class="dn-table-code">46.1.***.***</code></td>
-                <td><code class="dn-table-code">Estambul, Turquía</code></td>
+                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
+                <td><code class="dn-table-code table-public-loc">Estambul, Turquía</code></td>
                 <td><span class="dn-table-text">Mostrado</span></td>
               </tr>
             </tbody>
@@ -661,29 +667,29 @@
         <span class="dn-guarantee-icon">🛡️</span>
         <div class="dn-guarantee-text">
           <strong>Garantía de Privacidad:</strong> Su archivo no se carga en el servidor; el cálculo de hash se realiza en su navegador. 
-          Incluso en modo "Público", su dirección IP se enmascara en formato <code class="dn-code">***.***.***.***</code> 
+          Incluso en modo "Público", su dirección IP se enmascara en formato <code class="dn-code live-ip-preview">***.***.***.***</code> 
           — la IP completa nunca se registra.
         </div>
       </div>
     </div>
 
-    <button class="dn-btn">
+    <button class="seal-btn dn-btn">
       <span class="dn-btn-icon">🪶</span>
       <span>SELLAR Y CREAR CERTIFICADO</span>
     </button>
 
-    <div class="dn-status" style="display:none;"></div>
+    <div class="status-box dn-status" style="display:none;"></div>
 
-    <div class="dn-preview-section" style="display:none;">
+    <div class="preview-section dn-preview-section" style="display:none;">
       <div class="dn-preview-head">
         <div class="dn-preview-title">📜 Certificado Listo</div>
         <div class="dn-preview-actions">
-          <button class="dn-mini-btn" type="button">🖼️ PNG</button>
-          <button class="dn-mini-btn" type="button">💾 JSON</button>
-          <button class="dn-mini-btn" type="button">📄 PDF</button>
+          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
+          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
+          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
         </div>
       </div>
-      <div class="dn-cert-container"></div>
+      <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
 
@@ -1599,6 +1605,7 @@
     .dn-title { font-size: 28px; }
   }
 </style>
+
 <!-- External Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
@@ -1610,22 +1617,21 @@
   const MESSAGES = {
     tr: {
       selectArtFirst: "Lütfen önce bir eser seçin!", onlyImages: "Sadece görsel kabul edilir",
-      noPreview: "Görsel değilse önizleme yok", processing: "⏳ İşleniyor... Hash hesaplanıyor...",
+      noPreview: "Görsel değilse önizleme yok", processing: "⏳ İşleniyor...",
       savingSupabase: "💾 Supabase'e kaydediliyor...", creatingCert: "📜 Sertifika oluşturuluyor...",
-      certReadyPrivate: "✅ Sertifika hazır! 🔒 Özel mod: Sadece tarayıcınızda oluşturuldu.",
-      certReadySupabase: "✅ Sertifika hazır ve Supabase'e kaydedildi!", error: "❌ Hata: {error}",
-      pngDownloaded: "✅ PNG indirildi!", jsonDownloaded: "✅ JSON indirildi!", pdfDownloaded: "✅ PDF indirildi!",
-      certTitle: "DİJİTAL NOTER SERTİFİKASI", certSubtitle: "İlhan Art Gallery tarafından verilmiştir",
-      artworkName: "Eser Adı", artistName: "Sanatçı", certId: "Sertifika ID", date: "Tarih",
-      unknown: "Bilinmiyor", untitled: "İsimsiz", hidden: "Gizli", privateMode: "🔒 YEREL",
-      disclaimerPrivate: "Bu sertifika yalnızca tarayıcınızda oluşturulmuştur.",
+      certReadyPrivate: "✅ Sertifika hazır! 🔒 Özel mod", certReadySupabase: "✅ Sertifika hazır!",
+      error: "❌ Hata: {error}", pngDownloaded: "✅ PNG indirildi!", jsonDownloaded: "✅ JSON indirildi!",
+      pdfDownloaded: "✅ PDF indirildi!", certTitle: "DİJİTAL NOTER SERTİFİKASI",
+      certSubtitle: "İlhan Art Gallery tarafından verilmiştir", artworkName: "Eser Adı", artistName: "Sanatçı",
+      certId: "Sertifika ID", date: "Tarih", unknown: "Bilinmiyor", untitled: "İsimsiz", hidden: "Gizli",
+      privateMode: "🔒 YEREL", disclaimerPrivate: "Bu sertifika yalnızca tarayıcınızda oluşturulmuştur.",
       disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
     },
     en: {
       selectArtFirst: "Please select an artwork first!", onlyImages: "Only images accepted",
       noPreview: "No preview for non-images", processing: "⏳ Processing...",
       savingSupabase: "💾 Saving...", creatingCert: "📜 Creating certificate...",
-      certReadyPrivate: "✅ Certificate ready! 🔒 Private mode.", certReadySupabase: "✅ Certificate ready!",
+      certReadyPrivate: "✅ Certificate ready! 🔒 Private mode", certReadySupabase: "✅ Certificate ready!",
       error: "❌ Error: {error}", pngDownloaded: "✅ PNG downloaded!", jsonDownloaded: "✅ JSON downloaded!",
       pdfDownloaded: "✅ PDF downloaded!", certTitle: "DIGITAL NOTARY CERTIFICATE",
       certSubtitle: "Issued by İlhan Art Gallery", artworkName: "Artwork Name", artistName: "Artist",
@@ -1642,7 +1648,7 @@
       artworkName: "作品名称", artistName: "艺术家", certId: "证书编号", date: "日期",
       unknown: "未知", untitled: "无标题", hidden: "隐藏", privateMode: "🔒 本地",
       disclaimerPrivate: "此证书仅在您的浏览器中创建。",
-      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry.."
+      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
     },
     es: {
       selectArtFirst: "¡Seleccione una obra primero!", onlyImages: "Solo imágenes", noPreview: "Sin vista previa",
@@ -1666,9 +1672,46 @@
     return 'tr';
   }
 
+  const currentLang = getCurrentLang();
+  const activeContainer = document.querySelector(`.lang-${currentLang}`);
+  
+  if (!activeContainer) {
+    console.error('❌ Active language container not found:', currentLang);
+    return;
+  }
+
+  activeContainer.style.display = 'block';
+  
+  const sealBtn = activeContainer.querySelector('.seal-btn');
+  const artFile = activeContainer.querySelector('.art-file');
+  const userPhoto = activeContainer.querySelector('.user-photo');
+  const creatorName = activeContainer.querySelector('.creator-name');
+  const artTitle = activeContainer.querySelector('.art-title');
+  const statusBox = activeContainer.querySelector('.status-box');
+  const artDrop = activeContainer.querySelector('.art-drop');
+  const photoDrop = activeContainer.querySelector('.photo-drop');
+  const artMeta = activeContainer.querySelector('.art-meta');
+  const photoMeta = activeContainer.querySelector('.photo-meta');
+  const artPreview = activeContainer.querySelector('.art-preview');
+  const photoPreview = activeContainer.querySelector('.photo-preview');
+  const artPreviewEmpty = activeContainer.querySelector('.art-preview-empty');
+  const photoPreviewEmpty = activeContainer.querySelector('.photo-preview-empty');
+  const previewSection = activeContainer.querySelector('.preview-section');
+  const certPreview = activeContainer.querySelector('.cert-preview');
+  const downloadPNG = activeContainer.querySelector('.download-png');
+  const downloadJSON = activeContainer.querySelector('.download-json');
+  const downloadPDF = activeContainer.querySelector('.download-pdf');
+
+  const liveIPPreviews = activeContainer.querySelectorAll('.live-ip-preview');
+  const tableMaskedIPs = activeContainer.querySelectorAll('.table-masked-ip');
+  const tablePublicIPs = activeContainer.querySelectorAll('.table-public-ip');
+  const tableMaskedLocs = activeContainer.querySelectorAll('.table-masked-loc');
+  const tablePublicLocs = activeContainer.querySelectorAll('.table-public-loc');
+
+  console.log('✅ Digital Notary initialized for language:', currentLang);
+
   function t(key, replacements = {}) {
-    const lang = getCurrentLang();
-    let msg = MESSAGES[lang][key] || MESSAGES.tr[key] || key;
+    let msg = MESSAGES[currentLang]?.[key] || MESSAGES.tr?.[key] || key;
     Object.keys(replacements).forEach(k => { msg = msg.replace(`{${k}}`, replacements[k]); });
     return msg;
   }
@@ -1677,36 +1720,10 @@
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE";
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  // ✅ AYNI ID'LERİ KULLAN (suffix yok)
-  const sealBtn = document.getElementById("sealBtn");
-  const artFile = document.getElementById("artFile");
-  const userPhoto = document.getElementById("userPhoto");
-  const creatorName = document.getElementById("creatorName");
-  const artTitle = document.getElementById("artTitle");
-  const statusBox = document.getElementById("statusBox");
-  const artDrop = document.getElementById("artDrop");
-  const photoDrop = document.getElementById("photoDrop");
-  const artMeta = document.getElementById("artMeta");
-  const photoMeta = document.getElementById("photoMeta");
-  const artPreview = document.getElementById("artPreview");
-  const photoPreview = document.getElementById("photoPreview");
-  const artPreviewEmpty = document.getElementById("artPreviewEmpty");
-  const photoPreviewEmpty = document.getElementById("photoPreviewEmpty");
-  const previewSection = document.getElementById("previewSection");
-  const certPreview = document.getElementById("certPreview");
-  const downloadPNG = document.getElementById("downloadPNG");
-  const downloadJSON = document.getElementById("downloadJSON");
-  const downloadPDF = document.getElementById("downloadPDF");
-  const liveIPPreview = document.getElementById("liveIPPreview");
-  const tableMaskedIP = document.getElementById("tableMaskedIP");
-  const tablePublicIP = document.getElementById("tablePublicIP");
-  const tableMaskedLoc = document.getElementById("tableMaskedLoc");
-  const tablePublicLoc = document.getElementById("tablePublicLoc");
-
   let currentRecord = null, currentArtDataUrl = null, currentPhotoDataUrl = null, cachedIPData = null;
 
   function getVisibility() {
-    const checked = document.querySelector('input[name="visibility"]:checked');
+    const checked = activeContainer.querySelector('input[name^="visibility"]:checked');
     return checked ? checked.value : 'private';
   }
 
@@ -1717,11 +1734,11 @@
       if (cachedIPData?.ip) {
         const maskedIP = maskIP(cachedIPData.ip);
         const city = cachedIPData.city || 'Unknown', country = cachedIPData.country_name || 'Unknown';
-        if (liveIPPreview) liveIPPreview.textContent = maskedIP;
-        if (tableMaskedIP) tableMaskedIP.textContent = maskedIP;
-        if (tablePublicIP) tablePublicIP.textContent = maskedIP;
-        if (tableMaskedLoc) tableMaskedLoc.textContent = `*** / ${country}`;
-        if (tablePublicLoc) tablePublicLoc.textContent = `${city}, ${country}`;
+        liveIPPreviews.forEach(el => { if (el) el.textContent = maskedIP; });
+        tableMaskedIPs.forEach(el => { if (el) el.textContent = maskedIP; });
+        tablePublicIPs.forEach(el => { if (el) el.textContent = maskedIP; });
+        tableMaskedLocs.forEach(el => { if (el) el.textContent = `*** / ${country}`; });
+        tablePublicLocs.forEach(el => { if (el) el.textContent = `${city}, ${country}`; });
       }
     } catch (e) { console.warn('IP fetch failed:', e); cachedIPData = null; }
   }
@@ -1746,7 +1763,7 @@
       return;
     }
     
-    console.log('✅ Binding drop zone:', zoneEl.id || zoneEl.className);
+    console.log('✅ Binding drop zone:', zoneEl.className);
     
     zoneEl.addEventListener("click", () => {
       console.log('🖱️ Drop zone clicked');
@@ -1844,8 +1861,7 @@
   function formatDate(iso) {
     try {
       const d = new Date(iso);
-      const lang = getCurrentLang();
-      const locale = lang === 'tr' ? 'tr-TR' : lang === 'zh' ? 'zh-CN' : lang === 'es' ? 'es-ES' : 'en-US';
+      const locale = currentLang === 'tr' ? 'tr-TR' : currentLang === 'zh' ? 'zh-CN' : currentLang === 'es' ? 'es-ES' : 'en-US';
       return d.toLocaleDateString(locale) + ' ' + d.toLocaleTimeString(locale, {hour:'2-digit', minute:'2-digit'});
     } catch { return iso; }
   }
@@ -1869,8 +1885,7 @@
     }
 
     const localBadge = visibility === 'private' ? `<span class="cert-local-badge">${t('privateMode')}</span>` : '';
-    const lang = getCurrentLang();
-    const verifiedText = lang === 'tr' ? 'ONAYLANDI' : lang === 'zh' ? '已验证' : lang === 'es' ? 'VERIFICADO' : 'VERIFIED';
+    const verifiedText = currentLang === 'tr' ? 'ONAYLANDI' : currentLang === 'zh' ? '已验证' : currentLang === 'es' ? 'VERIFICADO' : 'VERIFIED';
 
     return `<div class="cert-frame"><div class="cert-header"><div class="cert-logo">POART PROTOCOL</div><h2 class="cert-title">${t('certTitle')} ${localBadge}</h2><div class="cert-subtitle">${t('certSubtitle')}</div></div>
       <div class="cert-body"><div class="cert-photos">${photoHTML}${artHTML}<div><div class="cert-qr"><img src="${qrDataUrl}" style="width:100%;height:auto;" alt="QR"></div><div class="cert-photo-label">QR</div></div></div>
@@ -1933,7 +1948,7 @@
           } catch (e) { console.error('Supabase error:', e); }
         }
         
-        const qrDataUrl = await generateQR(`https://www.ilhanart.org/public-registry}`);
+        const qrDataUrl = await generateQR(`https://www.ilhanart.org/public-registry`);
         setStatus(t('creatingCert'), "info");
         const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
         certPreview.innerHTML = certHTML;
@@ -1964,7 +1979,7 @@
   if (downloadJSON) {
     downloadJSON.addEventListener("click", () => {
       if (!currentRecord) return;
-      const jsonData = { ...currentRecord, verification_url: `https://www.ilhanart.org/public-registry}` };
+      const jsonData = { ...currentRecord, verification_url: `https://www.ilhanart.org/public-registry` };
       const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
@@ -1995,13 +2010,11 @@
     });
   }
 
-  console.log('✅ Digital Notary initialized for language:', getCurrentLang());
+  console.log('✅ Digital Notary fully initialized!');
 })();
 </script>
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- 🔐 SECURITY VERIFICATION BADGE                                -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
 
+<!-- SECURITY BADGE -->
 <div class="poart-security-badge">
   <div class="security-icon">🔐</div>
   <div class="security-content">
@@ -2097,7 +2110,6 @@
     box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
   }
   
-  /* Mobile responsive */
   @media (max-width: 768px) {
     .poart-security-badge {
       flex-direction: column;
