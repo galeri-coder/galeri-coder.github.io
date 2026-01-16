@@ -1,14 +1,18 @@
-<!-- ✅ DIGITAL NOTARY — MULTILINGUAL EDITION v5.3 (SECURITY BADGE REMOVED) -->
-<div id="notaryApp" class="dn-wrap">
+<!-- ✅ DIGITAL NOTARY v5.5 — [data-multilang] UYUMLU -->
+<!-- Custom CSS'teki [data-multilang] sistemini kullanır -->
+<!-- JavaScript dil kontrolü YOK - tamamen CSS ile çalışır -->
 
-  <!-- TÜRKÇE VERSİYON -->
+<div id="notaryApp" class="dn-wrap" data-multilang>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TÜRKÇE VERSİYON
+  ═══════════════════════════════════════════════════════════════ -->
   <div class="lang-tr">
     <div class="dn-head">
       <div class="dn-badge">POART PROTOCOL</div>
       <h1 class="dn-title">DİJİTAL NOTER</h1>
       <p class="dn-sub">Eserinizi yükleyin, kriptografik olarak mühürleyin ve resmi sertifikanızı alın.</p>
     </div>
-
     <div class="dn-grid">
       <div>
         <label class="dn-label">Fotoğrafınız</label>
@@ -20,7 +24,6 @@
         </div>
         <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
       </div>
-
       <div>
         <label class="dn-label">Eser Dosyası</label>
         <div class="dn-drop art-drop" role="button" tabindex="0">
@@ -32,7 +35,6 @@
         <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
       </div>
     </div>
-
     <div class="dn-grid" style="margin-top:-6px;">
       <div class="dn-preview-card">
         <div class="dn-preview-label">Fotoğraf Önizleme</div>
@@ -45,7 +47,6 @@
         <div class="dn-preview-empty art-preview-empty">Görsel değilse önizleme olmaz</div>
       </div>
     </div>
-
     <div class="dn-grid">
       <div>
         <label class="dn-label">Üretici / Sanatçı Adı</label>
@@ -56,639 +57,148 @@
         <input type="text" class="art-title dn-input" placeholder="Eser başlığını girin" />
       </div>
     </div>
-
     <div class="dn-visibility-section">
       <div class="dn-visibility-header">
         <span class="dn-visibility-icon">🔐</span>
         <span class="dn-visibility-title">Üç Gizlilik Modu: Tam Kontrol Sizde</span>
       </div>
-      
-      <p class="dn-visibility-intro">
-        Her duruma uygun gizlilik seviyesi seçebilirsiniz. Önemli not: 
-        <strong class="dn-highlight">Hangi modu seçerseniz seçin, IP adresiniz hiçbir zaman tam olarak görünmez</strong> 
-        — sistem her zaman maskeleyerek kaydeder (örn: <code class="dn-code">192.168.***.***</code>).
-      </p>
-
+      <p class="dn-visibility-intro">Her duruma uygun gizlilik seviyesi seçebilirsiniz. Önemli not: <strong class="dn-highlight">Hangi modu seçerseniz seçin, IP adresiniz hiçbir zaman tam olarak görünmez</strong> — sistem her zaman maskeleyerek kaydeder.</p>
       <div class="dn-visibility-cards">
-        <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility-tr" value="private" checked />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🔒</div>
-            <div class="dn-vis-name">Özel (Private)</div>
-            <div class="dn-vis-desc">Sadece siz görürsünüz. Henüz paylaşmak istemediğiniz projeler için ideal. Tarih damgası vurup bekletebilirsiniz.</div>
-            <div class="dn-vis-badge private">Sunucuya gitmez</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility-tr" value="masked" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🕶️</div>
-            <div class="dn-vis-name">Maskeli (Masked)</div>
-            <div class="dn-vis-desc">Mühür görünür, kimliğiniz gizli. Anonim kalmak isteyen sanatçılar için. Konum ve cihaz bilgileri maskelenir.</div>
-            <div class="dn-vis-badge masked">Anonim kayıt</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility-tr" value="public" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🌍</div>
-            <div class="dn-vis-name">Herkese Açık (Public)</div>
-            <div class="dn-vis-desc">Tam şeffaflık. Tarih, şehir ve cihaz bilgileri görünür. <em>(IP yine de maskelenir)</em></div>
-            <div class="dn-vis-badge public">Tam şeffaflık</div>
-          </div>
-        </label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="private" checked /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🔒</div><div class="dn-vis-name">Özel (Private)</div><div class="dn-vis-desc">Sadece siz görürsünüz. Tarih damgası vurup bekletebilirsiniz.</div><div class="dn-vis-badge private">Sunucuya gitmez</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="masked" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🕶️</div><div class="dn-vis-name">Maskeli (Masked)</div><div class="dn-vis-desc">Mühür görünür, kimliğiniz gizli. Konum ve cihaz bilgileri maskelenir.</div><div class="dn-vis-badge masked">Anonim kayıt</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="public" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🌍</div><div class="dn-vis-name">Herkese Açık (Public)</div><div class="dn-vis-desc">Tam şeffaflık. Tarih, şehir ve cihaz bilgileri görünür. <em>(IP yine de maskelenir)</em></div><div class="dn-vis-badge public">Tam şeffaflık</div></div></label>
       </div>
-
-      <div class="dn-table-section">
-        <div class="dn-table-header">
-          <span class="dn-table-icon">📊</span>
-          <span class="dn-table-title">Örnek için bakınız: Modlar Karşılaştırması</span>
-        </div>
-        <div class="dn-table-wrapper">
-          <table class="dn-comparison-table">
-            <thead>
-              <tr>
-                <th>Mod</th>
-                <th>Sunucu</th>
-                <th>IP</th>
-                <th>Konum</th>
-                <th>Cihaz</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="dn-table-mode">🔒 Özel<br><span class="dn-table-mode-sub">(Private)</span></span></td>
-                <td><span class="dn-table-badge red">✕ Gitmez</span></td>
-                <td><span class="dn-table-na">Yok</span></td>
-                <td><span class="dn-table-na">Yok</span></td>
-                <td><span class="dn-table-na">Yok</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🕶️ Maskeli<br><span class="dn-table-mode-sub">(Masked)</span></span></td>
-                <td><span class="dn-table-badge green">✓ Kaydedilir</span></td>
-                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-masked-loc">*** / Türkiye</code></td>
-                <td><span class="dn-table-text">Gizli</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🌍 Herkese Açık<br><span class="dn-table-mode-sub">(Public)</span></span></td>
-                <td><span class="dn-table-badge green">✓ Kaydedilir</span></td>
-                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-public-loc">İstanbul, Türkiye</code></td>
-                <td><span class="dn-table-text">Gösterilir</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="dn-privacy-guarantee">
-        <span class="dn-guarantee-icon">🛡️</span>
-        <div class="dn-guarantee-text">
-          <strong>Gizlilik Garantisi:</strong> Dosyanız sunucuya yüklenmez, hash hesaplaması tarayıcınızda yapılır. 
-          "Herkese Açık" modda bile IP adresiniz <code class="dn-code live-ip-preview">***.***.***.***</code> 
-          formatında maskelenerek gösterilir — tam IP asla kaydedilmez.
-        </div>
-      </div>
+      <div class="dn-privacy-guarantee"><span class="dn-guarantee-icon">🛡️</span><div class="dn-guarantee-text"><strong>Gizlilik Garantisi:</strong> Dosyanız sunucuya yüklenmez, hash hesaplaması tarayıcınızda yapılır. IP adresiniz <code class="dn-code live-ip-preview">***.***.***.***</code> formatında maskelenir.</div></div>
     </div>
-
-    <button class="seal-btn dn-btn">
-      <span class="dn-btn-icon">🪶</span>
-      <span>MÜHÜRLE & SERTİFİKA OLUŞTUR</span>
-    </button>
-
+    <button class="seal-btn dn-btn"><span class="dn-btn-icon">🪶</span><span>MÜHÜRLE & SERTİFİKA OLUŞTUR</span></button>
     <div class="status-box dn-status" style="display:none;"></div>
-
     <div class="preview-section dn-preview-section" style="display:none;">
-      <div class="dn-preview-head">
-        <div class="dn-preview-title">📜 Sertifika Hazır</div>
-        <div class="dn-preview-actions">
-          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
-          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
-          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
-        </div>
-      </div>
+      <div class="dn-preview-head"><div class="dn-preview-title">📜 Sertifika Hazır</div><div class="dn-preview-actions"><button class="download-png dn-mini-btn">🖼️ PNG</button><button class="download-json dn-mini-btn">💾 JSON</button><button class="download-pdf dn-mini-btn">📄 PDF</button></div></div>
       <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
 
-  <!-- İNGİLİZCE VERSİYON -->
-  <div class="lang-en" style="display:none;">
+  <!-- ═══════════════════════════════════════════════════════════════
+       ENGLISH VERSION
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="lang-en">
     <div class="dn-head">
       <div class="dn-badge">POART PROTOCOL</div>
       <h1 class="dn-title">DIGITAL NOTARY</h1>
       <p class="dn-sub">Upload your artwork, seal it cryptographically, and receive your official certificate.</p>
     </div>
-
     <div class="dn-grid">
       <div>
         <label class="dn-label">Your Photo</label>
-        <div class="dn-drop photo-drop" role="button" tabindex="0">
-          <div class="dn-drop-icon">📸</div>
-          <div class="dn-drop-title">Drag & Drop</div>
-          <div class="dn-drop-sub">or click to select</div>
-          <div class="dn-drop-meta photo-meta"></div>
-        </div>
+        <div class="dn-drop photo-drop" role="button" tabindex="0"><div class="dn-drop-icon">📸</div><div class="dn-drop-title">Drag & Drop</div><div class="dn-drop-sub">or click to select</div><div class="dn-drop-meta photo-meta"></div></div>
         <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
       </div>
-
       <div>
         <label class="dn-label">Artwork File</label>
-        <div class="dn-drop art-drop" role="button" tabindex="0">
-          <div class="dn-drop-icon">🎨</div>
-          <div class="dn-drop-title">Drag & Drop</div>
-          <div class="dn-drop-sub">or click to select</div>
-          <div class="dn-drop-meta art-meta"></div>
-        </div>
+        <div class="dn-drop art-drop" role="button" tabindex="0"><div class="dn-drop-icon">🎨</div><div class="dn-drop-title">Drag & Drop</div><div class="dn-drop-sub">or click to select</div><div class="dn-drop-meta art-meta"></div></div>
         <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
       </div>
     </div>
-
     <div class="dn-grid" style="margin-top:-6px;">
-      <div class="dn-preview-card">
-        <div class="dn-preview-label">Photo Preview</div>
-        <img class="dn-preview-img photo-preview" alt="" style="display:none;" />
-        <div class="dn-preview-empty photo-preview-empty">Not selected yet</div>
-      </div>
-      <div class="dn-preview-card">
-        <div class="dn-preview-label">Artwork Preview</div>
-        <img class="dn-preview-img art-preview" alt="" style="display:none;" />
-        <div class="dn-preview-empty art-preview-empty">No preview for non-images</div>
-      </div>
+      <div class="dn-preview-card"><div class="dn-preview-label">Photo Preview</div><img class="dn-preview-img photo-preview" alt="" style="display:none;" /><div class="dn-preview-empty photo-preview-empty">Not selected yet</div></div>
+      <div class="dn-preview-card"><div class="dn-preview-label">Artwork Preview</div><img class="dn-preview-img art-preview" alt="" style="display:none;" /><div class="dn-preview-empty art-preview-empty">No preview for non-images</div></div>
     </div>
-
     <div class="dn-grid">
-      <div>
-        <label class="dn-label">Creator / Artist Name</label>
-        <input type="text" class="creator-name dn-input" placeholder="Enter artist name" />
-      </div>
-      <div>
-        <label class="dn-label">Artwork Title</label>
-        <input type="text" class="art-title dn-input" placeholder="Enter artwork title" />
-      </div>
+      <div><label class="dn-label">Creator / Artist Name</label><input type="text" class="creator-name dn-input" placeholder="Enter artist name" /></div>
+      <div><label class="dn-label">Artwork Title</label><input type="text" class="art-title dn-input" placeholder="Enter artwork title" /></div>
     </div>
-
     <div class="dn-visibility-section">
-      <div class="dn-visibility-header">
-        <span class="dn-visibility-icon">🔐</span>
-        <span class="dn-visibility-title">Three Privacy Modes: Full Control is Yours</span>
-      </div>
-      
-      <p class="dn-visibility-intro">
-        Choose the privacy level that suits your situation. Important note: 
-        <strong class="dn-highlight">Regardless of which mode you choose, your IP address is never fully visible</strong> 
-        — the system always masks it (e.g., <code class="dn-code">192.168.***.***</code>).
-      </p>
-
+      <div class="dn-visibility-header"><span class="dn-visibility-icon">🔐</span><span class="dn-visibility-title">Three Privacy Modes: Full Control is Yours</span></div>
+      <p class="dn-visibility-intro">Choose the privacy level that suits your situation. <strong class="dn-highlight">Your IP address is never fully visible</strong> — the system always masks it.</p>
       <div class="dn-visibility-cards">
-        <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility-en" value="private" checked />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🔒</div>
-            <div class="dn-vis-name">Private</div>
-            <div class="dn-vis-desc">Only you can see it. Ideal for projects you don't want to share yet. Timestamp and wait.</div>
-            <div class="dn-vis-badge private">Not sent to server</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility-en" value="masked" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🕶️</div>
-            <div class="dn-vis-name">Masked</div>
-            <div class="dn-vis-desc">Seal visible, identity hidden. For artists who want to remain anonymous. Location and device info masked.</div>
-            <div class="dn-vis-badge masked">Anonymous record</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility-en" value="public" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🌍</div>
-            <div class="dn-vis-name">Public</div>
-            <div class="dn-vis-desc">Full transparency. Date, city, and device info visible. <em>(IP still masked)</em></div>
-            <div class="dn-vis-badge public">Full transparency</div>
-          </div>
-        </label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="private" checked /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🔒</div><div class="dn-vis-name">Private</div><div class="dn-vis-desc">Only you can see it. Timestamp and wait.</div><div class="dn-vis-badge private">Not sent to server</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="masked" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🕶️</div><div class="dn-vis-name">Masked</div><div class="dn-vis-desc">Seal visible, identity hidden. Location and device info masked.</div><div class="dn-vis-badge masked">Anonymous record</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="public" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🌍</div><div class="dn-vis-name">Public</div><div class="dn-vis-desc">Full transparency. Date, city, and device info visible. <em>(IP still masked)</em></div><div class="dn-vis-badge public">Full transparency</div></div></label>
       </div>
-
-      <div class="dn-table-section">
-        <div class="dn-table-header">
-          <span class="dn-table-icon">📊</span>
-          <span class="dn-table-title">Mode Comparison Table</span>
-        </div>
-        <div class="dn-table-wrapper">
-          <table class="dn-comparison-table">
-            <thead>
-              <tr>
-                <th>Mode</th>
-                <th>Server</th>
-                <th>IP</th>
-                <th>Location</th>
-                <th>Device</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="dn-table-mode">🔒 Private</span></td>
-                <td><span class="dn-table-badge red">✕ Not sent</span></td>
-                <td><span class="dn-table-na">None</span></td>
-                <td><span class="dn-table-na">None</span></td>
-                <td><span class="dn-table-na">None</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🕶️ Masked</span></td>
-                <td><span class="dn-table-badge green">✓ Saved</span></td>
-                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-masked-loc">*** / Turkey</code></td>
-                <td><span class="dn-table-text">Hidden</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🌍 Public</span></td>
-                <td><span class="dn-table-badge green">✓ Saved</span></td>
-                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-public-loc">Istanbul, Turkey</code></td>
-                <td><span class="dn-table-text">Shown</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="dn-privacy-guarantee">
-        <span class="dn-guarantee-icon">🛡️</span>
-        <div class="dn-guarantee-text">
-          <strong>Privacy Guarantee:</strong> Your file is not uploaded to the server; hash calculation is done in your browser. 
-          Even in "Public" mode, your IP address is masked in <code class="dn-code live-ip-preview">***.***.***.***</code> 
-          format — full IP is never recorded.
-        </div>
-      </div>
+      <div class="dn-privacy-guarantee"><span class="dn-guarantee-icon">🛡️</span><div class="dn-guarantee-text"><strong>Privacy Guarantee:</strong> Your file is not uploaded; hash calculation is done in your browser. IP masked as <code class="dn-code live-ip-preview">***.***.***.***</code>.</div></div>
     </div>
-
-    <button class="seal-btn dn-btn">
-      <span class="dn-btn-icon">🪶</span>
-      <span>SEAL & CREATE CERTIFICATE</span>
-    </button>
-
+    <button class="seal-btn dn-btn"><span class="dn-btn-icon">🪶</span><span>SEAL & CREATE CERTIFICATE</span></button>
     <div class="status-box dn-status" style="display:none;"></div>
-
     <div class="preview-section dn-preview-section" style="display:none;">
-      <div class="dn-preview-head">
-        <div class="dn-preview-title">📜 Certificate Ready</div>
-        <div class="dn-preview-actions">
-          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
-          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
-          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
-        </div>
-      </div>
+      <div class="dn-preview-head"><div class="dn-preview-title">📜 Certificate Ready</div><div class="dn-preview-actions"><button class="download-png dn-mini-btn">🖼️ PNG</button><button class="download-json dn-mini-btn">💾 JSON</button><button class="download-pdf dn-mini-btn">📄 PDF</button></div></div>
       <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
 
-  <!-- ÇİNCE VERSİYON -->
-  <div class="lang-zh" style="display:none;">
+  <!-- ═══════════════════════════════════════════════════════════════
+       中文版本
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="lang-zh">
     <div class="dn-head">
       <div class="dn-badge">POART PROTOCOL</div>
       <h1 class="dn-title">数字公证</h1>
       <p class="dn-sub">上传您的作品，加密密封，并获取您的官方证书。</p>
     </div>
-
     <div class="dn-grid">
-      <div>
-        <label class="dn-label">您的照片</label>
-        <div class="dn-drop photo-drop" role="button" tabindex="0">
-          <div class="dn-drop-icon">📸</div>
-          <div class="dn-drop-title">拖放文件</div>
-          <div class="dn-drop-sub">或点击选择</div>
-          <div class="dn-drop-meta photo-meta"></div>
-        </div>
-        <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
-      </div>
-
-      <div>
-        <label class="dn-label">作品文件</label>
-        <div class="dn-drop art-drop" role="button" tabindex="0">
-          <div class="dn-drop-icon">🎨</div>
-          <div class="dn-drop-title">拖放文件</div>
-          <div class="dn-drop-sub">或点击选择</div>
-          <div class="dn-drop-meta art-meta"></div>
-        </div>
-        <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
-      </div>
+      <div><label class="dn-label">您的照片</label><div class="dn-drop photo-drop" role="button" tabindex="0"><div class="dn-drop-icon">📸</div><div class="dn-drop-title">拖放文件</div><div class="dn-drop-sub">或点击选择</div><div class="dn-drop-meta photo-meta"></div></div><input type="file" class="user-photo dn-hidden-input" accept="image/*" /></div>
+      <div><label class="dn-label">作品文件</label><div class="dn-drop art-drop" role="button" tabindex="0"><div class="dn-drop-icon">🎨</div><div class="dn-drop-title">拖放文件</div><div class="dn-drop-sub">或点击选择</div><div class="dn-drop-meta art-meta"></div></div><input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" /></div>
     </div>
-
     <div class="dn-grid" style="margin-top:-6px;">
-      <div class="dn-preview-card">
-        <div class="dn-preview-label">照片预览</div>
-        <img class="dn-preview-img photo-preview" alt="" style="display:none;" />
-        <div class="dn-preview-empty photo-preview-empty">尚未选择</div>
-      </div>
-      <div class="dn-preview-card">
-        <div class="dn-preview-label">作品预览</div>
-        <img class="dn-preview-img art-preview" alt="" style="display:none;" />
-        <div class="dn-preview-empty art-preview-empty">非图片无预览</div>
-      </div>
+      <div class="dn-preview-card"><div class="dn-preview-label">照片预览</div><img class="dn-preview-img photo-preview" alt="" style="display:none;" /><div class="dn-preview-empty photo-preview-empty">尚未选择</div></div>
+      <div class="dn-preview-card"><div class="dn-preview-label">作品预览</div><img class="dn-preview-img art-preview" alt="" style="display:none;" /><div class="dn-preview-empty art-preview-empty">非图片无预览</div></div>
     </div>
-
     <div class="dn-grid">
-      <div>
-        <label class="dn-label">创作者 / 艺术家姓名</label>
-        <input type="text" class="creator-name dn-input" placeholder="输入艺术家姓名" />
-      </div>
-      <div>
-        <label class="dn-label">作品标题</label>
-        <input type="text" class="art-title dn-input" placeholder="输入作品标题" />
-      </div>
+      <div><label class="dn-label">创作者 / 艺术家姓名</label><input type="text" class="creator-name dn-input" placeholder="输入艺术家姓名" /></div>
+      <div><label class="dn-label">作品标题</label><input type="text" class="art-title dn-input" placeholder="输入作品标题" /></div>
     </div>
-
     <div class="dn-visibility-section">
-      <div class="dn-visibility-header">
-        <span class="dn-visibility-icon">🔐</span>
-        <span class="dn-visibility-title">三种隐私模式：完全控制权在您手中</span>
-      </div>
-      
-      <p class="dn-visibility-intro">
-        选择适合您情况的隐私级别。重要提示：
-        <strong class="dn-highlight">无论您选择哪种模式，您的IP地址永远不会完全可见</strong> 
-        — 系统始终会进行掩码处理（例如：<code class="dn-code">192.168.***.***</code>）。
-      </p>
-
+      <div class="dn-visibility-header"><span class="dn-visibility-icon">🔐</span><span class="dn-visibility-title">三种隐私模式：完全控制权在您手中</span></div>
+      <p class="dn-visibility-intro">选择适合您情况的隐私级别。<strong class="dn-highlight">您的IP地址永远不会完全可见</strong>。</p>
       <div class="dn-visibility-cards">
-        <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility-zh" value="private" checked />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🔒</div>
-            <div class="dn-vis-name">私密</div>
-            <div class="dn-vis-desc">仅您可见。适合您暂时不想分享的项目。时间戳并等待。</div>
-            <div class="dn-vis-badge private">不发送到服务器</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility-zh" value="masked" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🕶️</div>
-            <div class="dn-vis-name">掩码</div>
-            <div class="dn-vis-desc">印章可见，身份隐藏。适合希望保持匿名的艺术家。位置和设备信息已掩码。</div>
-            <div class="dn-vis-badge masked">匿名记录</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility-zh" value="public" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🌍</div>
-            <div class="dn-vis-name">公开</div>
-            <div class="dn-vis-desc">完全透明。日期、城市和设备信息可见。<em>（IP仍然掩码）</em></div>
-            <div class="dn-vis-badge public">完全透明</div>
-          </div>
-        </label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="private" checked /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🔒</div><div class="dn-vis-name">私密</div><div class="dn-vis-desc">仅您可见。时间戳并等待。</div><div class="dn-vis-badge private">不发送到服务器</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="masked" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🕶️</div><div class="dn-vis-name">掩码</div><div class="dn-vis-desc">印章可见，身份隐藏。位置和设备信息已掩码。</div><div class="dn-vis-badge masked">匿名记录</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="public" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🌍</div><div class="dn-vis-name">公开</div><div class="dn-vis-desc">完全透明。<em>（IP仍然掩码）</em></div><div class="dn-vis-badge public">完全透明</div></div></label>
       </div>
-
-      <div class="dn-table-section">
-        <div class="dn-table-header">
-          <span class="dn-table-icon">📊</span>
-          <span class="dn-table-title">模式对比表</span>
-        </div>
-        <div class="dn-table-wrapper">
-          <table class="dn-comparison-table">
-            <thead>
-              <tr>
-                <th>模式</th>
-                <th>服务器</th>
-                <th>IP</th>
-                <th>位置</th>
-                <th>设备</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="dn-table-mode">🔒 私密</span></td>
-                <td><span class="dn-table-badge red">✕ 不发送</span></td>
-                <td><span class="dn-table-na">无</span></td>
-                <td><span class="dn-table-na">无</span></td>
-                <td><span class="dn-table-na">无</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🕶️ 掩码</span></td>
-                <td><span class="dn-table-badge green">✓ 已保存</span></td>
-                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-masked-loc">*** / 土耳其</code></td>
-                <td><span class="dn-table-text">隐藏</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🌍 公开</span></td>
-                <td><span class="dn-table-badge green">✓ 已保存</span></td>
-                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-public-loc">伊斯坦布尔, 土耳其</code></td>
-                <td><span class="dn-table-text">显示</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="dn-privacy-guarantee">
-        <span class="dn-guarantee-icon">🛡️</span>
-        <div class="dn-guarantee-text">
-          <strong>隐私保证：</strong>您的文件不会上传到服务器；哈希计算在您的浏览器中完成。
-          即使在"公开"模式下，您的IP地址也以 <code class="dn-code live-ip-preview">***.***.***.***</code> 
-          格式掩码 — 完整IP永远不会被记录。
-        </div>
-      </div>
+      <div class="dn-privacy-guarantee"><span class="dn-guarantee-icon">🛡️</span><div class="dn-guarantee-text"><strong>隐私保证：</strong>文件不上传；哈希计算在浏览器完成。IP掩码为 <code class="dn-code live-ip-preview">***.***.***.***</code>。</div></div>
     </div>
-
-    <button class="seal-btn dn-btn">
-      <span class="dn-btn-icon">🪶</span>
-      <span>密封并创建证书</span>
-    </button>
-
+    <button class="seal-btn dn-btn"><span class="dn-btn-icon">🪶</span><span>密封并创建证书</span></button>
     <div class="status-box dn-status" style="display:none;"></div>
-
     <div class="preview-section dn-preview-section" style="display:none;">
-      <div class="dn-preview-head">
-        <div class="dn-preview-title">📜 证书已准备好</div>
-        <div class="dn-preview-actions">
-          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
-          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
-          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
-        </div>
-      </div>
+      <div class="dn-preview-head"><div class="dn-preview-title">📜 证书已准备好</div><div class="dn-preview-actions"><button class="download-png dn-mini-btn">🖼️ PNG</button><button class="download-json dn-mini-btn">💾 JSON</button><button class="download-pdf dn-mini-btn">📄 PDF</button></div></div>
       <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
 
-  <!-- İSPANYOLCA VERSİYON -->
-  <div class="lang-es" style="display:none;">
+  <!-- ═══════════════════════════════════════════════════════════════
+       VERSIÓN EN ESPAÑOL
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="lang-es">
     <div class="dn-head">
       <div class="dn-badge">POART PROTOCOL</div>
       <h1 class="dn-title">NOTARIO DIGITAL</h1>
       <p class="dn-sub">Sube su obra de arte, selle criptográficamente y reciba su certificado oficial.</p>
     </div>
-
     <div class="dn-grid">
-      <div>
-        <label class="dn-label">Su Foto</label>
-        <div class="dn-drop photo-drop" role="button" tabindex="0">
-          <div class="dn-drop-icon">📸</div>
-          <div class="dn-drop-title">Arrastrar y soltar</div>
-          <div class="dn-drop-sub">o haga clic para seleccionar</div>
-          <div class="dn-drop-meta photo-meta"></div>
-        </div>
-        <input type="file" class="user-photo dn-hidden-input" accept="image/*" />
-      </div>
-
-      <div>
-        <label class="dn-label">Archivo de Obra</label>
-        <div class="dn-drop art-drop" role="button" tabindex="0">
-          <div class="dn-drop-icon">🎨</div>
-          <div class="dn-drop-title">Arrastrar y soltar</div>
-          <div class="dn-drop-sub">o haga clic para seleccionar</div>
-          <div class="dn-drop-meta art-meta"></div>
-        </div>
-        <input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" />
-      </div>
+      <div><label class="dn-label">Su Foto</label><div class="dn-drop photo-drop" role="button" tabindex="0"><div class="dn-drop-icon">📸</div><div class="dn-drop-title">Arrastrar y soltar</div><div class="dn-drop-sub">o haga clic para seleccionar</div><div class="dn-drop-meta photo-meta"></div></div><input type="file" class="user-photo dn-hidden-input" accept="image/*" /></div>
+      <div><label class="dn-label">Archivo de Obra</label><div class="dn-drop art-drop" role="button" tabindex="0"><div class="dn-drop-icon">🎨</div><div class="dn-drop-title">Arrastrar y soltar</div><div class="dn-drop-sub">o haga clic para seleccionar</div><div class="dn-drop-meta art-meta"></div></div><input type="file" class="art-file dn-hidden-input" accept="image/*,.pdf,.mp4" /></div>
     </div>
-
     <div class="dn-grid" style="margin-top:-6px;">
-      <div class="dn-preview-card">
-        <div class="dn-preview-label">Vista previa de foto</div>
-        <img class="dn-preview-img photo-preview" alt="" style="display:none;" />
-        <div class="dn-preview-empty photo-preview-empty">Aún no seleccionado</div>
-      </div>
-      <div class="dn-preview-card">
-        <div class="dn-preview-label">Vista previa de obra</div>
-        <img class="dn-preview-img art-preview" alt="" style="display:none;" />
-        <div class="dn-preview-empty art-preview-empty">Sin vista previa para no imágenes</div>
-      </div>
+      <div class="dn-preview-card"><div class="dn-preview-label">Vista previa de foto</div><img class="dn-preview-img photo-preview" alt="" style="display:none;" /><div class="dn-preview-empty photo-preview-empty">Aún no seleccionado</div></div>
+      <div class="dn-preview-card"><div class="dn-preview-label">Vista previa de obra</div><img class="dn-preview-img art-preview" alt="" style="display:none;" /><div class="dn-preview-empty art-preview-empty">Sin vista previa para no imágenes</div></div>
     </div>
-
     <div class="dn-grid">
-      <div>
-        <label class="dn-label">Creador / Nombre del Artista</label>
-        <input type="text" class="creator-name dn-input" placeholder="Ingrese el nombre del artista" />
-      </div>
-      <div>
-        <label class="dn-label">Título de la Obra</label>
-        <input type="text" class="art-title dn-input" placeholder="Ingrese el título de la obra" />
-      </div>
+      <div><label class="dn-label">Creador / Nombre del Artista</label><input type="text" class="creator-name dn-input" placeholder="Ingrese el nombre del artista" /></div>
+      <div><label class="dn-label">Título de la Obra</label><input type="text" class="art-title dn-input" placeholder="Ingrese el título de la obra" /></div>
     </div>
-
     <div class="dn-visibility-section">
-      <div class="dn-visibility-header">
-        <span class="dn-visibility-icon">🔐</span>
-        <span class="dn-visibility-title">Tres Modos de Privacidad: El Control Total es Suyo</span>
-      </div>
-      
-      <p class="dn-visibility-intro">
-        Elija el nivel de privacidad que se adapte a su situación. Nota importante: 
-        <strong class="dn-highlight">Independientemente del modo que elija, su dirección IP nunca es completamente visible</strong> 
-        — el sistema siempre la enmascara (ej.: <code class="dn-code">192.168.***.***</code>).
-      </p>
-
+      <div class="dn-visibility-header"><span class="dn-visibility-icon">🔐</span><span class="dn-visibility-title">Tres Modos de Privacidad</span></div>
+      <p class="dn-visibility-intro">Elija el nivel de privacidad. <strong class="dn-highlight">Su IP nunca es completamente visible</strong>.</p>
       <div class="dn-visibility-cards">
-        <label class="dn-vis-card" data-value="private">
-          <input type="radio" name="visibility-es" value="private" checked />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🔒</div>
-            <div class="dn-vis-name">Privado</div>
-            <div class="dn-vis-desc">Solo usted puede verlo. Ideal para proyectos que aún no desea compartir. Marca de tiempo y espera.</div>
-            <div class="dn-vis-badge private">No se envía al servidor</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="masked">
-          <input type="radio" name="visibility-es" value="masked" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🕶️</div>
-            <div class="dn-vis-name">Enmascarado</div>
-            <div class="dn-vis-desc">Sello visible, identidad oculta. Para artistas que desean permanecer anónimos. Información de ubicación y dispositivo enmascarada.</div>
-            <div class="dn-vis-badge masked">Registro anónimo</div>
-          </div>
-        </label>
-
-        <label class="dn-vis-card" data-value="public">
-          <input type="radio" name="visibility-es" value="public" />
-          <div class="dn-vis-card-inner">
-            <div class="dn-vis-icon">🌍</div>
-            <div class="dn-vis-name">Público</div>
-            <div class="dn-vis-desc">Transparencia total. Fecha, ciudad e información del dispositivo visibles. <em>(IP aún enmascarada)</em></div>
-            <div class="dn-vis-badge public">Transparencia total</div>
-          </div>
-        </label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="private" checked /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🔒</div><div class="dn-vis-name">Privado</div><div class="dn-vis-desc">Solo usted puede verlo.</div><div class="dn-vis-badge private">No se envía al servidor</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="masked" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🕶️</div><div class="dn-vis-name">Enmascarado</div><div class="dn-vis-desc">Sello visible, identidad oculta.</div><div class="dn-vis-badge masked">Registro anónimo</div></div></label>
+        <label class="dn-vis-card"><input type="radio" name="visibility" value="public" /><div class="dn-vis-card-inner"><div class="dn-vis-icon">🌍</div><div class="dn-vis-name">Público</div><div class="dn-vis-desc">Transparencia total. <em>(IP aún enmascarada)</em></div><div class="dn-vis-badge public">Transparencia total</div></div></label>
       </div>
-
-      <div class="dn-table-section">
-        <div class="dn-table-header">
-          <span class="dn-table-icon">📊</span>
-          <span class="dn-table-title">Tabla de Comparación de Modos</span>
-        </div>
-        <div class="dn-table-wrapper">
-          <table class="dn-comparison-table">
-            <thead>
-              <tr>
-                <th>Modo</th>
-                <th>Servidor</th>
-                <th>IP</th>
-                <th>Ubicación</th>
-                <th>Dispositivo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="dn-table-mode">🔒 Privado</span></td>
-                <td><span class="dn-table-badge red">✕ No enviado</span></td>
-                <td><span class="dn-table-na">Ninguno</span></td>
-                <td><span class="dn-table-na">Ninguno</span></td>
-                <td><span class="dn-table-na">Ninguno</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🕶️ Enmascarado</span></td>
-                <td><span class="dn-table-badge green">✓ Guardado</span></td>
-                <td><code class="dn-table-code table-masked-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-masked-loc">*** / Turquía</code></td>
-                <td><span class="dn-table-text">Oculto</span></td>
-              </tr>
-              <tr>
-                <td><span class="dn-table-mode">🌍 Público</span></td>
-                <td><span class="dn-table-badge green">✓ Guardado</span></td>
-                <td><code class="dn-table-code table-public-ip">46.1.***.***</code></td>
-                <td><code class="dn-table-code table-public-loc">Estambul, Turquía</code></td>
-                <td><span class="dn-table-text">Mostrado</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="dn-privacy-guarantee">
-        <span class="dn-guarantee-icon">🛡️</span>
-        <div class="dn-guarantee-text">
-          <strong>Garantía de Privacidad:</strong> Su archivo no se carga en el servidor; el cálculo de hash se realiza en su navegador. 
-          Incluso en modo "Público", su dirección IP se enmascara en formato <code class="dn-code live-ip-preview">***.***.***.***</code> 
-          — la IP completa nunca se registra.
-        </div>
-      </div>
+      <div class="dn-privacy-guarantee"><span class="dn-guarantee-icon">🛡️</span><div class="dn-guarantee-text"><strong>Garantía de Privacidad:</strong> Archivo no se carga; hash en navegador. IP: <code class="dn-code live-ip-preview">***.***.***.***</code>.</div></div>
     </div>
-
-    <button class="seal-btn dn-btn">
-      <span class="dn-btn-icon">🪶</span>
-      <span>SELLAR Y CREAR CERTIFICADO</span>
-    </button>
-
+    <button class="seal-btn dn-btn"><span class="dn-btn-icon">🪶</span><span>SELLAR Y CREAR CERTIFICADO</span></button>
     <div class="status-box dn-status" style="display:none;"></div>
-
     <div class="preview-section dn-preview-section" style="display:none;">
-      <div class="dn-preview-head">
-        <div class="dn-preview-title">📜 Certificado Listo</div>
-        <div class="dn-preview-actions">
-          <button class="download-png dn-mini-btn" type="button">🖼️ PNG</button>
-          <button class="download-json dn-mini-btn" type="button">💾 JSON</button>
-          <button class="download-pdf dn-mini-btn" type="button">📄 PDF</button>
-        </div>
-      </div>
+      <div class="dn-preview-head"><div class="dn-preview-title">📜 Certificado Listo</div><div class="dn-preview-actions"><button class="download-png dn-mini-btn">🖼️ PNG</button><button class="download-json dn-mini-btn">💾 JSON</button><button class="download-pdf dn-mini-btn">📄 PDF</button></div></div>
       <div class="cert-preview dn-cert-container"></div>
     </div>
   </div>
@@ -698,912 +208,110 @@
 <canvas id="certCanvas" style="display:none;"></canvas>
 
 <style>
-  :root {
-    --dn-primary: #059669;
-    --dn-primary-dark: #047857;
-    --dn-primary-darker: #065f46;
-    --dn-primary-light: #10b981;
-    --dn-primary-lighter: #34d399;
-    --dn-accent: #6ee7b7;
-    --dn-gray-50: #f9fafb;
-    --dn-gray-100: #f3f4f6;
-    --dn-gray-200: #e5e7eb;
-    --dn-gray-300: #d1d5db;
-    --dn-gray-400: #9ca3af;
-    --dn-gray-500: #6b7280;
-    --dn-gray-600: #4b5563;
-    --dn-gray-700: #374151;
-    --dn-gray-800: #1f2937;
-    --dn-gray-900: #111827;
-  }
+/* ═══════════════════════════════════════════════════════════════════════════
+   DİJİTAL NOTER STİLLERİ v5.5
+   
+   ⚠️ DİL KONTROLÜ CUSTOM CSS'TE [data-multilang] SİSTEMİYLE YAPILIYOR
+   Bu dosyada dil gizleme/gösterme CSS'i YOK - Custom CSS hallediyor
+═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --dn-primary: #059669; --dn-primary-dark: #047857; --dn-primary-darker: #065f46;
+  --dn-primary-light: #10b981; --dn-primary-lighter: #34d399; --dn-accent: #6ee7b7;
+  --dn-gray-50: #f9fafb; --dn-gray-100: #f3f4f6; --dn-gray-200: #e5e7eb;
+  --dn-gray-300: #d1d5db; --dn-gray-400: #9ca3af; --dn-gray-500: #6b7280;
+  --dn-gray-600: #4b5563; --dn-gray-700: #374151; --dn-gray-800: #1f2937;
+}
+
+.dn-wrap { max-width:920px; margin:0 auto; padding:48px 52px; border-radius:28px; background:linear-gradient(165deg,#fff 0%,#f9fafb 25%,#f3f4f6 50%,#ecfdf5 75%,#d1fae5 100%); box-shadow:0 25px 80px rgba(5,150,105,.08),0 10px 40px rgba(0,0,0,.04); font-family:'Inter',system-ui,sans-serif; border:1px solid rgba(5,150,105,.12); position:relative; overflow:visible; }
+.dn-wrap::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--dn-primary-dark),var(--dn-primary),var(--dn-primary-light),var(--dn-primary-lighter),var(--dn-accent)); }
+.dn-head { text-align:center; margin-bottom:36px; padding-bottom:28px; border-bottom:1px solid rgba(5,150,105,.1); }
+.dn-badge { display:inline-block; padding:6px 16px; background:linear-gradient(135deg,var(--dn-primary-darker),var(--dn-primary-dark)); color:#d1fae5; font-size:11px; font-weight:800; letter-spacing:2.5px; border-radius:100px; margin-bottom:16px; }
+.dn-title { font-weight:900; font-size:38px; background:linear-gradient(135deg,var(--dn-gray-800),var(--dn-primary-darker)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin:0 0 12px; }
+.dn-sub { margin:0; color:var(--dn-gray-500); font-size:15px; line-height:1.6; font-weight:500; }
+.dn-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.dn-label { font-weight:700; font-size:13px; color:var(--dn-gray-700); margin-bottom:10px; display:block; }
+.dn-input { width:100%; padding:14px 16px; border:2px solid var(--dn-gray-200); border-radius:14px; background:linear-gradient(180deg,#fff,var(--dn-gray-50)); outline:none; font-size:14px; font-weight:500; color:var(--dn-gray-800); box-sizing:border-box; transition:all .25s; }
+.dn-input:focus { border-color:var(--dn-primary); box-shadow:0 0 0 4px rgba(5,150,105,.1); }
+.dn-drop { border:2px dashed var(--dn-gray-300); background:linear-gradient(145deg,#fff,var(--dn-gray-50),rgba(236,253,245,.5)); border-radius:18px; padding:24px 18px; cursor:pointer; min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; transition:all .3s; }
+.dn-drop:hover { border-color:var(--dn-primary-light); transform:translateY(-2px); box-shadow:0 12px 30px rgba(5,150,105,.1); }
+.dn-drop.is-over { border-color:var(--dn-primary); border-style:solid; background:linear-gradient(145deg,#ecfdf5,#d1fae5); }
+.dn-drop-icon { font-size:28px; }
+.dn-drop-title { font-weight:800; color:var(--dn-gray-700); font-size:14px; }
+.dn-drop-sub { color:var(--dn-gray-400); font-size:12px; }
+.dn-drop-meta { color:var(--dn-primary-dark); font-size:11px; font-weight:700; margin-top:6px; padding:4px 10px; background:rgba(5,150,105,.08); border-radius:6px; }
+.dn-hidden-input { display:none; }
+.dn-preview-card { border:1px solid var(--dn-gray-200); border-radius:16px; background:linear-gradient(180deg,#fff,var(--dn-gray-50)); padding:14px; min-height:150px; }
+.dn-preview-label { font-weight:800; color:var(--dn-gray-600); font-size:11px; margin-bottom:12px; text-transform:uppercase; letter-spacing:.8px; }
+.dn-preview-img { width:100%; height:100px; object-fit:cover; border-radius:12px; border:1px solid var(--dn-gray-200); }
+.dn-preview-empty { color:var(--dn-gray-400); font-size:12px; padding:30px 0 0; text-align:center; }
+.dn-visibility-section { background:linear-gradient(145deg,#fff,#f0fdf4); border:2px solid rgba(5,150,105,.15); border-radius:20px; padding:28px; margin:24px 0; overflow:visible; }
+.dn-visibility-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.dn-visibility-icon { font-size:24px; }
+.dn-visibility-title { font-size:18px; font-weight:800; color:var(--dn-primary-darker); }
+.dn-visibility-intro { font-size:14px; color:var(--dn-gray-600); line-height:1.7; margin-bottom:20px; }
+.dn-highlight { color:var(--dn-gray-900); font-weight:800; background:linear-gradient(135deg,rgba(5,150,105,.12),rgba(16,185,129,.08)); padding:2px 6px; border-radius:4px; }
+.dn-code { background:linear-gradient(135deg,var(--dn-primary-darker),var(--dn-primary-dark)); color:#fff; padding:4px 12px; border-radius:8px; font-family:'Courier New',monospace; font-size:13px; font-weight:800; }
+.dn-visibility-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:0; }
+.dn-vis-card { cursor:pointer; position:relative; }
+.dn-vis-card input { position:absolute; opacity:0; pointer-events:none; }
+.dn-vis-card-inner { background:#fff; border:2px solid var(--dn-gray-200); border-radius:16px; padding:20px 16px; text-align:center; transition:all .3s; height:100%; display:flex; flex-direction:column; }
+.dn-vis-card:hover .dn-vis-card-inner { border-color:var(--dn-primary-light); box-shadow:0 8px 25px rgba(5,150,105,.12); transform:translateY(-2px); }
+.dn-vis-card input:checked + .dn-vis-card-inner { border-color:var(--dn-primary); background:linear-gradient(145deg,#f0fdf4,#ecfdf5); box-shadow:0 8px 30px rgba(5,150,105,.18); }
+.dn-vis-icon { font-size:32px; margin-bottom:12px; }
+.dn-vis-name { font-size:14px; font-weight:800; color:var(--dn-primary-dark); margin-bottom:10px; }
+.dn-vis-desc { font-size:12px; color:var(--dn-gray-500); line-height:1.5; flex-grow:1; }
+.dn-vis-badge { margin-top:14px; padding:6px 12px; border-radius:100px; font-size:10px; font-weight:800; text-transform:uppercase; }
+.dn-vis-badge.private { background:linear-gradient(135deg,#fef3c7,#fde68a); color:#92400e; }
+.dn-vis-badge.masked { background:linear-gradient(135deg,#e0e7ff,#c7d2fe); color:#3730a3; }
+.dn-vis-badge.public { background:linear-gradient(135deg,#d1fae5,#a7f3d0); color:var(--dn-primary-darker); }
+.dn-privacy-guarantee { display:flex; align-items:flex-start; gap:14px; background:linear-gradient(135deg,#ecfdf5,#d1fae5); border:1px solid var(--dn-accent); border-left:4px solid var(--dn-primary); border-radius:12px; padding:18px 22px; margin-top:24px; width:100%; box-sizing:border-box; }
+.dn-guarantee-icon { font-size:24px; flex-shrink:0; }
+.dn-guarantee-text { font-size:13px; color:var(--dn-gray-700); line-height:1.6; }
+.dn-guarantee-text strong { color:var(--dn-primary-darker); }
+.dn-btn { width:100%; padding:18px 32px; border:none; border-radius:16px; background:linear-gradient(135deg,var(--dn-primary-dark),var(--dn-primary),var(--dn-primary-light)); color:#fff; font-weight:800; font-size:15px; cursor:pointer; box-shadow:0 8px 30px rgba(5,150,105,.35); transition:all .3s; display:flex; align-items:center; justify-content:center; gap:10px; text-transform:uppercase; }
+.dn-btn:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(5,150,105,.4); }
+.dn-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.dn-btn-icon { font-size:18px; }
+.dn-status { text-align:center; margin-top:18px; color:var(--dn-gray-600); font-size:14px; font-weight:600; padding:14px 20px; background:linear-gradient(135deg,var(--dn-gray-50),#fff); border-radius:12px; border:1px solid var(--dn-gray-200); }
+.dn-preview-section { margin-top:28px; border-radius:20px; border:2px solid rgba(5,150,105,.2); background:#fff; overflow:hidden; }
+.dn-preview-head { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; background:linear-gradient(135deg,#f0fdf4,#ecfdf5,#d1fae5); border-bottom:2px solid rgba(5,150,105,.15); }
+.dn-preview-title { font-weight:800; color:var(--dn-primary-darker); font-size:16px; }
+.dn-preview-actions { display:flex; gap:10px; }
+.dn-mini-btn { padding:10px 16px; border-radius:10px; border:2px solid rgba(5,150,105,.25); background:#fff; cursor:pointer; font-weight:700; font-size:12px; color:var(--dn-primary-dark); transition:all .25s; }
+.dn-mini-btn:hover { background:linear-gradient(135deg,#f0fdf4,#ecfdf5); border-color:var(--dn-primary); transform:translateY(-1px); }
+.dn-cert-container { padding:36px; background:linear-gradient(180deg,#fff,var(--dn-gray-50)); }
+
+/* Certificate Styles */
+.cert-frame { max-width:800px; margin:0 auto; background:linear-gradient(165deg,#fff,var(--dn-gray-50),#f0fdf4); border:3px solid var(--dn-primary-darker); border-radius:24px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.1); }
+.cert-header { background:linear-gradient(135deg,var(--dn-gray-800),var(--dn-primary-darker),var(--dn-primary-dark),var(--dn-primary)); padding:36px 28px; text-align:center; position:relative; }
+.cert-header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:6px; background:linear-gradient(90deg,var(--dn-primary-light),var(--dn-primary-lighter),var(--dn-accent),var(--dn-primary-lighter),var(--dn-primary-light)); }
+.cert-logo { font-family:Georgia,serif; font-size:13px; font-weight:700; color:var(--dn-accent); letter-spacing:4px; margin-bottom:14px; }
+.cert-title { font-family:Georgia,serif; font-size:34px; font-weight:900; color:#fff; margin:0; text-shadow:0 3px 12px rgba(0,0,0,.3); }
+.cert-subtitle { font-size:13px; color:#d1fae5; margin-top:10px; font-weight:500; }
+.cert-body { padding:36px 32px; }
+.cert-photos { display:grid; grid-template-columns:120px 1fr 120px; gap:24px; margin-bottom:32px; align-items:center; }
+.cert-photo-frame { width:120px; height:120px; border-radius:14px; border:3px solid var(--dn-gray-300); overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,.1); }
+.cert-photo-frame img { width:100%; height:100%; object-fit:cover; }
+.cert-photo-label { text-align:center; font-size:11px; color:var(--dn-gray-500); margin-top:8px; font-weight:700; text-transform:uppercase; }
+.cert-artwork-main { border-radius:16px; overflow:hidden; border:3px solid var(--dn-gray-200); box-shadow:0 8px 30px rgba(0,0,0,.1); }
+.cert-artwork-main img { width:100%; height:auto; display:block; }
+.cert-qr { width:120px; height:120px; border:3px solid var(--dn-primary); border-radius:14px; padding:8px; background:#fff; display:flex; align-items:center; justify-content:center; }
+.cert-info-panel { background:linear-gradient(145deg,#fff,#f0fdf4,#ecfdf5); border:2px solid var(--dn-accent); border-radius:18px; padding:28px; margin-bottom:24px; border-left:6px solid var(--dn-primary); }
+.cert-info-title { font-family:Georgia,serif; font-size:20px; font-weight:900; color:var(--dn-primary-darker); margin-bottom:20px; }
+.cert-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 24px; }
+.cert-info-item { display:flex; flex-direction:column; gap:5px; }
+.cert-info-label { font-size:11px; font-weight:800; color:var(--dn-primary); text-transform:uppercase; letter-spacing:1px; }
+.cert-info-value { font-size:14px; font-weight:700; color:var(--dn-gray-800); }
+.cert-hash-panel { background:linear-gradient(145deg,var(--dn-gray-50),#fff); border:2px solid var(--dn-gray-200); border-radius:16px; padding:24px; margin-bottom:24px; }
+.cert-hash-title { font-size:13px; font-weight:800; color:var(--dn-gray-600); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.cert-hash-value { font-family:'Courier New',monospace; font-size:11px; color:var(--dn-gray-700); word-break:break-all; line-height:1.7; background:#fff; padding:14px; border-radius:10px; border:1px solid var(--dn-gray-200); }
+.cert-footer { padding-top:24px; border-top:2px solid var(--dn-gray-200); display:flex; justify-content:flex-end; }
+.cert-stamp { width:95px; height:95px; border:4px double var(--dn-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; color:var(--dn-primary-dark); transform:rotate(-15deg); background:radial-gradient(circle,#fff,#f0fdf4,#ecfdf5); }
+.cert-disclaimer { font-family:Georgia,serif; font-size:11px; line-height:1.7; color:var(--dn-gray-500); text-align:center; font-style:italic; padding:18px 24px; background:linear-gradient(135deg,var(--dn-gray-50),#fff); border-radius:14px; border:1px solid var(--dn-gray-200); margin-top:24px; }
+.cert-local-badge { display:inline-block; background:linear-gradient(135deg,#fef3c7,#fde68a); color:#92400e; padding:4px 12px; border-radius:100px; font-size:10px; font-weight:800; margin-left:8px; }
 
-  .dn-wrap{
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 48px 52px;
-    border-radius: 28px;
-    background: linear-gradient(165deg, 
-      #ffffff 0%, 
-      #f9fafb 25%,
-      #f3f4f6 50%,
-      #ecfdf5 75%,
-      #d1fae5 100%
-    );
-    box-shadow: 
-      0 25px 80px rgba(5, 150, 105, 0.08),
-      0 10px 40px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    border: 1px solid rgba(5, 150, 105, 0.12);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dn-wrap::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, 
-      var(--dn-primary-dark) 0%,
-      var(--dn-primary) 25%,
-      var(--dn-primary-light) 50%,
-      var(--dn-primary-lighter) 75%,
-      var(--dn-accent) 100%
-    );
-  }
-
-  .dn-head{ 
-    text-align: center; 
-    margin-bottom: 36px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid rgba(5, 150, 105, 0.1);
-  }
-
-  .dn-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: linear-gradient(135deg, var(--dn-primary-darker), var(--dn-primary-dark));
-    color: #d1fae5;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    border-radius: 100px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.25);
-  }
-
-  .dn-title{
-    font-weight: 900;
-    font-size: 38px;
-    background: linear-gradient(135deg, var(--dn-gray-800) 0%, var(--dn-primary-darker) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.03em;
-    margin: 0 0 12px 0;
-  }
-
-  .dn-sub{ 
-    margin: 0; 
-    color: var(--dn-gray-500); 
-    font-size: 15px; 
-    line-height: 1.6;
-    font-weight: 500;
-  }
-
-  .dn-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  .dn-label{ 
-    font-weight: 700; 
-    font-size: 13px; 
-    color: var(--dn-gray-700); 
-    margin-bottom: 10px; 
-    display: block;
-    letter-spacing: 0.3px;
-  }
-
-  .dn-input{
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid var(--dn-gray-200);
-    border-radius: 14px;
-    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
-    outline: none;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--dn-gray-800);
-    box-sizing: border-box;
-  }
-
-  .dn-input::placeholder {
-    color: var(--dn-gray-400);
-  }
-
-  .dn-input:hover {
-    border-color: var(--dn-gray-300);
-  }
-
-  .dn-input:focus{
-    border-color: var(--dn-primary);
-    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
-    background: #ffffff;
-  }
-
-  .dn-drop{
-    border: 2px dashed var(--dn-gray-300);
-    background: linear-gradient(145deg, #ffffff 0%, var(--dn-gray-50) 50%, rgba(236, 253, 245, 0.5) 100%);
-    border-radius: 18px;
-    padding: 24px 18px;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    min-height: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    text-align: center;
-  }
-
-  .dn-drop:hover{ 
-    border-color: var(--dn-primary-light);
-    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(5, 150, 105, 0.1);
-  }
-
-  .dn-drop.is-over{ 
-    border-color: var(--dn-primary);
-    border-style: solid;
-    background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%);
-    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.12);
-  }
-
-  .dn-drop-icon {
-    font-size: 28px;
-    margin-bottom: 4px;
-  }
-
-  .dn-drop-title{ 
-    font-weight: 800; 
-    color: var(--dn-gray-700);
-    font-size: 14px;
-  }
-
-  .dn-drop-sub{ 
-    color: var(--dn-gray-400); 
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  .dn-drop-meta{ 
-    color: var(--dn-primary-dark); 
-    font-size: 11px; 
-    font-weight: 700; 
-    margin-top: 6px;
-    padding: 4px 10px;
-    background: rgba(5, 150, 105, 0.08);
-    border-radius: 6px;
-  }
-
-  .dn-hidden-input{ display: none; }
-
-  .dn-preview-card{
-    border: 1px solid var(--dn-gray-200);
-    border-radius: 16px;
-    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
-    padding: 14px;
-    min-height: 150px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-  }
-
-  .dn-preview-label{ 
-    font-weight: 800; 
-    color: var(--dn-gray-600); 
-    font-size: 11px; 
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-
-  .dn-preview-img{ 
-    width: 100%; 
-    height: 100px; 
-    object-fit: cover; 
-    border-radius: 12px; 
-    border: 1px solid var(--dn-gray-200);
-  }
-
-  .dn-preview-empty{ 
-    color: var(--dn-gray-400); 
-    font-size: 12px; 
-    padding: 30px 0 0; 
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .dn-visibility-section {
-    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
-    border: 2px solid rgba(5, 150, 105, 0.15);
-    border-radius: 20px;
-    padding: 28px;
-    margin: 24px 0;
-  }
-
-  .dn-visibility-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .dn-visibility-icon {
-    font-size: 24px;
-  }
-
-  .dn-visibility-title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--dn-primary-darker);
-  }
-
-  .dn-visibility-intro {
-    font-size: 14px;
-    color: var(--dn-gray-600);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .dn-highlight {
-    color: var(--dn-gray-900);
-    font-weight: 800;
-    background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(16, 185, 129, 0.08));
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .dn-code {
-    background: linear-gradient(135deg, var(--dn-primary-darker), var(--dn-primary-dark));
-    color: #ffffff;
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    font-weight: 800;
-    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
-  }
-
-  .dn-visibility-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  .dn-vis-card {
-    cursor: pointer;
-    position: relative;
-  }
-
-  .dn-vis-card input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .dn-vis-card-inner {
-    background: #ffffff;
-    border: 2px solid var(--dn-gray-200);
-    border-radius: 16px;
-    padding: 20px 16px;
-    text-align: center;
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .dn-vis-card:hover .dn-vis-card-inner {
-    border-color: var(--dn-primary-light);
-    box-shadow: 0 8px 25px rgba(5, 150, 105, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .dn-vis-card input:checked + .dn-vis-card-inner {
-    border-color: var(--dn-primary);
-    background: linear-gradient(145deg, #f0fdf4 0%, #ecfdf5 100%);
-    box-shadow: 0 8px 30px rgba(5, 150, 105, 0.18);
-  }
-
-  .dn-vis-icon {
-    font-size: 32px;
-    margin-bottom: 12px;
-  }
-
-  .dn-vis-name {
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--dn-primary-dark);
-    margin-bottom: 10px;
-  }
-
-  .dn-vis-desc {
-    font-size: 12px;
-    color: var(--dn-gray-500);
-    line-height: 1.5;
-    flex-grow: 1;
-  }
-
-  .dn-vis-desc em {
-    color: var(--dn-gray-400);
-    font-style: italic;
-  }
-
-  .dn-vis-badge {
-    margin-top: 14px;
-    padding: 6px 12px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .dn-vis-badge.private {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-  }
-
-  .dn-vis-badge.masked {
-    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-    color: #3730a3;
-  }
-
-  .dn-vis-badge.public {
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-    color: var(--dn-primary-darker);
-  }
-
-  .dn-privacy-guarantee {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-    border: 1px solid var(--dn-accent);
-    border-left: 4px solid var(--dn-primary);
-    border-radius: 12px;
-    padding: 16px 20px;
-  }
-
-  .dn-table-section {
-    margin-top: 24px;
-    margin-bottom: 20px;
-  }
-
-  .dn-table-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, var(--dn-primary-darker) 0%, var(--dn-primary-dark) 50%, var(--dn-primary) 100%);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.25);
-  }
-
-  .dn-table-icon {
-    font-size: 24px;
-    filter: brightness(1.2);
-  }
-
-  .dn-table-title {
-    font-size: 16px;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: 0.3px;
-  }
-
-  .dn-table-wrapper {
-    overflow-x: auto;
-    border-radius: 14px;
-    border: 1px solid var(--dn-gray-200);
-    background: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  }
-
-  .dn-comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-
-  .dn-comparison-table thead {
-    background: linear-gradient(135deg, var(--dn-gray-50) 0%, #f0fdf4 100%);
-  }
-
-  .dn-comparison-table th {
-    padding: 14px 16px;
-    text-align: left;
-    font-weight: 800;
-    color: var(--dn-gray-700);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid var(--dn-gray-200);
-  }
-
-  .dn-comparison-table td {
-    padding: 16px;
-    border-bottom: 1px solid var(--dn-gray-100);
-    vertical-align: middle;
-  }
-
-  .dn-comparison-table tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  .dn-comparison-table tbody tr:hover {
-    background: linear-gradient(135deg, rgba(240, 253, 244, 0.5), rgba(236, 253, 245, 0.5));
-  }
-
-  .dn-table-mode {
-    font-weight: 700;
-    color: var(--dn-gray-800);
-    font-size: 13px;
-    line-height: 1.4;
-  }
-
-  .dn-table-mode-sub {
-    font-weight: 600;
-    color: var(--dn-gray-500);
-    font-size: 11px;
-  }
-
-  .dn-table-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  .dn-table-badge.red {
-    background: linear-gradient(135deg, #fef2f2, #fee2e2);
-    color: #dc2626;
-  }
-
-  .dn-table-badge.green {
-    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-    color: #16a34a;
-  }
-
-  .dn-table-na {
-    color: var(--dn-gray-400);
-    font-weight: 500;
-    font-style: italic;
-  }
-
-  .dn-table-code {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .dn-table-text {
-    color: var(--dn-gray-600);
-    font-weight: 600;
-  }
-
-  .dn-guarantee-icon {
-    font-size: 24px;
-    flex-shrink: 0;
-  }
-
-  .dn-guarantee-text {
-    font-size: 13px;
-    color: var(--dn-gray-700);
-    line-height: 1.6;
-  }
-
-  .dn-guarantee-text strong {
-    color: var(--dn-primary-darker);
-  }
-
-  .dn-btn{
-    width: 100%;
-    padding: 18px 32px;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, 
-      var(--dn-primary-dark) 0%,
-      var(--dn-primary) 50%,
-      var(--dn-primary-light) 100%
-    );
-    color: white;
-    font-weight: 800;
-    font-size: 15px;
-    cursor: pointer;
-    box-shadow: 
-      0 8px 30px rgba(5, 150, 105, 0.35),
-      0 2px 8px rgba(5, 150, 105, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .dn-btn:hover{ 
-    transform: translateY(-2px);
-    box-shadow: 
-      0 12px 40px rgba(5, 150, 105, 0.4),
-      0 4px 12px rgba(5, 150, 105, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-
-  .dn-btn:active {
-    transform: translateY(0);
-  }
-
-  .dn-btn:disabled{ 
-    opacity: 0.6; 
-    cursor: not-allowed; 
-    transform: none;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.2);
-  }
-
-  .dn-btn-icon {
-    font-size: 18px;
-  }
-
-  .dn-status{ 
-    text-align: center; 
-    margin-top: 18px; 
-    color: var(--dn-gray-600); 
-    font-size: 14px; 
-    font-weight: 600;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, var(--dn-gray-50), #ffffff);
-    border-radius: 12px;
-    border: 1px solid var(--dn-gray-200);
-  }
-
-  .dn-preview-section{
-    margin-top: 28px;
-    border-radius: 20px;
-    border: 2px solid rgba(5, 150, 105, 0.2);
-    background: #ffffff;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(5, 150, 105, 0.08);
-  }
-
-  .dn-preview-head{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 22px;
-    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
-    border-bottom: 2px solid rgba(5, 150, 105, 0.15);
-  }
-
-  .dn-preview-title{ 
-    font-weight: 800; 
-    color: var(--dn-primary-darker); 
-    font-size: 16px;
-    letter-spacing: 0.3px;
-  }
-
-  .dn-preview-actions{ 
-    display: flex; 
-    gap: 10px; 
-  }
-
-  .dn-mini-btn{
-    padding: 10px 16px;
-    border-radius: 10px;
-    border: 2px solid rgba(5, 150, 105, 0.25);
-    background: #ffffff;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--dn-primary-dark);
-    transition: all 0.25s ease;
-  }
-
-  .dn-mini-btn:hover{ 
-    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-    border-color: var(--dn-primary);
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
-    transform: translateY(-1px);
-  }
-
-  .dn-cert-container{
-    padding: 36px;
-    background: linear-gradient(180deg, #ffffff 0%, var(--dn-gray-50) 100%);
-  }
-
-  .cert-frame{
-    max-width: 800px;
-    margin: 0 auto;
-    background: linear-gradient(165deg, #ffffff 0%, var(--dn-gray-50) 50%, #f0fdf4 100%);
-    border: 3px solid var(--dn-primary-darker);
-    border-radius: 24px;
-    padding: 0;
-    overflow: hidden;
-    box-shadow: 
-      0 20px 60px rgba(0, 0, 0, 0.1),
-      0 8px 25px rgba(5, 150, 105, 0.08);
-  }
-
-  .cert-header{
-    background: linear-gradient(135deg, 
-      var(--dn-gray-800) 0%,
-      var(--dn-primary-darker) 40%,
-      var(--dn-primary-dark) 70%,
-      var(--dn-primary) 100%
-    );
-    padding: 36px 28px;
-    text-align: center;
-    position: relative;
-  }
-
-  .cert-header::after{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, 
-      var(--dn-primary-light), 
-      var(--dn-primary-lighter), 
-      var(--dn-accent), 
-      var(--dn-primary-lighter), 
-      var(--dn-primary-light)
-    );
-  }
-
-  .cert-logo{
-    font-family: 'Georgia', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--dn-accent);
-    letter-spacing: 4px;
-    margin-bottom: 14px;
-  }
-
-  .cert-title{
-    font-family: 'Georgia', serif;
-    font-size: 34px;
-    font-weight: 900;
-    color: white;
-    letter-spacing: 1px;
-    margin: 0;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .cert-subtitle{
-    font-size: 13px;
-    color: #d1fae5;
-    margin-top: 10px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-
-  .cert-body{
-    padding: 36px 32px;
-  }
-
-  .cert-photos{
-    display: grid;
-    grid-template-columns: 120px 1fr 120px;
-    gap: 24px;
-    margin-bottom: 32px;
-    align-items: center;
-  }
-
-  .cert-photo-frame{
-    width: 120px;
-    height: 120px;
-    border-radius: 14px;
-    border: 3px solid var(--dn-gray-300);
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .cert-photo-frame img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .cert-photo-label{
-    text-align: center;
-    font-size: 11px;
-    color: var(--dn-gray-500);
-    margin-top: 8px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .cert-artwork-main{
-    border-radius: 16px;
-    overflow: hidden;
-    border: 3px solid var(--dn-gray-200);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .cert-artwork-main img{
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .cert-qr{
-    width: 120px;
-    height: 120px;
-    border: 3px solid var(--dn-primary);
-    border-radius: 14px;
-    padding: 8px;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
-  }
-
-  .cert-info-panel{
-    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
-    border: 2px solid var(--dn-accent);
-    border-radius: 18px;
-    padding: 28px;
-    margin-bottom: 24px;
-    border-left: 6px solid var(--dn-primary);
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.06);
-  }
-
-  .cert-info-title{
-    font-family: 'Georgia', serif;
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--dn-primary-darker);
-    margin-bottom: 20px;
-  }
-
-  .cert-info-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 24px;
-  }
-
-  .cert-info-item{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .cert-info-label{
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--dn-primary);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .cert-info-value{
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--dn-gray-800);
-  }
-
-  .cert-hash-panel{
-    background: linear-gradient(145deg, var(--dn-gray-50) 0%, #ffffff 100%);
-    border: 2px solid var(--dn-gray-200);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-
-  .cert-hash-title{
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--dn-gray-600);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .cert-hash-value{
-    font-family: 'Courier New', monospace;
-    font-size: 11px;
-    color: var(--dn-gray-700);
-    word-break: break-all;
-    line-height: 1.7;
-    background: #ffffff;
-    padding: 14px;
-    border-radius: 10px;
-    border: 1px solid var(--dn-gray-200);
-  }
-
-  .cert-footer{
-    padding-top: 24px;
-    border-top: 2px solid var(--dn-gray-200);
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .cert-stamp{
-    width: 95px;
-    height: 95px;
-    border: 4px double var(--dn-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 900;
-    color: var(--dn-primary-dark);
-    transform: rotate(-15deg);
-    background: radial-gradient(circle, #ffffff 0%, #f0fdf4 50%, #ecfdf5 100%);
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
-  }
-
-  .cert-disclaimer{
-    font-family: 'Georgia', serif;
-    font-size: 11px;
-    line-height: 1.7;
-    color: var(--dn-gray-500);
-    text-align: center;
-    font-style: italic;
-    padding: 18px 24px;
-    background: linear-gradient(135deg, var(--dn-gray-50), #ffffff);
-    border-radius: 14px;
-    border: 1px solid var(--dn-gray-200);
-    margin-top: 24px;
-  }
-
-  .cert-local-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-    padding: 4px 12px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-weight: 800;
-    margin-left: 8px;
-  }
-
-  @media (max-width: 800px){
-    .dn-wrap{ padding: 24px 20px; }
-    .dn-grid{ grid-template-columns: 1fr; }
-    .dn-visibility-cards { grid-template-columns: 1fr; }
-    .cert-photos{ grid-template-columns: 1fr; }
-    .cert-photo-frame{ margin: 0 auto; }
-    .cert-info-grid{ grid-template-columns: 1fr; }
-    .dn-title { font-size: 28px; }
-  }
+@media(max-width:800px) { .dn-wrap{padding:24px 20px;} .dn-grid,.dn-visibility-cards{grid-template-columns:1fr;} .cert-photos{grid-template-columns:1fr;} .cert-photo-frame{margin:0 auto;} .cert-info-grid{grid-template-columns:1fr;} .dn-title{font-size:28px;} }
 </style>
 
 <!-- External Libraries -->
@@ -1613,403 +321,350 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
-(async function () {
-  const MESSAGES = {
-    tr: {
-      selectArtFirst: "Lütfen önce bir eser seçin!", onlyImages: "Sadece görsel kabul edilir",
-      noPreview: "Görsel değilse önizleme yok", processing: "⏳ İşleniyor...",
-      savingSupabase: "💾 Supabase'e kaydediliyor...", creatingCert: "📜 Sertifika oluşturuluyor...",
-      certReadyPrivate: "✅ Sertifika hazır! 🔒 Özel mod", certReadySupabase: "✅ Sertifika hazır!",
-      error: "❌ Hata: {error}", pngDownloaded: "✅ PNG indirildi!", jsonDownloaded: "✅ JSON indirildi!",
-      pdfDownloaded: "✅ PDF indirildi!", certTitle: "DİJİTAL NOTER SERTİFİKASI",
-      certSubtitle: "İlhan Art Gallery tarafından verilmiştir", artworkName: "Eser Adı", artistName: "Sanatçı",
-      certId: "Sertifika ID", date: "Tarih", unknown: "Bilinmiyor", untitled: "İsimsiz", hidden: "Gizli",
-      privateMode: "🔒 YEREL", disclaimerPrivate: "Bu sertifika yalnızca tarayıcınızda oluşturulmuştur.",
-      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
-    },
-    en: {
-      selectArtFirst: "Please select an artwork first!", onlyImages: "Only images accepted",
-      noPreview: "No preview for non-images", processing: "⏳ Processing...",
-      savingSupabase: "💾 Saving...", creatingCert: "📜 Creating certificate...",
-      certReadyPrivate: "✅ Certificate ready! 🔒 Private mode", certReadySupabase: "✅ Certificate ready!",
-      error: "❌ Error: {error}", pngDownloaded: "✅ PNG downloaded!", jsonDownloaded: "✅ JSON downloaded!",
-      pdfDownloaded: "✅ PDF downloaded!", certTitle: "DIGITAL NOTARY CERTIFICATE",
-      certSubtitle: "Issued by İlhan Art Gallery", artworkName: "Artwork Name", artistName: "Artist",
-      certId: "Certificate ID", date: "Date", unknown: "Unknown", untitled: "Untitled", hidden: "Hidden",
-      privateMode: "🔒 LOCAL", disclaimerPrivate: "This certificate was created only in your browser.",
-      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
-    },
-    zh: {
-      selectArtFirst: "请先选择一件作品！", onlyImages: "仅接受图片", noPreview: "非图片无预览",
-      processing: "⏳ 处理中...", savingSupabase: "💾 保存中...", creatingCert: "📜 创建证书...",
-      certReadyPrivate: "✅ 证书已准备好！🔒 私密模式", certReadySupabase: "✅ 证书已准备好！",
-      error: "❌ 错误：{error}", pngDownloaded: "✅ PNG 已下载！", jsonDownloaded: "✅ JSON 已下载！",
-      pdfDownloaded: "✅ PDF 已下载！", certTitle: "数字公证证书", certSubtitle: "由伊尔汗艺术画廊颁发",
-      artworkName: "作品名称", artistName: "艺术家", certId: "证书编号", date: "日期",
-      unknown: "未知", untitled: "无标题", hidden: "隐藏", privateMode: "🔒 本地",
-      disclaimerPrivate: "此证书仅在您的浏览器中创建。",
-      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
-    },
-    es: {
-      selectArtFirst: "¡Seleccione una obra primero!", onlyImages: "Solo imágenes", noPreview: "Sin vista previa",
-      processing: "⏳ Procesando...", savingSupabase: "💾 Guardando...", creatingCert: "📜 Creando certificado...",
-      certReadyPrivate: "✅ ¡Certificado listo! 🔒 Modo privado", certReadySupabase: "✅ ¡Certificado listo!",
-      error: "❌ Error: {error}", pngDownloaded: "✅ ¡PNG descargado!", jsonDownloaded: "✅ ¡JSON descargado!",
-      pdfDownloaded: "✅ ¡PDF descargado!", certTitle: "CERTIFICADO DE NOTARIO DIGITAL",
-      certSubtitle: "Emitido por İlhan Art Gallery", artworkName: "Nombre de la Obra", artistName: "Artista",
-      certId: "ID del Certificado", date: "Fecha", unknown: "Desconocido", untitled: "Sin título",
-      hidden: "Oculto", privateMode: "🔒 LOCAL", disclaimerPrivate: "Este certificado fue creado solo en su navegador.",
-      disclaimerPublic: "This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry."
+/* ═══════════════════════════════════════════════════════════════════════════
+   DİJİTAL NOTER APP v5.5
+   
+   ⚠️ DİL KONTROLÜ YOK - Custom CSS [data-multilang] sistemi hallediyor
+   Bu script sadece fonksiyonellik sağlar (hash, sertifika, download)
+   
+   Aktif dil bloğunu CSS belirler, JS sadece görünen bloğu kullanır
+═══════════════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  
+  // Aktif (görünen) dil bloğunu bul
+  function getActiveContainer() {
+    var wrap = document.getElementById('notaryApp');
+    if (!wrap) return null;
+    
+    // CSS tarafından display:block yapılan bloğu bul
+    var blocks = wrap.querySelectorAll('.lang-tr, .lang-en, .lang-zh, .lang-es');
+    for (var i = 0; i < blocks.length; i++) {
+      var style = window.getComputedStyle(blocks[i]);
+      if (style.display !== 'none') {
+        return blocks[i];
+      }
     }
-  };
-
-  function getCurrentLang() {
-    const htmlLang = document.documentElement.lang;
-    if (htmlLang.startsWith('tr')) return 'tr';
-    if (htmlLang.startsWith('en')) return 'en';
-    if (htmlLang.startsWith('zh')) return 'zh';
-    if (htmlLang.startsWith('es')) return 'es';
+    
+    // Fallback: ilk bloğu döndür
+    return blocks[0] || wrap;
+  }
+  
+  // Aktif dili belirle (mesajlar için)
+  function getActiveLang() {
+    var container = getActiveContainer();
+    if (!container) return 'tr';
+    if (container.classList.contains('lang-en')) return 'en';
+    if (container.classList.contains('lang-zh')) return 'zh';
+    if (container.classList.contains('lang-es')) return 'es';
     return 'tr';
   }
-
-  const currentLang = getCurrentLang();
-  const activeContainer = document.querySelector(`.lang-${currentLang}`);
   
-  if (!activeContainer) {
-    console.error('❌ Active language container not found:', currentLang);
-    return;
-  }
-
-  activeContainer.style.display = 'block';
+  var M = {
+    tr: { 
+      sel:'Lütfen önce bir eser seçin!', proc:'⏳ İşleniyor...', save:'💾 Kaydediliyor...', cert:'📜 Sertifika oluşturuluyor...', 
+      readyP:'✅ Sertifika hazır! 🔒 Özel mod', readyS:'✅ Sertifika hazır!', err:'❌ Hata', 
+      png:'✅ PNG indirildi!', json:'✅ JSON indirildi!', pdf:'✅ PDF indirildi!', 
+      title:'DİJİTAL NOTER SERTİFİKASI', sub:'İlhan Art Gallery tarafından verilmiştir', 
+      art:'Eser Adı', artist:'Sanatçı', cid:'Sertifika ID', date:'Tarih', 
+      unk:'Bilinmiyor', untit:'İsimsiz', hid:'Gizli', loc:'🔒 YEREL', 
+      certInfo:'Sertifika Bilgileri', hashTitle:'🔐 Hash Parmak İzleri', location:'Konum',
+      discP:'Bu sertifika [PoArt] birinci aşama doğrulama için kullanılabilir. İkinci aşama doğrulama yalnızca Herkese Açık Kayıt Defteri üzerinden yerinde yapılır.', 
+      ver:'ONAYLANDI' 
+    },
+    en: { 
+      sel:'Please select an artwork first!', proc:'⏳ Processing...', save:'💾 Saving...', cert:'📜 Creating certificate...', 
+      readyP:'✅ Certificate ready! 🔒 Private', readyS:'✅ Certificate ready!', err:'❌ Error', 
+      png:'✅ PNG downloaded!', json:'✅ JSON downloaded!', pdf:'✅ PDF downloaded!', 
+      title:'DIGITAL NOTARY CERTIFICATE', sub:'Issued by İlhan Art Gallery', 
+      art:'Artwork Name', artist:'Artist', cid:'Certificate ID', date:'Date', 
+      unk:'Unknown', untit:'Untitled', hid:'Hidden', loc:'🔒 LOCAL', 
+      certInfo:'Certificate Information', hashTitle:'🔐 Hash Fingerprints', location:'Location',
+      discP:'This certificate [PoArt] can be used as first-stage verification. Second-stage verification is only done on-site through the Public Registry.', 
+      ver:'VERIFIED' 
+    },
+    zh: { 
+      sel:'请先选择一件作品！', proc:'⏳ 处理中...', save:'💾 保存中...', cert:'📜 创建证书...', 
+      readyP:'✅ 证书已准备好！🔒 私密模式', readyS:'✅ 证书已准备好！', err:'❌ 错误', 
+      png:'✅ PNG 已下载！', json:'✅ JSON 已下载！', pdf:'✅ PDF 已下载！', 
+      title:'数字公证证书', sub:'由伊尔汗艺术画廊颁发', 
+      art:'作品名称', artist:'艺术家', cid:'证书编号', date:'日期', 
+      unk:'未知', untit:'无标题', hid:'隐藏', loc:'🔒 本地', 
+      certInfo:'证书信息', hashTitle:'🔐 哈希指纹', location:'位置',
+      discP:'此证书 [PoArt] 可用于第一阶段验证。第二阶段验证仅通过公共注册处现场进行。', 
+      ver:'已验证' 
+    },
+    es: { 
+      sel:'¡Seleccione una obra primero!', proc:'⏳ Procesando...', save:'💾 Guardando...', cert:'📜 Creando certificado...', 
+      readyP:'✅ ¡Certificado listo! 🔒 Privado', readyS:'✅ ¡Certificado listo!', err:'❌ Error', 
+      png:'✅ ¡PNG descargado!', json:'✅ ¡JSON descargado!', pdf:'✅ ¡PDF descargado!', 
+      title:'CERTIFICADO DE NOTARIO DIGITAL', sub:'Emitido por İlhan Art Gallery', 
+      art:'Nombre de la Obra', artist:'Artista', cid:'ID del Certificado', date:'Fecha', 
+      unk:'Desconocido', untit:'Sin título', hid:'Oculto', loc:'🔒 LOCAL', 
+      certInfo:'Información del Certificado', hashTitle:'🔐 Huellas Hash', location:'Ubicación',
+      discP:'Este certificado [PoArt] puede usarse para verificación de primera etapa. La verificación de segunda etapa solo se realiza en el sitio a través del Registro Público.', 
+      ver:'VERIFICADO' 
+    }
+  };
   
-  const sealBtn = activeContainer.querySelector('.seal-btn');
-  const artFile = activeContainer.querySelector('.art-file');
-  const userPhoto = activeContainer.querySelector('.user-photo');
-  const creatorName = activeContainer.querySelector('.creator-name');
-  const artTitle = activeContainer.querySelector('.art-title');
-  const statusBox = activeContainer.querySelector('.status-box');
-  const artDrop = activeContainer.querySelector('.art-drop');
-  const photoDrop = activeContainer.querySelector('.photo-drop');
-  const artMeta = activeContainer.querySelector('.art-meta');
-  const photoMeta = activeContainer.querySelector('.photo-meta');
-  const artPreview = activeContainer.querySelector('.art-preview');
-  const photoPreview = activeContainer.querySelector('.photo-preview');
-  const artPreviewEmpty = activeContainer.querySelector('.art-preview-empty');
-  const photoPreviewEmpty = activeContainer.querySelector('.photo-preview-empty');
-  const previewSection = activeContainer.querySelector('.preview-section');
-  const certPreview = activeContainer.querySelector('.cert-preview');
-  const downloadPNG = activeContainer.querySelector('.download-png');
-  const downloadJSON = activeContainer.querySelector('.download-json');
-  const downloadPDF = activeContainer.querySelector('.download-pdf');
-
-  const liveIPPreviews = activeContainer.querySelectorAll('.live-ip-preview');
-  const tableMaskedIPs = activeContainer.querySelectorAll('.table-masked-ip');
-  const tablePublicIPs = activeContainer.querySelectorAll('.table-public-ip');
-  const tableMaskedLocs = activeContainer.querySelectorAll('.table-masked-loc');
-  const tablePublicLocs = activeContainer.querySelectorAll('.table-public-loc');
-
-  console.log('✅ Digital Notary initialized for language:', currentLang);
-
-  function t(key, replacements = {}) {
-    let msg = MESSAGES[currentLang]?.[key] || MESSAGES.tr?.[key] || key;
-    Object.keys(replacements).forEach(k => { msg = msg.replace(`{${k}}`, replacements[k]); });
-    return msg;
-  }
-
-  const SUPABASE_URL = "https://immdfdvrwqcvgmflbgdr.supabase.co";
-  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE";
-  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  let currentRecord = null, currentArtDataUrl = null, currentPhotoDataUrl = null, cachedIPData = null;
-
-  function getVisibility() {
-    const checked = activeContainer.querySelector('input[name^="visibility"]:checked');
-    return checked ? checked.value : 'private';
-  }
-
-  async function fetchIPData() {
-    try {
-      const res = await fetch("https://ipapi.co/json/");
-      cachedIPData = await res.json();
-      if (cachedIPData?.ip) {
-        const maskedIP = maskIP(cachedIPData.ip);
-        const city = cachedIPData.city || 'Unknown', country = cachedIPData.country_name || 'Unknown';
-        liveIPPreviews.forEach(el => { if (el) el.textContent = maskedIP; });
-        tableMaskedIPs.forEach(el => { if (el) el.textContent = maskedIP; });
-        tablePublicIPs.forEach(el => { if (el) el.textContent = maskedIP; });
-        tableMaskedLocs.forEach(el => { if (el) el.textContent = `*** / ${country}`; });
-        tablePublicLocs.forEach(el => { if (el) el.textContent = `${city}, ${country}`; });
-      }
-    } catch (e) { console.warn('IP fetch failed:', e); cachedIPData = null; }
-  }
-  fetchIPData();
-
-  function setStatus(html, kind = "info") {
-    if (!statusBox) return;
-    statusBox.style.display = "block";
-    const color = kind === "error" ? "#dc2626" : (kind === "ok" ? "#059669" : "#4b5563");
-    statusBox.innerHTML = `<span style="color:${color};">${html}</span>`;
-  }
-
-  function setDropMeta(el, file) {
-    if (!el || !file) { if (el) el.textContent = ""; return; }
-    const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
-    el.textContent = `${file.name} • ${sizeMb} MB`;
-  }
-
-  function bindDropZone(zoneEl, inputEl, metaEl, onFile) {
-    if (!zoneEl || !inputEl) {
-      console.warn('❌ bindDropZone: element not found', {zoneEl, inputEl});
-      return;
-    }
-    
-    console.log('✅ Binding drop zone:', zoneEl.className);
-    
-    zoneEl.addEventListener("click", () => {
-      console.log('🖱️ Drop zone clicked');
-      inputEl.click();
-    });
-    
-    zoneEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        console.log('⌨️ Keyboard trigger');
-        inputEl.click();
-      }
-    });
-
-    ["dragenter","dragover"].forEach(evt => {
-      zoneEl.addEventListener(evt, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        zoneEl.classList.add("is-over");
-      });
-    });
-    
-    ["dragleave","drop"].forEach(evt => {
-      zoneEl.addEventListener(evt, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        zoneEl.classList.remove("is-over");
-      });
-    });
-    
-    zoneEl.addEventListener("drop", (e) => {
-      const file = e.dataTransfer.files?.[0];
-      if (!file) return;
-      console.log('📁 File dropped:', file.name);
-      inputEl.files = e.dataTransfer.files;
-      setDropMeta(metaEl, file);
-      onFile(file);
-    });
-
-    inputEl.addEventListener("change", () => {
-      const file = inputEl.files?.[0];
-      console.log('📁 File selected:', file?.name);
-      setDropMeta(metaEl, file);
-      if (file) onFile(file);
-    });
-  }
-
-  bindDropZone(photoDrop, userPhoto, photoMeta, (file) => {
-    if (!file.type.startsWith("image/")) {
-      photoPreview.style.display = "none";
-      photoPreviewEmpty.textContent = t('onlyImages');
-      photoPreviewEmpty.style.display = "block";
-      return;
-    }
-    const url = URL.createObjectURL(file);
-    photoPreview.src = url;
-    photoPreview.style.display = "block";
-    photoPreviewEmpty.style.display = "none";
-  });
-
-  bindDropZone(artDrop, artFile, artMeta, (file) => {
-    if (file.type.startsWith("image/")) {
-      const url = URL.createObjectURL(file);
-      artPreview.src = url;
-      artPreview.style.display = "block";
-      artPreviewEmpty.style.display = "none";
-    } else {
-      artPreview.style.display = "none";
-      artPreviewEmpty.textContent = t('noPreview');
-      artPreviewEmpty.style.display = "block";
-    }
-  });
-
-  function maskIP(ip) {
-    if (!ip) return "***.***.***.***";
-    const parts = ip.split('.');
-    return parts.length === 4 ? `${parts[0]}.${parts[1]}.***.***` : ip.substring(0, 6) + "****";
-  }
-
-  function maskLoc(city, country) { return `*** / ${country || 'Unknown'}`; }
-
-  async function digest(buffer, algo) {
-    const hashBuffer = await crypto.subtle.digest(algo, buffer);
-    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,"0")).join("");
-  }
-
-  async function fileToDataUrl(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => reject(new Error("FileReader failed"));
-      reader.onload = () => resolve(reader.result);
-      reader.readAsDataURL(file);
-    });
-  }
-
+  function t(key) { var lang = getActiveLang(); return (M[lang] && M[lang][key]) || M.tr[key] || key; }
+  
+  var sb = supabase.createClient("https://immdfdvrwqcvgmflbgdr.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE");
+  var currentRecord = null, currentArtDataUrl = null, currentPhotoDataUrl = null, cachedIPData = null;
+  
+  function maskIP(ip) { if (!ip) return '***.***.***.***'; var p = ip.split('.'); return p.length === 4 ? p[0] + '.' + p[1] + '.***.***' : ip.substring(0,6) + '****'; }
+  function maskLoc(city, country) { return '*** / ' + (country || 'Unknown'); }
+  
+  async function digest(buffer, algo) { var hb = await crypto.subtle.digest(algo, buffer); return Array.from(new Uint8Array(hb)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join(''); }
+  async function fileToDataUrl(file) { return new Promise(function(res, rej) { var r = new FileReader(); r.onerror = function() { rej(new Error('FileReader failed')); }; r.onload = function() { res(r.result); }; r.readAsDataURL(file); }); }
+  
   function formatDate(iso) {
     try {
-      const d = new Date(iso);
-      const locale = currentLang === 'tr' ? 'tr-TR' : currentLang === 'zh' ? 'zh-CN' : currentLang === 'es' ? 'es-ES' : 'en-US';
-      return d.toLocaleDateString(locale) + ' ' + d.toLocaleTimeString(locale, {hour:'2-digit', minute:'2-digit'});
-    } catch { return iso; }
+      var d = new Date(iso);
+      var lang = getActiveLang();
+      var loc = lang === 'tr' ? 'tr-TR' : lang === 'zh' ? 'zh-CN' : lang === 'es' ? 'es-ES' : 'en-US';
+      return d.toLocaleDateString(loc) + ' ' + d.toLocaleTimeString(loc, {hour:'2-digit', minute:'2-digit'});
+    } catch(e) { return iso; }
   }
-
-  async function generateQR(text) {
-    const canvas = document.createElement("canvas");
-    await QRCode.toCanvas(canvas, text, { width: 110, color: { dark: "#065f46", light: "#ffffff" } });
-    return canvas.toDataURL("image/png");
-  }
-
+  
+  async function generateQR(text) { var canvas = document.createElement('canvas'); await QRCode.toCanvas(canvas, text, {width:110, color:{dark:'#065f46', light:'#ffffff'}}); return canvas.toDataURL('image/png'); }
+  
   async function generateCertHTML(record, artDataUrl, photoDataUrl, qrDataUrl, visibility) {
-    const photoHTML = photoDataUrl ? `<div><div class="cert-photo-frame"><img src="${photoDataUrl}" alt="User"></div><div class="cert-photo-label">${t('artistName')}</div></div>` : '';
-    const artHTML = artDataUrl ? `<div class="cert-artwork-main"><img src="${artDataUrl}" alt="Artwork"></div>` : 
-      `<div class="cert-artwork-main" style="min-height:200px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f9fafb,#f0fdf4);">
-        <div style="text-align:center;color:#6b7280;"><div style="font-size:48px;margin-bottom:8px;">📄</div><div style="font-weight:700;">${record.title}</div></div></div>`;
-    
-    let extraInfoHTML = '';
-    if (visibility === 'public' || visibility === 'masked') {
-      extraInfoHTML = `<div class="cert-info-item"><div class="cert-info-label">location</div><div class="cert-info-value">${record.location_data}</div></div>
-        <div class="cert-info-item"><div class="cert-info-label">IP</div><div class="cert-info-value">${record.origin_ip}</div></div>`;
+    var photoHTML = photoDataUrl ? '<div><div class="cert-photo-frame"><img src="' + photoDataUrl + '" alt="User"></div><div class="cert-photo-label">' + t('artist') + '</div></div>' : '';
+    var artHTML = artDataUrl ? '<div class="cert-artwork-main"><img src="' + artDataUrl + '" alt="Artwork"></div>' : '<div class="cert-artwork-main" style="min-height:200px;display:flex;align-items:center;justify-content:center;background:#f9fafb;"><div style="text-align:center;color:#6b7280;"><div style="font-size:48px;">📄</div><div style="font-weight:700;">' + record.title + '</div></div></div>';
+    var extraInfoHTML = '';
+    if (visibility === 'public' || visibility === 'masked') { 
+      extraInfoHTML = '<div class="cert-info-item"><div class="cert-info-label">' + t('location') + '</div><div class="cert-info-value">' + record.location_data + '</div></div><div class="cert-info-item"><div class="cert-info-label">IP</div><div class="cert-info-value">' + record.origin_ip + '</div></div>'; 
     }
-
-    const localBadge = visibility === 'private' ? `<span class="cert-local-badge">${t('privateMode')}</span>` : '';
-    const verifiedText = currentLang === 'tr' ? 'ONAYLANDI' : currentLang === 'zh' ? '已验证' : currentLang === 'es' ? 'VERIFICADO' : 'VERIFIED';
-
-    return `<div class="cert-frame"><div class="cert-header"><div class="cert-logo">POART PROTOCOL</div><h2 class="cert-title">${t('certTitle')} ${localBadge}</h2><div class="cert-subtitle">${t('certSubtitle')}</div></div>
-      <div class="cert-body"><div class="cert-photos">${photoHTML}${artHTML}<div><div class="cert-qr"><img src="${qrDataUrl}" style="width:100%;height:auto;" alt="QR"></div><div class="cert-photo-label">QR</div></div></div>
-      <div class="cert-info-panel"><div class="cert-info-title">Certificate information</div><div class="cert-info-grid">
-        <div class="cert-info-item"><div class="cert-info-label">${t('artworkName')}</div><div class="cert-info-value">${record.title}</div></div>
-        <div class="cert-info-item"><div class="cert-info-label">${t('artistName')}</div><div class="cert-info-value">${record.creator}</div></div>
-        <div class="cert-info-item"><div class="cert-info-label">${t('certId')}</div><div class="cert-info-value">${record.cert_id}</div></div>
-        <div class="cert-info-item"><div class="cert-info-label">${t('date')}</div><div class="cert-info-value">${formatDate(record.created_at)}</div></div>${extraInfoHTML}
-      </div></div>
-      <div class="cert-hash-panel"><div class="cert-hash-title">🔐 Hash Fingerprints</div>
-        <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:800;color:#6b7280;margin-bottom:5px;">SHA-256:</div><div class="cert-hash-value">${record.sha256}</div></div>
-        <div><div style="font-size:10px;font-weight:800;color:#6b7280;margin-bottom:5px;">SHA-512:</div><div class="cert-hash-value">${record.sha512}</div></div>
-      </div>
-      <div class="cert-disclaimer">${t('disclaimerPublic')}</div>
-      <div class="cert-footer"><div class="cert-stamp">✓<br>${verifiedText}</div></div></div></div>`;
+    var localBadge = visibility === 'private' ? '<span class="cert-local-badge">' + t('loc') + '</span>' : '';
+    
+    return '<div class="cert-frame">' +
+      '<div class="cert-header">' +
+        '<div class="cert-logo">POART PROTOCOL</div>' +
+        '<h2 class="cert-title">' + t('title') + ' ' + localBadge + '</h2>' +
+        '<div class="cert-subtitle">' + t('sub') + '</div>' +
+      '</div>' +
+      '<div class="cert-body">' +
+        '<div class="cert-photos">' + photoHTML + artHTML + 
+          '<div><div class="cert-qr"><img src="' + qrDataUrl + '" style="width:100%;height:auto;" alt="QR"></div><div class="cert-photo-label">QR</div></div>' +
+        '</div>' +
+        '<div class="cert-info-panel">' +
+          '<div class="cert-info-title">' + t('certInfo') + '</div>' +
+          '<div class="cert-info-grid">' +
+            '<div class="cert-info-item"><div class="cert-info-label">' + t('art') + '</div><div class="cert-info-value">' + record.title + '</div></div>' +
+            '<div class="cert-info-item"><div class="cert-info-label">' + t('artist') + '</div><div class="cert-info-value">' + record.creator + '</div></div>' +
+            '<div class="cert-info-item"><div class="cert-info-label">' + t('cid') + '</div><div class="cert-info-value">' + record.cert_id + '</div></div>' +
+            '<div class="cert-info-item"><div class="cert-info-label">' + t('date') + '</div><div class="cert-info-value">' + formatDate(record.created_at) + '</div></div>' +
+            extraInfoHTML +
+          '</div>' +
+        '</div>' +
+        '<div class="cert-hash-panel">' +
+          '<div class="cert-hash-title">' + t('hashTitle') + '</div>' +
+          '<div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:800;color:#6b7280;margin-bottom:5px;">SHA-256:</div><div class="cert-hash-value">' + record.sha256 + '</div></div>' +
+          '<div><div style="font-size:10px;font-weight:800;color:#6b7280;margin-bottom:5px;">SHA-512:</div><div class="cert-hash-value">' + record.sha512 + '</div></div>' +
+        '</div>' +
+        '<div class="cert-disclaimer">' + t('discP') + '</div>' +
+        '<div class="cert-footer"><div class="cert-stamp">✓<br>' + t('ver') + '</div></div>' +
+      '</div>' +
+    '</div>';
   }
-
-  if (sealBtn && artFile) {
-    sealBtn.addEventListener("click", async () => {
-      if (!artFile.files.length) { alert(t('selectArtFirst')); return; }
-      previewSection.style.display = "none";
-      certPreview.innerHTML = "";
-      const visibility = getVisibility();
-      
-      try {
-        sealBtn.disabled = true;
-        setStatus(t('processing'), "info");
-        const file = artFile.files[0];
-        const buffer = await file.arrayBuffer();
-        const sha256 = await digest(buffer, "SHA-256");
-        const sha512 = await digest(buffer, "SHA-512");
-        
-        let ip = "***.***.***.***", loc = t('hidden');
-        if (visibility !== 'private' && cachedIPData) {
-          ip = maskIP(cachedIPData.ip);
-          loc = visibility === 'public' ? `${cachedIPData.city || t('unknown')}, ${cachedIPData.country_name || t('unknown')}` : maskLoc(cachedIPData.city, cachedIPData.country_name);
-        }
-        
-        const record = {
-          cert_id: "POART-" + Math.random().toString(36).substring(2, 10).toUpperCase(),
-          title: artTitle.value || t('untitled'),
-          creator: creatorName.value || t('unknown'),
-          sha256, sha512, visibility,
-          device_info: visibility === 'public' ? navigator.userAgent : t('hidden'),
-          location_data: loc, origin_ip: ip, created_at: new Date().toISOString()
-        };
-        currentRecord = record;
-        
-        currentArtDataUrl = file.type.startsWith("image/") ? await fileToDataUrl(file) : null;
-        const userFile = userPhoto.files[0];
-        currentPhotoDataUrl = userFile?.type.startsWith("image/") ? await fileToDataUrl(userFile) : null;
-        
-        let supabaseSuccess = false;
-        if (visibility !== 'private') {
-          setStatus(t('savingSupabase'), "info");
-          try {
-            const { error } = await sb.from("manifests").insert([record]);
-            if (error) throw error;
-            supabaseSuccess = true;
-          } catch (e) { console.error('Supabase error:', e); }
-        }
-        
-        const qrDataUrl = await generateQR(`https://www.ilhanart.org/public-registry`);
-        setStatus(t('creatingCert'), "info");
-        const certHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
-        certPreview.innerHTML = certHTML;
-        previewSection.style.display = "block";
-        setStatus(visibility === 'private' ? t('certReadyPrivate') : t('certReadySupabase'), "ok");
-      } catch (err) {
-        setStatus(t('error', {error: err.message}), "error");
-      } finally { sealBtn.disabled = false; }
+  
+  function initApp() {
+    var C = getActiveContainer();
+    if (!C) { console.log('⚠️ No active container found'); return; }
+    
+    console.log('✅ Digital Notary init for:', C.className);
+    
+    var sealBtn = C.querySelector('.seal-btn');
+    var artFile = C.querySelector('.art-file');
+    var userPhoto = C.querySelector('.user-photo');
+    var creatorName = C.querySelector('.creator-name');
+    var artTitle = C.querySelector('.art-title');
+    var statusBox = C.querySelector('.status-box');
+    var artDrop = C.querySelector('.art-drop');
+    var photoDrop = C.querySelector('.photo-drop');
+    var artMeta = C.querySelector('.art-meta');
+    var photoMeta = C.querySelector('.photo-meta');
+    var artPreview = C.querySelector('.art-preview');
+    var photoPreview = C.querySelector('.photo-preview');
+    var artPreviewEmpty = C.querySelector('.art-preview-empty');
+    var photoPreviewEmpty = C.querySelector('.photo-preview-empty');
+    var previewSection = C.querySelector('.preview-section');
+    var certPreview = C.querySelector('.cert-preview');
+    var downloadPNG = C.querySelector('.download-png');
+    var downloadJSON = C.querySelector('.download-json');
+    var downloadPDF = C.querySelector('.download-pdf');
+    var liveIPPreviews = C.querySelectorAll('.live-ip-preview');
+    
+    // IP fetch
+    fetch("https://ipapi.co/json/").then(function(r) { return r.json(); }).then(function(d) {
+      cachedIPData = d;
+      if (d && d.ip) { var masked = maskIP(d.ip); liveIPPreviews.forEach(function(el) { if (el) el.textContent = masked; }); }
+    }).catch(function() { cachedIPData = null; });
+    
+    function setStatus(html, kind) {
+      if (!statusBox) return;
+      statusBox.style.display = 'block';
+      var c = kind === 'error' ? '#dc2626' : (kind === 'ok' ? '#059669' : '#4b5563');
+      statusBox.innerHTML = '<span style="color:' + c + ';">' + html + '</span>';
+    }
+    
+    function setDropMeta(el, file) { if (!el || !file) { if (el) el.textContent = ''; return; } el.textContent = file.name + ' • ' + (file.size / 1048576).toFixed(2) + ' MB'; }
+    
+    function bindDrop(zone, input, meta, onFile) {
+      if (!zone || !input) return;
+      zone.addEventListener('click', function() { input.click(); });
+      zone.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') input.click(); });
+      ['dragenter','dragover'].forEach(function(ev) { zone.addEventListener(ev, function(e) { e.preventDefault(); e.stopPropagation(); zone.classList.add('is-over'); }); });
+      ['dragleave','drop'].forEach(function(ev) { zone.addEventListener(ev, function(e) { e.preventDefault(); e.stopPropagation(); zone.classList.remove('is-over'); }); });
+      zone.addEventListener('drop', function(e) { var f = e.dataTransfer.files && e.dataTransfer.files[0]; if (!f) return; input.files = e.dataTransfer.files; setDropMeta(meta, f); onFile(f); });
+      input.addEventListener('change', function() { var f = input.files && input.files[0]; setDropMeta(meta, f); if (f) onFile(f); });
+    }
+    
+    bindDrop(photoDrop, userPhoto, photoMeta, function(file) {
+      if (!file.type.startsWith('image/')) { photoPreview.style.display = 'none'; photoPreviewEmpty.style.display = 'block'; return; }
+      photoPreview.src = URL.createObjectURL(file); photoPreview.style.display = 'block'; photoPreviewEmpty.style.display = 'none';
     });
-  }
-
-  if (downloadPNG) {
-    downloadPNG.addEventListener("click", async () => {
-      if (!currentRecord || !certPreview) return;
-      try {
-        setStatus('🖼️ Creating PNG...', "info");
-        const certElement = certPreview.querySelector('.cert-frame');
-        const canvas = await html2canvas(certElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false });
-        const link = document.createElement("a");
-        link.download = `${currentRecord.cert_id}_Certificate.png`;
-        link.href = canvas.toDataURL("image/png");
+    
+    bindDrop(artDrop, artFile, artMeta, function(file) {
+      if (file.type.startsWith('image/')) { artPreview.src = URL.createObjectURL(file); artPreview.style.display = 'block'; artPreviewEmpty.style.display = 'none'; }
+      else { artPreview.style.display = 'none'; artPreviewEmpty.style.display = 'block'; }
+    });
+    
+    function getVisibility() { var ch = C.querySelector('input[name="visibility"]:checked'); return ch ? ch.value : 'private'; }
+    
+    if (sealBtn && artFile) {
+      sealBtn.addEventListener('click', async function() {
+        if (!artFile.files.length) { alert(t('sel')); return; }
+        previewSection.style.display = 'none';
+        certPreview.innerHTML = '';
+        var visibility = getVisibility();
+        
+        try {
+          sealBtn.disabled = true;
+          setStatus(t('proc'), 'info');
+          var file = artFile.files[0];
+          var buffer = await file.arrayBuffer();
+          var sha256 = await digest(buffer, 'SHA-256');
+          var sha512 = await digest(buffer, 'SHA-512');
+          
+          var ip = '***.***.***.***', loc = t('hid');
+          if (visibility !== 'private' && cachedIPData) {
+            ip = maskIP(cachedIPData.ip);
+            loc = visibility === 'public' ? (cachedIPData.city || t('unk')) + ', ' + (cachedIPData.country_name || t('unk')) : maskLoc(cachedIPData.city, cachedIPData.country_name);
+          }
+          
+          var record = {
+            cert_id: 'POART-' + Math.random().toString(36).substring(2,10).toUpperCase(),
+            title: artTitle.value || t('untit'),
+            creator: creatorName.value || t('unk'),
+            sha256: sha256, sha512: sha512, visibility: visibility,
+            device_info: visibility === 'public' ? navigator.userAgent : t('hid'),
+            location_data: loc, origin_ip: ip, created_at: new Date().toISOString()
+          };
+          currentRecord = record;
+          
+          currentArtDataUrl = file.type.startsWith('image/') ? await fileToDataUrl(file) : null;
+          var userFile = userPhoto.files && userPhoto.files[0];
+          currentPhotoDataUrl = userFile && userFile.type.startsWith('image/') ? await fileToDataUrl(userFile) : null;
+          
+          if (visibility !== 'private') {
+            setStatus(t('save'), 'info');
+            try { await sb.from('manifests').insert([record]); } catch(e) { console.error(e); }
+          }
+          
+          var qrDataUrl = await generateQR('https://www.ilhanart.org/public-registry');
+          setStatus(t('cert'), 'info');
+          certPreview.innerHTML = await generateCertHTML(record, currentArtDataUrl, currentPhotoDataUrl, qrDataUrl, visibility);
+          previewSection.style.display = 'block';
+          setStatus(visibility === 'private' ? t('readyP') : t('readyS'), 'ok');
+        } catch(err) {
+          setStatus(t('err') + ': ' + err.message, 'error');
+        } finally {
+          sealBtn.disabled = false;
+        }
+      });
+    }
+    
+    if (downloadPNG) {
+      downloadPNG.addEventListener('click', async function() {
+        if (!currentRecord || !certPreview) return;
+        try {
+          setStatus('🖼️ PNG...', 'info');
+          var el = certPreview.querySelector('.cert-frame');
+          var canvas = await html2canvas(el, {scale:2, useCORS:true, backgroundColor:'#ffffff'});
+          var link = document.createElement('a');
+          link.download = currentRecord.cert_id + '_Certificate.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          setStatus(t('png'), 'ok');
+        } catch(e) { console.error(e); }
+      });
+    }
+    
+    if (downloadJSON) {
+      downloadJSON.addEventListener('click', function() {
+        if (!currentRecord) return;
+        var blob = new Blob([JSON.stringify(Object.assign({}, currentRecord, {verification_url:'https://www.ilhanart.org/public-registry'}), null, 2)], {type:'application/json'});
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = currentRecord.cert_id + '_Data.json';
         link.click();
-        setStatus(t('pngDownloaded'), "ok");
-      } catch (e) { console.error(e); }
+        setStatus(t('json'), 'ok');
+      });
+    }
+    
+    if (downloadPDF) {
+      downloadPDF.addEventListener('click', async function() {
+        if (!currentRecord || !certPreview) return;
+        try {
+          setStatus('📄 PDF...', 'info');
+          var jsPDF = window.jspdf.jsPDF;
+          var el = certPreview.querySelector('.cert-frame');
+          var canvas = await html2canvas(el, {scale:2, useCORS:true, backgroundColor:'#ffffff'});
+          var pdf = new jsPDF('p','mm','a4');
+          var w = pdf.internal.pageSize.getWidth() - 20;
+          var h = (canvas.height * w) / canvas.width;
+          pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, w, h);
+          pdf.save(currentRecord.cert_id + '_Certificate.pdf');
+          setStatus(t('pdf'), 'ok');
+        } catch(e) { console.error(e); }
+      });
+    }
+  }
+  
+  // Init on load + watch for language changes
+  function tryInit() {
+    var C = getActiveContainer();
+    if (C) {
+      initApp();
+    } else {
+      setTimeout(tryInit, 500);
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryInit, 300); });
+  } else {
+    setTimeout(tryInit, 300);
+  }
+  
+  // Re-init when Weglot changes language (CSS will show different block)
+  if (typeof Weglot !== 'undefined' && Weglot.on) {
+    Weglot.on('languageChanged', function() {
+      setTimeout(initApp, 500);
     });
   }
-
-  if (downloadJSON) {
-    downloadJSON.addEventListener("click", () => {
-      if (!currentRecord) return;
-      const jsonData = { ...currentRecord, verification_url: `https://www.ilhanart.org/public-registry` };
-      const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `${currentRecord.cert_id}_Data.json`;
-      link.click();
-      setStatus(t('jsonDownloaded'), "ok");
-    });
-  }
-
-  if (downloadPDF) {
-    downloadPDF.addEventListener("click", async () => {
-      if (!currentRecord || !certPreview) return;
-      try {
-        setStatus('📄 Creating PDF...', "info");
-        const { jsPDF } = window.jspdf;
-        if (!jsPDF) throw new Error("jsPDF not loaded");
-        const certElement = certPreview.querySelector('.cert-frame');
-        const canvas = await html2canvas(certElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const imgWidth = pdfWidth - 20;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
-        pdf.save(`${currentRecord.cert_id}_Certificate.pdf`);
-        setStatus(t('pdfDownloaded'), "ok");
-      } catch (e) { console.error(e); }
-    });
-  }
-
-  console.log('✅ Digital Notary fully initialized!');
+  
+  // Also watch for html lang changes
+  var lastLang = document.documentElement.getAttribute('lang');
+  setInterval(function() {
+    var newLang = document.documentElement.getAttribute('lang');
+    if (newLang !== lastLang) {
+      lastLang = newLang;
+      setTimeout(initApp, 300);
+    }
+  }, 1000);
+  
 })();
 </script>
