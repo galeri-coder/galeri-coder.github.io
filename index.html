@@ -1880,7 +1880,7 @@
     
     let extraInfoHTML = '';
     if (visibility === 'public' || visibility === 'masked') {
-      extraInfoHTML = `<div class="cert-info-item"><div class="cert-info-label">Konum</div><div class="cert-info-value">${record.location_data}</div></div>
+      extraInfoHTML = `<div class="cert-info-item"><div class="cert-info-label">location</div><div class="cert-info-value">${record.location_data}</div></div>
         <div class="cert-info-item"><div class="cert-info-label">IP</div><div class="cert-info-value">${record.origin_ip}</div></div>`;
     }
 
@@ -1889,7 +1889,7 @@
 
     return `<div class="cert-frame"><div class="cert-header"><div class="cert-logo">POART PROTOCOL</div><h2 class="cert-title">${t('certTitle')} ${localBadge}</h2><div class="cert-subtitle">${t('certSubtitle')}</div></div>
       <div class="cert-body"><div class="cert-photos">${photoHTML}${artHTML}<div><div class="cert-qr"><img src="${qrDataUrl}" style="width:100%;height:auto;" alt="QR"></div><div class="cert-photo-label">QR</div></div></div>
-      <div class="cert-info-panel"><div class="cert-info-title">Sertifika Bilgileri</div><div class="cert-info-grid">
+      <div class="cert-info-panel"><div class="cert-info-title">Certificate information</div><div class="cert-info-grid">
         <div class="cert-info-item"><div class="cert-info-label">${t('artworkName')}</div><div class="cert-info-value">${record.title}</div></div>
         <div class="cert-info-item"><div class="cert-info-label">${t('artistName')}</div><div class="cert-info-value">${record.creator}</div></div>
         <div class="cert-info-item"><div class="cert-info-label">${t('certId')}</div><div class="cert-info-value">${record.cert_id}</div></div>
