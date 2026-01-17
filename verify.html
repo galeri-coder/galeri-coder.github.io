@@ -1,125 +1,653 @@
-<!-- ============================================================================ -->
-<!-- 🔍 DOSYA DOĞRULAMA SİSTEMİ -->
-<!-- Bu bölümü previewSection'ın kapanış </div> etiketinden SONRA -->
-<!-- ama dn-wrap kapanışından (en son </div>) ÖNCE ekleyin -->
-<!-- ============================================================================ -->
+<!-- ════════════════════════════════════════════════════════════════════════════
+     🔍 İLHAN ART - DOSYA DOĞRULAMA SİSTEMİ V3
+     
+     ✅ 4 Dil Desteği (TR/EN/ES/ZH) - [data-multilang] sistemi
+     ✅ SHA-256 + SHA-512 Doğrulama
+     ✅ Dosya Yükleme + Manuel Hash Girişi
+     ✅ Weglot uyumlu - Çeviri gerektirmez
+════════════════════════════════════════════════════════════════════════════ -->
 
 <div class="dn-verify-section" id="verifySection">
-  <div class="dn-verify-header">
-    <div class="dn-verify-badge">VERIFICATION TOOL</div>
-    <h2 class="dn-verify-title">Dosya Doğrulama</h2>
-    <p class="dn-verify-subtitle">Elinizdeki dosyanın daha önce mühürlenip mühürlenmediğini kontrol edin</p>
-  </div>
+  <div class="dn-verify-container">
 
-  <div class="dn-verify-explainer">
-    <div class="dn-verify-explainer-icon">🔍</div>
-    <div class="dn-verify-explainer-content">
-      <div class="dn-verify-explainer-title">Nasıl Çalışır?</div>
-      <div class="dn-verify-explainer-text">
-        Bir dosyayı buraya sürükleyin. Sistem otomatik olarak SHA-512 hash'ini hesaplayıp 
-        İlhanArt veri tabanında arar. Eğer dosya daha önce mühürlenmişse, tüm detaylarını göreceksiniz.
+    <!-- ═══════════════════ 4 DİL BLOKLARI ═══════════════════ -->
+    <div data-multilang>
+
+      <!-- ===== TÜRKÇE ===== -->
+      <div class="lang-tr">
+        <div class="dn-verify-header">
+          <div class="dn-verify-badge">VERIFICATION TOOL</div>
+          <h2 class="dn-verify-title">Dosya Doğrulama</h2>
+          <p class="dn-verify-subtitle">Elinizdeki dosyanın daha önce mühürlenip mühürlenmediğini kontrol edin</p>
+        </div>
+
+        <div class="dn-verify-explainer">
+          <div class="dn-verify-explainer-icon">🔍</div>
+          <div class="dn-verify-explainer-content">
+            <div class="dn-verify-explainer-title">Nasıl Çalışır?</div>
+            <div class="dn-verify-explainer-text">
+              <strong>Üç yöntemle doğrulama yapabilirsiniz:</strong><br>
+              1️⃣ <strong>Dosya Yükle:</strong> Dosyayı sürükleyin, sistem otomatik hash hesaplar<br>
+              2️⃣ <strong>SHA-512 Gir:</strong> 128 karakterlik SHA-512 kodunu yapıştırın<br>
+              3️⃣ <strong>SHA-256 Gir:</strong> 64 karakterlik SHA-256 kodunu yapıştırın
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB NAVIGATION -->
+        <div class="dn-verify-tabs">
+          <button class="dn-verify-tab active" data-tab="file">
+            📂 Dosya Yükle
+          </button>
+          <button class="dn-verify-tab" data-tab="sha512">
+            🔑 SHA-512
+          </button>
+          <button class="dn-verify-tab" data-tab="sha256">
+            🔐 SHA-256
+          </button>
+        </div>
+
+        <!-- FILE UPLOAD TAB -->
+        <div class="dn-verify-tab-content active" data-content="file">
+          <div class="dn-verify-drop-zone" data-dropzone>
+            <div class="dn-verify-drop-icon">📂</div>
+            <div class="dn-verify-drop-title">Dosyayı Sürükle & Bırak</div>
+            <div class="dn-verify-drop-subtitle">veya tıklayıp seçin</div>
+            <div class="dn-verify-drop-formats">✅ Tüm formatlar kabul edilir (PNG, JPG, PDF, MP4, vb.)</div>
+            <div class="dn-verify-drop-meta" data-filemeta></div>
+          </div>
+          <input type="file" class="dn-hidden-input" data-fileinput />
+        </div>
+
+        <!-- SHA-512 INPUT TAB -->
+        <div class="dn-verify-tab-content" data-content="sha512">
+          <div class="dn-verify-hash-input-wrapper">
+            <label class="dn-verify-hash-label">SHA-512 Hash Kodu (128 karakter):</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha512"
+              placeholder="SHA-512 hash kodunu buraya yapıştırın (128 karakter)
+Örnek: 081963fa2d89371cc15692fc25c7a04db17a5cb15b9b72b43a226e94bf96ae472518bd9dd1859623d370388cef2fd5f09fb183cc9687f9d86a995e2ae9e79446"
+              rows="4"
+            ></textarea>
+            <button class="dn-verify-hash-btn" data-hashbtn="sha512">
+              <span class="dn-btn-icon">🔍</span>
+              <span>SHA-512 İLE DOĞRULA</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SHA-256 INPUT TAB -->
+        <div class="dn-verify-tab-content" data-content="sha256">
+          <div class="dn-verify-hash-input-wrapper sha256-wrapper">
+            <label class="dn-verify-hash-label">SHA-256 Hash Kodu (64 karakter):</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha256"
+              placeholder="SHA-256 hash kodunu buraya yapıştırın (64 karakter)
+Örnek: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              rows="3"
+            ></textarea>
+            <button class="dn-verify-hash-btn sha256-btn" data-hashbtn="sha256">
+              <span class="dn-btn-icon">🔐</span>
+              <span>SHA-256 İLE DOĞRULA</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- LOADING -->
+        <div class="dn-verify-loading" data-loading style="display: none;">
+          <div class="dn-verify-loading-spinner"></div>
+          <div class="dn-verify-loading-text">Hash hesaplanıyor ve veritabanında aranıyor...</div>
+        </div>
+
+        <!-- NOT FOUND -->
+        <div class="dn-verify-result dn-verify-not-found" data-notfound style="display: none;">
+          <div class="dn-verify-result-icon">❌</div>
+          <div class="dn-verify-result-title">Kayıt Bulunamadı</div>
+          <div class="dn-verify-result-desc">
+            Bu hash İlhanArt sisteminde kayıtlı değil. Veritabanında eşleşen bir kayıt yok.
+          </div>
+          <div class="dn-verify-hash-display">
+            <div class="dn-verify-hash-label-sm">Aranan Hash:</div>
+            <div class="dn-verify-hash-value" data-searchedhash></div>
+          </div>
+        </div>
+
+        <!-- FOUND -->
+        <div class="dn-verify-result dn-verify-found" data-found style="display: none;">
+          <div class="dn-verify-result-icon">✅</div>
+          <div class="dn-verify-result-title">Dosya Doğrulandı!</div>
+          <div class="dn-verify-result-desc">
+            Bu dosya İlhanArt sisteminde kayıtlı. Aşağıda orijinal mühürleme bilgilerini görebilirsiniz.
+          </div>
+
+          <div class="dn-verify-cert-card">
+            <div class="dn-verify-cert-header">
+              <div class="dn-verify-cert-badge" data-certid>POART-XXXXXXXX</div>
+              <div class="dn-verify-cert-visibility" data-visibility>🌍 Herkese Açık</div>
+            </div>
+
+            <div class="dn-verify-cert-grid">
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Eser Adı</div>
+                <div class="dn-verify-cert-value" data-title>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Sanatçı</div>
+                <div class="dn-verify-cert-value" data-creator>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Mühürleme Tarihi</div>
+                <div class="dn-verify-cert-value" data-date>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Konum</div>
+                <div class="dn-verify-cert-value" data-location>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">IP (Maskeli)</div>
+                <div class="dn-verify-cert-value" data-ip>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Cihaz</div>
+                <div class="dn-verify-cert-value" data-device>-</div>
+              </div>
+            </div>
+
+            <div class="dn-verify-hash-display">
+              <div class="dn-verify-hash-label-sm">SHA-256 (Orijinal):</div>
+              <div class="dn-verify-hash-value" data-sha256>-</div>
+            </div>
+
+            <div class="dn-verify-hash-display" style="margin-top: 12px;">
+              <div class="dn-verify-hash-label-sm">SHA-512 (Orijinal Mühür):</div>
+              <div class="dn-verify-hash-value" data-sha512>-</div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- ===== ENGLISH ===== -->
+      <div class="lang-en">
+        <div class="dn-verify-header">
+          <div class="dn-verify-badge">VERIFICATION TOOL</div>
+          <h2 class="dn-verify-title">File Verification</h2>
+          <p class="dn-verify-subtitle">Check if your file has been previously sealed in our system</p>
+        </div>
+
+        <div class="dn-verify-explainer">
+          <div class="dn-verify-explainer-icon">🔍</div>
+          <div class="dn-verify-explainer-content">
+            <div class="dn-verify-explainer-title">How It Works?</div>
+            <div class="dn-verify-explainer-text">
+              <strong>Three verification methods available:</strong><br>
+              1️⃣ <strong>Upload File:</strong> Drag file, system calculates hash automatically<br>
+              2️⃣ <strong>Enter SHA-512:</strong> Paste 128-character SHA-512 code<br>
+              3️⃣ <strong>Enter SHA-256:</strong> Paste 64-character SHA-256 code
+            </div>
+          </div>
+        </div>
+
+        <div class="dn-verify-tabs">
+          <button class="dn-verify-tab active" data-tab="file">
+            📂 Upload File
+          </button>
+          <button class="dn-verify-tab" data-tab="sha512">
+            🔑 SHA-512
+          </button>
+          <button class="dn-verify-tab" data-tab="sha256">
+            🔐 SHA-256
+          </button>
+        </div>
+
+        <div class="dn-verify-tab-content active" data-content="file">
+          <div class="dn-verify-drop-zone" data-dropzone>
+            <div class="dn-verify-drop-icon">📂</div>
+            <div class="dn-verify-drop-title">Drag & Drop File</div>
+            <div class="dn-verify-drop-subtitle">or click to select</div>
+            <div class="dn-verify-drop-formats">✅ All formats accepted (PNG, JPG, PDF, MP4, etc.)</div>
+            <div class="dn-verify-drop-meta" data-filemeta></div>
+          </div>
+          <input type="file" class="dn-hidden-input" data-fileinput />
+        </div>
+
+        <div class="dn-verify-tab-content" data-content="sha512">
+          <div class="dn-verify-hash-input-wrapper">
+            <label class="dn-verify-hash-label">SHA-512 Hash Code (128 characters):</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha512"
+              placeholder="Paste SHA-512 hash code here (128 characters)
+Example: 081963fa2d89371cc15692fc25c7a04db17a5cb15b9b72b43a226e94bf96ae472518bd9dd1859623d370388cef2fd5f09fb183cc9687f9d86a995e2ae9e79446"
+              rows="4"
+            ></textarea>
+            <button class="dn-verify-hash-btn" data-hashbtn="sha512">
+              <span class="dn-btn-icon">🔍</span>
+              <span>VERIFY WITH SHA-512</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dn-verify-tab-content" data-content="sha256">
+          <div class="dn-verify-hash-input-wrapper sha256-wrapper">
+            <label class="dn-verify-hash-label">SHA-256 Hash Code (64 characters):</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha256"
+              placeholder="Paste SHA-256 hash code here (64 characters)
+Example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              rows="3"
+            ></textarea>
+            <button class="dn-verify-hash-btn sha256-btn" data-hashbtn="sha256">
+              <span class="dn-btn-icon">🔐</span>
+              <span>VERIFY WITH SHA-256</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dn-verify-loading" data-loading style="display: none;">
+          <div class="dn-verify-loading-spinner"></div>
+          <div class="dn-verify-loading-text">Calculating hash and searching database...</div>
+        </div>
+
+        <div class="dn-verify-result dn-verify-not-found" data-notfound style="display: none;">
+          <div class="dn-verify-result-icon">❌</div>
+          <div class="dn-verify-result-title">Record Not Found</div>
+          <div class="dn-verify-result-desc">
+            This hash is not registered in the İlhanArt system. No matching record in database.
+          </div>
+          <div class="dn-verify-hash-display">
+            <div class="dn-verify-hash-label-sm">Searched Hash:</div>
+            <div class="dn-verify-hash-value" data-searchedhash></div>
+          </div>
+        </div>
+
+        <div class="dn-verify-result dn-verify-found" data-found style="display: none;">
+          <div class="dn-verify-result-icon">✅</div>
+          <div class="dn-verify-result-title">File Verified!</div>
+          <div class="dn-verify-result-desc">
+            This file is registered in the İlhanArt system. See original sealing information below.
+          </div>
+
+          <div class="dn-verify-cert-card">
+            <div class="dn-verify-cert-header">
+              <div class="dn-verify-cert-badge" data-certid>POART-XXXXXXXX</div>
+              <div class="dn-verify-cert-visibility" data-visibility>🌍 Public</div>
+            </div>
+
+            <div class="dn-verify-cert-grid">
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Artwork Name</div>
+                <div class="dn-verify-cert-value" data-title>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Artist</div>
+                <div class="dn-verify-cert-value" data-creator>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Seal Date</div>
+                <div class="dn-verify-cert-value" data-date>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Location</div>
+                <div class="dn-verify-cert-value" data-location>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">IP (Masked)</div>
+                <div class="dn-verify-cert-value" data-ip>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Device</div>
+                <div class="dn-verify-cert-value" data-device>-</div>
+              </div>
+            </div>
+
+            <div class="dn-verify-hash-display">
+              <div class="dn-verify-hash-label-sm">SHA-256 (Original):</div>
+              <div class="dn-verify-hash-value" data-sha256>-</div>
+            </div>
+
+            <div class="dn-verify-hash-display" style="margin-top: 12px;">
+              <div class="dn-verify-hash-label-sm">SHA-512 (Original Seal):</div>
+              <div class="dn-verify-hash-value" data-sha512>-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ESPAÑOL ===== -->
+      <div class="lang-es">
+        <div class="dn-verify-header">
+          <div class="dn-verify-badge">HERRAMIENTA DE VERIFICACIÓN</div>
+          <h2 class="dn-verify-title">Verificación de Archivo</h2>
+          <p class="dn-verify-subtitle">Compruebe si su archivo ha sido sellado previamente en nuestro sistema</p>
+        </div>
+
+        <div class="dn-verify-explainer">
+          <div class="dn-verify-explainer-icon">🔍</div>
+          <div class="dn-verify-explainer-content">
+            <div class="dn-verify-explainer-title">¿Cómo Funciona?</div>
+            <div class="dn-verify-explainer-text">
+              <strong>Tres métodos de verificación disponibles:</strong><br>
+              1️⃣ <strong>Subir Archivo:</strong> Arrastre el archivo, el sistema calcula el hash automáticamente<br>
+              2️⃣ <strong>Ingresar SHA-512:</strong> Pegue el código SHA-512 de 128 caracteres<br>
+              3️⃣ <strong>Ingresar SHA-256:</strong> Pegue el código SHA-256 de 64 caracteres
+            </div>
+          </div>
+        </div>
+
+        <div class="dn-verify-tabs">
+          <button class="dn-verify-tab active" data-tab="file">
+            📂 Subir Archivo
+          </button>
+          <button class="dn-verify-tab" data-tab="sha512">
+            🔑 SHA-512
+          </button>
+          <button class="dn-verify-tab" data-tab="sha256">
+            🔐 SHA-256
+          </button>
+        </div>
+
+        <div class="dn-verify-tab-content active" data-content="file">
+          <div class="dn-verify-drop-zone" data-dropzone>
+            <div class="dn-verify-drop-icon">📂</div>
+            <div class="dn-verify-drop-title">Arrastrar y Soltar Archivo</div>
+            <div class="dn-verify-drop-subtitle">o haga clic para seleccionar</div>
+            <div class="dn-verify-drop-formats">✅ Todos los formatos aceptados (PNG, JPG, PDF, MP4, etc.)</div>
+            <div class="dn-verify-drop-meta" data-filemeta></div>
+          </div>
+          <input type="file" class="dn-hidden-input" data-fileinput />
+        </div>
+
+        <div class="dn-verify-tab-content" data-content="sha512">
+          <div class="dn-verify-hash-input-wrapper">
+            <label class="dn-verify-hash-label">Código Hash SHA-512 (128 caracteres):</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha512"
+              placeholder="Pegue el código hash SHA-512 aquí (128 caracteres)
+Ejemplo: 081963fa2d89371cc15692fc25c7a04db17a5cb15b9b72b43a226e94bf96ae472518bd9dd1859623d370388cef2fd5f09fb183cc9687f9d86a995e2ae9e79446"
+              rows="4"
+            ></textarea>
+            <button class="dn-verify-hash-btn" data-hashbtn="sha512">
+              <span class="dn-btn-icon">🔍</span>
+              <span>VERIFICAR CON SHA-512</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dn-verify-tab-content" data-content="sha256">
+          <div class="dn-verify-hash-input-wrapper sha256-wrapper">
+            <label class="dn-verify-hash-label">Código Hash SHA-256 (64 caracteres):</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha256"
+              placeholder="Pegue el código hash SHA-256 aquí (64 caracteres)
+Ejemplo: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              rows="3"
+            ></textarea>
+            <button class="dn-verify-hash-btn sha256-btn" data-hashbtn="sha256">
+              <span class="dn-btn-icon">🔐</span>
+              <span>VERIFICAR CON SHA-256</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dn-verify-loading" data-loading style="display: none;">
+          <div class="dn-verify-loading-spinner"></div>
+          <div class="dn-verify-loading-text">Calculando hash y buscando en la base de datos...</div>
+        </div>
+
+        <div class="dn-verify-result dn-verify-not-found" data-notfound style="display: none;">
+          <div class="dn-verify-result-icon">❌</div>
+          <div class="dn-verify-result-title">Registro No Encontrado</div>
+          <div class="dn-verify-result-desc">
+            Este hash no está registrado en el sistema İlhanArt. No hay registro coincidente en la base de datos.
+          </div>
+          <div class="dn-verify-hash-display">
+            <div class="dn-verify-hash-label-sm">Hash Buscado:</div>
+            <div class="dn-verify-hash-value" data-searchedhash></div>
+          </div>
+        </div>
+
+        <div class="dn-verify-result dn-verify-found" data-found style="display: none;">
+          <div class="dn-verify-result-icon">✅</div>
+          <div class="dn-verify-result-title">¡Archivo Verificado!</div>
+          <div class="dn-verify-result-desc">
+            Este archivo está registrado en el sistema İlhanArt. Vea la información de sellado original a continuación.
+          </div>
+
+          <div class="dn-verify-cert-card">
+            <div class="dn-verify-cert-header">
+              <div class="dn-verify-cert-badge" data-certid>POART-XXXXXXXX</div>
+              <div class="dn-verify-cert-visibility" data-visibility>🌍 Público</div>
+            </div>
+
+            <div class="dn-verify-cert-grid">
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Nombre de la Obra</div>
+                <div class="dn-verify-cert-value" data-title>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Artista</div>
+                <div class="dn-verify-cert-value" data-creator>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Fecha de Sellado</div>
+                <div class="dn-verify-cert-value" data-date>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Ubicación</div>
+                <div class="dn-verify-cert-value" data-location>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">IP (Enmascarada)</div>
+                <div class="dn-verify-cert-value" data-ip>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">Dispositivo</div>
+                <div class="dn-verify-cert-value" data-device>-</div>
+              </div>
+            </div>
+
+            <div class="dn-verify-hash-display">
+              <div class="dn-verify-hash-label-sm">SHA-256 (Original):</div>
+              <div class="dn-verify-hash-value" data-sha256>-</div>
+            </div>
+
+            <div class="dn-verify-hash-display" style="margin-top: 12px;">
+              <div class="dn-verify-hash-label-sm">SHA-512 (Sello Original):</div>
+              <div class="dn-verify-hash-value" data-sha512>-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 中文 ===== -->
+      <div class="lang-zh">
+        <div class="dn-verify-header">
+          <div class="dn-verify-badge">验证工具</div>
+          <h2 class="dn-verify-title">文件验证</h2>
+          <p class="dn-verify-subtitle">检查您的文件是否已在我们的系统中盖章</p>
+        </div>
+
+        <div class="dn-verify-explainer">
+          <div class="dn-verify-explainer-icon">🔍</div>
+          <div class="dn-verify-explainer-content">
+            <div class="dn-verify-explainer-title">如何运作？</div>
+            <div class="dn-verify-explainer-text">
+              <strong>三种验证方法可用：</strong><br>
+              1️⃣ <strong>上传文件：</strong>拖放文件，系统自动计算哈希<br>
+              2️⃣ <strong>输入SHA-512：</strong>粘贴128个字符的SHA-512代码<br>
+              3️⃣ <strong>输入SHA-256：</strong>粘贴64个字符的SHA-256代码
+            </div>
+          </div>
+        </div>
+
+        <div class="dn-verify-tabs">
+          <button class="dn-verify-tab active" data-tab="file">
+            📂 上传文件
+          </button>
+          <button class="dn-verify-tab" data-tab="sha512">
+            🔑 SHA-512
+          </button>
+          <button class="dn-verify-tab" data-tab="sha256">
+            🔐 SHA-256
+          </button>
+        </div>
+
+        <div class="dn-verify-tab-content active" data-content="file">
+          <div class="dn-verify-drop-zone" data-dropzone>
+            <div class="dn-verify-drop-icon">📂</div>
+            <div class="dn-verify-drop-title">拖放文件</div>
+            <div class="dn-verify-drop-subtitle">或点击选择</div>
+            <div class="dn-verify-drop-formats">✅ 接受所有格式（PNG、JPG、PDF、MP4等）</div>
+            <div class="dn-verify-drop-meta" data-filemeta></div>
+          </div>
+          <input type="file" class="dn-hidden-input" data-fileinput />
+        </div>
+
+        <div class="dn-verify-tab-content" data-content="sha512">
+          <div class="dn-verify-hash-input-wrapper">
+            <label class="dn-verify-hash-label">SHA-512哈希代码（128个字符）：</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha512"
+              placeholder="在此粘贴SHA-512哈希代码（128个字符）
+示例：081963fa2d89371cc15692fc25c7a04db17a5cb15b9b72b43a226e94bf96ae472518bd9dd1859623d370388cef2fd5f09fb183cc9687f9d86a995e2ae9e79446"
+              rows="4"
+            ></textarea>
+            <button class="dn-verify-hash-btn" data-hashbtn="sha512">
+              <span class="dn-btn-icon">🔍</span>
+              <span>使用SHA-512验证</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dn-verify-tab-content" data-content="sha256">
+          <div class="dn-verify-hash-input-wrapper sha256-wrapper">
+            <label class="dn-verify-hash-label">SHA-256哈希代码（64个字符）：</label>
+            <textarea 
+              class="dn-verify-hash-textarea"
+              data-hashinput="sha256"
+              placeholder="在此粘贴SHA-256哈希代码（64个字符）
+示例：e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              rows="3"
+            ></textarea>
+            <button class="dn-verify-hash-btn sha256-btn" data-hashbtn="sha256">
+              <span class="dn-btn-icon">🔐</span>
+              <span>使用SHA-256验证</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dn-verify-loading" data-loading style="display: none;">
+          <div class="dn-verify-loading-spinner"></div>
+          <div class="dn-verify-loading-text">正在计算哈希并搜索数据库...</div>
+        </div>
+
+        <div class="dn-verify-result dn-verify-not-found" data-notfound style="display: none;">
+          <div class="dn-verify-result-icon">❌</div>
+          <div class="dn-verify-result-title">未找到记录</div>
+          <div class="dn-verify-result-desc">
+            此哈希未在İlhanArt系统中注册。数据库中没有匹配的记录。
+          </div>
+          <div class="dn-verify-hash-display">
+            <div class="dn-verify-hash-label-sm">搜索的哈希：</div>
+            <div class="dn-verify-hash-value" data-searchedhash></div>
+          </div>
+        </div>
+
+        <div class="dn-verify-result dn-verify-found" data-found style="display: none;">
+          <div class="dn-verify-result-icon">✅</div>
+          <div class="dn-verify-result-title">文件已验证！</div>
+          <div class="dn-verify-result-desc">
+            此文件已在İlhanArt系统中注册。请参阅下面的原始盖章信息。
+          </div>
+
+          <div class="dn-verify-cert-card">
+            <div class="dn-verify-cert-header">
+              <div class="dn-verify-cert-badge" data-certid>POART-XXXXXXXX</div>
+              <div class="dn-verify-cert-visibility" data-visibility>🌍 公开</div>
+            </div>
+
+            <div class="dn-verify-cert-grid">
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">作品名称</div>
+                <div class="dn-verify-cert-value" data-title>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">艺术家</div>
+                <div class="dn-verify-cert-value" data-creator>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">盖章日期</div>
+                <div class="dn-verify-cert-value" data-date>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">位置</div>
+                <div class="dn-verify-cert-value" data-location>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">IP（已掩码）</div>
+                <div class="dn-verify-cert-value" data-ip>-</div>
+              </div>
+              <div class="dn-verify-cert-item">
+                <div class="dn-verify-cert-label">设备</div>
+                <div class="dn-verify-cert-value" data-device>-</div>
+              </div>
+            </div>
+
+            <div class="dn-verify-hash-display">
+              <div class="dn-verify-hash-label-sm">SHA-256（原始）：</div>
+              <div class="dn-verify-hash-value" data-sha256>-</div>
+            </div>
+
+            <div class="dn-verify-hash-display" style="margin-top: 12px;">
+              <div class="dn-verify-hash-label-sm">SHA-512（原始印章）：</div>
+              <div class="dn-verify-hash-value" data-sha512>-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
+    <!-- ═══════════════════ /4 DİL BLOKLARI ═══════════════════ -->
 
-  <div class="dn-verify-drop-zone" id="verifyDropZone">
-    <div class="dn-verify-drop-icon">📂</div>
-    <div class="dn-verify-drop-title">Dosyayı Sürükle & Bırak</div>
-    <div class="dn-verify-drop-subtitle">veya tıklayıp seçin (herhangi bir dosya türü)</div>
-    <div class="dn-verify-drop-meta" id="verifyFileMeta"></div>
-  </div>
-  <input type="file" id="verifyFileInput" class="dn-hidden-input" />
-
-  <!-- Loading State -->
-  <div class="dn-verify-loading" id="verifyLoading" style="display: none;">
-    <div class="dn-verify-loading-spinner"></div>
-    <div class="dn-verify-loading-text">Hash hesaplanıyor ve veritabanında aranıyor...</div>
-  </div>
-
-  <!-- Result: NOT FOUND -->
-  <div class="dn-verify-result dn-verify-not-found" id="verifyNotFound" style="display: none;">
-    <div class="dn-verify-result-icon">❌</div>
-    <div class="dn-verify-result-title">Kayıt Bulunamadı</div>
-    <div class="dn-verify-result-desc">
-      Bu dosya İlhanArt sisteminde mühürlenmemiş. Hash hesaplaması başarılı oldu ama veritabanında eşleşen bir kayıt yok.
-    </div>
-    <div class="dn-verify-hash-display">
-      <div class="dn-verify-hash-label">Hesaplanan SHA-512:</div>
-      <div class="dn-verify-hash-value" id="verifyComputedHash"></div>
-    </div>
-  </div>
-
-  <!-- Result: FOUND -->
-  <div class="dn-verify-result dn-verify-found" id="verifyFound" style="display: none;">
-    <div class="dn-verify-result-icon">✅</div>
-    <div class="dn-verify-result-title">Dosya Doğrulandı!</div>
-    <div class="dn-verify-result-desc">
-      Bu dosya İlhanArt sisteminde kayıtlı. Aşağıda orijinal mühürleme bilgilerini görebilirsiniz.
-    </div>
-
-    <div class="dn-verify-cert-card">
-      <div class="dn-verify-cert-header">
-        <div class="dn-verify-cert-badge" id="verifyCertBadge">POART-XXXXXXXX</div>
-        <div class="dn-verify-cert-visibility" id="verifyCertVisibility">🌍 Herkese Açık</div>
-      </div>
-
-      <div class="dn-verify-cert-grid">
-        <div class="dn-verify-cert-item">
-          <div class="dn-verify-cert-label">Eser Adı</div>
-          <div class="dn-verify-cert-value" id="verifyCertTitle">-</div>
-        </div>
-        <div class="dn-verify-cert-item">
-          <div class="dn-verify-cert-label">Sanatçı</div>
-          <div class="dn-verify-cert-value" id="verifyCertCreator">-</div>
-        </div>
-        <div class="dn-verify-cert-item">
-          <div class="dn-verify-cert-label">Mühürleme Tarihi</div>
-          <div class="dn-verify-cert-value" id="verifyCertDate">-</div>
-        </div>
-        <div class="dn-verify-cert-item">
-          <div class="dn-verify-cert-label">Konum</div>
-          <div class="dn-verify-cert-value" id="verifyCertLocation">-</div>
-        </div>
-        <div class="dn-verify-cert-item">
-          <div class="dn-verify-cert-label">IP (Maskeli)</div>
-          <div class="dn-verify-cert-value" id="verifyCertIP">-</div>
-        </div>
-        <div class="dn-verify-cert-item">
-          <div class="dn-verify-cert-label">Cihaz</div>
-          <div class="dn-verify-cert-value" id="verifyCertDevice">-</div>
-        </div>
-      </div>
-
-      <div class="dn-verify-hash-display">
-        <div class="dn-verify-hash-label">SHA-256 (Orijinal):</div>
-        <div class="dn-verify-hash-value" id="verifySHA256"></div>
-      </div>
-
-      <div class="dn-verify-hash-display" style="margin-top: 12px;">
-        <div class="dn-verify-hash-label">SHA-512 (Orijinal Mühür):</div>
-        <div class="dn-verify-hash-value" id="verifySHA512"></div>
-      </div>
-
-      <div class="dn-verify-cert-footer">
-        <a href="#" id="verifyCertLink" target="_blank" class="dn-verify-cert-link">
-          📜 Doğrulama Linki
-        </a>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- ============================================================================ -->
-<!-- STİLLER - Bu <style> bloğunu mevcut </style> kapanışından ÖNCE ekleyin -->
-<!-- ============================================================================ -->
-
 <style>
-/* Verification Section Base */
+:root {
+  --dn-primary: #059669;
+  --dn-primary-dark: #047857;
+  --dn-primary-darker: #065f46;
+  --dn-amber: #d97706;
+  --dn-amber-light: #fbbf24;
+  --dn-blue: #2563eb;
+  --dn-gray-50: #f9fafb;
+  --dn-gray-100: #f3f4f6;
+  --dn-gray-200: #e5e7eb;
+  --dn-gray-400: #9ca3af;
+  --dn-gray-500: #6b7280;
+  --dn-gray-600: #4b5563;
+  --dn-gray-700: #374151;
+  --dn-gray-800: #1f2937;
+}
+
+.dn-hidden-input { display: none; }
+
 .dn-verify-section {
   margin-top: 48px;
-  padding-top: 48px;
+  padding: 48px 18px;
   border-top: 3px solid rgba(5, 150, 105, 0.15);
   animation: fadeInUp 0.6s ease;
+}
+
+.dn-verify-container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 @keyframes fadeInUp {
@@ -164,7 +692,6 @@
   font-weight: 500;
 }
 
-/* Explainer Box */
 .dn-verify-explainer {
   display: flex;
   align-items: flex-start;
@@ -177,29 +704,67 @@
   margin-bottom: 28px;
 }
 
-.dn-verify-explainer-icon {
-  font-size: 36px;
-  flex-shrink: 0;
-}
-
-.dn-verify-explainer-content {
-  flex: 1;
-}
-
+.dn-verify-explainer-icon { font-size: 36px; flex-shrink: 0; }
+.dn-verify-explainer-content { flex: 1; }
 .dn-verify-explainer-title {
   font-size: 16px;
   font-weight: 800;
   color: var(--dn-gray-800);
   margin-bottom: 8px;
 }
-
 .dn-verify-explainer-text {
   font-size: 14px;
   color: var(--dn-gray-600);
   line-height: 1.7;
 }
 
-/* Drop Zone */
+/* TAB NAVIGATION */
+.dn-verify-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 3px solid var(--dn-gray-200);
+  flex-wrap: wrap;
+}
+
+.dn-verify-tab {
+  flex: 1;
+  min-width: 100px;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dn-gray-500);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: -3px;
+}
+
+.dn-verify-tab:hover {
+  color: var(--dn-gray-700);
+  background: rgba(251, 191, 36, 0.05);
+}
+
+.dn-verify-tab.active {
+  color: #d97706;
+  border-bottom-color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
+}
+
+.dn-verify-tab-content { display: none; }
+.dn-verify-tab-content.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* DROP ZONE */
 .dn-verify-drop-zone {
   border: 3px dashed rgba(251, 191, 36, 0.35);
   background: linear-gradient(145deg, #ffffff 0%, #fef3c7 25%, rgba(254, 243, 199, 0.4) 100%);
@@ -232,24 +797,27 @@
   transform: scale(1.02);
 }
 
-.dn-verify-drop-icon {
-  font-size: 52px;
-  margin-bottom: 10px;
-}
-
+.dn-verify-drop-icon { font-size: 52px; margin-bottom: 10px; }
 .dn-verify-drop-title {
   font-size: 19px;
   font-weight: 800;
   color: var(--dn-gray-700);
   margin-bottom: 6px;
 }
-
 .dn-verify-drop-subtitle {
   font-size: 14px;
   color: var(--dn-gray-500);
   font-weight: 500;
 }
-
+.dn-verify-drop-formats {
+  font-size: 13px;
+  font-weight: 600;
+  color: #059669;
+  background: rgba(5, 150, 105, 0.08);
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
 .dn-verify-drop-meta {
   margin-top: 14px;
   font-size: 13px;
@@ -259,8 +827,105 @@
   padding: 6px 14px;
   border-radius: 8px;
 }
+.dn-verify-drop-meta:empty { display: none; }
 
-/* Loading State */
+/* HASH INPUT */
+.dn-verify-hash-input-wrapper {
+  background: linear-gradient(145deg, #ffffff 0%, #fef3c7 100%);
+  border: 3px solid rgba(251, 191, 36, 0.25);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 28px;
+}
+
+.dn-verify-hash-input-wrapper.sha256-wrapper {
+  background: linear-gradient(145deg, #ffffff 0%, #dbeafe 100%);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+.dn-verify-hash-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--dn-gray-700);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dn-verify-hash-textarea {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  border-radius: 14px;
+  background: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--dn-gray-800);
+  line-height: 1.7;
+  resize: vertical;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.sha256-wrapper .dn-verify-hash-textarea {
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.dn-verify-hash-textarea:focus {
+  outline: none;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.15);
+}
+
+.sha256-wrapper .dn-verify-hash-textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.dn-verify-hash-textarea::placeholder {
+  color: var(--dn-gray-400);
+  font-size: 12px;
+}
+
+.dn-verify-hash-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 18px 32px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+  color: white;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(217, 119, 6, 0.35);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dn-verify-hash-btn.sha256-btn {
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #60a5fa 100%);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.35);
+}
+
+.dn-verify-hash-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(217, 119, 6, 0.45);
+}
+
+.dn-verify-hash-btn.sha256-btn:hover {
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.45);
+}
+
+.dn-btn-icon { font-size: 18px; }
+
+/* LOADING */
 .dn-verify-loading {
   text-align: center;
   padding: 52px 28px;
@@ -280,9 +945,7 @@
   margin: 0 auto 18px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .dn-verify-loading-text {
   font-size: 15px;
@@ -290,7 +953,7 @@
   font-weight: 600;
 }
 
-/* Result States */
+/* RESULTS */
 .dn-verify-result {
   border-radius: 20px;
   padding: 36px 32px;
@@ -314,10 +977,7 @@
   border: 3px solid #86efac;
 }
 
-.dn-verify-result-icon {
-  font-size: 72px;
-  margin-bottom: 18px;
-}
+.dn-verify-result-icon { font-size: 72px; margin-bottom: 18px; }
 
 .dn-verify-result-title {
   font-size: 26px;
@@ -350,7 +1010,6 @@
   margin-right: auto;
 }
 
-/* Hash Display */
 .dn-verify-hash-display {
   background: rgba(0, 0, 0, 0.04);
   border: 2px solid rgba(0, 0, 0, 0.08);
@@ -360,7 +1019,7 @@
   margin-top: 24px;
 }
 
-.dn-verify-hash-label {
+.dn-verify-hash-label-sm {
   font-size: 11px;
   font-weight: 800;
   color: var(--dn-gray-600);
@@ -369,7 +1028,7 @@
   margin-bottom: 10px;
 }
 
-.dn-verify-hash-value {
+.dn-verify-hash-display .dn-verify-hash-value {
   font-family: 'Courier New', monospace;
   font-size: 11px;
   color: var(--dn-gray-800);
@@ -381,7 +1040,7 @@
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Certificate Card */
+/* CERT CARD */
 .dn-verify-cert-card {
   background: #ffffff;
   border: 3px solid #86efac;
@@ -399,6 +1058,8 @@
   padding-bottom: 18px;
   margin-bottom: 24px;
   border-bottom: 3px solid #d1fae5;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .dn-verify-cert-badge {
@@ -441,7 +1102,7 @@
   box-shadow: 0 4px 15px rgba(5, 150, 105, 0.1);
 }
 
-.dn-verify-cert-label {
+.dn-verify-cert-item .dn-verify-cert-label {
   font-size: 10px;
   font-weight: 800;
   color: var(--dn-primary);
@@ -450,236 +1111,344 @@
   margin-bottom: 8px;
 }
 
-.dn-verify-cert-value {
+.dn-verify-cert-item .dn-verify-cert-value {
   font-size: 14px;
   font-weight: 700;
   color: var(--dn-gray-800);
   line-height: 1.4;
 }
 
-.dn-verify-cert-footer {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 2px solid #d1fae5;
-  text-align: center;
-}
-
-.dn-verify-cert-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  background: linear-gradient(135deg, var(--dn-primary-dark), var(--dn-primary));
-  color: white;
-  font-weight: 800;
-  font-size: 14px;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.25);
-}
-
-.dn-verify-cert-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(5, 150, 105, 0.35);
-  background: linear-gradient(135deg, var(--dn-primary), var(--dn-primary-light));
-}
-
-/* Responsive */
+/* MOBILE */
 @media (max-width: 768px) {
-  .dn-verify-cert-grid {
-    grid-template-columns: 1fr;
+  .dn-verify-cert-grid { grid-template-columns: 1fr; }
+  .dn-verify-title { font-size: 26px; }
+  .dn-verify-tabs { flex-direction: column; gap: 0; }
+  .dn-verify-tab {
+    border-bottom: 2px solid var(--dn-gray-200);
+    margin-bottom: 0;
   }
-  .dn-verify-title {
-    font-size: 26px;
-  }
-  .dn-verify-cert-header {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
+  .dn-verify-explainer { flex-direction: column; text-align: center; }
 }
 </style>
 
-<!-- ============================================================================ -->
-<!-- JAVASCRIPT - Bu <script> bloğunu en son </script> kapanışından HEMEN ÖNCE ekleyin -->
-<!-- NOT: Mevcut script'in kapanışından ÖNCE, yani ")();" satırından önce ekleyin -->
-<!-- ============================================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-// ===== VERIFICATION SYSTEM =====
-// Bu kod mevcut script içinde, sb değişkeni tanımlandıktan SONRA eklenmelidir
-(function initVerification() {
-  const verifyDropZone = document.getElementById('verifyDropZone');
-  const verifyFileInput = document.getElementById('verifyFileInput');
-  const verifyFileMeta = document.getElementById('verifyFileMeta');
-  const verifyLoading = document.getElementById('verifyLoading');
-  const verifyNotFound = document.getElementById('verifyNotFound');
-  const verifyFound = document.getElementById('verifyFound');
+(function() {
+  'use strict';
+  
+  const SUPABASE_URL = "https://immdfdvrwqcvgmflbgdr.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltbWRmZHZyd3FjdmdtZmxiZ2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzU0MTgsImV4cCI6MjA4MzQ1MTQxOH0.MN05h2FLVFb14P9Oi0y3g3euqZjzGdVslJay6aQ1HkE";
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  // Result elements
-  const verifyComputedHash = document.getElementById('verifyComputedHash');
-  const verifySHA256 = document.getElementById('verifySHA256');
-  const verifySHA512 = document.getElementById('verifySHA512');
-  const verifyCertBadge = document.getElementById('verifyCertBadge');
-  const verifyCertVisibility = document.getElementById('verifyCertVisibility');
-  const verifyCertTitle = document.getElementById('verifyCertTitle');
-  const verifyCertCreator = document.getElementById('verifyCertCreator');
-  const verifyCertDate = document.getElementById('verifyCertDate');
-  const verifyCertLocation = document.getElementById('verifyCertLocation');
-  const verifyCertIP = document.getElementById('verifyCertIP');
-  const verifyCertDevice = document.getElementById('verifyCertDevice');
-  const verifyCertLink = document.getElementById('verifyCertLink');
+  // ===== LANGUAGE DETECTION =====
+  function getCurrentLang() {
+    const htmlLang = (document.documentElement.lang || '').toLowerCase();
+    if (htmlLang.startsWith('en')) return 'en';
+    if (htmlLang.startsWith('es')) return 'es';
+    if (htmlLang.startsWith('zh')) return 'zh';
+    return 'tr';
+  }
 
-  // Drag & Drop setup
-  verifyDropZone.addEventListener('click', () => verifyFileInput.click());
+  function getVisibleLangContainer() {
+    const lang = getCurrentLang();
+    const container = document.querySelector(`#verifySection .lang-${lang}`);
+    // Fallback to TR if not found
+    return container || document.querySelector('#verifySection .lang-tr');
+  }
 
-  ['dragenter', 'dragover'].forEach(evt => {
-    verifyDropZone.addEventListener(evt, (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      verifyDropZone.classList.add('is-over');
+  // ===== INIT ALL LANG CONTAINERS =====
+  function initVerifyWidget() {
+    const langContainers = document.querySelectorAll('#verifySection [data-multilang] > div[class^="lang-"]');
+    
+    langContainers.forEach(container => {
+      initContainerTabs(container);
+      initContainerDropZone(container);
+      initContainerHashButtons(container);
     });
-  });
+  }
 
-  ['dragleave', 'drop'].forEach(evt => {
-    verifyDropZone.addEventListener(evt, (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      verifyDropZone.classList.remove('is-over');
+  // ===== TAB SWITCHING =====
+  function initContainerTabs(container) {
+    const tabs = container.querySelectorAll('.dn-verify-tab');
+    const tabContents = container.querySelectorAll('.dn-verify-tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.dataset.tab;
+        
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        
+        tab.classList.add('active');
+        const targetContent = container.querySelector(`[data-content="${targetTab}"]`);
+        if (targetContent) targetContent.classList.add('active');
+      });
     });
-  });
+  }
 
-  verifyDropZone.addEventListener('drop', (e) => {
-    const file = e.dataTransfer.files && e.dataTransfer.files[0];
-    if (file) handleVerifyFile(file);
-  });
+  // ===== DROP ZONE =====
+  function initContainerDropZone(container) {
+    const dropZone = container.querySelector('[data-dropzone]');
+    const fileInput = container.querySelector('[data-fileinput]');
+    
+    if (!dropZone || !fileInput) return;
 
-  verifyFileInput.addEventListener('change', (e) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) handleVerifyFile(file);
-  });
+    dropZone.addEventListener('click', () => fileInput.click());
 
-  async function handleVerifyFile(file) {
-    // Reset UI
-    verifyLoading.style.display = 'none';
-    verifyNotFound.style.display = 'none';
-    verifyFound.style.display = 'none';
+    ['dragenter', 'dragover'].forEach(evt => {
+      dropZone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.add('is-over');
+      });
+    });
 
-    // Show file info
-    const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
-    verifyFileMeta.textContent = `${file.name} • ${sizeMb} MB`;
+    ['dragleave', 'drop'].forEach(evt => {
+      dropZone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.remove('is-over');
+      });
+    });
 
-    // Show loading
-    verifyLoading.style.display = 'block';
+    dropZone.addEventListener('drop', (e) => {
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) handleVerifyFile(container, file);
+    });
 
-    try {
-      // Calculate hash
-      const buffer = await file.arrayBuffer();
-      const hashBuffer = await crypto.subtle.digest('SHA-512', buffer);
-      const hash = Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) handleVerifyFile(container, file);
+    });
+  }
 
-      console.log('🔍 Computed hash:', hash);
+  // ===== HASH BUTTONS =====
+  function initContainerHashButtons(container) {
+    // SHA-512 button
+    const sha512Btn = container.querySelector('[data-hashbtn="sha512"]');
+    const sha512Input = container.querySelector('[data-hashinput="sha512"]');
+    
+    if (sha512Btn && sha512Input) {
+      sha512Btn.addEventListener('click', () => {
+        const hash = sha512Input.value.trim().toLowerCase().replace(/\s+/g, '');
+        if (hash.length !== 128) {
+          alert('SHA-512 hash must be 128 characters! / SHA-512 hash 128 karakter olmalı!');
+          return;
+        }
+        handleVerifyHash(container, hash, 'sha512');
+      });
+    }
 
-      // Search in Supabase
-      const { data, error } = await sb
-        .from('manifests')
-        .select('*')
-        .eq('sha512', hash)
-        .single();
-
-      verifyLoading.style.display = 'none';
-
-      if (error || !data) {
-        // NOT FOUND
-        console.log('❌ Not found in database');
-        verifyComputedHash.textContent = hash;
-        verifyNotFound.style.display = 'block';
-        
-        // Scroll to result
-        setTimeout(() => {
-          verifyNotFound.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-      } else {
-        // FOUND!
-        console.log('✅ Found in database:', data);
-        displayVerificationResult(data, hash);
-        verifyFound.style.display = 'block';
-        
-        // Scroll to result
-        setTimeout(() => {
-          verifyFound.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-      }
-    } catch (err) {
-      console.error('Verification error:', err);
-      verifyLoading.style.display = 'none';
-      alert('Doğrulama sırasında hata oluştu: ' + err.message);
+    // SHA-256 button
+    const sha256Btn = container.querySelector('[data-hashbtn="sha256"]');
+    const sha256Input = container.querySelector('[data-hashinput="sha256"]');
+    
+    if (sha256Btn && sha256Input) {
+      sha256Btn.addEventListener('click', () => {
+        const hash = sha256Input.value.trim().toLowerCase().replace(/\s+/g, '');
+        if (hash.length !== 64) {
+          alert('SHA-256 hash must be 64 characters! / SHA-256 hash 64 karakter olmalı!');
+          return;
+        }
+        handleVerifyHash(container, hash, 'sha256');
+      });
     }
   }
 
-  function displayVerificationResult(record, hash) {
-    // Badge & Visibility
-    verifyCertBadge.textContent = record.cert_id;
-    
-    const visibilityIcons = {
-      'private': '🔒',
-      'masked': '🕶️',
-      'public': '🌍'
-    };
-    const visibilityLabels = {
-      'private': 'Özel (Private)',
-      'masked': 'Maskeli (Masked)',
-      'public': 'Herkese Açık (Public)'
-    };
-    verifyCertVisibility.textContent = 
-      `${visibilityIcons[record.visibility] || '🔐'} ${visibilityLabels[record.visibility] || record.visibility}`;
+  // ===== FILE VERIFICATION =====
+  async function handleVerifyFile(container, file) {
+    const fileMeta = container.querySelector('[data-filemeta]');
+    const loading = container.querySelector('[data-loading]');
+    const notFound = container.querySelector('[data-notfound]');
+    const found = container.querySelector('[data-found]');
 
-    // Basic Info
-    verifyCertTitle.textContent = record.title || 'İsimsiz';
-    verifyCertCreator.textContent = record.creator || 'Bilinmiyor';
-    
-    // Date
+    // Reset states
+    loading.style.display = 'none';
+    notFound.style.display = 'none';
+    found.style.display = 'none';
+
+    // Show file info
+    const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+    if (fileMeta) fileMeta.textContent = `${file.name} • ${sizeMb} MB`;
+
+    loading.style.display = 'block';
+
     try {
-      const d = new Date(record.created_at);
-      verifyCertDate.textContent = d.toLocaleDateString('tr-TR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      }) + ' ' + d.toLocaleTimeString('tr-TR', {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    } catch {
-      verifyCertDate.textContent = record.created_at;
+      const buffer = await file.arrayBuffer();
+      
+      // Calculate both SHA-256 and SHA-512
+      const [sha256Buffer, sha512Buffer] = await Promise.all([
+        crypto.subtle.digest('SHA-256', buffer),
+        crypto.subtle.digest('SHA-512', buffer)
+      ]);
+      
+      const sha256 = Array.from(new Uint8Array(sha256Buffer))
+        .map(b => b.toString(16).padStart(2, '0')).join('');
+      const sha512 = Array.from(new Uint8Array(sha512Buffer))
+        .map(b => b.toString(16).padStart(2, '0')).join('');
+
+      // First try SHA-512, then SHA-256
+      await searchHash(container, sha512, 'sha512', sha256);
+    } catch (err) {
+      console.error('File verification error:', err);
+      loading.style.display = 'none';
+      alert('Error: ' + err.message);
+    }
+  }
+
+  // ===== HASH VERIFICATION =====
+  async function handleVerifyHash(container, hash, hashType) {
+    const loading = container.querySelector('[data-loading]');
+    const notFound = container.querySelector('[data-notfound]');
+    const found = container.querySelector('[data-found]');
+
+    loading.style.display = 'none';
+    notFound.style.display = 'none';
+    found.style.display = 'none';
+
+    loading.style.display = 'block';
+
+    try {
+      await searchHash(container, hash, hashType);
+    } catch (err) {
+      console.error('Hash verification error:', err);
+      loading.style.display = 'none';
+      alert('Error: ' + err.message);
+    }
+  }
+
+  // ===== DATABASE SEARCH =====
+  async function searchHash(container, hash, hashType, fallbackSha256 = null) {
+    const loading = container.querySelector('[data-loading]');
+    const notFound = container.querySelector('[data-notfound]');
+    const found = container.querySelector('[data-found]');
+    const searchedHashEl = container.querySelector('[data-searchedhash]');
+
+    // Determine which column to search
+    const column = hashType === 'sha256' ? 'sha256' : 'sha512';
+    
+    let { data, error } = await sb
+      .from('manifests')
+      .select('*')
+      .eq(column, hash)
+      .single();
+
+    // If SHA-512 not found but we have SHA-256 fallback, try that
+    if ((error || !data) && fallbackSha256 && hashType === 'sha512') {
+      console.log('SHA-512 not found, trying SHA-256...');
+      const result = await sb
+        .from('manifests')
+        .select('*')
+        .eq('sha256', fallbackSha256)
+        .single();
+      
+      data = result.data;
+      error = result.error;
+      hash = fallbackSha256; // Update displayed hash
     }
 
-    // Location & IP (visibility-dependent)
-    if (record.visibility === 'private') {
-      verifyCertLocation.textContent = 'Gizli';
-      verifyCertIP.textContent = 'Gizli';
-      verifyCertDevice.textContent = 'Gizli';
-    } else if (record.visibility === 'masked') {
-      verifyCertLocation.textContent = record.location_data || 'Gizli';
-      verifyCertIP.textContent = record.origin_ip || 'Gizli';
-      verifyCertDevice.textContent = 'Gizli';
+    loading.style.display = 'none';
+
+    if (error || !data) {
+      console.log('❌ Not found in database');
+      if (searchedHashEl) searchedHashEl.textContent = hash;
+      notFound.style.display = 'block';
+      setTimeout(() => {
+        notFound.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
     } else {
-      verifyCertLocation.textContent = record.location_data || 'Belirtilmedi';
-      verifyCertIP.textContent = record.origin_ip || 'Belirtilmedi';
-      const deviceText = record.device_info || 'Belirtilmedi';
-      verifyCertDevice.textContent = deviceText.length > 80 ? 
-        deviceText.substring(0, 80) + '...' : 
-        deviceText;
+      console.log('✅ Found in database:', data);
+      displayVerificationResult(container, data);
+      found.style.display = 'block';
+      setTimeout(() => {
+        found.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }
+
+  // ===== DISPLAY RESULT =====
+  function displayVerificationResult(container, record) {
+    const lang = getCurrentLang();
+    
+    // Cert ID
+    const certIdEl = container.querySelector('[data-certid]');
+    if (certIdEl) certIdEl.textContent = record.cert_id || 'POART-UNKNOWN';
+    
+    // Visibility
+    const visEl = container.querySelector('[data-visibility]');
+    if (visEl) {
+      const visMap = {
+        tr: { private: '🔒 Özel', masked: '🕶️ Maskeli', public: '🌍 Herkese Açık' },
+        en: { private: '🔒 Private', masked: '🕶️ Masked', public: '🌍 Public' },
+        es: { private: '🔒 Privado', masked: '🕶️ Enmascarado', public: '🌍 Público' },
+        zh: { private: '🔒 私人', masked: '🕶️ 掩码', public: '🌍 公开' }
+      };
+      const vis = visMap[lang] || visMap.en;
+      visEl.textContent = vis[record.visibility] || record.visibility;
     }
 
-    // Hashes
-    verifySHA256.textContent = record.sha256 || 'Yok';
-    verifySHA512.textContent = hash;
+    // Title
+    const titleEl = container.querySelector('[data-title]');
+    if (titleEl) {
+      const unnamed = { tr: 'İsimsiz', en: 'Unnamed', es: 'Sin nombre', zh: '未命名' };
+      titleEl.textContent = record.title || unnamed[lang] || 'Unnamed';
+    }
 
-    // Verification Link
-    verifyCertLink.href = `https://ilhanart.org/verify?id=${record.cert_id}`;
+    // Creator
+    const creatorEl = container.querySelector('[data-creator]');
+    if (creatorEl) {
+      const unknown = { tr: 'Bilinmiyor', en: 'Unknown', es: 'Desconocido', zh: '未知' };
+      creatorEl.textContent = record.creator || unknown[lang] || 'Unknown';
+    }
+
+    // Date
+    const dateEl = container.querySelector('[data-date]');
+    if (dateEl) {
+      try {
+        const d = new Date(record.created_at);
+        const locales = { tr: 'tr-TR', en: 'en-US', es: 'es-ES', zh: 'zh-CN' };
+        dateEl.textContent = d.toLocaleString(locales[lang] || 'en-US');
+      } catch {
+        dateEl.textContent = record.created_at;
+      }
+    }
+
+    // Location
+    const locEl = container.querySelector('[data-location]');
+    if (locEl) {
+      const hidden = { tr: 'Gizli', en: 'Hidden', es: 'Oculto', zh: '隐藏' };
+      locEl.textContent = record.location_data || hidden[lang] || 'Hidden';
+    }
+
+    // IP
+    const ipEl = container.querySelector('[data-ip]');
+    if (ipEl) {
+      const hidden = { tr: 'Gizli', en: 'Hidden', es: 'Oculto', zh: '隐藏' };
+      ipEl.textContent = record.origin_ip || hidden[lang] || 'Hidden';
+    }
+
+    // Device
+    const deviceEl = container.querySelector('[data-device]');
+    if (deviceEl) {
+      const hidden = { tr: 'Gizli', en: 'Hidden', es: 'Oculto', zh: '隐藏' };
+      deviceEl.textContent = record.device_info || hidden[lang] || 'Hidden';
+    }
+
+    // SHA-256
+    const sha256El = container.querySelector('[data-sha256]');
+    if (sha256El) sha256El.textContent = record.sha256 || 'N/A';
+
+    // SHA-512
+    const sha512El = container.querySelector('[data-sha512]');
+    if (sha512El) sha512El.textContent = record.sha512 || 'N/A';
+  }
+
+  // ===== INITIALIZE =====
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVerifyWidget);
+  } else {
+    initVerifyWidget();
   }
 })();
 </script>
